@@ -1,0 +1,58 @@
+name: Active Work Claim Validation
+
+on:
+  pull_request_target:
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+  push:
+    branches: [bootstrap/initial-root]
+    paths: ['.github/workflows/active-work-claim-validation.yml']
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+jobs:
+  validate-active-work-claim:
+    runs-on: [self-hosted, Windows, X64, glass-builder]
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      EVENT_NAME: ${{ github.event_name }}
+      PR_BODY: ${{ github.event.pull_request.body || '' }}
+      PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+      PR_NUMBER: ${{ github.event.pull_request.number || 0 }}
+    steps:
+      - shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          function Field([string]$Body,[string]$Name,[bool]$Required=$true) {
+            $m=@([regex]::Matches($Body,'(?im)^\s*(?:[-*]\s*)?'+[regex]::Escape($Name)+'\s*:\s*(?<v>[^\r\n]+?)\s*$'))
+            if($m.Count -eq 0){if($Required){throw "Missing $Name field."};return $null}
+            if($m.Count -ne 1){throw "Duplicate $Name field."}
+            return ([string]$m[0].Groups['v'].Value).Trim()
+          }
+          function Surfaces([string]$Value) {
+            $s=@($Value.Split(';')|%{$_.Trim().ToLowerInvariant()}|?{$_})
+            if($s.Count -eq 0){throw 'Conflict-Surfaces is empty.'}
+            foreach($x in $s){if($x -notmatch '^[a-z0-9][a-z0-9._/-]{0,63}$'){throw "Invalid conflict surface '$x'."}}
+            return @($s|Sort-Object -Unique)
+          }
+          if($env:EVENT_NAME -ne 'pull_request_target'){Write-Host 'Active-work workflow installed.';exit 0}
+          if($env:PR_HEAD_REPO -ne $env:GITHUB_REPOSITORY){throw 'Material PRs must use a canonical-repository branch.'}
+          $workId=Field $env:PR_BODY 'Work-ID'
+          $active=Field $env:PR_BODY 'Active-Work'
+          $surfaces=@(Surfaces (Field $env:PR_BODY 'Conflict-Surfaces'))
+          if($workId -notmatch '^[a-z0-9][a-z0-9._-]{2,95}$'){throw 'Invalid Work-ID.'}
+          if($active -notmatch '^thatoneguydan/DevelopmentInfrastructure#[1-9][0-9]*$'){throw 'Invalid Active-Work pointer.'}
+          $n=[int]$env:PR_NUMBER
+          $files=@(gh api "repos/$env:GITHUB_REPOSITORY/pulls/$n/files?per_page=100" --paginate --jq '.[].filename')
+          foreach($otherText in @(gh api "repos/$env:GITHUB_REPOSITORY/pulls?state=open&per_page=100" --paginate --jq '.[].number')){
+            $other=[int]$otherText;if($other -eq $n){continue}
+            $of=@(gh api "repos/$env:GITHUB_REPOSITORY/pulls/$other/files?per_page=100" --paginate --jq '.[].filename')
+            $overlap=@($files|?{$of -contains $_});if($overlap.Count){throw "PR #$other overlaps changed files: $($overlap -join ', ')."}
+            $op=gh api "repos/$env:GITHUB_REPOSITORY/pulls/$other"|ConvertFrom-Json
+            $ow=Field ([string]$op.body) 'Work-ID' $false;$os=Field ([string]$op.body) 'Conflict-Surfaces' $false
+            if($null -ne $os){$so=@(Surfaces $os);$hit=@($surfaces|?{$so -contains $_});if($hit.Count -and $ow -ne $workId){throw "PR #$other overlaps conflict surfaces: $($hit -join ', ')."}}
+          }
+          Write-Host "Active-work ownership PASSED for '$workId'."
