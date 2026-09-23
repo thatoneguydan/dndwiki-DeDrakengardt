@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "campaignId": "de-drakengardt",
+  "title": "De Drakengardt",
+  "engineRepository": "thatoneguydan/dndwiki",
+  "publicationRoot": "site",
+  "source": {
+    "authority": "private-obsidian-vault",
+    "repositoryMirror": false
+  },
+  "deployment": {
+    "provider": "github-pages",
+    "enabled": false
+  }
+}
