@@ -6,7 +6,7 @@ This public repository is the generated player-facing publication target for the
 
 - Canonical campaign writing remains in the DM's private Obsidian vault.
 - Reusable engine/plugin/parser/UI source belongs to `thatoneguydan/dndwiki`.
-- This repository owns only De Drakengardt publication configuration, generated player-safe/perspective-tagged content/assets/runtime output, and its eventual GitHub Pages deployment configuration.
+- This repository owns only De Drakengardt publication configuration, generated player-safe/perspective-tagged content/assets/runtime output, and its GitHub Pages deployment configuration.
 - This repository is never a full-vault mirror and is never a second authoring copy.
 
 ## Privacy boundary
@@ -21,7 +21,13 @@ DM-only ordinary note content and the player-registry source note must never ent
 
 ## Current position
 
-De Drakengardt deployment work remains **pre-service**. No live vault connection, campaign corpus publication, Pages deployment, or custom-domain operation is authorized by this bootstrap.
+De Drakengardt has completed its initial live campaign publication and production GitHub Pages deployment.
+
+- Live site: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`
+- Initial authorized corpus: `Session 38 - 3.1 Recap` (public) and `Letter to Celeste` (`celeste` only).
+- GitHub Pages deployment is enabled from generated `site/` output on `main`.
+- Automatic Publishing remains off; publication remains explicitly controlled from the canonical private vault.
+- The next launch gate is the custom campaign subdomain.
 
 ## Safety constraints
 

@@ -10,6 +10,6 @@
   },
   "deployment": {
     "provider": "github-pages",
-    "enabled": false
+    "enabled": true
   }
 }
