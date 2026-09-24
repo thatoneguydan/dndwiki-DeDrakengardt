@@ -1,6 +1,15 @@
 const BLOCK_START_RE = /^(?: {0,3}(?:#{1,6})\s+| {0,3}(?:```+|~~~+)| {0,3}> ?|\s*(?:[-+*]|\d+[.)])\s+|\s*(?:\|?.+\|.+)|\s*(?:\*\s*){3,}$|\s*(?:-\s*){3,}$|\s*(?:_\s*){3,}$)/;
 const SPECIAL_MARK_RE = /^<mark class="(story|battle|ideation)">([\s\S]*?)<\/mark>/;
 const CALLOUT_HEADER_RE = /^\[!([A-Za-z0-9_-]{1,32})\](?:[+-])?(?:\s+(.*))?$/;
+const DD5E_ROOT_RE = /^\s*<div class="dd5e-sheet">\s*$/;
+const DD5E_ALLOWED_TAGS = new Set(['div', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'span', 'ul', 'li']);
+const DD5E_ALLOWED_CLASSES = new Set([
+  'dd5e-sheet', 'dd5e-title', 'dd5e-card-grid', 'dd5e-card', 'dd5e-card-label', 'dd5e-card-value',
+  'dd5e-ability-grid', 'dd5e-ability-card', 'dd5e-ability-name', 'dd5e-ability-mod', 'dd5e-ability-score',
+  'dd5e-main', 'dd5e-left', 'dd5e-right', 'dd5e-section', 'dd5e-section-title', 'dd5e-section-body',
+  'dd5e-save-table', 'dd5e-save-name', 'dd5e-save-bonus', 'dd5e-prof-dot', 'filled', 'dd5e-save-notes',
+  'dd5e-lang-list', 'dd5e-physical-list', 'dd5e-senses-table', 'dd5e-skills-table', 'dd5e-skill-name',
+]);
 
 function escapeHtml(value) {
   return String(value)
@@ -214,6 +223,55 @@ function defaultCalloutTitle(type) {
     .replace(/\b[a-z]/g, (letter) => letter.toUpperCase());
 }
 
+function collectDd5eBlock(lines, startIndex) {
+  if (!DD5E_ROOT_RE.test(lines[startIndex] ?? '')) return null;
+  let depth = 0;
+  const block = [];
+  for (let index = startIndex; index < lines.length; index += 1) {
+    const line = lines[index];
+    block.push(line);
+    depth += [...line.matchAll(/<div(?:\s|>)/g)].length;
+    depth -= [...line.matchAll(/<\/div\s*>/g)].length;
+    if (depth === 0) return { source: block.join('\n'), end: index + 1 };
+    if (depth < 0) return null;
+  }
+  return null;
+}
+
+function safeDd5eTag(token) {
+  const closing = /^<\/([a-z]+)\s*>$/.exec(token);
+  if (closing) return DD5E_ALLOWED_TAGS.has(closing[1]) ? token : null;
+
+  const opening = /^<([a-z]+)(?:\s+class="([A-Za-z0-9_ -]+)")?\s*>$/.exec(token);
+  if (!opening || !DD5E_ALLOWED_TAGS.has(opening[1])) return null;
+  const classes = opening[2] ? opening[2].trim().split(/\s+/).filter(Boolean) : [];
+  if (classes.some((className) => !DD5E_ALLOWED_CLASSES.has(className))) return null;
+  if (classes.includes('filled') && !classes.includes('dd5e-prof-dot')) return null;
+  return token;
+}
+
+function sanitizeDd5eHtml(source) {
+  let output = '';
+  let index = 0;
+  while (index < source.length) {
+    const open = source.indexOf('<', index);
+    if (open === -1) {
+      output += escapeHtml(source.slice(index));
+      break;
+    }
+    output += escapeHtml(source.slice(index, open));
+    const close = source.indexOf('>', open + 1);
+    if (close === -1) {
+      output += escapeHtml(source.slice(open));
+      break;
+    }
+    const token = source.slice(open, close + 1);
+    output += safeDd5eTag(token) ?? escapeHtml(token);
+    index = close + 1;
+  }
+  return output;
+}
+
 export function renderMarkdownToHtml(markdown) {
   const lines = String(markdown ?? '').replace(/\r\n?/g, '\n').split('\n');
   const blocks = [];
@@ -223,6 +281,13 @@ export function renderMarkdownToHtml(markdown) {
     const line = lines[index];
     if (line.trim().length === 0) {
       index += 1;
+      continue;
+    }
+
+    const dd5eBlock = collectDd5eBlock(lines, index);
+    if (dd5eBlock) {
+      blocks.push(sanitizeDd5eHtml(dd5eBlock.source));
+      index = dd5eBlock.end;
       continue;
     }
 
@@ -311,6 +376,7 @@ export function renderMarkdownToHtml(markdown) {
     const paragraph = [line];
     index += 1;
     while (index < lines.length && lines[index].trim().length > 0) {
+      if (DD5E_ROOT_RE.test(lines[index])) break;
       if (BLOCK_START_RE.test(lines[index])) {
         const nextFence = isFenceStart(lines[index]);
         const nextHeading = /^ {0,3}#{1,6}\s+/.test(lines[index]);
