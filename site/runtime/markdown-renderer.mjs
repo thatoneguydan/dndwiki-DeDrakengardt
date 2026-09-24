@@ -1,4 +1,6 @@
 const BLOCK_START_RE = /^(?: {0,3}(?:#{1,6})\s+| {0,3}(?:```+|~~~+)| {0,3}> ?|\s*(?:[-+*]|\d+[.)])\s+|\s*(?:\|?.+\|.+)|\s*(?:\*\s*){3,}$|\s*(?:-\s*){3,}$|\s*(?:_\s*){3,}$)/;
+const SPECIAL_MARK_RE = /^<mark class="(story|battle|ideation)">([\s\S]*?)<\/mark>/;
+const CALLOUT_HEADER_RE = /^\[!([A-Za-z0-9_-]{1,32})\](?:[+-])?(?:\s+(.*))?$/;
 
 function escapeHtml(value) {
   return String(value)
@@ -58,6 +60,24 @@ function renderInline(source) {
       output += escapeHtml(source[index + 1]);
       index += 2;
       continue;
+    }
+
+    if (char === '<') {
+      const specialMark = SPECIAL_MARK_RE.exec(source.slice(index));
+      if (specialMark) {
+        output += `<mark class="${specialMark[1]}">${renderInline(specialMark[2])}</mark>`;
+        index += specialMark[0].length;
+        continue;
+      }
+    }
+
+    if (source.startsWith('==', index)) {
+      const close = findClosing(source, '==', index + 2);
+      if (close !== -1 && close > index + 2) {
+        output += `<mark>${renderInline(source.slice(index + 2, close))}</mark>`;
+        index = close + 2;
+        continue;
+      }
     }
 
     if (char === '`') {
@@ -188,6 +208,12 @@ function horizontalRule(line) {
     || /^(?:_\s*){3,}$/.test(trimmed);
 }
 
+function defaultCalloutTitle(type) {
+  return type
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b[a-z]/g, (letter) => letter.toUpperCase());
+}
+
 export function renderMarkdownToHtml(markdown) {
   const lines = String(markdown ?? '').replace(/\r\n?/g, '\n').split('\n');
   const blocks = [];
@@ -234,7 +260,15 @@ export function renderMarkdownToHtml(markdown) {
         quoteLines.push(lines[index].replace(/^ {0,3}> ?/, ''));
         index += 1;
       }
-      blocks.push(`<blockquote>${renderMarkdownToHtml(quoteLines.join('\n'))}</blockquote>`);
+      const callout = quoteLines.length > 0 ? CALLOUT_HEADER_RE.exec(quoteLines[0].trim()) : null;
+      if (callout) {
+        const type = callout[1].toLowerCase();
+        const title = callout[2]?.trim() || defaultCalloutTitle(type);
+        const content = renderMarkdownToHtml(quoteLines.slice(1).join('\n'));
+        blocks.push(`<div class="callout" data-callout="${escapeAttribute(type)}"><div class="callout-title">${renderInline(title)}</div><div class="callout-content">${content}</div></div>`);
+      } else {
+        blocks.push(`<blockquote>${renderMarkdownToHtml(quoteLines.join('\n'))}</blockquote>`);
+      }
       continue;
     }
 
