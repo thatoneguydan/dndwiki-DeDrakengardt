@@ -176,6 +176,148 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
 .dndwiki-page .callout[data-callout="skills"] table th { font-weight: 400; }
 .dndwiki-page .callout[data-callout="skills"] table tbody td:first-child { font-weight: 700; }
 
+/* User D&D character-sheet snippet (Reading View rules). */
+.dndwiki-page .dd5e-sheet,
+.dndwiki-page .dd5e-sheet * { box-sizing: border-box !important; }
+.dndwiki-page .dd5e-sheet {
+  width: 100% !important;
+  max-width: 980px !important;
+  min-width: 0 !important;
+  margin: 0 auto !important;
+  overflow-x: hidden !important;
+  font-family: inherit;
+  color: var(--text-normal);
+}
+.dndwiki-page .dd5e-sheet table {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  display: table !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  margin: 0 !important;
+  overflow: visible;
+}
+.dndwiki-page .dd5e-sheet th,
+.dndwiki-page .dd5e-sheet td {
+  border: 1px solid var(--background-modifier-border) !important;
+  padding: .45em .65em !important;
+  vertical-align: middle !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+}
+.dndwiki-page .dd5e-sheet tbody tr:nth-child(even) { background: transparent; }
+.dndwiki-page .dd5e-title { text-align: center; font-size: 1.15em; font-weight: 600; margin: 0 0 1.25rem; }
+.dndwiki-page .dd5e-card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4,minmax(0,1fr)) !important;
+  gap: .75rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-bottom: .9rem !important;
+}
+.dndwiki-page .dd5e-card {
+  min-width: 0 !important;
+  border: 1px solid var(--background-modifier-border);
+  padding: 1rem .6rem;
+  text-align: center;
+  overflow: hidden;
+}
+.dndwiki-page .dd5e-card-label { color: var(--text-muted); font-weight: 800; text-transform: uppercase; font-size: .88em; line-height: 1.1; }
+.dndwiki-page .dd5e-card-value { font-size: 2em; font-weight: 800; line-height: 1.15; margin: .2em 0; }
+.dndwiki-page .dd5e-ability-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6,minmax(0,1fr)) !important;
+  gap: .65rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-bottom: 1rem !important;
+}
+.dndwiki-page .dd5e-ability-card {
+  min-width: 0 !important;
+  border: 1px solid var(--background-modifier-border);
+  text-align: center;
+  padding: .8rem .35rem;
+  overflow: hidden;
+}
+.dndwiki-page .dd5e-ability-name { color: var(--text-muted); font-weight: 800; text-transform: uppercase; font-size: .82em; }
+.dndwiki-page .dd5e-ability-mod { font-size: 2em; line-height: 1.1; margin: .2em 0; }
+.dndwiki-page .dd5e-ability-score {
+  display: inline-block;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  font-size: .9em;
+  font-weight: 800;
+  padding: .15em .5em;
+}
+.dndwiki-page .dd5e-main {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) minmax(0,.95fr) !important;
+  gap: 1rem !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  align-items: start;
+}
+.dndwiki-page .dd5e-left,
+.dndwiki-page .dd5e-right,
+.dndwiki-page .dd5e-section { min-width: 0 !important; max-width: 100% !important; overflow-x: hidden !important; }
+.dndwiki-page .dd5e-section { border: 1px solid var(--background-modifier-border); margin-bottom: 1rem; }
+.dndwiki-page .dd5e-section-title {
+  font-size: 1.15em;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: .75rem .85rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.dndwiki-page .dd5e-section-body { padding: .75rem .85rem; min-width: 0 !important; }
+.dndwiki-page .dd5e-save-table td { font-size: .95em; }
+.dndwiki-page .dd5e-save-name { font-weight: 800; }
+.dndwiki-page .dd5e-save-bonus { text-align: center; }
+.dndwiki-page .dd5e-prof-dot {
+  display: inline-block;
+  width: .7em;
+  height: .7em;
+  border-radius: 50%;
+  border: 2px solid #aaa;
+  margin-right: .35em;
+  vertical-align: -.05em;
+}
+.dndwiki-page .dd5e-prof-dot.filled { background: currentColor; border-color: currentColor; }
+.dndwiki-page .dd5e-save-notes,
+.dndwiki-page .dd5e-lang-list,
+.dndwiki-page .dd5e-physical-list { font-size: .85em; line-height: 1.35; margin: .75rem 0 0 1.1rem; padding: 0; }
+.dndwiki-page .dd5e-save-notes li,
+.dndwiki-page .dd5e-lang-list li,
+.dndwiki-page .dd5e-physical-list li { margin: .25em 0; }
+.dndwiki-page .dd5e-senses-table td:first-child { color: var(--text-muted); font-weight: 800; text-transform: uppercase; font-size: .8em; }
+.dndwiki-page .dd5e-senses-table td:last-child { width: 5.5rem; text-align: right; font-size: .85em; font-weight: 800; }
+.dndwiki-page .dd5e-skills-table th { color: var(--text-muted); font-weight: 800; text-transform: uppercase; text-align: left; font-size: .8em; }
+.dndwiki-page .dd5e-skills-table td { font-size: .9em; }
+.dndwiki-page .dd5e-skills-table th:nth-child(1),
+.dndwiki-page .dd5e-skills-table td:nth-child(1) { width: 3.2rem; text-align: center; }
+.dndwiki-page .dd5e-skills-table th:nth-child(2),
+.dndwiki-page .dd5e-skills-table td:nth-child(2) { width: 4rem; text-align: center; }
+.dndwiki-page .dd5e-skills-table th:nth-child(4),
+.dndwiki-page .dd5e-skills-table td:nth-child(4) { width: 4.5rem; text-align: center; }
+.dndwiki-page .dd5e-skill-name { font-weight: 800; }
+.dndwiki-page .dd5e-section-body:has(> .dd5e-save-table),
+.dndwiki-page .dd5e-section-body:has(> .dd5e-senses-table),
+.dndwiki-page .dd5e-section-body:has(> .dd5e-skills-table) { padding: 0 !important; }
+.dndwiki-page .dd5e-section-body:has(> .dd5e-save-table) > .dd5e-save-notes { margin: .55rem .85rem .65rem 1.65rem !important; padding: 0 !important; }
+.dndwiki-page .dd5e-section-body:has(> .dd5e-lang-list),
+.dndwiki-page .dd5e-section-body:has(> .dd5e-physical-list) { padding: .45rem .85rem .55rem !important; }
+.dndwiki-page .dd5e-save-notes,
+.dndwiki-page .dd5e-lang-list,
+.dndwiki-page .dd5e-physical-list { margin-top: .35rem !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+.dndwiki-page .dd5e-lang-list,
+.dndwiki-page .dd5e-physical-list { margin-left: .95rem !important; padding-left: 0 !important; }
+.dndwiki-page .dd5e-save-notes li,
+.dndwiki-page .dd5e-lang-list li,
+.dndwiki-page .dd5e-physical-list li { margin-top: .15rem !important; margin-bottom: .15rem !important; padding-top: 0 !important; padding-bottom: 0 !important; }
+.dndwiki-page .dd5e-save-table,
+.dndwiki-page .dd5e-senses-table,
+.dndwiki-page .dd5e-skills-table { margin: 0 !important; }
+
 /* Navigation follows the same flat, quiet hierarchy as an Obsidian side pane. */
 .dndwiki-sidebar { position: sticky; top: 4.25rem; display: grid; gap: 0; padding-left: 1.25rem; border-left: 1px solid var(--divider-color); color: var(--text-muted); }
 .dndwiki-card { border: 0; border-radius: 0; background: transparent; padding: .85rem 0; }
@@ -210,6 +352,10 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-link-list a { min-height: 44px; display: flex; align-items: center; }
 }
 
+@media (max-width: 900px) {
+  .dndwiki-page .dd5e-main { grid-template-columns: 1fr !important; }
+}
+
 @media (max-width: 860px) {
   .dndwiki-topbar { grid-template-columns: minmax(0,1fr) auto; }
   .dndwiki-search { grid-column: 1 / -1; grid-row: 2; }
@@ -217,6 +363,11 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-sidebar { position: static; grid-template-columns: repeat(2,minmax(0,1fr)); border-left: 0; border-top: 1px solid var(--divider-color); padding: .5rem 0 0; gap: 0 1rem; }
   .dndwiki-card + .dndwiki-card { border-top: 0; }
   .dndwiki-card:nth-child(n+3) { border-top: 1px solid var(--divider-color); }
+}
+
+@media (max-width: 760px) {
+  .dndwiki-page .dd5e-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .dndwiki-page .dd5e-ability-grid { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
 }
 
 @media (max-width: 560px) {
@@ -229,6 +380,11 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-card:nth-child(n+2) { border-top: 1px solid var(--divider-color); }
   .dndwiki-key-form { grid-template-columns: minmax(0,1fr); }
   .dndwiki-page h1:has(mark.story)::before, .dndwiki-page h1:has(mark.battle)::before, .dndwiki-page h1:has(mark.ideation)::before { inset-inline: -.5rem; }
+}
+
+@media (max-width: 460px) {
+  .dndwiki-page .dd5e-card-grid,
+  .dndwiki-page .dd5e-ability-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
