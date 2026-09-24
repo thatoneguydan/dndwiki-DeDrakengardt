@@ -10,6 +10,7 @@
   },
   "deployment": {
     "provider": "github-pages",
-    "enabled": true
+    "enabled": true,
+    "customDomain": "dedrak.lorebomb.com"
   }
 }
