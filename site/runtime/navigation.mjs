@@ -6,7 +6,7 @@ import {
   searchViewerGraph,
 } from './viewer-graph.mjs';
 
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
+const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
 
 export class NavigationError extends Error {
   constructor(message) {
@@ -17,7 +17,7 @@ export class NavigationError extends Error {
 
 function pageId(value, field = 'pageId') {
   if (typeof value !== 'string' || !PAGE_ID_RE.test(value)) {
-    throw new NavigationError(`${field} must be a valid opaque page ID.`);
+    throw new NavigationError(`${field} must be a valid page slug.`);
   }
   return value;
 }
@@ -33,7 +33,7 @@ function snapshotParts(snapshot) {
   const pages = new Map();
   for (const [index, page] of snapshot.pages.entries()) {
     const id = pageId(page?.pageId, `pages[${index}].pageId`);
-    if (pages.has(id)) throw new NavigationError(`Duplicate page ID '${id}'.`);
+    if (pages.has(id)) throw new NavigationError(`Duplicate page slug '${id}'.`);
     pages.set(id, page);
   }
   return { pages, graph: snapshot.graph };
@@ -49,8 +49,9 @@ function inlineText(value) {
     .trim();
 }
 
-function visibleTitle(pageView) {
+function visibleTitle(page, pageView) {
   if (pageView.status !== 'visible') return null;
+  if (typeof page?.title === 'string' && page.title.trim().length > 0) return page.title.trim();
   for (const line of pageView.markdown.split(/\r?\n/)) {
     const match = /^ {0,3}#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/.exec(line);
     if (match) {
@@ -87,7 +88,7 @@ export function pageForRoute(snapshot, perspective, pageIdValue) {
   const view = buildPageView(page, perspective);
   return {
     ...view,
-    title: visibleTitle(view),
+    title: visibleTitle(page, view),
     route: routeForPage(id),
   };
 }
@@ -100,7 +101,7 @@ function pageTargetSummary(pages, perspective, targetPageId, heading) {
   const view = buildPageView(target, perspective);
   return {
     targetStatus: view.status,
-    targetTitle: visibleTitle(view),
+    targetTitle: visibleTitle(target, view),
     route: routeForPage(targetPageId, heading),
   };
 }
@@ -149,7 +150,7 @@ export function backlinkNavigationForPage(snapshot, perspective, targetPageId) {
     if (sourceView.status !== 'visible') return [];
     return [{
       sourcePageId: record.sourcePageId,
-      sourceTitle: visibleTitle(sourceView),
+      sourceTitle: visibleTitle(source, sourceView),
       kind: record.kind,
       heading: record.heading,
       label: record.label,
@@ -168,7 +169,7 @@ export function searchNavigation(snapshot, perspective, query, options = {}) {
     return [{
       pageId: record.pageId,
       segmentIndex: record.segmentIndex,
-      title: visibleTitle(view),
+      title: visibleTitle(page, view),
       snippet: record.snippet,
       route: routeForPage(record.pageId),
     }];
