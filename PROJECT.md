@@ -23,11 +23,12 @@ DM-only ordinary note content and the player-registry source note must never ent
 
 De Drakengardt has completed its initial live campaign publication and production GitHub Pages deployment.
 
-- Live site: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`
+- Current GitHub Pages site: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`
+- Selected permanent campaign domain: `https://dedrak.lorebomb.com/`
 - Initial authorized corpus: `Session 38 - 3.1 Recap` (public) and `Letter to Celeste` (`celeste` only).
 - GitHub Pages deployment is enabled from generated `site/` output on `main`.
 - Automatic Publishing remains off; publication remains explicitly controlled from the canonical private vault.
-- The next launch gate is the custom campaign subdomain.
+- The active launch gate is binding `dedrak.lorebomb.com` to GitHub Pages, validating DNS, and enabling HTTPS.
 
 ## Safety constraints
 
