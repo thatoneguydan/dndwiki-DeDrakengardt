@@ -1,0 +1,72 @@
+{
+  "campaign": {
+    "id": "de-drakengardt",
+    "title": "De Drakengardt"
+  },
+  "engine": {
+    "version": "0.1.0"
+  },
+  "graph": {
+    "assets": [],
+    "references": [],
+    "schemaVersion": 1,
+    "search": [
+      {
+        "audience": {
+          "playerIds": [
+            "celeste"
+          ],
+          "public": false
+        },
+        "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss you\n\n---\n\nAchievement and rule-following is the only life I've ever known. I thought it was the epitome of character. But then our home fell from the sky and I wonder what it was all for. My north star turned out to be a demonic creature of death. \n",
+        "pageId": "cb452dd0cd9b1dd08693c634",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "- The Silver City screeched and sheared against the failing chains of Marduun's Stratos Tether.\n- Celeste was lost in a something like a memory: having a picnic with her father Exander.\n\t- Would you still love me if I did something *yikes* bad? - Celeste\n\t- \"A weed is only a weed because _we_ labeled it so.\" - Exander\n- Spark cast Divine Intervention, shouting about weak-willed gods while headbutting Timar.\n\t- This forced Timar's eyes open.\n- Skrimhawk slipped outside of time. Chronos introduced themself, offering their help.\n\t- Each lock on the Arcane Multilock clicked open, and Chronos's voice emanated from the Chronogual Orb\n- Chronos asked if Skrimhawk would be willing to sacrifice himself to walk against the flow of time, since Timar needed more time to save the city from impact.\n- Skrimhawk pulled the party and Timar back in time by a few moments.\n- Timar burst through the mural above The Sanctum of the Lambs and caught the city, holding it in place.\n- The party was approached by Punar Tillam, one of a few uninjured government officials attempting to bring some order to the aftermath.\n\t- He was from commerce. Basically an accountant.\n\t- The party did not trust him and restrained him, attempting to cast Banishment on him.\n- Professor Marduun peered down through the shattered mural, requesting the party meet him at the surface\n\t- His staff's candles did not burn, a sight Celeste and HAL had never seen before\n- The surface was a cold aftershock: many buildings in ruin, many bodies lying among the rubble\n- HAL healed as many as he was able to\n- Marduun asked the party to stay under the city's watch as the party was under suspicion.\n\t- He explained Castiel Ralora was found in a bunker built for such an occasion, and he was detained.\n- While under \"house arrest,\" Spark asked Kiktal to hit him. He had a breakthrough in his attempts to solidify magical flame.\n- There was no trial brought against the party, but Councilwoman Veldrin Illiir heard the party's account of things\n\t- She thanked them. She gave Celeste an item (Spellbook Jailbreak) from her personal collection.\n- Celeste's reunion with her parents, Maeve and Exander, was strained.\n\t- Celeste asked if the party could stay with them in their house for a short while.\n- Exander revealed that he did not send HAL to find Celeste.\n- Maeve asked the party to come to the Efthalia household for tea.\n\t- Celeste showed Skrimhawk and Spark her old room, her old clothes.\n\t- Skrimhawk noticed Celeste stuff a seemingly unimportant trophy into her bag.\n\t- Spark caught Flicker stealing, and they had a conversation about excess.\n\t- Spark talked about how he misses the old De Drakengardt, where gardeners used to walk among mortals, and the roads were filled with travelers you didn't have to avoid.\n\t- HAL went back to his old \"room,\" a closet with unattached piping. He gathered some crayon drawings. Kiktal had a short, uncomfortable conversation about caring for people.\n- One of Flicker's fireflies dissolved as Celeste heard \"some things must be broken before they can be fixed.\" A spell wrought tattoo appeared on her of a little star.",
+        "pageId": "7393765769ebacc47b1c4643",
+        "segmentIndex": 0
+      }
+    ]
+  },
+  "pages": [
+    {
+      "pageId": "cb452dd0cd9b1dd08693c634",
+      "segments": [
+        {
+          "kind": "keyed",
+          "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss you\n\n---\n\nAchievement and rule-following is the only life I've ever known. I thought it was the epitome of character. But then our home fell from the sky and I wonder what it was all for. My north star turned out to be a demonic creature of death. \n",
+          "playerIds": [
+            "celeste"
+          ]
+        }
+      ]
+    },
+    {
+      "pageId": "7393765769ebacc47b1c4643",
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "- The Silver City screeched and sheared against the failing chains of Marduun's Stratos Tether.\n- Celeste was lost in a something like a memory: having a picnic with her father Exander.\n\t- Would you still love me if I did something *yikes* bad? - Celeste\n\t- \"A weed is only a weed because _we_ labeled it so.\" - Exander\n- Spark cast Divine Intervention, shouting about weak-willed gods while headbutting Timar.\n\t- This forced Timar's eyes open.\n- Skrimhawk slipped outside of time. Chronos introduced themself, offering their help.\n\t- Each lock on the Arcane Multilock clicked open, and Chronos's voice emanated from the Chronogual Orb\n- Chronos asked if Skrimhawk would be willing to sacrifice himself to walk against the flow of time, since Timar needed more time to save the city from impact.\n- Skrimhawk pulled the party and Timar back in time by a few moments.\n- Timar burst through the mural above The Sanctum of the Lambs and caught the city, holding it in place.\n- The party was approached by Punar Tillam, one of a few uninjured government officials attempting to bring some order to the aftermath.\n\t- He was from commerce. Basically an accountant.\n\t- The party did not trust him and restrained him, attempting to cast Banishment on him.\n- Professor Marduun peered down through the shattered mural, requesting the party meet him at the surface\n\t- His staff's candles did not burn, a sight Celeste and HAL had never seen before\n- The surface was a cold aftershock: many buildings in ruin, many bodies lying among the rubble\n- HAL healed as many as he was able to\n- Marduun asked the party to stay under the city's watch as the party was under suspicion.\n\t- He explained Castiel Ralora was found in a bunker built for such an occasion, and he was detained.\n- While under \"house arrest,\" Spark asked Kiktal to hit him. He had a breakthrough in his attempts to solidify magical flame.\n- There was no trial brought against the party, but Councilwoman Veldrin Illiir heard the party's account of things\n\t- She thanked them. She gave Celeste an item (Spellbook Jailbreak) from her personal collection.\n- Celeste's reunion with her parents, Maeve and Exander, was strained.\n\t- Celeste asked if the party could stay with them in their house for a short while.\n- Exander revealed that he did not send HAL to find Celeste.\n- Maeve asked the party to come to the Efthalia household for tea.\n\t- Celeste showed Skrimhawk and Spark her old room, her old clothes.\n\t- Skrimhawk noticed Celeste stuff a seemingly unimportant trophy into her bag.\n\t- Spark caught Flicker stealing, and they had a conversation about excess.\n\t- Spark talked about how he misses the old De Drakengardt, where gardeners used to walk among mortals, and the roads were filled with travelers you didn't have to avoid.\n\t- HAL went back to his old \"room,\" a closet with unattached piping. He gathered some crayon drawings. Kiktal had a short, uncomfortable conversation about caring for people.\n- One of Flicker's fireflies dissolved as Celeste heard \"some things must be broken before they can be fixed.\" A spell wrought tattoo appeared on her of a little star.",
+          "playerIds": []
+        }
+      ]
+    }
+  ],
+  "players": {
+    "keyLookup": {
+      "06136b0a3c80f9940bc63dfa12510fe01a30ecca4ae63070d95dd1380090bdb9": "celeste",
+      "2071dea3c03fe06a1d14e44f62c4c4028a6e3da34f86313cee57ba7095fd3dad": "flicker",
+      "6588f83abf9eb4f44e639724b52d2cc16999b5002b2e8ff54aaab9538e21a9b8": "hal",
+      "c25efc30049b961c51cd5e17176bd783899114a2817fa21c766a14a6dd2a2d61": "voli",
+      "d202acbd0577b405b4211b386f7cedb18aec040c79f621d2db2486a94b4fc740": "skrimhawk",
+      "d4ce06e319c7157b63b375ca23a9c2e86d02109261b79aba736faca3db660473": "kiktal"
+    },
+    "schemaVersion": 1
+  },
+  "schemaVersion": 1
+}

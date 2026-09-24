@@ -1,0 +1,17 @@
+{
+  "engineVersion": "0.1.0",
+  "generatedPaths": [
+    "site/dndwiki.generated.json",
+    "site/dndwiki.snapshot.json",
+    "site/index.html",
+    "site/runtime/markdown-renderer.mjs",
+    "site/runtime/navigation.mjs",
+    "site/runtime/page-visibility.mjs",
+    "site/runtime/player-identity.mjs",
+    "site/runtime/viewer-graph.mjs",
+    "site/runtime/wiki-shell-entry.mjs",
+    "site/runtime/wiki-shell.mjs",
+    "site/styles.css"
+  ],
+  "schemaVersion": 1
+}
