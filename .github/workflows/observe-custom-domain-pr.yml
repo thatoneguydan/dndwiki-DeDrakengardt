@@ -1,0 +1,65 @@
+name: Observe custom domain (operational)
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe DNS, HTTP, and TLS
+        shell: bash
+        run: |
+          set -u
+          host="dedrak.lorebomb.com"
+          expected_cname="thatoneguydan.github.io"
+
+          echo "=== DNS ==="
+          cname="$(dig +short CNAME "${host}" | sed 's/\.$//' | head -n 1)"
+          echo "observed_cname=${cname:-<none>}"
+          dig +noall +answer CNAME "${host}" || true
+          getent ahosts "${host}" || true
+
+          echo
+          echo "=== HTTP ==="
+          set +e
+          curl -sS -D - -o /dev/null --max-time 20 "http://${host}/"
+          http_exit=$?
+          set -e
+          echo "http_curl_exit=${http_exit}"
+
+          echo
+          echo "=== HTTPS ==="
+          set +e
+          curl -sS -vI --max-time 20 "https://${host}/" 2>&1
+          https_exit=$?
+          set -e
+          echo "https_curl_exit=${https_exit}"
+
+          echo
+          echo "=== TLS certificate ==="
+          set +e
+          timeout 20 openssl s_client -connect "${host}:443" -servername "${host}" </dev/null 2>&1 | tee /tmp/tls.txt
+          tls_exit=${PIPESTATUS[0]}
+          set -e
+          echo "tls_probe_exit=${tls_exit}"
+
+          if grep -q "BEGIN CERTIFICATE" /tmp/tls.txt; then
+            awk '/BEGIN CERTIFICATE/{flag=1} flag{print} /END CERTIFICATE/{exit}' /tmp/tls.txt > /tmp/leaf.pem
+            openssl x509 -in /tmp/leaf.pem -noout -subject -issuer -dates -ext subjectAltName || true
+          fi
+
+          echo
+          if [[ "${cname}" != "${expected_cname}" ]]; then
+            echo "RESULT=DNS_NOT_READY"
+          elif [[ "${https_exit}" -eq 0 ]]; then
+            echo "RESULT=HTTPS_READY"
+          else
+            echo "RESULT=DNS_READY_HTTPS_PENDING"
+          fi
