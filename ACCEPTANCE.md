@@ -7,13 +7,13 @@ This checklist closes DnDWiki Workstream 5, Stage 3 only after the permanent pro
 - Permanent URL: `https://dedrak.lorebomb.com/`
 - Pre-custom-domain GitHub Pages project URL: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/` (GitHub may redirect this once the custom-domain binding is active).
 - DNS target: `dedrak.lorebomb.com` CNAME `thatoneguydan.github.io`
-- Cloudflare proxy should remain DNS-only until GitHub Pages has validated the hostname and provisioned its certificate.
+- Cloudflare remains DNS-only for launch acceptance; no proxying is required.
 
 ## Preconditions
 
 - [ ] GitHub Pages reports the custom domain as valid.
-- [ ] `https://dedrak.lorebomb.com/` presents a valid certificate for `dedrak.lorebomb.com`.
-- [ ] HTTP redirects to HTTPS once GitHub **Enforce HTTPS** is available and enabled.
+- [x] `https://dedrak.lorebomb.com/` presents a valid certificate for `dedrak.lorebomb.com`.
+- [x] HTTP redirects to HTTPS.
 - [x] The generated site uses relative asset/snapshot URLs and hash routing, so the same artifact can be served from either the project-site URL or the custom hostname.
 - [x] Persistent Automatic Publishing remains off during launch acceptance.
 
@@ -21,9 +21,9 @@ This checklist closes DnDWiki Workstream 5, Stage 3 only after the permanent pro
 
 From the permanent hostname:
 
-- [ ] The landing page loads without a certificate warning.
-- [ ] Styles load and the page is not an unstyled HTML shell.
-- [ ] `./runtime/wiki-shell-entry.mjs` and `./dndwiki.snapshot.json` load successfully.
+- [x] The landing page completes TLS validation and returns HTTP 200.
+- [ ] Styles visibly apply and the page is not an unstyled HTML shell.
+- [x] `./runtime/wiki-shell-entry.mjs` and `./dndwiki.snapshot.json` load successfully over HTTPS.
 - [ ] Reloading a `#/page/<slug>` route returns to the same wiki route.
 - [ ] There are no mixed-content or same-origin runtime errors in the browser console/network panel.
 
@@ -77,6 +77,16 @@ Exercise the permanent hostname on at least one desktop browser and one touch/mo
 - [ ] A page can be followed, reloaded, searched, and returned to during normal session use without losing the expected perspective.
 
 Android/Obsidian plugin physical acceptance is tracked separately; this gate covers the player-facing website rather than authoring-device plugin behavior.
+
+## Automated evidence already complete
+
+These checks do not need to be repeated manually:
+
+- GitHub-hosted observer run `36087716628`, job `108065781396`: valid `dedrak.lorebomb.com` certificate, HTTP 301 to HTTPS, HTTPS root 200, and HTTPS 200 for `styles.css`, `runtime/wiki-shell-entry.mjs`, and `dndwiki.snapshot.json`.
+- Post-cleanup canonical observer run `36133710476`, job `108066662020`: repeated the same `HTTPS_READY` result after the hourly schedule was removed.
+- Launch-specific artifact proof run `36087617872`, job `107922888218`: exact five-page corpus, anonymous/wrong-key isolation, keyed `Letter to Celeste`, wrong-key non-persistence, and anonymous viewer-graph/search/reference isolation all pass against the generated production artifact without using any real player key.
+
+The remaining unchecked items intentionally require browser/UI observation, a real Celeste key, a real non-Celeste key, or representative desktop/touch use.
 
 ## Pass criteria
 
