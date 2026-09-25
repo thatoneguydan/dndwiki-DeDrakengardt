@@ -261,15 +261,26 @@ function searchResults(model, expandedPageIds = new Set()) {
   const items = groups.map((group) => {
     const expanded = expandedPageIds.has(group.pageId);
     const visibleResults = expanded ? group.results : group.results.slice(0, 5);
-    const matches = visibleResults.map((result) => `<li>
-      <a href="${escapeHtml(result.route)}" data-dndwiki-search-result data-dndwiki-search-page="${escapeHtml(result.pageId)}" data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}" data-dndwiki-search-query="${escapeHtml(model.query)}">
-        <strong>${escapeHtml(result.title ?? 'Page')}</strong>
-        <span>${highlightedSnippet(result)}</span>
-      </a>
-    </li>`).join('');
+    const matches = visibleResults.map((result) => {
+      const matchType = result.matchType === 'title' ? 'title' : 'content';
+      const occurrenceAttribute = matchType === 'content'
+        ? ` data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}"`
+        : '';
+      const resultBody = matchType === 'title'
+        ? `<strong>${highlightedSnippet(result)}</strong><span>Page title</span>`
+        : `<strong>${escapeHtml(result.title ?? 'Page')}</strong><span>${highlightedSnippet(result)}</span>`;
+      return `<li>
+        <a href="${escapeHtml(result.route)}" data-dndwiki-search-result data-dndwiki-search-match="${matchType}" data-dndwiki-search-page="${escapeHtml(result.pageId)}"${occurrenceAttribute} data-dndwiki-search-query="${escapeHtml(model.query)}">
+          ${resultBody}
+        </a>
+      </li>`;
+    }).join('');
     const overflowCount = Math.max(0, group.results.length - 5);
     const toggle = overflowCount > 0
-      ? `<li><button type="button" data-dndwiki-search-more data-dndwiki-search-page="${escapeHtml(group.pageId)}" aria-expanded="${expanded ? 'true' : 'false'}" style="display:block;width:100%;min-height:32px;text-align:left;border:0;border-radius:0;padding:.55rem .75rem;color:var(--text-muted)">${expanded ? `show fewer from ${escapeHtml(group.title)}` : `and ${overflowCount} more from ${escapeHtml(group.title)}`}</button></li>`
+      ? `<li><button type="button" data-dndwiki-search-more data-dndwiki-search-page="${escapeHtml(group.pageId)}" aria-expanded="${expanded ? 'true' : 'false'}" aria-label="${expanded ? `Show fewer results from ${escapeHtml(group.title)}` : `Show ${overflowCount} more results from ${escapeHtml(group.title)}`}" style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;width:calc(100% - 1.1rem);min-height:34px;margin:.42rem .55rem;padding:.42rem .7rem;border-radius:999px;color:var(--text-muted);font-size:.78rem;font-weight:500;text-align:left">
+          <span style="display:inline;margin:0;color:inherit;font-size:inherit"><strong style="display:inline;font-weight:600">${expanded ? 'Show fewer' : `Show ${overflowCount} more`}</strong><span style="display:inline;margin:0;color:var(--text-muted);font-size:inherit"> · ${escapeHtml(group.title)}</span></span>
+          <span aria-hidden="true" style="display:inline-flex;margin:0;color:inherit;font-size:.9rem;line-height:1">${expanded ? '▴' : '▾'}</span>
+        </button></li>`
       : '';
     return `${matches}${toggle}`;
   }).join('');
@@ -521,11 +532,17 @@ export async function mountWikiShell({
         if (link == null) return;
         const pageId = link.getAttribute?.('data-dndwiki-search-page') ?? '';
         const query = link.getAttribute?.('data-dndwiki-search-query') ?? '';
+        const matchType = link.getAttribute?.('data-dndwiki-search-match') ?? 'content';
         const occurrenceIndex = Number.parseInt(link.getAttribute?.('data-dndwiki-search-occurrence') ?? '', 10);
         const route = link.getAttribute?.('href') ?? '';
-        if (!PAGE_ID_RE.test(pageId) || query.trim().length === 0 || !Number.isInteger(occurrenceIndex) || occurrenceIndex < 0 || route.length === 0) return;
+        const contentTarget = matchType === 'content';
+        if (!PAGE_ID_RE.test(pageId)
+          || query.trim().length === 0
+          || !['title', 'content'].includes(matchType)
+          || (contentTarget && (!Number.isInteger(occurrenceIndex) || occurrenceIndex < 0))
+          || route.length === 0) return;
         event.preventDefault();
-        pendingSearchTarget = { pageId, query, occurrenceIndex };
+        pendingSearchTarget = contentTarget ? { pageId, query, occurrenceIndex } : null;
         searchResultsOpen = false;
         if (resultsRoot != null) resultsRoot.hidden = true;
         if (browserWindow.location?.hash === route) {
