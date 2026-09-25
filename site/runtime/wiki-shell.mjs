@@ -233,15 +233,25 @@ function accessCard(model) {
   </section>`;
 }
 
+function highlightedSnippet(result) {
+  const snippet = String(result?.snippet ?? '');
+  const start = Number(result?.matchStart);
+  const length = Number(result?.matchLength);
+  if (!Number.isInteger(start) || !Number.isInteger(length) || start < 0 || length < 1 || start + length > snippet.length) {
+    return escapeHtml(snippet);
+  }
+  return `${escapeHtml(snippet.slice(0, start))}<mark style="background:var(--text-highlight-bg);color:inherit;padding:0 .08em">${escapeHtml(snippet.slice(start, start + length))}</mark>${escapeHtml(snippet.slice(start + length))}`;
+}
+
 function searchResults(model) {
   if (model.query.length === 0) return '';
   const items = model.searchResults.map((result) => `<li>
-    <a href="${escapeHtml(result.route)}">
+    <a href="${escapeHtml(result.route)}" data-dndwiki-search-result data-dndwiki-search-page="${escapeHtml(result.pageId)}" data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}" data-dndwiki-search-query="${escapeHtml(model.query)}">
       <strong>${escapeHtml(result.title ?? 'Page')}</strong>
-      <span>${escapeHtml(result.snippet)}</span>
+      <span>${highlightedSnippet(result)}</span>
     </a>
   </li>`).join('');
-  return `<section class="dndwiki-search-results" aria-label="Search results">
+  return `<section class="dndwiki-search-results" aria-label="Search results" style="width:100%;max-width:none;margin:0">
     <h2>${model.searchResults.length} result${model.searchResults.length === 1 ? '' : 's'} for “${escapeHtml(model.query)}”</h2>
     ${items.length > 0 ? `<ul>${items}</ul>` : '<p class="dndwiki-meta" style="padding:0 1rem 1rem">No visible matches.</p>'}
   </section>`;
@@ -289,6 +299,7 @@ export function renderWikiShellHtml(model) {
           <input name="query" type="search" value="${escapeHtml(model.query)}" placeholder="Search this wiki" autocomplete="off">
         </label>
         <button type="submit">Search</button>
+        <div data-dndwiki-search-results aria-live="polite" style="position:absolute;left:0;right:0;top:calc(100% + .4rem);z-index:30;max-height:min(70vh,34rem);overflow:auto">${searchResults(model)}</div>
       </form>
       <div class="dndwiki-access">
         <span class="dndwiki-access-status">${accessStatus}</span>
@@ -297,7 +308,6 @@ export function renderWikiShellHtml(model) {
     </header>
     <div class="dndwiki-layout">
       <main class="dndwiki-main" id="main-content">
-        <div data-dndwiki-search-results>${searchResults(model)}</div>
         ${pageBody(model)}
       </main>
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
@@ -328,6 +338,67 @@ function scrollToRequestedHeading(root, heading) {
   }
 }
 
+function occurrenceBounds(text, query, occurrenceIndex) {
+  const normalizedText = String(text ?? '').toLocaleLowerCase('en-US');
+  const normalizedQuery = String(query ?? '').trim().toLocaleLowerCase('en-US');
+  if (normalizedQuery.length === 0 || !Number.isInteger(occurrenceIndex) || occurrenceIndex < 0) return null;
+  let fromIndex = 0;
+  for (let index = 0; index <= occurrenceIndex; index += 1) {
+    const start = normalizedText.indexOf(normalizedQuery, fromIndex);
+    if (start < 0) return null;
+    if (index === occurrenceIndex) return { start, end: start + normalizedQuery.length };
+    fromIndex = start + Math.max(1, normalizedQuery.length);
+  }
+  return null;
+}
+
+function highlightSearchOccurrence(root, browserWindow, target) {
+  const article = root?.querySelector?.('[data-dndwiki-page]');
+  const document = browserWindow?.document;
+  if (article == null || document == null || typeof document.createTreeWalker !== 'function' || typeof document.createRange !== 'function') return false;
+
+  const showText = browserWindow?.NodeFilter?.SHOW_TEXT ?? 4;
+  const walker = document.createTreeWalker(article, showText);
+  const nodes = [];
+  let offset = 0;
+  for (let node = walker.nextNode(); node != null; node = walker.nextNode()) {
+    const text = String(node.data ?? node.textContent ?? '');
+    if (text.length === 0) continue;
+    nodes.push({ node, start: offset, end: offset + text.length, text });
+    offset += text.length;
+  }
+  const combined = nodes.map((record) => record.text).join('');
+  const bounds = occurrenceBounds(combined, target.query, target.occurrenceIndex);
+  if (bounds == null) return false;
+
+  const marks = [];
+  try {
+    for (const record of nodes) {
+      const overlapStart = Math.max(bounds.start, record.start);
+      const overlapEnd = Math.min(bounds.end, record.end);
+      if (overlapStart >= overlapEnd) continue;
+      const range = document.createRange();
+      range.setStart(record.node, overlapStart - record.start);
+      range.setEnd(record.node, overlapEnd - record.start);
+      const mark = document.createElement('mark');
+      mark.setAttribute('data-dndwiki-search-highlight', '');
+      if (marks.length === 0) mark.setAttribute('data-dndwiki-search-target', '');
+      range.surroundContents(mark);
+      marks.push(mark);
+    }
+  } catch {
+    return false;
+  }
+
+  const first = marks[0];
+  if (first == null) return false;
+  if (typeof first.scrollIntoView === 'function') {
+    const reduced = browserWindow?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
+    first.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+  }
+  return true;
+}
+
 export async function mountWikiShell({
   root,
   window: browserWindow,
@@ -346,6 +417,7 @@ export async function mountWikiShell({
   });
 
   let model = session.currentModel;
+  let pendingSearchTarget = null;
   const render = () => {
     root.innerHTML = renderWikiShellHtml(model);
     if (browserWindow.document != null) {
@@ -357,9 +429,9 @@ export async function mountWikiShell({
     if (typeof root.querySelector === 'function') {
       const searchForm = root.querySelector('[data-dndwiki-search-form]');
       const searchInput = searchForm?.elements?.query;
+      const resultsRoot = root.querySelector('[data-dndwiki-search-results]');
       const updateSearch = (value) => {
         model = session.search(value);
-        const resultsRoot = root.querySelector('[data-dndwiki-search-results]');
         if (resultsRoot != null) resultsRoot.innerHTML = searchResults(model);
       };
       searchForm?.addEventListener?.('submit', (event) => {
@@ -368,6 +440,27 @@ export async function mountWikiShell({
       });
       searchInput?.addEventListener?.('input', () => {
         updateSearch(searchInput.value ?? '');
+      });
+      resultsRoot?.addEventListener?.('click', (event) => {
+        const link = event.target?.closest?.('[data-dndwiki-search-result]');
+        if (link == null) return;
+        const pageId = link.getAttribute?.('data-dndwiki-search-page') ?? '';
+        const query = link.getAttribute?.('data-dndwiki-search-query') ?? '';
+        const occurrenceIndex = Number.parseInt(link.getAttribute?.('data-dndwiki-search-occurrence') ?? '', 10);
+        const route = link.getAttribute?.('href') ?? '';
+        if (!PAGE_ID_RE.test(pageId) || query.trim().length === 0 || !Number.isInteger(occurrenceIndex) || occurrenceIndex < 0 || route.length === 0) return;
+        event.preventDefault();
+        pendingSearchTarget = { pageId, query, occurrenceIndex };
+        model = session.search('');
+        if (browserWindow.location?.hash === route) {
+          model = session.setRoute(route);
+          render();
+        } else if (browserWindow.location != null) {
+          browserWindow.location.hash = route;
+        } else {
+          model = session.setRoute(route);
+          render();
+        }
       });
 
       for (const form of root.querySelectorAll?.('[data-dndwiki-key-form]') ?? []) {
@@ -384,6 +477,14 @@ export async function mountWikiShell({
           model = session.clearKey();
           render();
         });
+      }
+    }
+
+    if (pendingSearchTarget != null) {
+      if (model.page?.pageId !== pendingSearchTarget.pageId || model.page?.status !== 'visible') {
+        pendingSearchTarget = null;
+      } else if (highlightSearchOccurrence(root, browserWindow, pendingSearchTarget)) {
+        pendingSearchTarget = null;
       }
     }
   };
