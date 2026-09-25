@@ -32,7 +32,7 @@ From the permanent hostname:
 With no stored player key:
 
 - [ ] Public pages remain readable, including `Session 38 - 3.1 Recap`, `Spellbook Jailbreak`, `The Humbling of the Silver City`, and `A Construct's Confession About Dreams`.
-- [ ] `Letter to Celeste` presents only the generic player-key gate.
+- [x] `Letter to Celeste` presents only the generic player-key gate when opened in an anonymous/incognito session.
 - [ ] Search does not reveal keyed-only text, hidden snippets, hidden player IDs, or audience metadata.
 - [ ] Forward links and backlinks do not leak hidden target content or private source structure.
 - [ ] The normal UI identifies the perspective only as public/anonymous; it does not expose registry internals.
@@ -50,13 +50,15 @@ Use a deliberately invalid test value, never a real player's key:
 
 Celeste should perform this portion using her own real key. Do not paste, record, screenshot, commit, log, or transmit the raw key as acceptance evidence.
 
-- [ ] Entering the valid key activates player access.
-- [ ] `Letter to Celeste` becomes readable.
+- [x] Entering the valid key activates player access.
+- [x] `Letter to Celeste` becomes readable.
 - [ ] Public pages remain readable.
 - [ ] Search/navigation expose only public material plus material intended for Celeste.
 - [ ] Reloading preserves the active perspective in the same browser profile.
 - [ ] Clearing the key immediately returns to the anonymous visibility boundary.
 - [ ] Entering the key causes no network request containing the raw key; key resolution remains browser-local against the public hash projection.
+
+Human evidence recorded 2026-09-25: Celeste's real key was accepted without being recorded, `Letter to Celeste` became readable in that keyed browser session, and opening the same page URL in an anonymous/incognito session correctly returned the generic access gate.
 
 ## 5. Non-Celeste player perspective
 
