@@ -16,6 +16,7 @@ DM-only ordinary note content and the player-registry source note must never ent
 ## Read next
 
 - `dndwiki.campaign.json` — campaign publication/deployment contract.
+- `ACCEPTANCE.md` — permanent-hostname and real-player launch acceptance.
 - `thatoneguydan/dndwiki/ARCHITECTURE.md` — engine-wide publication/privacy semantics.
 - `thatoneguydan/dndwiki/ROADMAP.md` — canonical program roadmap.
 
@@ -23,12 +24,14 @@ DM-only ordinary note content and the player-registry source note must never ent
 
 De Drakengardt has completed its initial live campaign publication and production GitHub Pages deployment.
 
-- Current GitHub Pages site: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`
-- Selected permanent campaign domain: `https://dedrak.lorebomb.com/`
-- Initial authorized corpus: `Session 38 - 3.1 Recap` (public) and `Letter to Celeste` (`celeste` only).
-- GitHub Pages deployment is enabled from generated `site/` output on `main`.
+- Pre-custom-domain GitHub Pages project URL: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`.
+- Selected permanent campaign URL: `https://dedrak.lorebomb.com/`.
+- `dedrak.lorebomb.com` resolves by CNAME to `thatoneguydan.github.io` and serves the generated site over HTTP from GitHub Pages.
+- GitHub's custom certificate for `dedrak.lorebomb.com` is still provisioning; keep Cloudflare DNS-only until the hostname presents a valid certificate and GitHub HTTPS enforcement is ready.
+- Intentionally published corpus: `Session 38 - 3.1 Recap` (public), `Letter to Celeste` (`celeste` only), `Spellbook Jailbreak` (public), `The Humbling of the Silver City` (public), and `A Construct's Confession About Dreams` (public).
+- GitHub Pages deployment is enabled from generated `site/` output on `main`; deployment and custom-domain observation run as separate jobs so TLS can be rechecked without changing publication content.
 - Automatic Publishing remains off; publication remains explicitly controlled from the canonical private vault.
-- The active launch gate is binding `dedrak.lorebomb.com` to GitHub Pages, validating DNS, and enabling HTTPS.
+- The active launch gate is GitHub custom-certificate issuance, HTTPS enforcement, then `ACCEPTANCE.md` real-player validation on the permanent hostname.
 
 ## Safety constraints
 
