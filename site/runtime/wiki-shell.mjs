@@ -325,7 +325,7 @@ export function renderWikiShellHtml(model) {
     <header class="dndwiki-topbar">
       <div class="dndwiki-brand">
         <a href="#/">${escapeHtml(model.campaign.title)}</a>
-        <small>DnDWiki</small>
+        <small>dndwiki</small>
       </div>
       <form class="dndwiki-search" role="search" data-dndwiki-search-form style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem">
         <label style="min-width:0;position:relative">

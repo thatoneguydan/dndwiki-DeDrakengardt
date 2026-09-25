@@ -1,4 +1,4 @@
-# DnDWiki — De Drakengardt
+# dndwiki — De Drakengardt
 
 This public repository is the generated player-facing publication target for the De Drakengardt campaign.
 
@@ -11,7 +11,7 @@ This public repository is the generated player-facing publication target for the
 
 ## Privacy boundary
 
-DM-only ordinary note content and the player-registry source note must never enter this repository. Player-keyed sections are intentionally publishable under DnDWiki's lightweight personalization threat model. Generated state must identify the DnDWiki schema/engine version that produced it.
+DM-only ordinary note content and the player-registry source note must never enter this repository. Player-keyed sections are intentionally publishable under dndwiki's lightweight personalization threat model. Generated state must identify the dndwiki schema/engine version that produced it.
 
 ## Read next
 
@@ -36,5 +36,5 @@ De Drakengardt has completed its initial live campaign publication and productio
 ## Safety constraints
 
 - Never commit private DM-only source or the player registry.
-- Never infer publishability from folder location alone; generated output must come from the DnDWiki extraction contract.
+- Never infer publishability from folder location alone; generated output must come from the dndwiki extraction contract.
 - Do not require Gigachomper, grimoireOS, the DM's home power, or residential internet to serve already-published content.
