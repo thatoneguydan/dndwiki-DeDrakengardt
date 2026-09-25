@@ -5,7 +5,7 @@ This checklist closes DnDWiki Workstream 5, Stage 3 only after the permanent pro
 ## Production target
 
 - Permanent URL: `https://dedrak.lorebomb.com/`
-- Current GitHub Pages origin/fallback: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/`
+- Pre-custom-domain GitHub Pages project URL: `https://thatoneguydan.github.io/dndwiki-DeDrakengardt/` (GitHub may redirect this once the custom-domain binding is active).
 - DNS target: `dedrak.lorebomb.com` CNAME `thatoneguydan.github.io`
 - Cloudflare proxy should remain DNS-only until GitHub Pages has validated the hostname and provisioned its certificate.
 
