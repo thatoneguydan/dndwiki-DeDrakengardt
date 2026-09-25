@@ -1,0 +1,124 @@
+name: Verify De Drakengardt public production artifact
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/public-production-acceptance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify public and wrong-key boundaries
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out campaign artifact
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Verify generated production snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFile } from 'node:fs/promises';
+          import {
+            createPlayerIdentitySession,
+            playerKeyStorageKey,
+            resolvePlayerPerspective,
+            validatePublicRegistry,
+          } from './site/runtime/player-identity.mjs';
+          import { buildPageView } from './site/runtime/page-visibility.mjs';
+          import { buildViewerGraph } from './site/runtime/viewer-graph.mjs';
+
+          const snapshot = JSON.parse(await readFile('./site/dndwiki.snapshot.json', 'utf8'));
+          assert.equal(snapshot?.campaign?.id, 'de-drakengardt');
+          assert.equal(snapshot?.campaign?.title, 'De Drakengardt');
+          assert.equal(snapshot?.engine?.version, '0.1.0');
+          assert.ok(Array.isArray(snapshot?.pages), 'snapshot.pages must be an array');
+
+          const publicPageIds = [
+            'a-constructs-confession-about-dreams',
+            'session-38-3-1-recap',
+            'spellbook-jailbreak',
+            'the-humbling-of-the-silver-city',
+          ];
+          const keyedPageId = 'letter-to-celeste';
+          const expectedPageIds = [...publicPageIds, keyedPageId].sort();
+          const actualPageIds = snapshot.pages.map((page) => page.pageId).sort();
+          assert.deepEqual(actualPageIds, expectedPageIds, 'generated corpus must remain the authorized five-page set');
+
+          const pageById = new Map(snapshot.pages.map((page) => [page.pageId, page]));
+          for (const pageId of publicPageIds) {
+            const page = pageById.get(pageId);
+            assert.ok(page, `missing public page ${pageId}`);
+            assert.ok(page.segments.length > 0, `${pageId} must contain at least one segment`);
+            assert.ok(page.segments.every((segment) => segment.kind === 'public' && Array.isArray(segment.playerIds) && segment.playerIds.length === 0), `${pageId} must remain fully public`);
+          }
+
+          const keyedPage = pageById.get(keyedPageId);
+          assert.ok(keyedPage, 'Letter to Celeste must be present');
+          assert.ok(keyedPage.segments.length > 0, 'Letter to Celeste must contain keyed content');
+          assert.ok(keyedPage.segments.every((segment) => segment.kind === 'keyed' && Array.isArray(segment.playerIds) && segment.playerIds.includes('celeste')), 'Letter to Celeste must remain keyed to Celeste');
+
+          validatePublicRegistry(snapshot.players);
+          assert.ok(Object.keys(snapshot.players.keyLookup).every((hash) => /^[0-9a-f]{64}$/.test(hash)), 'public registry keys must be SHA-256 hashes');
+
+          const anonymous = { kind: 'anonymous', playerId: null, playerIds: [], reason: 'no-key' };
+          for (const pageId of publicPageIds) {
+            const view = buildPageView(pageById.get(pageId), anonymous);
+            assert.equal(view.status, 'visible', `${pageId} must be visible anonymously`);
+            assert.equal(view.showKeyEntry, false, `${pageId} must not show the key gate anonymously`);
+            assert.ok(view.markdown.length > 0, `${pageId} must expose readable anonymous Markdown`);
+          }
+
+          const anonymousKeyedView = buildPageView(keyedPage, anonymous);
+          assert.equal(anonymousKeyedView.status, 'gated');
+          assert.equal(anonymousKeyedView.showKeyEntry, true);
+          assert.equal(anonymousKeyedView.markdown, '');
+
+          const invalidKey = 'dndwiki-production-acceptance-invalid-key-v1';
+          const wrongKey = await resolvePlayerPerspective(snapshot.players, invalidKey);
+          assert.equal(wrongKey.kind, 'anonymous');
+          assert.equal(wrongKey.reason, 'wrong-key');
+          assert.deepEqual(buildPageView(keyedPage, wrongKey), anonymousKeyedView, 'wrong-key keyed-page view must equal anonymous view');
+
+          const anonymousGraph = buildViewerGraph(snapshot.graph, anonymous);
+          const wrongKeyGraph = buildViewerGraph(snapshot.graph, wrongKey);
+          assert.deepEqual(wrongKeyGraph, anonymousGraph, 'wrong-key graph must equal anonymous graph');
+          assert.equal(anonymousGraph.search.some((record) => record.pageId === keyedPageId), false, 'anonymous search must not include keyed-only page records');
+          assert.equal(anonymousGraph.references.some((record) => record.sourcePageId === keyedPageId || record.targetPageId === keyedPageId), false, 'anonymous references must not expose keyed-only page relationships');
+          assert.equal(JSON.stringify(anonymousGraph).includes('playerIds'), false, 'filtered graph must not expose audience player IDs');
+
+          const memory = new Map();
+          const storage = {
+            getItem: (key) => memory.has(key) ? memory.get(key) : null,
+            setItem: (key, value) => memory.set(key, value),
+            removeItem: (key) => memory.delete(key),
+          };
+          const session = createPlayerIdentitySession({
+            campaignId: snapshot.campaign.id,
+            publicRegistry: snapshot.players,
+            storage,
+          });
+          const entered = await session.enterKey(invalidKey);
+          assert.equal(entered.kind, 'anonymous');
+          assert.equal(entered.reason, 'wrong-key');
+          assert.equal(storage.getItem(playerKeyStorageKey(snapshot.campaign.id)), null, 'wrong key must not persist');
+
+          const reloadSession = createPlayerIdentitySession({
+            campaignId: snapshot.campaign.id,
+            publicRegistry: snapshot.players,
+            storage,
+          });
+          const reloaded = await reloadSession.load();
+          assert.equal(reloaded.kind, 'anonymous');
+          assert.equal(reloaded.reason, 'no-key');
+
+          console.log('Production artifact acceptance passed: exact corpus, anonymous boundary, wrong-key boundary, graph isolation, and wrong-key persistence behavior are valid.');
+          NODE
