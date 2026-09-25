@@ -43,8 +43,17 @@ jobs:
             cname="$(dig +short CNAME "${host}" | sed 's/\.$//' | head -n 1)"
             echo "observed_cname=${cname:-<none>}"
             dig +noall +answer CNAME "${host}" || true
+
+            echo
+            echo "=== CAA ==="
+            zone="${host#*.}"
+            echo "host_caa:"
+            dig +noall +answer CAA "${host}" || true
+            echo "zone=${zone}"
+            echo "zone_caa:"
+            dig +noall +answer CAA "${zone}" || true
           else
-            echo "dig is unavailable on this runner; exact CNAME observation skipped."
+            echo "dig is unavailable on this runner; DNS and CAA observation skipped."
           fi
 
           echo
@@ -81,8 +90,29 @@ jobs:
             echo "tls_probe_exit=${tls_exit}"
           fi
 
+          resource_scheme="http"
+          if [[ "${https_exit}" -eq 0 ]]; then
+            resource_scheme="https"
+          fi
+
+          echo
+          echo "=== Live runtime resources (${resource_scheme}) ==="
+          resource_failures=0
+          for resource_path in styles.css runtime/wiki-shell-entry.mjs dndwiki.snapshot.json; do
+            set +e
+            resource_status="$(curl -sS -o /dev/null -w '%{http_code}' --max-time 20 "${resource_scheme}://${host}/${resource_path}")"
+            resource_exit=$?
+            set -e
+            echo "${resource_path}: curl_exit=${resource_exit} http_status=${resource_status}"
+            if [[ "${resource_exit}" -ne 0 || "${resource_status}" != "200" ]]; then
+              resource_failures=$((resource_failures + 1))
+            fi
+          done
+
           if [[ -n "${cname}" && "${cname}" != "${expected_cname}" ]]; then
             state="DNS_MISMATCH"
+          elif [[ "${resource_failures}" -ne 0 ]]; then
+            state="RUNTIME_RESOURCE_FAILURE"
           elif [[ "${https_exit}" -eq 0 ]]; then
             state="HTTPS_READY"
           elif [[ -n "${cname}" ]]; then
@@ -99,6 +129,8 @@ jobs:
             echo "- Observed CNAME: \`${cname:-unknown}\`"
             echo "- HTTP curl exit: \`${http_exit}\`"
             echo "- HTTPS curl exit: \`${https_exit}\`"
+            echo "- Runtime resource scheme: \`${resource_scheme}\`"
+            echo "- Runtime resource failures: \`${resource_failures}\`"
             echo "- State: **${state}**"
           } >> "${GITHUB_STEP_SUMMARY}"
 
