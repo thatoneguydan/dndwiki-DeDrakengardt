@@ -1,6 +1,6 @@
 # De Drakengardt Production Acceptance
 
-This checklist closes DnDWiki Workstream 5, Stage 3 only after the permanent production hostname is live over HTTPS and real player perspectives have been exercised without exposing raw player keys.
+This checklist closes dndwiki Workstream 5, Stage 3 only after the permanent production hostname is live over HTTPS and real player perspectives have been exercised without exposing raw player keys.
 
 ## Production target
 
