@@ -1,0 +1,99 @@
+name: Observe De Drakengardt custom domain
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  observe:
+    name: Observe custom domain
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out campaign configuration
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Observe configured custom domain
+        shell: bash
+        run: |
+          set -u
+
+          host="$(jq -r '.deployment.customDomain // empty' dndwiki.campaign.json)"
+          expected_cname="${{ github.repository_owner }}.github.io"
+
+          if [[ -z "${host}" ]]; then
+            echo "No deployment.customDomain is configured; skipping custom-domain observation."
+            exit 0
+          fi
+
+          echo "=== Custom domain observation ==="
+          echo "host=${host}"
+          echo "expected_cname=${expected_cname}"
+
+          cname=""
+          if command -v dig >/dev/null 2>&1; then
+            cname="$(dig +short CNAME "${host}" | sed 's/\.$//' | head -n 1)"
+            echo "observed_cname=${cname:-<none>}"
+            dig +noall +answer CNAME "${host}" || true
+          else
+            echo "dig is unavailable on this runner; exact CNAME observation skipped."
+          fi
+
+          echo
+          echo "=== HTTP ==="
+          set +e
+          http_headers="$(curl -sS -I --max-time 20 "http://${host}/" 2>&1)"
+          http_exit=$?
+          set -e
+          printf '%s\n' "${http_headers}"
+          echo "http_curl_exit=${http_exit}"
+
+          echo
+          echo "=== HTTPS ==="
+          set +e
+          https_headers="$(curl -sS -I --max-time 20 "https://${host}/" 2>&1)"
+          https_exit=$?
+          set -e
+          printf '%s\n' "${https_headers}"
+          echo "https_curl_exit=${https_exit}"
+
+          echo
+          echo "=== TLS certificate ==="
+          if command -v openssl >/dev/null 2>&1; then
+            set +e
+            timeout 20 openssl s_client -connect "${host}:443" -servername "${host}" </dev/null 2>/tmp/tls.err | awk '/BEGIN CERTIFICATE/{flag=1} flag{print} /END CERTIFICATE/{exit}' > /tmp/leaf.pem
+            tls_exit=$?
+            set -e
+            cat /tmp/tls.err || true
+            if [[ -s /tmp/leaf.pem ]]; then
+              openssl x509 -in /tmp/leaf.pem -noout -subject -issuer -dates -ext subjectAltName || true
+            else
+              echo "No leaf certificate was captured."
+            fi
+            echo "tls_probe_exit=${tls_exit}"
+          fi
+
+          if [[ -n "${cname}" && "${cname}" != "${expected_cname}" ]]; then
+            state="DNS_MISMATCH"
+          elif [[ "${https_exit}" -eq 0 ]]; then
+            state="HTTPS_READY"
+          elif [[ -n "${cname}" ]]; then
+            state="DNS_READY_HTTPS_PENDING"
+          else
+            state="OBSERVATION_INCOMPLETE"
+          fi
+
+          {
+            echo "## Custom domain observation"
+            echo
+            echo "- Host: \`${host}\`"
+            echo "- Expected CNAME: \`${expected_cname}\`"
+            echo "- Observed CNAME: \`${cname:-unknown}\`"
+            echo "- HTTP curl exit: \`${http_exit}\`"
+            echo "- HTTPS curl exit: \`${https_exit}\`"
+            echo "- State: **${state}**"
+          } >> "${GITHUB_STEP_SUMMARY}"
+
+          echo "RESULT=${state}"
