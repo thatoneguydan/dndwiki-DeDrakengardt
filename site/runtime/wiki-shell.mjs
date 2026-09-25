@@ -283,11 +283,12 @@ export function renderWikiShellHtml(model) {
         <a href="#/">${escapeHtml(model.campaign.title)}</a>
         <small>DnDWiki</small>
       </div>
-      <form class="dndwiki-search" role="search" data-dndwiki-search-form>
-        <label>
+      <form class="dndwiki-search" role="search" data-dndwiki-search-form style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem">
+        <label style="min-width:0">
           <span class="dndwiki-meta" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search visible wiki content</span>
           <input name="query" type="search" value="${escapeHtml(model.query)}" placeholder="Search this wiki" autocomplete="off">
         </label>
+        <button type="submit">Search</button>
       </form>
       <div class="dndwiki-access">
         <span class="dndwiki-access-status">${accessStatus}</span>
@@ -296,7 +297,7 @@ export function renderWikiShellHtml(model) {
     </header>
     <div class="dndwiki-layout">
       <main class="dndwiki-main" id="main-content">
-        ${searchResults(model)}
+        <div data-dndwiki-search-results>${searchResults(model)}</div>
         ${pageBody(model)}
       </main>
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
@@ -355,11 +356,18 @@ export async function mountWikiShell({
 
     if (typeof root.querySelector === 'function') {
       const searchForm = root.querySelector('[data-dndwiki-search-form]');
+      const searchInput = searchForm?.elements?.query;
+      const updateSearch = (value) => {
+        model = session.search(value);
+        const resultsRoot = root.querySelector('[data-dndwiki-search-results]');
+        if (resultsRoot != null) resultsRoot.innerHTML = searchResults(model);
+      };
       searchForm?.addEventListener?.('submit', (event) => {
         event.preventDefault();
-        const value = searchForm.elements?.query?.value ?? '';
-        model = session.search(value);
-        render();
+        updateSearch(searchInput?.value ?? '');
+      });
+      searchInput?.addEventListener?.('input', () => {
+        updateSearch(searchInput.value ?? '');
       });
 
       for (const form of root.querySelectorAll?.('[data-dndwiki-key-form]') ?? []) {
