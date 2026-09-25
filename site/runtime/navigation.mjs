@@ -203,15 +203,45 @@ export function searchNavigation(snapshot, perspective, query) {
   const results = [];
   const pageOccurrenceCounts = new Map();
   const pageViews = new Map();
+  const pageTitles = new Map();
+
+  const viewForPage = (id, page) => {
+    let view = pageViews.get(id);
+    if (view == null) {
+      view = buildPageView(page, perspective);
+      pageViews.set(id, view);
+    }
+    return view;
+  };
+
+  for (const [id, page] of pages) {
+    const view = viewForPage(id, page);
+    if (view.status !== 'visible') continue;
+    const title = visibleTitle(page, view);
+    if (title == null) continue;
+    pageTitles.set(id, title);
+    const matchIndex = title.toLocaleLowerCase('en-US').indexOf(normalizedQuery);
+    if (matchIndex < 0) continue;
+    results.push({
+      matchType: 'title',
+      pageId: id,
+      segmentIndex: null,
+      pageOccurrenceIndex: null,
+      title,
+      snippet: title,
+      matchStart: matchIndex,
+      matchLength: normalizedQuery.length,
+      route: routeForPage(id),
+    });
+  }
+
   for (const record of buildViewerGraph(graph, perspective).search) {
     const page = pages.get(record.pageId);
     if (page == null) continue;
-    let view = pageViews.get(record.pageId);
-    if (view == null) {
-      view = buildPageView(page, perspective);
-      pageViews.set(record.pageId, view);
-    }
+    const view = viewForPage(record.pageId, page);
     if (view.status !== 'visible') continue;
+    const title = pageTitles.get(record.pageId) ?? visibleTitle(page, view);
+    if (title != null) pageTitles.set(record.pageId, title);
 
     const text = searchableText(record.markdown);
     const normalizedText = text.toLocaleLowerCase('en-US');
@@ -223,10 +253,11 @@ export function searchNavigation(snapshot, perspective, query) {
       pageOccurrenceCounts.set(record.pageId, pageOccurrenceIndex + 1);
       const excerpt = occurrenceExcerpt(text, matchIndex, normalizedQuery.length);
       results.push({
+        matchType: 'content',
         pageId: record.pageId,
         segmentIndex: record.segmentIndex,
         pageOccurrenceIndex,
-        title: visibleTitle(page, view),
+        title,
         snippet: excerpt.snippet,
         matchStart: excerpt.matchStart,
         matchLength: excerpt.matchLength,
