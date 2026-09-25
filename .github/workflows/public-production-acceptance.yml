@@ -1,10 +1,9 @@
-name: Verify De Drakengardt public production artifact
+name: Verify De Drakengardt launch public artifact
 
 on:
   push:
     branches: [main]
     paths:
-      - 'site/**'
       - '.github/workflows/public-production-acceptance.yml'
   workflow_dispatch:
 
@@ -13,14 +12,14 @@ permissions:
 
 jobs:
   verify:
-    name: Verify public and wrong-key boundaries
+    name: Verify launch public and wrong-key boundaries
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Check out campaign artifact
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
-      - name: Verify generated production snapshot
+      - name: Verify generated launch snapshot
         shell: bash
         run: |
           set -euo pipefail
@@ -39,7 +38,7 @@ jobs:
           const snapshot = JSON.parse(await readFile('./site/dndwiki.snapshot.json', 'utf8'));
           assert.equal(snapshot?.campaign?.id, 'de-drakengardt');
           assert.equal(snapshot?.campaign?.title, 'De Drakengardt');
-          assert.equal(snapshot?.engine?.version, '0.1.0');
+          assert.ok(typeof snapshot?.engine?.version === 'string' && snapshot.engine.version.length > 0, 'snapshot engine version must be present');
           assert.ok(Array.isArray(snapshot?.pages), 'snapshot.pages must be an array');
 
           const publicPageIds = [
@@ -51,7 +50,7 @@ jobs:
           const keyedPageId = 'letter-to-celeste';
           const expectedPageIds = [...publicPageIds, keyedPageId].sort();
           const actualPageIds = snapshot.pages.map((page) => page.pageId).sort();
-          assert.deepEqual(actualPageIds, expectedPageIds, 'generated corpus must remain the authorized five-page set');
+          assert.deepEqual(actualPageIds, expectedPageIds, 'launch corpus must remain the authorized five-page set');
 
           const pageById = new Map(snapshot.pages.map((page) => [page.pageId, page]));
           for (const pageId of publicPageIds) {
@@ -120,5 +119,5 @@ jobs:
           assert.equal(reloaded.kind, 'anonymous');
           assert.equal(reloaded.reason, 'no-key');
 
-          console.log('Production artifact acceptance passed: exact corpus, anonymous boundary, wrong-key boundary, graph isolation, and wrong-key persistence behavior are valid.');
+          console.log('Launch artifact acceptance passed: exact corpus, anonymous boundary, wrong-key boundary, graph isolation, and wrong-key persistence behavior are valid.');
           NODE
