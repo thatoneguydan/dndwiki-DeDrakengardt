@@ -6,7 +6,6 @@ on:
     paths:
       - 'site/**'
       - '.github/workflows/deploy-pages.yml'
-      - '.github/workflows/observe-domain.yml'
   workflow_dispatch:
 
 permissions:
