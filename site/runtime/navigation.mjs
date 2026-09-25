@@ -195,13 +195,12 @@ export function backlinkNavigationForPage(snapshot, perspective, targetPageId) {
   });
 }
 
-export function searchNavigation(snapshot, perspective, query, { limit = 20 } = {}) {
+export function searchNavigation(snapshot, perspective, query) {
   const { pages, graph } = snapshotParts(snapshot);
   const normalizedQuery = String(query ?? '').trim().toLocaleLowerCase('en-US');
   if (normalizedQuery.length === 0) return [];
-  if (!Number.isInteger(limit) || limit < 1) throw new TypeError('limit must be a positive integer.');
 
-  const allResults = [];
+  const results = [];
   const pageOccurrenceCounts = new Map();
   const pageViews = new Map();
   for (const record of buildViewerGraph(graph, perspective).search) {
@@ -223,7 +222,7 @@ export function searchNavigation(snapshot, perspective, query, { limit = 20 } = 
       const pageOccurrenceIndex = pageOccurrenceCounts.get(record.pageId) ?? 0;
       pageOccurrenceCounts.set(record.pageId, pageOccurrenceIndex + 1);
       const excerpt = occurrenceExcerpt(text, matchIndex, normalizedQuery.length);
-      allResults.push({
+      results.push({
         pageId: record.pageId,
         segmentIndex: record.segmentIndex,
         pageOccurrenceIndex,
@@ -235,23 +234,6 @@ export function searchNavigation(snapshot, perspective, query, { limit = 20 } = 
       });
       fromIndex = matchIndex + Math.max(1, normalizedQuery.length);
     }
-  }
-
-  if (allResults.length <= limit) return allResults;
-
-  const results = [];
-  const representedPages = new Set();
-  for (const result of allResults) {
-    if (representedPages.has(result.pageId)) continue;
-    representedPages.add(result.pageId);
-    results.push(result);
-    if (results.length >= limit) return results;
-  }
-
-  for (const result of allResults) {
-    if (result.pageOccurrenceIndex === 0) continue;
-    results.push(result);
-    if (results.length >= limit) break;
   }
   return results;
 }
