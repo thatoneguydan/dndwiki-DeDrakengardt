@@ -1,6 +1,10 @@
 name: Observe De Drakengardt custom domain
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/observe-domain.yml'
   workflow_call:
   workflow_dispatch:
 
