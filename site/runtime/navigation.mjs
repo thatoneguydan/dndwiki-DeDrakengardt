@@ -3,7 +3,6 @@ import {
   backlinksForPage,
   buildViewerGraph,
   referencesFromPage,
-  searchViewerGraph,
 } from './viewer-graph.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
@@ -47,6 +46,43 @@ function inlineText(value) {
     .replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function searchableText(value) {
+  return String(value ?? '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/^ {0,3}#{1,6}[ \t]+/gm, '')
+    .replace(/^ {0,3}>[ \t]?/gm, '')
+    .replace(/^ {0,3}(?:[-+*]|\d+[.)])[ \t]+/gm, '')
+    .replace(/\|/g, ' ')
+    .replace(/[`*_~]/g, '')
+    .replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function occurrenceExcerpt(text, start, length, context = 72) {
+  let excerptStart = Math.max(0, start - context);
+  let excerptEnd = Math.min(text.length, start + length + context);
+
+  if (excerptStart > 0) {
+    const nextSpace = text.indexOf(' ', excerptStart);
+    if (nextSpace >= 0 && nextSpace < start) excerptStart = nextSpace + 1;
+  }
+  if (excerptEnd < text.length) {
+    const previousSpace = text.lastIndexOf(' ', excerptEnd);
+    if (previousSpace > start + length) excerptEnd = previousSpace;
+  }
+
+  const prefix = `${excerptStart > 0 ? '…' : ''}${text.slice(excerptStart, start)}`;
+  const match = text.slice(start, start + length);
+  const suffix = `${text.slice(start + length, excerptEnd)}${excerptEnd < text.length ? '…' : ''}`;
+  return {
+    snippet: `${prefix}${match}${suffix}`,
+    matchStart: prefix.length,
+    matchLength: match.length,
+  };
 }
 
 function visibleTitle(page, pageView) {
@@ -159,21 +195,49 @@ export function backlinkNavigationForPage(snapshot, perspective, targetPageId) {
   });
 }
 
-export function searchNavigation(snapshot, perspective, query, options = {}) {
+export function searchNavigation(snapshot, perspective, query, { limit = 20 } = {}) {
   const { pages, graph } = snapshotParts(snapshot);
-  return searchViewerGraph(graph, perspective, query, options).flatMap((record) => {
+  const normalizedQuery = String(query ?? '').trim().toLocaleLowerCase('en-US');
+  if (normalizedQuery.length === 0) return [];
+  if (!Number.isInteger(limit) || limit < 1) throw new TypeError('limit must be a positive integer.');
+
+  const results = [];
+  const pageOccurrenceCounts = new Map();
+  const pageViews = new Map();
+  for (const record of buildViewerGraph(graph, perspective).search) {
     const page = pages.get(record.pageId);
-    if (page == null) return [];
-    const view = buildPageView(page, perspective);
-    if (view.status !== 'visible') return [];
-    return [{
-      pageId: record.pageId,
-      segmentIndex: record.segmentIndex,
-      title: visibleTitle(page, view),
-      snippet: record.snippet,
-      route: routeForPage(record.pageId),
-    }];
-  });
+    if (page == null) continue;
+    let view = pageViews.get(record.pageId);
+    if (view == null) {
+      view = buildPageView(page, perspective);
+      pageViews.set(record.pageId, view);
+    }
+    if (view.status !== 'visible') continue;
+
+    const text = searchableText(record.markdown);
+    const normalizedText = text.toLocaleLowerCase('en-US');
+    let fromIndex = 0;
+    while (fromIndex <= normalizedText.length - normalizedQuery.length) {
+      const matchIndex = normalizedText.indexOf(normalizedQuery, fromIndex);
+      if (matchIndex < 0) break;
+      const pageOccurrenceIndex = pageOccurrenceCounts.get(record.pageId) ?? 0;
+      pageOccurrenceCounts.set(record.pageId, pageOccurrenceIndex + 1);
+      const excerpt = occurrenceExcerpt(text, matchIndex, normalizedQuery.length);
+      results.push({
+        pageId: record.pageId,
+        segmentIndex: record.segmentIndex,
+        pageOccurrenceIndex,
+        title: visibleTitle(page, view),
+        snippet: excerpt.snippet,
+        matchStart: excerpt.matchStart,
+        matchLength: excerpt.matchLength,
+        route: routeForPage(record.pageId),
+      });
+      if (results.length >= limit) return results;
+      fromIndex = matchIndex + Math.max(1, normalizedQuery.length);
+    }
+  }
+  return results;
 }
 
 export function embedNavigationForPage(snapshot, perspective, sourcePageId) {
