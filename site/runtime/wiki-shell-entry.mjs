@@ -295,9 +295,16 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function safeColor(value) {
+export function safeColor(value) {
   const color = String(value ?? '').trim();
-  return /^(?:#[0-9a-f]{3,8}|rgba?\([^)]*\)|hsla?\([^)]*\)|oklch\([^)]*\)|transparent|[a-z]+)$/i.test(color) ? color : '';
+  if (color.length === 0 || color.length > 256 || /[;{}<>"']/.test(color)) return '';
+
+  const css = globalThis.CSS;
+  if (typeof css?.supports === 'function') {
+    return css.supports('color', color) ? color : '';
+  }
+
+  return /^(?:#[0-9a-f]{3,8}|rgba?\([^)]*\)|hsla?\([^)]*\)|(?:ok)?lch\([^)]*\)|(?:ok)?lab\([^)]*\)|color\([^)]*\)|transparent|[a-z]+)$/i.test(color) ? color : '';
 }
 
 function parseTagHash(hash) {
