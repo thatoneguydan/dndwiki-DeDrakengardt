@@ -508,19 +508,6 @@ function mobileNavigationHtml(directory,currentPageId,currentTag,routeKind) {
   return `<details class="dndwiki-mobile-browse" data-dndwiki-mobile-browse><summary>Browse</summary><div class="dndwiki-mobile-browse-body"><ul class="dndwiki-primary-nav-list">${navigationItems([],currentPageId,{includeHome:true,homeCurrent:routeKind==='home'})}</ul>${tags.length?`<p class="dndwiki-primary-nav-heading" style="margin-top:1rem">Categories</p><ul class="dndwiki-primary-nav-list">${tagNavigationItems(tags,currentTag)}</ul>`:''}<details class="dndwiki-primary-nav-details"${pagesOpen}><summary><span>All pages</span><span class="dndwiki-primary-nav-badge">${directory.length}</span></summary><ul class="dndwiki-primary-nav-list">${navigationItems(directory,currentPageId,{includeHome:false})}</ul></details></div></details>`;
 }
 
-function repairTagSearchResults(root,snapshot) {
-  for (const link of root.querySelectorAll?.('[data-dndwiki-search-result][data-dndwiki-search-occurrence="null"]') ?? []) {
-    const pageId=link.getAttribute('data-dndwiki-search-page');
-    const query=(link.getAttribute('data-dndwiki-search-query')??'').trim().toLocaleLowerCase('en-US');
-    const page=snapshot.pages?.find((record)=>record.pageId===pageId);
-    const tag=(page?.tags??[]).find((record)=>`#${record.name}`.toLocaleLowerCase('en-US').includes(query));
-    if(!tag) continue;
-    link.setAttribute('data-dndwiki-search-match','title');
-    link.removeAttribute('data-dndwiki-search-occurrence');
-    link.innerHTML=`<strong>#${escapeHtml(tag.name)}</strong><span>Tag · ${escapeHtml(page.title??'Page')}</span>`;
-  }
-}
-
 function polishSidebar(shell) {
   const headings=shell?.querySelectorAll?.('.dndwiki-sidebar .dndwiki-card h2')??[];
   for(const heading of headings){
@@ -560,7 +547,6 @@ function enhanceWikiChrome({root,browserWindow,snapshot,session}) {
     }
   }
   polishSidebar(shell);
-  repairTagSearchResults(root,snapshot);
 }
 
 export async function mountModernWikiChrome({root,window:browserWindow,fetchImpl=browserWindow?.fetch?.bind(browserWindow),snapshotUrl='./dndwiki.snapshot.json'}={}) {
