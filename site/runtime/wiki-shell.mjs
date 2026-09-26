@@ -56,17 +56,6 @@ export function parseWikiRoute(hash) {
   return { kind: 'page', pageId: match[1], heading: decodeHeading(match[2]) };
 }
 
-function chooseLandingPage(snapshot, perspective) {
-  let gated = null;
-  for (const page of snapshot.pages) {
-    if (typeof page?.pageId !== 'string' || !PAGE_ID_RE.test(page.pageId)) continue;
-    const view = pageForRoute(snapshot, perspective, page.pageId);
-    if (view.status === 'visible') return page.pageId;
-    if (gated === null && view.status === 'gated') gated = page.pageId;
-  }
-  return gated;
-}
-
 function pageLabel(page) {
   return page?.title ?? 'Page';
 }
@@ -89,9 +78,7 @@ export function buildWikiShellModel(snapshotInput, perspective, {
 } = {}) {
   const snapshot = validateSnapshot(snapshotInput);
   const parsedRoute = parseWikiRoute(hash);
-  const requestedPageId = parsedRoute.kind === 'page'
-    ? parsedRoute.pageId
-    : chooseLandingPage(snapshot, perspective);
+  const requestedPageId = parsedRoute.kind === 'page' ? parsedRoute.pageId : null;
   const page = requestedPageId == null
     ? null
     : pageForRoute(snapshot, perspective, requestedPageId);
@@ -113,7 +100,7 @@ export function buildWikiShellModel(snapshotInput, perspective, {
       title: snapshot.campaign.title,
     },
     route: {
-      hash: parsedRoute.kind === 'page' ? hash : requestedPageId == null ? '#/' : `#/page/${requestedPageId}`,
+      hash: parsedRoute.kind === 'page' ? hash : '#/',
       requested: parsedRoute.kind === 'page',
       heading: parsedRoute.heading,
     },
@@ -293,6 +280,9 @@ function searchResults(model, expandedPageIds = new Set()) {
 
 function pageBody(model) {
   const page = model.page;
+  if (page == null && model.route.requested !== true) {
+    return '<section class="dndwiki-home-placeholder" data-dndwiki-home-placeholder aria-hidden="true"></section>';
+  }
   if (page == null) {
     return '<section class="dndwiki-empty"><h1>No published pages yet</h1><p>This campaign does not currently have a page available to this view.</p></section>';
   }
