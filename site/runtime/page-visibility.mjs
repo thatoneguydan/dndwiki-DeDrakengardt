@@ -38,9 +38,13 @@ function validatePage(page) {
     throw new PageVisibilityError('Page requires a valid opaque pageId.');
   }
   if (!Array.isArray(page.segments)) throw new PageVisibilityError(`Page '${page.pageId}' requires segments.`);
+  if (page.public !== undefined && typeof page.public !== 'boolean') {
+    throw new PageVisibilityError(`Page '${page.pageId}' public visibility flag must be boolean.`);
+  }
 
   return {
     pageId: page.pageId,
+    public: page.public === true,
     segments: page.segments.map((segment, index) => {
       if (segment == null || (segment.kind !== 'public' && segment.kind !== 'keyed')) {
         throw new PageVisibilityError(`Page '${page.pageId}' segment ${index} has invalid kind.`);
@@ -106,7 +110,7 @@ export function buildPageView(page, perspective) {
   const showKeyEntry = viewer.kind === 'anonymous' && containsKeyedSegments;
   return {
     pageId: validatedPage.pageId,
-    status: markdown.length > 0 ? 'visible' : showKeyEntry ? 'gated' : 'empty',
+    status: markdown.length > 0 || validatedPage.public ? 'visible' : showKeyEntry ? 'gated' : 'empty',
     markdown,
     showKeyEntry,
   };
