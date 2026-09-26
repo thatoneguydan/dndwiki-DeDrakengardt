@@ -220,6 +220,27 @@ function accessCard(model) {
   </section>`;
 }
 
+function topbarAccess(model) {
+  const accessStatus = model.access.active ? 'Player access active' : 'Public view';
+  if (model.access.active) {
+    return `<div class="dndwiki-access">
+      <span class="dndwiki-access-status">${accessStatus}</span>
+      <button type="button" data-dndwiki-clear-key>Lock</button>
+    </div>`;
+  }
+  const open = model.access.message ? ' open' : '';
+  return `<div class="dndwiki-access">
+    <span class="dndwiki-access-status">${accessStatus}</span>
+    <details data-dndwiki-access-menu${open} style="position:relative">
+      <summary class="dndwiki-button" style="list-style:none;min-height:32px;display:flex;align-items:center">Unlock</summary>
+      <div style="position:absolute;right:0;top:calc(100% + .45rem);z-index:40;width:min(20rem,calc(100vw - 1.3rem));padding:.8rem;border:1px solid var(--background-modifier-border);border-radius:var(--radius-m);background:var(--background-primary);box-shadow:0 12px 32px rgba(0,0,0,.18)">
+        <p class="dndwiki-meta" style="margin:0">Enter your campaign key to reveal material shared with you.</p>
+        ${keyForm(model.access.message)}
+      </div>
+    </details>
+  </div>`;
+}
+
 function highlightedSnippet(result) {
   const snippet = String(result?.snippet ?? '');
   const start = Number(result?.matchStart);
@@ -249,13 +270,17 @@ function searchResults(model, expandedPageIds = new Set()) {
     const expanded = expandedPageIds.has(group.pageId);
     const visibleResults = expanded ? group.results : group.results.slice(0, 5);
     const matches = visibleResults.map((result) => {
-      const matchType = result.matchType === 'title' ? 'title' : 'content';
+      const matchType = result.matchType === 'title' || result.matchType === 'tag'
+        ? result.matchType
+        : 'content';
       const occurrenceAttribute = matchType === 'content'
         ? ` data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}"`
         : '';
       const resultBody = matchType === 'title'
         ? `<strong>${highlightedSnippet(result)}</strong><span>Page title</span>`
-        : `<strong>${escapeHtml(result.title ?? 'Page')}</strong><span>${highlightedSnippet(result)}</span>`;
+        : matchType === 'tag'
+          ? `<strong>${highlightedSnippet(result)}</strong><span>Tag · ${escapeHtml(result.title ?? 'Page')}</span>`
+          : `<strong>${escapeHtml(result.title ?? 'Page')}</strong><span>${highlightedSnippet(result)}</span>`;
       return `<li>
         <a href="${escapeHtml(result.route)}" data-dndwiki-search-result data-dndwiki-search-match="${matchType}" data-dndwiki-search-page="${escapeHtml(result.pageId)}"${occurrenceAttribute} data-dndwiki-search-query="${escapeHtml(model.query)}">
           ${resultBody}
@@ -299,7 +324,6 @@ function pageBody(model) {
 }
 
 function linkList(records, { backlink = false } = {}) {
-  if (records.length === 0) return '<p class="dndwiki-meta">None</p>';
   return `<ul class="dndwiki-link-list">${records.map((record) => {
     const label = backlink
       ? pageLabel({ title: record.sourceTitle })
@@ -310,7 +334,6 @@ function linkList(records, { backlink = false } = {}) {
 
 export function renderWikiShellHtml(model) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
-  const accessStatus = model.access.active ? 'Player access active' : 'Public view';
   return `<div class="dndwiki-shell">
     <header class="dndwiki-topbar">
       <div class="dndwiki-brand">
@@ -321,29 +344,20 @@ export function renderWikiShellHtml(model) {
         <label style="min-width:0;position:relative">
           <span class="dndwiki-meta" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search visible wiki content</span>
           <input name="query" type="text" value="${escapeHtml(model.query)}" placeholder="Search this wiki" autocomplete="off" style="padding-right:2.4rem">
-          <button type="button" data-dndwiki-search-clear aria-label="Clear search" title="Clear search"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;right:.22rem;top:50%;transform:translateY(-50%);width:1.8rem;height:1.8rem;min-height:0;padding:0;border:1px solid transparent;border-radius:999px;color:var(--text-muted);font-size:1.05rem;line-height:1">×</button>
+          <button type="button" data-dndwiki-search-clear aria-label="Clear search"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;right:.22rem;top:50%;transform:translateY(-50%);width:1.8rem;height:1.8rem;min-height:0;padding:0;border:1px solid transparent;border-radius:999px;color:var(--text-muted);font-size:1.05rem;line-height:1">×</button>
         </label>
         <button type="submit">Search</button>
         <div data-dndwiki-search-results aria-live="polite"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;left:0;right:0;top:calc(100% + .4rem);z-index:30;max-height:min(70vh,34rem);overflow:auto">${searchResults(model)}</div>
       </form>
-      <div class="dndwiki-access">
-        <span class="dndwiki-access-status">${accessStatus}</span>
-        ${model.access.active ? '<button type="button" data-dndwiki-clear-key>Lock</button>' : ''}
-      </div>
+      ${topbarAccess(model)}
     </header>
     <div class="dndwiki-layout">
       <main class="dndwiki-main" id="main-content">
         ${pageBody(model)}
       </main>
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
-        <section class="dndwiki-card" aria-labelledby="dndwiki-links-heading">
-          <h2 id="dndwiki-links-heading">Links</h2>
-          ${linkList(model.forward)}
-        </section>
-        <section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading">
-          <h2 id="dndwiki-backlinks-heading">Backlinks</h2>
-          ${linkList(model.backlinks, { backlink: true })}
-        </section>
+        ${model.forward.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-links-heading"><h2 id="dndwiki-links-heading">Links</h2>${linkList(model.forward)}</section>` : ''}
+        ${model.backlinks.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading"><h2 id="dndwiki-backlinks-heading">Backlinks</h2>${linkList(model.backlinks, { backlink: true })}</section>` : ''}
         ${accessCard(model)}
       </aside>
     </div>
@@ -528,7 +542,7 @@ export async function mountWikiShell({
         const contentTarget = matchType === 'content';
         if (!PAGE_ID_RE.test(pageId)
           || query.trim().length === 0
-          || !['title', 'content'].includes(matchType)
+          || !['title', 'tag', 'content'].includes(matchType)
           || (contentTarget && (!Number.isInteger(occurrenceIndex) || occurrenceIndex < 0))
           || route.length === 0) return;
         event.preventDefault();
