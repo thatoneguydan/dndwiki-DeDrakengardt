@@ -106,6 +106,12 @@ export function routeForPage(pageIdValue, heading = null) {
   return `#/page/${id}${fragment}`;
 }
 
+export function routeForTag(tagName) {
+  const tag = String(tagName ?? '').trim().replace(/^#+/, '');
+  if (tag.length === 0) throw new NavigationError('tagName is required.');
+  return `#/tag/${encodeURIComponent(tag)}`;
+}
+
 export function pageForRoute(snapshot, perspective, pageIdValue) {
   const id = pageId(pageIdValue);
   const { pages } = snapshotParts(snapshot);
@@ -115,6 +121,7 @@ export function pageForRoute(snapshot, perspective, pageIdValue) {
       pageId: id,
       status: 'missing',
       markdown: '',
+      tags: [],
       showKeyEntry: false,
       title: null,
       route: null,
@@ -221,18 +228,36 @@ export function searchNavigation(snapshot, perspective, query) {
     if (title == null) continue;
     pageTitles.set(id, title);
     const matchIndex = title.toLocaleLowerCase('en-US').indexOf(normalizedQuery);
-    if (matchIndex < 0) continue;
-    results.push({
-      matchType: 'title',
-      pageId: id,
-      segmentIndex: null,
-      pageOccurrenceIndex: null,
-      title,
-      snippet: title,
-      matchStart: matchIndex,
-      matchLength: normalizedQuery.length,
-      route: routeForPage(id),
-    });
+    if (matchIndex >= 0) {
+      results.push({
+        matchType: 'title',
+        pageId: id,
+        segmentIndex: null,
+        pageOccurrenceIndex: null,
+        title,
+        snippet: title,
+        matchStart: matchIndex,
+        matchLength: normalizedQuery.length,
+        route: routeForPage(id),
+      });
+    }
+    for (const tag of view.tags ?? []) {
+      const label = `#${tag.name}`;
+      const tagMatch = label.toLocaleLowerCase('en-US').indexOf(normalizedQuery);
+      if (tagMatch < 0) continue;
+      results.push({
+        matchType: 'tag',
+        pageId: id,
+        segmentIndex: null,
+        pageOccurrenceIndex: null,
+        title,
+        tag: tag.name,
+        snippet: label,
+        matchStart: tagMatch,
+        matchLength: normalizedQuery.length,
+        route: routeForPage(id),
+      });
+    }
   }
 
   for (const record of buildViewerGraph(graph, perspective).search) {

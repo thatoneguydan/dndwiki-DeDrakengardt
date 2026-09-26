@@ -32,6 +32,23 @@ function validatePerspective(perspective) {
   return { kind: 'player', playerIds };
 }
 
+function validateTags(page) {
+  if (page.tags === undefined) return [];
+  if (!Array.isArray(page.tags)) throw new PageVisibilityError(`Page '${page.pageId}' tags must be an array.`);
+  return page.tags.map((tag, index) => {
+    if (tag == null || typeof tag !== 'object' || typeof tag.name !== 'string' || tag.name.trim().length === 0) {
+      throw new PageVisibilityError(`Page '${page.pageId}' tag ${index} is invalid.`);
+    }
+    const normalized = { name: tag.name.trim() };
+    for (const field of ['color', 'backgroundColor', 'borderColor']) {
+      if (tag[field] === undefined) continue;
+      if (typeof tag[field] !== 'string') throw new PageVisibilityError(`Page '${page.pageId}' tag ${index} ${field} must be a string.`);
+      normalized[field] = tag[field];
+    }
+    return normalized;
+  });
+}
+
 function validatePage(page) {
   if (page == null || typeof page !== 'object') throw new PageVisibilityError('Page is required.');
   if (typeof page.pageId !== 'string' || !PAGE_ID_RE.test(page.pageId)) {
@@ -45,6 +62,7 @@ function validatePage(page) {
   return {
     pageId: page.pageId,
     public: page.public === true,
+    tags: validateTags(page),
     segments: page.segments.map((segment, index) => {
       if (segment == null || (segment.kind !== 'public' && segment.kind !== 'keyed')) {
         throw new PageVisibilityError(`Page '${page.pageId}' segment ${index} has invalid kind.`);
@@ -108,12 +126,14 @@ export function buildPageView(page, perspective) {
 
   const markdown = visibleMarkdown.join('');
   const showKeyEntry = viewer.kind === 'anonymous' && containsKeyedSegments;
-  return {
+  const view = {
     pageId: validatedPage.pageId,
     status: markdown.length > 0 || validatedPage.public ? 'visible' : showKeyEntry ? 'gated' : 'empty',
     markdown,
     showKeyEntry,
   };
+  if (validatedPage.tags.length > 0) view.tags = validatedPage.tags;
+  return view;
 }
 
 export function buildAnonymousPageView(page) {
