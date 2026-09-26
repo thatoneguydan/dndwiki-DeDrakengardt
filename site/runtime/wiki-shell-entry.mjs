@@ -75,11 +75,57 @@ const CHROME_CSS = `
   border-radius: 999px;
   background: var(--interactive-accent);
 }
+.dndwiki-primary-nav-tag-link { justify-content: space-between; }
+.dndwiki-primary-nav-tag-name {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+}
+.dndwiki-primary-nav-tag-dot {
+  flex: 0 0 auto;
+  width: .58rem;
+  height: .58rem;
+  border-radius: 999px;
+  background: var(--tag-nav-color, var(--interactive-accent));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tag-nav-color, var(--interactive-accent)) 55%, var(--background-modifier-border));
+}
+.dndwiki-primary-nav-badge {
+  flex: 0 0 auto;
+  min-width: 1.4rem;
+  color: var(--text-faint);
+  font-size: .69rem;
+  text-align: right;
+}
 .dndwiki-primary-nav-count {
   margin: .42rem .55rem 0;
   color: var(--text-faint);
   font-size: .72rem;
 }
+.dndwiki-primary-nav-details {
+  margin-top: .85rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--background-modifier-border);
+}
+.dndwiki-primary-nav-details > summary {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  padding: .38rem .55rem;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: .78rem;
+  font-weight: 650;
+  list-style: none;
+}
+.dndwiki-primary-nav-details > summary::-webkit-details-marker { display:none; }
+.dndwiki-primary-nav-details > summary:hover { color:var(--text-normal); background:var(--background-modifier-hover); }
+.dndwiki-primary-nav-details > summary::after { content:'›'; color:var(--text-faint); transform:rotate(0deg); transition:transform .12s ease; }
+.dndwiki-primary-nav-details[open] > summary::after { transform:rotate(90deg); }
+.dndwiki-primary-nav-details[open] > .dndwiki-primary-nav-list { margin-top:.35rem; }
 .dndwiki-mobile-browse { display:none; }
 .dndwiki-shell[data-dndwiki-route-kind="home"] .dndwiki-sidebar,
 .dndwiki-shell[data-dndwiki-route-kind="tag"] .dndwiki-sidebar { display:none; }
@@ -182,6 +228,30 @@ const CHROME_CSS = `
 }
 .dndwiki-home-section h2 { margin:0; font-size:1rem; }
 .dndwiki-home-section-head span { color:var(--text-muted); font-size:.78rem; }
+.dndwiki-home-categories {
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.dndwiki-home-category {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  min-height:36px;
+  padding:.38rem .68rem;
+  border:1px solid var(--tag-border, var(--background-modifier-border));
+  border-radius:999px;
+  color:var(--tag-fg, var(--tag-color, var(--text-accent)));
+  background:var(--tag-bg, var(--tag-background, var(--background-secondary)));
+  text-decoration:none;
+  font-size:.82rem;
+  font-weight:600;
+}
+.dndwiki-home-category:hover { filter:brightness(1.05); text-decoration:none; }
+.dndwiki-home-category-count { opacity:.72; font-size:.72rem; font-weight:600; }
 .dndwiki-home-pages, .dndwiki-tag-pages {
   list-style:none;
   margin:0;
@@ -271,10 +341,11 @@ const CHROME_CSS = `
     list-style:none;
   }
   .dndwiki-mobile-browse summary::-webkit-details-marker { display:none; }
-  .dndwiki-mobile-browse summary::after { content:'▾'; color:var(--text-muted); }
-  .dndwiki-mobile-browse[open] summary::after { content:'▴'; }
+  .dndwiki-mobile-browse > summary::after { content:'▾'; color:var(--text-muted); }
+  .dndwiki-mobile-browse[open] > summary::after { content:'▴'; }
   .dndwiki-mobile-browse-body { max-height:58vh; overflow:auto; padding:0 .45rem .55rem; }
   .dndwiki-mobile-browse .dndwiki-primary-nav-link { min-height:44px; }
+  .dndwiki-mobile-browse .dndwiki-primary-nav-details > summary { min-height:44px; }
   .dndwiki-sidebar { position:static; border-left:0; padding-left:0; }
   .dndwiki-home, .dndwiki-tag-page { padding-top:0; }
   .dndwiki-home-pages, .dndwiki-tag-pages { grid-template-columns:minmax(0,1fr); }
@@ -322,6 +393,16 @@ function tagRoute(tag) {
   return `#/tag/${encodeURIComponent(String(tag ?? '').trim().replace(/^#+/, ''))}`;
 }
 
+function tagStyle(tag) {
+  const fg=safeColor(tag?.color); const bg=safeColor(tag?.backgroundColor); const border=safeColor(tag?.borderColor);
+  return [fg&&`--tag-fg:${fg}`,bg&&`--tag-bg:${bg}`,border&&`--tag-border:${border}`].filter(Boolean).join(';');
+}
+
+function tagNavigationStyle(tag) {
+  const accent=safeColor(tag?.backgroundColor)||safeColor(tag?.borderColor)||safeColor(tag?.color);
+  return accent ? `--tag-nav-color:${accent}` : '';
+}
+
 export function isWikiHomeHash(hash) {
   return parseTagHash(hash) === null && parseWikiRoute(String(hash ?? '')).kind === 'home';
 }
@@ -359,11 +440,16 @@ function navigationItems(directory,currentPageId,{includeHome=true,homeCurrent=f
 }
 
 function tagNavigationItems(tags,currentTag) {
-  return tags.map((tag)=>`<li><a class="dndwiki-primary-nav-link" href="${escapeHtml(tagRoute(tag.name))}"${currentTag?.toLocaleLowerCase('en-US')===tag.name.toLocaleLowerCase('en-US')?' aria-current="page"':''}><span>#${escapeHtml(tag.name)}</span></a></li>`).join('');
+  return tags.map((tag)=>{
+    const style=tagNavigationStyle(tag);
+    return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link" href="${escapeHtml(tagRoute(tag.name))}"${currentTag?.toLocaleLowerCase('en-US')===tag.name.toLocaleLowerCase('en-US')?' aria-current="page"':''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot"${style?` style="${escapeHtml(style)}"`:''}></span><span>#${escapeHtml(tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${tag.count}</span></a></li>`;
+  }).join('');
 }
 
 export function renderWikiHomeHtml({ campaignTitle, directory }) {
   const count = directory.length;
+  const tags = tagDirectory(directory);
+  const categories = tags.length===0 ? '' : `<section class="dndwiki-home-section" aria-labelledby="dndwiki-home-categories-heading"><div class="dndwiki-home-section-head"><h2 id="dndwiki-home-categories-heading">Browse categories</h2><span>${tags.length} categor${tags.length===1?'y':'ies'}</span></div><ul class="dndwiki-home-categories">${tags.map((tag)=>{const style=tagStyle(tag);return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(tag.name))}"${style?` style="${escapeHtml(style)}"`:''}><span>#${escapeHtml(tag.name)}</span><span class="dndwiki-home-category-count">${tag.count}</span></a></li>`;}).join('')}</ul></section>`;
   const pages = count===0 ? '<div class="dndwiki-home-empty">Nothing here yet.</div>' : `<ul class="dndwiki-home-pages">${directory.map((page)=>`<li><a href="${escapeHtml(page.route)}">${escapeHtml(page.title)}</a></li>`).join('')}</ul>`;
   return `<section class="dndwiki-home" data-dndwiki-home>
     <div class="dndwiki-home-hero">
@@ -375,8 +461,9 @@ export function renderWikiHomeHtml({ campaignTitle, directory }) {
         <span class="dndwiki-home-stat">${count} page${count===1?'':'s'}</span>
       </div>
     </div>
+    ${categories}
     <section class="dndwiki-home-section" aria-labelledby="dndwiki-home-pages-heading">
-      <div class="dndwiki-home-section-head"><h2 id="dndwiki-home-pages-heading">Browse pages</h2><span>Alphabetical</span></div>
+      <div class="dndwiki-home-section-head"><h2 id="dndwiki-home-pages-heading">All pages</h2><span>Alphabetical</span></div>
       ${pages}
     </section>
   </section>`;
@@ -395,8 +482,7 @@ function renderTagPageHtml(tag,directory) {
 function renderTagPills(tags) {
   if (!Array.isArray(tags) || tags.length===0) return '';
   return `<div class="dndwiki-page-tags">${tags.map((tag)=>{
-    const fg=safeColor(tag.color); const bg=safeColor(tag.backgroundColor); const border=safeColor(tag.borderColor);
-    const style=[fg&&`--tag-fg:${fg}`,bg&&`--tag-bg:${bg}`,border&&`--tag-border:${border}`].filter(Boolean).join(';');
+    const style=tagStyle(tag);
     return `<a class="dndwiki-tag" href="${escapeHtml(tagRoute(tag.name))}"${style?` style="${escapeHtml(style)}"`:''}>#${escapeHtml(tag.name)}</a>`;
   }).join('')}</div>`;
 }
@@ -406,18 +492,20 @@ function ensureChromeStyles(document) {
   const style=document?.createElement?.('style'); if(style==null)return; style.id=CHROME_STYLE_ID; style.textContent=CHROME_CSS; document.head?.append?.(style);
 }
 
-function primaryNavigationHtml(directory,currentPageId,currentTag,routeKind) {
+export function primaryNavigationHtml(directory,currentPageId,currentTag,routeKind) {
   const tags=tagDirectory(directory);
+  const pagesOpen=routeKind==='page'?' open':'';
   return `<nav class="dndwiki-primary-nav" data-dndwiki-primary-nav aria-label="Wiki navigation">
     <section class="dndwiki-primary-nav-section"><ul class="dndwiki-primary-nav-list">${navigationItems([],currentPageId,{includeHome:true,homeCurrent:routeKind==='home'})}</ul></section>
-    <section class="dndwiki-primary-nav-section"><p class="dndwiki-primary-nav-heading">Pages</p><ul class="dndwiki-primary-nav-list">${navigationItems(directory,currentPageId,{includeHome:false})}</ul><p class="dndwiki-primary-nav-count">${directory.length} pages</p></section>
     ${tags.length?`<section class="dndwiki-primary-nav-section"><p class="dndwiki-primary-nav-heading">Categories</p><ul class="dndwiki-primary-nav-list">${tagNavigationItems(tags,currentTag)}</ul></section>`:''}
+    <details class="dndwiki-primary-nav-details"${pagesOpen}><summary><span>All pages</span><span class="dndwiki-primary-nav-badge">${directory.length}</span></summary><ul class="dndwiki-primary-nav-list">${navigationItems(directory,currentPageId,{includeHome:false})}</ul></details>
   </nav>`;
 }
 
 function mobileNavigationHtml(directory,currentPageId,currentTag,routeKind) {
   const tags=tagDirectory(directory);
-  return `<details class="dndwiki-mobile-browse" data-dndwiki-mobile-browse><summary>Browse</summary><div class="dndwiki-mobile-browse-body"><p class="dndwiki-primary-nav-heading">Pages</p><ul class="dndwiki-primary-nav-list">${navigationItems(directory,currentPageId,{includeHome:true,homeCurrent:routeKind==='home'})}</ul>${tags.length?`<p class="dndwiki-primary-nav-heading" style="margin-top:1rem">Categories</p><ul class="dndwiki-primary-nav-list">${tagNavigationItems(tags,currentTag)}</ul>`:''}</div></details>`;
+  const pagesOpen=routeKind==='page'?' open':'';
+  return `<details class="dndwiki-mobile-browse" data-dndwiki-mobile-browse><summary>Browse</summary><div class="dndwiki-mobile-browse-body"><ul class="dndwiki-primary-nav-list">${navigationItems([],currentPageId,{includeHome:true,homeCurrent:routeKind==='home'})}</ul>${tags.length?`<p class="dndwiki-primary-nav-heading" style="margin-top:1rem">Categories</p><ul class="dndwiki-primary-nav-list">${tagNavigationItems(tags,currentTag)}</ul>`:''}<details class="dndwiki-primary-nav-details"${pagesOpen}><summary><span>All pages</span><span class="dndwiki-primary-nav-badge">${directory.length}</span></summary><ul class="dndwiki-primary-nav-list">${navigationItems(directory,currentPageId,{includeHome:false})}</ul></details></div></details>`;
 }
 
 function repairTagSearchResults(root,snapshot) {
