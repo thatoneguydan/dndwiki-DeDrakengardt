@@ -198,16 +198,10 @@ function alignmentAttribute(value) {
 
 function renderParagraphLines(lines) {
   const pieces = lines.map((line) => {
-    const hardBreak = / {2,}$/.test(line);
-    const clean = hardBreak ? line.replace(/ {2,}$/, '') : line;
-    return { html: renderInline(clean), hardBreak };
+    const clean = / {2,}$/.test(line) ? line.replace(/ {2,}$/, '') : line;
+    return renderInline(clean);
   });
-  let html = '';
-  for (let index = 0; index < pieces.length; index += 1) {
-    html += pieces[index].html;
-    if (index < pieces.length - 1) html += pieces[index].hardBreak ? '<br>' : ' ';
-  }
-  return `<p>${html}</p>`;
+  return `<p>${pieces.join('<br>')}</p>`;
 }
 
 function horizontalRule(line) {
