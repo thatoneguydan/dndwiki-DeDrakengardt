@@ -15,6 +15,7 @@
     "site/runtime/player-identity.mjs",
     "site/runtime/reader-chrome-refresh.css",
     "site/runtime/reader-chrome-refresh.mjs",
+    "site/runtime/tag-taxonomy-chrome.mjs",
     "site/runtime/viewer-graph.mjs",
     "site/runtime/wiki-shell-entry.mjs",
     "site/runtime/wiki-shell.mjs",
