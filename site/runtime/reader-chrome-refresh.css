@@ -20,8 +20,9 @@
   grid-template-columns: minmax(14rem, 16.5rem) minmax(0, 1fr) !important;
 }
 
-/* The filename-derived page header belongs to the reading column, not the full center grid cell. */
-.dndwiki-page-header {
+/* The filename-derived page header belongs to the exact same centered reading column as the authored body.
+   The child selector intentionally outranks the later injected base chrome rule. */
+.dndwiki-main > .dndwiki-page-header {
   width: min(var(--line-width), var(--max-width));
   max-width: 100%;
   margin: 0 auto 1.4rem;

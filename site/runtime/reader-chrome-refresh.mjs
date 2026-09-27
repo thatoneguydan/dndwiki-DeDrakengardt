@@ -2,7 +2,10 @@ export function updateContextHeadings(root) {
   const title = root?.querySelector?.('[data-dndwiki-page-header] h1')?.textContent?.trim() ?? '';
   const backlinksHeading = root?.querySelector?.('#dndwiki-backlinks-heading');
   if (backlinksHeading != null && title.length > 0) {
-    backlinksHeading.textContent = `${title} is mentioned in`;
+    const desiredHeading = `${title} is mentioned in`;
+    if (backlinksHeading.textContent !== desiredHeading) {
+      backlinksHeading.textContent = desiredHeading;
+    }
   }
 }
 
