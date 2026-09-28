@@ -12,6 +12,11 @@
     /* v4.1+ fidelity/layout corrections. Authored note semantics remain in the renderer. */
     :root {
       --dndwiki-persistent-browse-width: clamp(16rem, 20vw, 20rem);
+      /* Screenshot-calibrated to Dan's live Obsidian reading pane. The 18px/45rem
+         pair scales the article by the same 1.125 factor, preserving its wrap
+         measure while leaving the surrounding wiki chrome at the 16px baseline. */
+      --dndwiki-reader-font-size: 18px;
+      --line-width: 45rem;
     }
 
     .dndwiki-shell .dndwiki-search-shortcut {
@@ -86,6 +91,12 @@
     .dndwiki-shell .dndwiki-page {
       min-width: 0;
       max-width: 100%;
+    }
+
+    /* Scale only authored article content. Chrome remains on the 16px root
+       scale, while 45rem / 18px keeps the same 40em wrap measure as 40rem / 16px. */
+    .dndwiki-shell .dndwiki-page {
+      font-size: var(--dndwiki-reader-font-size) !important;
     }
 
     .dndwiki-shell .dndwiki-page-header h1 {
@@ -247,5 +258,56 @@
   <script type="module" src="./runtime/wiki-shell-entry.mjs"></script>
   <script type="module" src="./runtime/tag-taxonomy-chrome.mjs"></script>
   <script type="module" src="./runtime/reader-chrome-refresh.mjs"></script>
+  <script type="module">
+    /* The shell route uses a hash-within-a-hash, so native anchor scrolling is
+       not available. Delegate outline clicks here and scroll only after the
+       shell has rerendered and reader chrome has settled for two frames. */
+    const root = document.getElementById('dndwiki-app');
+    let scrollRequest = 0;
+
+    function routeHeading(hash = window.location.hash) {
+      const match = /^#\/page\/[a-z0-9][a-z0-9._-]{0,63}#(.*)$/.exec(String(hash ?? ''));
+      if (match == null || match[1].length === 0) return null;
+      try {
+        return decodeURIComponent(match[1]).trim();
+      } catch {
+        return null;
+      }
+    }
+
+    function scrollToRouteHeading(heading) {
+      if (root == null || heading == null || heading.length === 0) return false;
+      const normalized = heading.toLocaleLowerCase('en-US');
+      const headings = root.querySelectorAll('[data-dndwiki-page] h1, [data-dndwiki-page] h2, [data-dndwiki-page] h3, [data-dndwiki-page] h4, [data-dndwiki-page] h5, [data-dndwiki-page] h6');
+      const target = [...headings].find((element) => String(element.textContent ?? '').trim().toLocaleLowerCase('en-US') === normalized);
+      if (target == null) return false;
+
+      const topbarBottom = Number(root.querySelector('.dndwiki-topbar')?.getBoundingClientRect?.().bottom ?? 0);
+      const targetTop = Number(target.getBoundingClientRect?.().top ?? 0) + Number(window.scrollY ?? window.pageYOffset ?? 0);
+      window.scrollTo({ top: Math.max(0, targetTop - Math.max(0, topbarBottom) - 16), behavior: 'auto' });
+      return true;
+    }
+
+    function scheduleRouteHeadingScroll() {
+      const heading = routeHeading();
+      const request = ++scrollRequest;
+      if (heading == null) return;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (request === scrollRequest) scrollToRouteHeading(heading);
+      }));
+    }
+
+    root?.addEventListener('click', (event) => {
+      const link = event.target?.closest?.('[data-dndwiki-toc-index]');
+      if (link == null) return;
+      const route = String(link.getAttribute('href') ?? '');
+      if (!/^#\/page\/[a-z0-9][a-z0-9._-]{0,63}#/.test(route)) return;
+      event.preventDefault();
+      if (window.location.hash === route) scheduleRouteHeadingScroll();
+      else window.location.hash = route;
+    }, true);
+    window.addEventListener('hashchange', scheduleRouteHeadingScroll, true);
+    scheduleRouteHeadingScroll();
+  </script>
 </body>
 </html>
