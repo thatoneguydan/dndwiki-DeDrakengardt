@@ -11,7 +11,6 @@
   <style id="dndwiki-reader-v41-fidelity">
     /* v4.1+ fidelity/layout corrections. Authored note semantics remain in the renderer. */
     :root {
-      --font-text-size: 18px;
       --dndwiki-persistent-browse-width: clamp(16rem, 20vw, 20rem);
     }
 
@@ -100,12 +99,6 @@
       word-break: normal;
     }
 
-    .dndwiki-shell .dndwiki-page p,
-    .dndwiki-shell .dndwiki-page li {
-      text-align: justify;
-      text-align-last: left;
-    }
-
     .dndwiki-shell .dndwiki-page ul,
     .dndwiki-shell .dndwiki-page ol {
       padding-inline-start: 1.8em;
@@ -171,12 +164,11 @@
     }
 
     /* At wide reader sizes the outline occupies the otherwise-empty right
-       column without shifting the centered article. The modern-layout class
-       intentionally raises specificity above the reader stylesheet that is
-       moved last at runtime; otherwise its display:block !important wins the
-       cascade and drops this rail below the article. */
+       column without shifting the centered article. The mount ID deliberately
+       outranks the legacy ID-bearing two-column rule in styles.css, while the
+       modern-layout classes outrank the reader stylesheet's display:block rule. */
     @media (min-width: 1200px) {
-      .dndwiki-shell .dndwiki-layout.dndwiki-modern-layout:has(> .dndwiki-outline-rail) {
+      #dndwiki-app .dndwiki-shell .dndwiki-layout.dndwiki-modern-layout:has(> .dndwiki-outline-rail) {
         display: grid !important;
         grid-template-columns: minmax(0, 1fr) minmax(0, var(--line-width)) minmax(0, 1fr) !important;
         align-items: start;
@@ -194,26 +186,37 @@
         position: sticky;
         top: 5.2rem;
         z-index: 2;
-        width: min(15rem, calc(100% - 1rem));
+        width: min(18rem, calc(100% - 2rem));
         max-height: calc(100vh - 6.4rem);
-        margin: 2.25rem 0 0 1rem;
+        margin: 2.25rem 0 0 2rem;
         overflow: auto;
         align-self: start;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline {
         margin: 0;
-        padding: .2rem 0 .65rem;
+        padding: .2rem 0 .75rem;
         border-top: 0;
         border-bottom: 1px solid var(--dndwiki-soft-line);
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline > summary {
+        min-height: 52px;
+        font-size: .82rem;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list {
         display: block !important;
       }
 
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link {
+        padding-block: .34rem;
+        font-size: .8rem;
+        line-height: 1.4;
+      }
+
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list li + li {
-        margin-top: .08rem;
+        margin-top: .1rem;
       }
     }
 
