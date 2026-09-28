@@ -10034,6 +10034,15 @@
           "public": true
         },
         "markdown": "- The party agreed to keep watch on Castiel Ralora and intervene if the Silver City failed to deliver justice.\n- Kiktal revealed that she had killed a man after he cruelly killed a stray dog she cared for, and that the Red Claw gang may now be hunting her.\n- Skrim sympathized\n- While searching Maeve’s office for something to help Voli scry on Castiel, Celeste secretly took an unfinished letter addressed to her and the family photograph.\n- Voli and Celeste successfully scried on Castiel and confirmed he was being held in a highly secure High Court cell.\n- Voli later scried on Vulk Ildstad and found the city in ruins. Though his mother's underground vault door was closed.\n- Celeste secretly infiltrated the High Court, entered Castiel’s cell, and warned him that if the city failed to deliver justice, retribution would follow him like a shadow.\n- Celeste admitted to Marduun that she was close to killing Castiel.\n- Celeste read Maeve’s unfinished letter, which contained more words crossed out than not.\n- The next morning, the Grand Library publicly honored Misfortune’s Misfits and dedicated its primary study room to them.\n- Inside the library, a reaction between two magical artifacts quickly built into unstable chaos.\n\n- Inside the library, Voli recognized a damaged Vulkian pauldron as belonging to Guardian, the old Gate Guardian of Vulk Ildstad.\n- At the same moment, Flicker’s boots began reacting to the pauldron, his father’s words returned to him — “Steal divinity, share immortality” — and Voli’s previously lost Sending spells suddenly reconnected as stable threads leading directly toward Guardian.",
+        "pageId": "session-42-3-5-recap-1",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "- The party agreed to keep watch on Castiel Ralora and intervene if the Silver City failed to deliver justice.\n- Kiktal revealed that she had killed a man after he cruelly killed a stray dog she cared for, and that the Red Claw gang may now be hunting her.\n- Skrim sympathized\n- While searching Maeve’s office for something to help Voli scry on Castiel, Celeste secretly took an unfinished letter addressed to her and the family photograph.\n- Voli and Celeste successfully scried on Castiel and confirmed he was being held in a highly secure High Court cell.\n- Voli later scried on Vulk Ildstad and found the city in ruins. Though his mother's underground vault door was closed.\n- Celeste secretly infiltrated the High Court, entered Castiel’s cell, and warned him that if the city failed to deliver justice, retribution would follow him like a shadow.\n- Celeste admitted to Marduun that she was close to killing Castiel.\n- Celeste read Maeve’s unfinished letter, which contained more words crossed out than not.\n- The next morning, the Grand Library publicly honored Misfortune’s Misfits and dedicated its primary study room to them.\n- Inside the library, a reaction between two magical artifacts quickly built into unstable chaos.\n\n- Inside the library, Voli recognized a damaged Vulkian pauldron as belonging to Guardian, the old Gate Guardian of Vulk Ildstad.\n- At the same moment, Flicker’s boots began reacting to the pauldron, his father’s words returned to him — “Steal divinity, share immortality” — and Voli’s previously lost Sending spells suddenly reconnected as stable threads leading directly toward Guardian.",
         "pageId": "session-42-3-5-recap",
         "segmentIndex": 0
       },
@@ -12739,6 +12748,26 @@
         }
       ],
       "title": "Session 41 - 3.4 Run Doc"
+    },
+    {
+      "pageId": "session-42-3-5-recap-1",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "- The party agreed to keep watch on Castiel Ralora and intervene if the Silver City failed to deliver justice.\n- Kiktal revealed that she had killed a man after he cruelly killed a stray dog she cared for, and that the Red Claw gang may now be hunting her.\n- Skrim sympathized\n- While searching Maeve’s office for something to help Voli scry on Castiel, Celeste secretly took an unfinished letter addressed to her and the family photograph.\n- Voli and Celeste successfully scried on Castiel and confirmed he was being held in a highly secure High Court cell.\n- Voli later scried on Vulk Ildstad and found the city in ruins. Though his mother's underground vault door was closed.\n- Celeste secretly infiltrated the High Court, entered Castiel’s cell, and warned him that if the city failed to deliver justice, retribution would follow him like a shadow.\n- Celeste admitted to Marduun that she was close to killing Castiel.\n- Celeste read Maeve’s unfinished letter, which contained more words crossed out than not.\n- The next morning, the Grand Library publicly honored Misfortune’s Misfits and dedicated its primary study room to them.\n- Inside the library, a reaction between two magical artifacts quickly built into unstable chaos.\n\n- Inside the library, Voli recognized a damaged Vulkian pauldron as belonging to Guardian, the old Gate Guardian of Vulk Ildstad.\n- At the same moment, Flicker’s boots began reacting to the pauldron, his father’s words returned to him — “Steal divinity, share immortality” — and Voli’s previously lost Sending spells suddenly reconnected as stable threads leading directly toward Guardian.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(21.507 8.4577 268.63)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(76.507 11.458 268.63)",
+          "name": "Session"
+        }
+      ],
+      "title": "Session 42 - 3.5 Recap 1"
     },
     {
       "pageId": "session-42-3-5-recap",
