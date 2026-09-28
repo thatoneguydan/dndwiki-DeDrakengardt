@@ -10,6 +10,11 @@
   <link rel="stylesheet" href="./runtime/reader-chrome-refresh.css">
   <style id="dndwiki-reader-v41-fidelity">
     /* v4.1+ fidelity/layout corrections. Authored note semantics remain in the renderer. */
+    :root {
+      --font-text-size: 18px;
+      --dndwiki-persistent-browse-width: clamp(16rem, 20vw, 20rem);
+    }
+
     .dndwiki-shell .dndwiki-search-shortcut {
       display: none !important;
     }
@@ -87,9 +92,9 @@
     .dndwiki-shell .dndwiki-page-header h1 {
       width: 100%;
       max-width: 100% !important;
-      font-size: clamp(1.85rem, 3.6vw, 2.85rem) !important;
-      line-height: 1.08 !important;
-      letter-spacing: -.03em !important;
+      font-size: clamp(1.55rem, 2.3vw, 2.15rem) !important;
+      line-height: 1.12 !important;
+      letter-spacing: -.025em !important;
       white-space: normal;
       overflow-wrap: anywhere;
       word-break: normal;
@@ -134,9 +139,92 @@
       pointer-events: none;
     }
 
+    /* v4.5: desktop browse becomes a real persistent workspace column. Padding
+       the shell reduces its content box, so the masthead and article remain
+       centered in the space that is actually available after the nav column. */
+    @media (min-width: 1100px) {
+      .dndwiki-shell[data-dndwiki-browse-persistent][data-dndwiki-browse-open] {
+        box-sizing: border-box;
+        padding-left: var(--dndwiki-persistent-browse-width);
+      }
+
+      .dndwiki-shell[data-dndwiki-browse-persistent] .dndwiki-primary-nav {
+        width: var(--dndwiki-persistent-browse-width) !important;
+        max-width: var(--dndwiki-persistent-browse-width) !important;
+        box-shadow: none !important;
+      }
+
+      .dndwiki-shell[data-dndwiki-browse-persistent][data-dndwiki-browse-open] .dndwiki-browse-scrim {
+        display: none !important;
+      }
+
+      body:has(.dndwiki-shell[data-dndwiki-browse-persistent][data-dndwiki-browse-open]) {
+        overflow: auto !important;
+      }
+    }
+
+    /* Continue Exploring belongs to the same reading column as the note. */
+    .dndwiki-shell .dndwiki-main > .dndwiki-sidebar[data-dndwiki-context-footer] {
+      width: var(--dndwiki-reading-max) !important;
+      max-width: 100% !important;
+      margin-inline: auto !important;
+    }
+
+    /* At wide reader sizes the outline occupies the otherwise-empty right
+       column without shifting the centered article. At smaller sizes the same
+       details element falls back to its compact inline position. */
+    @media (min-width: 1200px) {
+      .dndwiki-shell .dndwiki-layout:has(> .dndwiki-outline-rail) {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--line-width)) minmax(0, 1fr) !important;
+        align-items: start;
+      }
+
+      .dndwiki-shell .dndwiki-layout:has(> .dndwiki-outline-rail) > .dndwiki-main {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        min-width: 0;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail {
+        grid-column: 3;
+        grid-row: 1;
+        position: sticky;
+        top: 5.2rem;
+        z-index: 2;
+        width: min(15rem, calc(100% - 1rem));
+        max-height: calc(100vh - 6.4rem);
+        margin: 2.25rem 0 0 1rem;
+        overflow: auto;
+        align-self: start;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline {
+        margin: 0;
+        padding: .2rem 0 .65rem;
+        border-top: 0;
+        border-bottom: 1px solid var(--dndwiki-soft-line);
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list {
+        display: block !important;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list li + li {
+        margin-top: .08rem;
+      }
+    }
+
+    .dndwiki-shell .dndwiki-toc-link[aria-current="location"] {
+      background: var(--dndwiki-soft-accent);
+      color: var(--text-normal);
+      box-shadow: inset 2px 0 0 color-mix(in srgb, var(--interactive-accent) 72%, var(--text-normal));
+      font-weight: 650;
+    }
+
     @media (max-width: 620px) {
       .dndwiki-shell .dndwiki-page-header h1 {
-        font-size: clamp(1.75rem, 8.5vw, 2.45rem) !important;
+        font-size: clamp(1.45rem, 6.5vw, 1.95rem) !important;
       }
     }
   </style>

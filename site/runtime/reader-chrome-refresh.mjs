@@ -1,3 +1,6 @@
+const BROWSE_DESKTOP_MIN = 1100;
+const OUTLINE_RAIL_MIN = 1200;
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -62,46 +65,95 @@ function tocEntries(article) {
     const label = String(heading.textContent ?? '').trim();
     const level = Number(String(heading.tagName ?? '').slice(1));
     if (label.length === 0 || !Number.isInteger(level) || level < 2 || level > 4) continue;
-    records.push({ label, level });
+    records.push({ label, level, heading });
   }
   return records;
+}
+
+export function outlineUsesRightRail(browserWindow) {
+  return Number(browserWindow?.innerWidth ?? 0) >= OUTLINE_RAIL_MIN;
+}
+
+export function activeOutlineIndex(headingTops, threshold = 0) {
+  if (!Array.isArray(headingTops) || headingTops.length === 0) return -1;
+  let active = 0;
+  for (let index = 0; index < headingTops.length; index += 1) {
+    const top = Number(headingTops[index]);
+    if (Number.isFinite(top) && top <= threshold) active = index;
+    else if (Number.isFinite(top) && top > threshold) break;
+  }
+  return active;
 }
 
 export function syncPageTableOfContents(root, browserWindow) {
   const header = root?.querySelector?.('[data-dndwiki-page-header]');
   const article = root?.querySelector?.('[data-dndwiki-page]');
+  const layout = root?.querySelector?.('.dndwiki-layout');
   const existing = root?.querySelector?.('[data-dndwiki-page-outline]') ?? null;
+  const existingRail = root?.querySelector?.('[data-dndwiki-outline-rail]') ?? null;
   if (header == null || article == null) {
-    existing?.remove?.();
-    return existing != null;
+    existingRail?.remove?.();
+    if (existingRail == null) existing?.remove?.();
+    return existing != null || existingRail != null;
   }
 
   const entries = tocEntries(article);
   if (entries.length < 2) {
-    existing?.remove?.();
-    return existing != null;
+    existingRail?.remove?.();
+    if (existingRail == null) existing?.remove?.();
+    return existing != null || existingRail != null;
   }
 
   const routeHash = String(browserWindow?.location?.hash ?? '');
-  const signature = entries.map((entry) => `${entry.level}:${entry.label}`).join('|');
+  const rail = outlineUsesRightRail(browserWindow) && layout != null;
+  const placement = rail ? 'rail' : 'inline';
+  const signature = `${placement}:${entries.map((entry) => `${entry.level}:${entry.label}`).join('|')}`;
   if (existing?.getAttribute?.('data-dndwiki-toc-signature') === signature) return false;
 
-  const links = entries.map((entry) => {
+  const links = entries.map((entry, index) => {
     const route = headingRoute(routeHash, entry.label);
     if (route == null) return '';
-    return `<li><a class="dndwiki-toc-link" data-level="${entry.level}" href="${escapeHtml(route)}">${escapeHtml(entry.label)}</a></li>`;
+    return `<li><a class="dndwiki-toc-link" data-dndwiki-toc-index="${index}" data-level="${entry.level}" href="${escapeHtml(route)}">${escapeHtml(entry.label)}</a></li>`;
   }).filter(Boolean).join('');
 
   if (links.length === 0) {
-    existing?.remove?.();
-    return existing != null;
+    existingRail?.remove?.();
+    if (existingRail == null) existing?.remove?.();
+    return existing != null || existingRail != null;
   }
 
-  const open = Number(browserWindow?.innerWidth ?? 0) >= 1180 && entries.length <= 7 ? ' open' : '';
-  const html = `<details class="dndwiki-page-outline" data-dndwiki-page-outline data-dndwiki-toc-signature="${escapeHtml(signature)}"${open}><summary><span>On this page</span><span class="dndwiki-page-outline-count">${entries.length} sections</span></summary><ul class="dndwiki-toc-list">${links}</ul></details>`;
-  existing?.remove?.();
-  header.insertAdjacentHTML?.('beforeend', html);
+  const open = rail || (Number(browserWindow?.innerWidth ?? 0) >= 860 && entries.length <= 7) ? ' open' : '';
+  const details = `<details class="dndwiki-page-outline" data-dndwiki-page-outline data-dndwiki-toc-signature="${escapeHtml(signature)}"${open}><summary><span>On this page</span><span class="dndwiki-page-outline-count">${entries.length} sections</span></summary><ul class="dndwiki-toc-list">${links}</ul></details>`;
+  existingRail?.remove?.();
+  if (existingRail == null) existing?.remove?.();
+  if (rail) {
+    layout.insertAdjacentHTML?.('beforeend', `<aside class="dndwiki-outline-rail" data-dndwiki-outline-rail aria-label="Page outline">${details}</aside>`);
+  } else {
+    header.insertAdjacentHTML?.('beforeend', details);
+  }
   return true;
+}
+
+export function syncActiveOutlineSection(root) {
+  const article = root?.querySelector?.('[data-dndwiki-page]');
+  const links = [...(root?.querySelectorAll?.('[data-dndwiki-toc-index]') ?? [])];
+  const entries = tocEntries(article);
+  if (entries.length < 2 || links.length === 0) return false;
+  const topbarBottom = Number(root?.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0);
+  const threshold = topbarBottom + 28;
+  const active = activeOutlineIndex(entries.map((entry) => entry.heading?.getBoundingClientRect?.()?.top), threshold);
+  let changed = false;
+  for (const link of links) {
+    const index = Number(link.getAttribute?.('data-dndwiki-toc-index'));
+    const desired = index === active;
+    const current = link.getAttribute?.('aria-current') === 'location';
+    if (desired !== current) {
+      if (desired) link.setAttribute?.('aria-current', 'location');
+      else link.removeAttribute?.('aria-current');
+      changed = true;
+    }
+  }
+  return changed;
 }
 
 export function browseQueryMatches(value, query) {
@@ -132,7 +184,35 @@ export function filterBrowseItems(nav, query) {
   return changed;
 }
 
-export function syncBrowsePanel(root) {
+export function persistentBrowseViewport(browserWindow) {
+  return Number(browserWindow?.innerWidth ?? 0) >= BROWSE_DESKTOP_MIN;
+}
+
+function browsePreferenceKey(shell) {
+  const campaignId = String(shell?.getAttribute?.('data-dndwiki-campaign-id') ?? '').trim();
+  return campaignId.length > 0 ? `dndwiki:${campaignId}:browse-open` : 'dndwiki:reader:browse-open';
+}
+
+function storedBrowsePreference(shell, browserWindow) {
+  try {
+    const value = browserWindow?.localStorage?.getItem?.(browsePreferenceKey(shell));
+    if (value === 'open') return true;
+    if (value === 'closed') return false;
+  } catch {
+    // Storage is optional; desktop still defaults open.
+  }
+  return null;
+}
+
+function persistBrowsePreference(shell, browserWindow, open) {
+  try {
+    browserWindow?.localStorage?.setItem?.(browsePreferenceKey(shell), open ? 'open' : 'closed');
+  } catch {
+    // A blocked storage backend must not break navigation.
+  }
+}
+
+export function syncBrowsePanel(root, browserWindow = null) {
   const shell = root?.querySelector?.('.dndwiki-shell');
   const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
   if (shell == null || nav == null) return false;
@@ -147,7 +227,7 @@ export function syncBrowsePanel(root) {
     changed = true;
   }
   if (nav.querySelector?.('[data-dndwiki-browse-panel-head]') == null) {
-    nav.insertAdjacentHTML?.('afterbegin', '<div class="dndwiki-browse-panel-head" data-dndwiki-browse-panel-head><div><span class="dndwiki-browse-panel-eyebrow">Campaign index</span><span class="dndwiki-browse-panel-title">Browse</span></div><button class="dndwiki-browse-close" type="button" data-dndwiki-browse-close aria-label="Close browse">×</button></div>');
+    nav.insertAdjacentHTML?.('afterbegin', '<div class="dndwiki-browse-panel-head" data-dndwiki-browse-panel-head><div><span class="dndwiki-browse-panel-eyebrow">Campaign index</span><span class="dndwiki-browse-panel-title">Browse</span></div><button class="dndwiki-browse-close" type="button" data-dndwiki-browse-close aria-label="Collapse browse">×</button></div>');
     changed = true;
   }
   if (nav.querySelector?.('[data-dndwiki-browse-filter]') == null) {
@@ -166,6 +246,21 @@ export function syncBrowsePanel(root) {
     changed = true;
   }
 
+  const persistent = persistentBrowseViewport(browserWindow);
+  const wasPersistent = shell.hasAttribute?.('data-dndwiki-browse-persistent') === true;
+  if (persistent) shell.setAttribute?.('data-dndwiki-browse-persistent', '');
+  else shell.removeAttribute?.('data-dndwiki-browse-persistent');
+  if (persistent !== wasPersistent) changed = true;
+
+  if (shell.hasAttribute?.('data-dndwiki-browse-state-ready') !== true || persistent !== wasPersistent) {
+    const preferred = persistent ? storedBrowsePreference(shell, browserWindow) : false;
+    const desired = persistent ? preferred ?? true : false;
+    if (desired) shell.setAttribute?.('data-dndwiki-browse-open', '');
+    else shell.removeAttribute?.('data-dndwiki-browse-open');
+    shell.setAttribute?.('data-dndwiki-browse-state-ready', '');
+    changed = true;
+  }
+
   const open = shell.hasAttribute?.('data-dndwiki-browse-open') === true;
   nav.setAttribute?.('aria-hidden', open ? 'false' : 'true');
   for (const trigger of shell.querySelectorAll?.('[data-dndwiki-browse-trigger]') ?? []) {
@@ -175,7 +270,7 @@ export function syncBrowsePanel(root) {
   return changed;
 }
 
-export function setBrowseOpen(root, open) {
+export function setBrowseOpen(root, open, browserWindow = null, { focus = true, persist = true } = {}) {
   const shell = root?.querySelector?.('.dndwiki-shell');
   const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
   if (shell == null || nav == null) return false;
@@ -188,7 +283,10 @@ export function setBrowseOpen(root, open) {
   for (const trigger of shell.querySelectorAll?.('[data-dndwiki-browse-trigger]') ?? []) {
     trigger.setAttribute?.('aria-expanded', desired ? 'true' : 'false');
   }
-  if (desired) nav.querySelector?.('[data-dndwiki-browse-filter]')?.focus?.();
+  if (persist && (shell.hasAttribute?.('data-dndwiki-browse-persistent') === true || persistentBrowseViewport(browserWindow))) {
+    persistBrowsePreference(shell, browserWindow, desired);
+  }
+  if (desired && focus) nav.querySelector?.('[data-dndwiki-browse-filter]')?.focus?.();
   return current !== desired;
 }
 
@@ -209,6 +307,34 @@ export function syncSearchChrome(root) {
   return changed;
 }
 
+function contextPageKey(link) {
+  const href = String(link?.getAttribute?.('href') ?? '');
+  const match = /^(#\/page\/[a-z0-9][a-z0-9._-]{0,63})/.exec(href);
+  return match?.[1] ?? href;
+}
+
+function dedupeContextLinks(sidebar) {
+  const seen = new Set();
+  let changed = false;
+  for (const card of sidebar?.querySelectorAll?.('.dndwiki-card') ?? []) {
+    for (const link of card.querySelectorAll?.('.dndwiki-link-list a') ?? []) {
+      const key = contextPageKey(link);
+      if (key.length === 0 || !seen.has(key)) {
+        if (key.length > 0) seen.add(key);
+        continue;
+      }
+      link.closest?.('li')?.remove?.();
+      changed = true;
+    }
+    const remaining = (card.querySelectorAll?.('.dndwiki-link-list a') ?? []).length;
+    if (remaining === 0) {
+      card.remove?.();
+      changed = true;
+    }
+  }
+  return changed;
+}
+
 export function syncContextFooter(root) {
   const main = root?.querySelector?.('.dndwiki-main');
   const sidebar = root?.querySelector?.('.dndwiki-sidebar');
@@ -221,6 +347,8 @@ export function syncContextFooter(root) {
     accessCard.remove?.();
     changed = true;
   }
+
+  if (dedupeContextLinks(sidebar)) changed = true;
 
   if (sidebar.parentElement !== main) {
     main.append?.(sidebar);
@@ -353,26 +481,30 @@ export function focusWikiSearch(root, browserWindow, event) {
   const input = root?.querySelector?.('[data-dndwiki-search-form] input[name="query"]');
   if (input == null || typeof input.focus !== 'function') return false;
   event.preventDefault?.();
-  setBrowseOpen(root, false);
+  if (!persistentBrowseViewport(browserWindow)) setBrowseOpen(root, false, browserWindow, { persist: false });
   input.focus();
   input.select?.();
   return true;
 }
 
-function handleReaderClick(root, target) {
+function handleReaderClick(root, target, browserWindow) {
   const trigger = target?.closest?.('[data-dndwiki-browse-trigger]');
   if (trigger != null) {
     const shell = root?.querySelector?.('.dndwiki-shell');
     const open = shell?.hasAttribute?.('data-dndwiki-browse-open') === true;
-    setBrowseOpen(root, !open);
+    setBrowseOpen(root, !open, browserWindow);
     return true;
   }
-  if (target?.closest?.('[data-dndwiki-browse-close], [data-dndwiki-browse-scrim]') != null) {
-    setBrowseOpen(root, false);
+  if (target?.closest?.('[data-dndwiki-browse-close]') != null) {
+    setBrowseOpen(root, false, browserWindow);
     return true;
   }
-  if (target?.closest?.('[data-dndwiki-primary-nav] a') != null) {
-    setBrowseOpen(root, false);
+  if (target?.closest?.('[data-dndwiki-browse-scrim]') != null) {
+    setBrowseOpen(root, false, browserWindow, { persist: false });
+    return true;
+  }
+  if (target?.closest?.('[data-dndwiki-primary-nav] a') != null && !persistentBrowseViewport(browserWindow)) {
+    setBrowseOpen(root, false, browserWindow, { persist: false });
     return true;
   }
   return false;
@@ -384,14 +516,15 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
   moveReaderStylesheetLast(browserWindow.document);
 
   let queued = false;
-  let progressQueued = false;
-  const updateProgress = () => {
-    if (progressQueued) return;
-    progressQueued = true;
+  let scrollQueued = false;
+  const updateScrollState = () => {
+    if (scrollQueued) return;
+    scrollQueued = true;
     const schedule = browserWindow.requestAnimationFrame ?? ((callback) => setTimeout(callback, 0));
     schedule(() => {
-      progressQueued = false;
+      scrollQueued = false;
       syncReadingProgress(root, browserWindow);
+      syncActiveOutlineSection(root);
     });
   };
   const refresh = () => {
@@ -400,7 +533,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
     queueMicrotask(() => {
       queued = false;
       moveReaderStylesheetLast(browserWindow.document);
-      syncBrowsePanel(root);
+      syncBrowsePanel(root, browserWindow);
       syncSearchChrome(root);
       updateContextHeadings(root);
       syncPageBreadcrumbs(root);
@@ -408,17 +541,18 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       syncContextFooter(root);
       reshapeHomeDirectory(root);
       syncReadingProgress(root, browserWindow);
+      syncActiveOutlineSection(root);
     });
   };
 
   const onKeyDown = (event) => {
     if (String(event?.key ?? '') === 'Escape') {
-      if (setBrowseOpen(root, false)) event.preventDefault?.();
+      if (!persistentBrowseViewport(browserWindow) && setBrowseOpen(root, false, browserWindow, { persist: false })) event.preventDefault?.();
       return;
     }
     focusWikiSearch(root, browserWindow, event);
   };
-  const onClick = (event) => handleReaderClick(root, event?.target);
+  const onClick = (event) => handleReaderClick(root, event?.target, browserWindow);
   const onInput = (event) => {
     if (event?.target?.matches?.('[data-dndwiki-browse-filter]')) {
       const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
@@ -426,9 +560,14 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
     }
   };
   const onHashChange = () => {
-    setBrowseOpen(root, false);
+    if (!persistentBrowseViewport(browserWindow)) setBrowseOpen(root, false, browserWindow, { persist: false });
     refresh();
-    updateProgress();
+    updateScrollState();
+  };
+  const onResize = () => {
+    syncBrowsePanel(root, browserWindow);
+    syncPageTableOfContents(root, browserWindow);
+    updateScrollState();
   };
   const observer = typeof browserWindow.MutationObserver === 'function'
     ? new browserWindow.MutationObserver(refresh)
@@ -436,8 +575,8 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
   observer?.observe?.(root, { childList: true, subtree: true });
   browserWindow.addEventListener?.('hashchange', onHashChange, true);
   browserWindow.addEventListener?.('keydown', onKeyDown, true);
-  browserWindow.addEventListener?.('scroll', updateProgress, { passive: true });
-  browserWindow.addEventListener?.('resize', updateProgress, { passive: true });
+  browserWindow.addEventListener?.('scroll', updateScrollState, { passive: true });
+  browserWindow.addEventListener?.('resize', onResize, { passive: true });
   root.addEventListener?.('click', onClick, true);
   root.addEventListener?.('input', onInput, true);
   refresh();
@@ -447,8 +586,8 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       observer?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange, true);
       browserWindow.removeEventListener?.('keydown', onKeyDown, true);
-      browserWindow.removeEventListener?.('scroll', updateProgress);
-      browserWindow.removeEventListener?.('resize', updateProgress);
+      browserWindow.removeEventListener?.('scroll', updateScrollState);
+      browserWindow.removeEventListener?.('resize', onResize);
       root.removeEventListener?.('click', onClick, true);
       root.removeEventListener?.('input', onInput, true);
     },

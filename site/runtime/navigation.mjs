@@ -98,6 +98,25 @@ function visibleTitle(page, pageView) {
   return null;
 }
 
+function firstVisibleLine(markdown, title) {
+  const normalizedTitle = String(title ?? '').trim().toLocaleLowerCase('en-US');
+  let fenced = false;
+  for (const rawLine of String(markdown ?? '').split(/\r?\n/)) {
+    const trimmed = rawLine.trim();
+    if (/^```/.test(trimmed)) {
+      fenced = !fenced;
+      continue;
+    }
+    if (fenced || trimmed.length === 0) continue;
+    const heading = /^ {0,3}#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/.exec(rawLine);
+    const text = searchableText(rawLine);
+    if (text.length === 0) continue;
+    if (heading != null && text.toLocaleLowerCase('en-US') === normalizedTitle) continue;
+    return text.length > 180 ? `${text.slice(0, 179).trimEnd()}…` : text;
+  }
+  return '';
+}
+
 export function routeForPage(pageIdValue, heading = null) {
   const id = pageId(pageIdValue);
   const fragment = typeof heading === 'string' && heading.length > 0
@@ -235,6 +254,7 @@ export function searchNavigation(snapshot, perspective, query) {
         segmentIndex: null,
         pageOccurrenceIndex: null,
         title,
+        preview: firstVisibleLine(view.markdown, title),
         snippet: title,
         matchStart: matchIndex,
         matchLength: normalizedQuery.length,

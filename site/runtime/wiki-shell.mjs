@@ -60,15 +60,27 @@ function pageLabel(page) {
   return page?.title ?? 'Page';
 }
 
+function uniqueByPage(records, key, excluded = new Set()) {
+  const seen = new Set(excluded);
+  const unique = [];
+  for (const record of records) {
+    const id = record?.[key];
+    if (typeof id !== 'string' || seen.has(id)) continue;
+    seen.add(id);
+    unique.push(record);
+  }
+  return unique;
+}
+
 function cleanNavigationLinks(records) {
-  return records
+  return uniqueByPage(records
     .filter((record) => record.targetType === 'page' && record.route != null)
     .map((record) => ({
       label: record.label,
       route: record.route,
       status: record.targetStatus,
       targetPageId: record.targetPageId,
-    }));
+    })), 'targetPageId');
 }
 
 export function buildWikiShellModel(snapshotInput, perspective, {
@@ -86,11 +98,12 @@ export function buildWikiShellModel(snapshotInput, perspective, {
   const searchResults = normalizedQuery.length === 0
     ? []
     : searchNavigation(snapshot, perspective, normalizedQuery);
-  const backlinks = page != null && page.status !== 'missing'
-    ? backlinkNavigationForPage(snapshot, perspective, page.pageId)
-    : [];
   const forward = page != null && page.status === 'visible'
     ? cleanNavigationLinks(forwardNavigationForPage(snapshot, perspective, page.pageId))
+    : [];
+  const forwardPageIds = new Set(forward.map((record) => record.targetPageId));
+  const backlinks = page != null && page.status !== 'missing'
+    ? uniqueByPage(backlinkNavigationForPage(snapshot, perspective, page.pageId), 'sourcePageId', forwardPageIds)
     : [];
 
   return {
@@ -276,8 +289,9 @@ function searchResults(model, expandedPageIds = new Set()) {
       const occurrenceAttribute = matchType === 'content'
         ? ` data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}"`
         : '';
+      const titlePreview = String(result.preview ?? '').trim();
       const resultBody = matchType === 'title'
-        ? `<strong>${highlightedSnippet(result)}</strong><span>Page title</span>`
+        ? `<strong>${highlightedSnippet(result)}</strong>${titlePreview.length > 0 ? `<span>${escapeHtml(titlePreview)}</span>` : ''}`
         : matchType === 'tag'
           ? `<strong>${highlightedSnippet(result)}</strong><span>Tag · ${escapeHtml(result.title ?? 'Page')}</span>`
           : `<strong>${escapeHtml(result.title ?? 'Page')}</strong><span>${highlightedSnippet(result)}</span>`;
@@ -334,7 +348,7 @@ function linkList(records, { backlink = false } = {}) {
 
 export function renderWikiShellHtml(model) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
-  return `<div class="dndwiki-shell">
+  return `<div class="dndwiki-shell" data-dndwiki-campaign-id="${escapeHtml(model.campaign.id)}">
     <header class="dndwiki-topbar">
       <div class="dndwiki-brand">
         <a href="#/">${escapeHtml(model.campaign.title)}</a>
