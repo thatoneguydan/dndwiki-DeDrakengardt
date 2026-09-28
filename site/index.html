@@ -8,6 +8,95 @@
   <title>dndwiki</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./runtime/reader-chrome-refresh.css">
+  <style id="dndwiki-reader-v41-fidelity">
+    /* v4.1 fidelity/layout corrections. Authored note semantics remain in the renderer. */
+    .dndwiki-shell .dndwiki-search-shortcut {
+      display: none !important;
+    }
+
+    .dndwiki-shell .dndwiki-search {
+      width: var(--dndwiki-reading-max) !important;
+      max-width: 100% !important;
+      justify-self: center !important;
+    }
+
+    .dndwiki-shell .dndwiki-topbar .dndwiki-search input {
+      padding-right: 2.25rem !important;
+    }
+
+    @media (min-width: 981px) {
+      .dndwiki-shell .dndwiki-topbar {
+        grid-template-columns: minmax(14rem, 1fr) minmax(19rem, 40rem) minmax(13rem, 1fr) !important;
+      }
+    }
+
+    .dndwiki-shell .dndwiki-main,
+    .dndwiki-shell .dndwiki-main > .dndwiki-page-header,
+    .dndwiki-shell .dndwiki-page {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .dndwiki-shell .dndwiki-page-header h1 {
+      width: 100%;
+      max-width: 100% !important;
+      font-size: clamp(1.85rem, 3.6vw, 2.85rem) !important;
+      line-height: 1.08 !important;
+      letter-spacing: -.03em !important;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    .dndwiki-shell .dndwiki-page p,
+    .dndwiki-shell .dndwiki-page li {
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    .dndwiki-shell .dndwiki-page ul,
+    .dndwiki-shell .dndwiki-page ol {
+      padding-inline-start: 1.8em;
+    }
+
+    .dndwiki-shell .dndwiki-page li {
+      margin-block: .075em;
+    }
+
+    .dndwiki-shell .dndwiki-page li::marker {
+      color: var(--text-faint);
+      font-size: .88em;
+    }
+
+    .dndwiki-shell .dndwiki-page li > ul,
+    .dndwiki-shell .dndwiki-page li > ol {
+      position: relative;
+      margin-block: .18em .28em !important;
+      padding-inline-start: 1.9em !important;
+    }
+
+    .dndwiki-shell .dndwiki-page li > ul::before,
+    .dndwiki-shell .dndwiki-page li > ol::before {
+      content: '';
+      position: absolute;
+      top: .12em;
+      bottom: .12em;
+      left: -1em;
+      width: 1px;
+      background: var(--background-modifier-border);
+      pointer-events: none;
+    }
+
+    @media (max-width: 620px) {
+      .dndwiki-shell .dndwiki-search {
+        width: 100% !important;
+      }
+
+      .dndwiki-shell .dndwiki-page-header h1 {
+        font-size: clamp(1.75rem, 8.5vw, 2.45rem) !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <div id="dndwiki-app" class="dndwiki-loading" aria-live="polite">Loading wiki…</div>

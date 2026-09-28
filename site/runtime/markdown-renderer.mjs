@@ -2,6 +2,7 @@ const BLOCK_START_RE = /^(?: {0,3}(?:#{1,6})\s+| {0,3}(?:```+|~~~+)| {0,3}> ?|\s
 const SPECIAL_MARK_RE = /^<mark class="(story|battle|ideation)">([\s\S]*?)<\/mark>/;
 const CALLOUT_HEADER_RE = /^\[!([A-Za-z0-9_-]{1,32})\](?:[+-])?(?:\s+(.*))?$/;
 const DD5E_ROOT_RE = /^\s*<div class="dd5e-sheet">\s*$/;
+const LIST_ITEM_RE = /^([ \t]*)([-+*]|\d+[.)])\s+(.+)$/;
 const DD5E_ALLOWED_TAGS = new Set(['div', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'span', 'ul', 'li']);
 const DD5E_ALLOWED_CLASSES = new Set([
   'dd5e-sheet', 'dd5e-title', 'dd5e-card-grid', 'dd5e-card', 'dd5e-card-label', 'dd5e-card-value',
@@ -211,6 +212,65 @@ function horizontalRule(line) {
     || /^(?:_\s*){3,}$/.test(trimmed);
 }
 
+function listIndentWidth(value) {
+  let width = 0;
+  for (const char of value) {
+    if (char === '\t') width += 4 - (width % 4);
+    else width += 1;
+  }
+  return width;
+}
+
+function parseListItem(line) {
+  const match = LIST_ITEM_RE.exec(line);
+  if (!match) return null;
+  return {
+    indent: listIndentWidth(match[1]),
+    tag: /^\d/.test(match[2]) ? 'ol' : 'ul',
+    content: match[3],
+  };
+}
+
+function renderListNodes(nodes) {
+  let html = '';
+  let index = 0;
+  while (index < nodes.length) {
+    const tag = nodes[index].tag;
+    html += `<${tag}>`;
+    while (index < nodes.length && nodes[index].tag === tag) {
+      const node = nodes[index];
+      html += `<li>${renderInline(node.content)}${renderListNodes(node.children)}</li>`;
+      index += 1;
+    }
+    html += `</${tag}>`;
+  }
+  return html;
+}
+
+function renderListBlock(lines, startIndex) {
+  const items = [];
+  let index = startIndex;
+  while (index < lines.length) {
+    const item = parseListItem(lines[index]);
+    if (item == null) break;
+    items.push(item);
+    index += 1;
+  }
+  if (items.length === 0) return null;
+
+  const roots = [];
+  const stack = [];
+  for (const item of items) {
+    const node = { ...item, children: [] };
+    while (stack.length > 0 && item.indent <= stack.at(-1).indent) stack.pop();
+    if (stack.length > 0) stack.at(-1).node.children.push(node);
+    else roots.push(node);
+    stack.push({ indent: item.indent, node });
+  }
+
+  return { html: renderListNodes(roots), end: index };
+}
+
 function defaultCalloutTitle(type) {
   return type
     .replace(/[-_]+/g, ' ')
@@ -331,20 +391,10 @@ export function renderMarkdownToHtml(markdown) {
       continue;
     }
 
-    const unordered = /^\s*[-+*]\s+(.+)$/.exec(line);
-    const ordered = /^\s*\d+[.)]\s+(.+)$/.exec(line);
-    if (unordered || ordered) {
-      const orderedList = Boolean(ordered);
-      const items = [];
-      const itemRe = orderedList ? /^\s*\d+[.)]\s+(.+)$/ : /^\s*[-+*]\s+(.+)$/;
-      while (index < lines.length) {
-        const item = itemRe.exec(lines[index]);
-        if (!item) break;
-        items.push(`<li>${renderInline(item[1])}</li>`);
-        index += 1;
-      }
-      const tag = orderedList ? 'ol' : 'ul';
-      blocks.push(`<${tag}>${items.join('')}</${tag}>`);
+    const list = renderListBlock(lines, index);
+    if (list != null) {
+      blocks.push(list.html);
+      index = list.end;
       continue;
     }
 
