@@ -99,6 +99,14 @@
       word-break: normal;
     }
 
+    /* The reader intentionally uses justified prose. Keep the final line left
+       aligned while preserving the corrected Obsidian width/type metrics. */
+    .dndwiki-shell .dndwiki-page p,
+    .dndwiki-shell .dndwiki-page li {
+      text-align: justify;
+      text-align-last: left;
+    }
+
     .dndwiki-shell .dndwiki-page ul,
     .dndwiki-shell .dndwiki-page ol {
       padding-inline-start: 1.8em;
