@@ -171,10 +171,12 @@
     }
 
     /* At wide reader sizes the outline occupies the otherwise-empty right
-       column without shifting the centered article. At smaller sizes the same
-       details element falls back to its compact inline position. */
+       column without shifting the centered article. The modern-layout class
+       intentionally raises specificity above the reader stylesheet that is
+       moved last at runtime; otherwise its display:block !important wins the
+       cascade and drops this rail below the article. */
     @media (min-width: 1200px) {
-      .dndwiki-shell .dndwiki-layout:has(> .dndwiki-outline-rail) {
+      .dndwiki-shell .dndwiki-layout.dndwiki-modern-layout:has(> .dndwiki-outline-rail) {
         display: grid !important;
         grid-template-columns: minmax(0, 1fr) minmax(0, var(--line-width)) minmax(0, 1fr) !important;
         align-items: start;
