@@ -312,12 +312,23 @@ export function syncReadingProgress(root, browserWindow) {
     }
     return false;
   }
+
+  const topbar = shell.querySelector?.('.dndwiki-topbar') ?? null;
+  if (topbar == null) return false;
   if (bar == null) {
-    const topbar = shell.querySelector?.('.dndwiki-topbar');
-    topbar?.insertAdjacentHTML?.('afterend', '<div class="dndwiki-reading-progress" data-dndwiki-reading-progress aria-hidden="true"><span></span></div>');
-    bar = shell.querySelector?.('[data-dndwiki-reading-progress]') ?? null;
+    topbar.insertAdjacentHTML?.('beforeend', '<div class="dndwiki-reading-progress" data-dndwiki-reading-progress aria-hidden="true"><span></span></div>');
+    bar = topbar.querySelector?.('[data-dndwiki-reading-progress]')
+      ?? shell.querySelector?.('[data-dndwiki-reading-progress]')
+      ?? null;
   }
   if (bar == null) return false;
+
+  if (bar.parentElement !== topbar) topbar.append?.(bar);
+  bar.style?.setProperty?.('position', 'absolute');
+  bar.style?.setProperty?.('top', 'auto');
+  bar.style?.setProperty?.('bottom', '0');
+  bar.style?.setProperty?.('left', '0');
+  bar.style?.setProperty?.('right', '0');
 
   const rect = article.getBoundingClientRect?.();
   const scrollY = Number(browserWindow?.scrollY ?? browserWindow?.pageYOffset ?? 0);
