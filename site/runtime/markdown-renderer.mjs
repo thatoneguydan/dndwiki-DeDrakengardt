@@ -231,6 +231,13 @@ function parseListItem(line) {
   };
 }
 
+function renderListItemContent(content) {
+  const heading = /^(#{1,6})\s+(.+?)\s*#*\s*$/.exec(String(content ?? ''));
+  if (heading == null) return renderInline(content);
+  const level = heading[1].length;
+  return `<h${level}>${renderInline(heading[2])}</h${level}>`;
+}
+
 function renderListNodes(nodes) {
   let html = '';
   let index = 0;
@@ -239,7 +246,7 @@ function renderListNodes(nodes) {
     html += `<${tag}>`;
     while (index < nodes.length && nodes[index].tag === tag) {
       const node = nodes[index];
-      html += `<li>${renderInline(node.content)}${renderListNodes(node.children)}</li>`;
+      html += `<li>${renderListItemContent(node.content)}${renderListNodes(node.children)}</li>`;
       index += 1;
     }
     html += `</${tag}>`;

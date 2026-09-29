@@ -11,7 +11,8 @@
   <style id="dndwiki-reader-v41-fidelity">
     /* v4.1+ fidelity/layout corrections. Authored note semantics remain in the renderer. */
     :root {
-      --dndwiki-persistent-browse-width: clamp(16rem, 20vw, 20rem);
+      --dndwiki-persistent-rail-width: clamp(11rem, calc((100vw - 57.5rem) / 2), 19rem);
+      --dndwiki-persistent-browse-width: var(--dndwiki-persistent-rail-width);
       /* Screenshot-calibrated to Dan's live Obsidian reading pane. The 18px/45rem
          pair scales the article by the same 1.125 factor, preserving its wrap
          measure while leaving the surrounding wiki chrome at the 16px baseline. */
@@ -182,60 +183,157 @@
       margin-inline: auto !important;
     }
 
-    /* At wide reader sizes the outline occupies the otherwise-empty right
-       column without shifting the centered article. The mount ID deliberately
-       outranks the legacy ID-bearing two-column rule in styles.css, while the
-       modern-layout classes outrank the reader stylesheet's display:block rule. */
+    /* The desktop outline is a true mirror rail for Browse: same responsive
+       width, full-height edge treatment, inner padding, and reclaimed content
+       space when collapsed. Equal open rails keep the article centered in the
+       viewport instead of merely placing an outline beside it. */
+    .dndwiki-shell .dndwiki-outline-trigger {
+      min-height: 36px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: .42rem;
+      padding: .35rem .6rem;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: .79rem;
+      font-weight: 620;
+      line-height: 1.2;
+    }
+
+    .dndwiki-shell .dndwiki-outline-trigger::before {
+      content: '☷';
+      color: var(--text-faint);
+      font-size: .92rem;
+      line-height: 1;
+    }
+
+    .dndwiki-shell .dndwiki-outline-trigger:hover,
+    .dndwiki-shell .dndwiki-outline-trigger[aria-expanded="true"] {
+      background: var(--dndwiki-soft-hover);
+      color: var(--text-normal);
+    }
+
     @media (min-width: 1200px) {
+      .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-outline-open] {
+        box-sizing: border-box;
+        padding-right: var(--dndwiki-persistent-rail-width);
+      }
+
       #dndwiki-app .dndwiki-shell .dndwiki-layout.dndwiki-modern-layout:has(> .dndwiki-outline-rail) {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) minmax(0, var(--line-width)) minmax(0, 1fr) !important;
-        align-items: start;
+        display: block !important;
       }
 
       .dndwiki-shell .dndwiki-layout:has(> .dndwiki-outline-rail) > .dndwiki-main {
-        grid-column: 1 / -1;
-        grid-row: 1;
         min-width: 0;
       }
 
       .dndwiki-shell .dndwiki-outline-rail {
-        grid-column: 3;
-        grid-row: 1;
-        position: sticky;
-        top: 5.2rem;
-        z-index: 2;
-        width: min(18rem, calc(100% - 2rem));
-        max-height: calc(100vh - 6.4rem);
-        margin: 2.25rem 0 0 2rem;
+        position: fixed;
+        z-index: 130;
+        inset: 0 0 0 auto;
+        width: var(--dndwiki-persistent-rail-width) !important;
+        max-width: var(--dndwiki-persistent-rail-width) !important;
+        max-height: none;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 .78rem 1.5rem;
         overflow: auto;
-        align-self: start;
+        overscroll-behavior: contain;
+        border: 0;
+        border-left: 1px solid var(--dndwiki-soft-line-strong);
+        background: var(--background-primary);
+        box-shadow: none;
+        scrollbar-gutter: stable;
+        scrollbar-width: thin;
+        transform: translateX(calc(100% + 1.5rem));
+        visibility: hidden;
+        transition: transform .22s cubic-bezier(.2,.8,.2,1), visibility .22s linear;
+      }
+
+      .dndwiki-shell[data-dndwiki-outline-open] .dndwiki-outline-rail {
+        transform: translateX(0);
+        visibility: visible;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline {
+        min-height: 100%;
         margin: 0;
-        padding: .2rem 0 .75rem;
-        border-top: 0;
-        border-bottom: 1px solid var(--dndwiki-soft-line);
+        padding: 0;
+        border: 0;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline > summary {
-        min-height: 52px;
-        font-size: .82rem;
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        min-height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .75rem;
+        box-sizing: border-box;
+        margin-inline: -.78rem;
+        padding: .9rem 1rem .78rem;
+        border-bottom: 1px solid var(--dndwiki-soft-line);
+        background: color-mix(in srgb, var(--background-primary) 95%, transparent);
+        color: var(--text-normal);
+        backdrop-filter: blur(14px);
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline > summary > span:first-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        font-size: 1.05rem;
+        font-weight: 720;
+        letter-spacing: -.015em;
+        line-height: 1.25;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline-count {
+        color: var(--text-faint);
+        font-size: .64rem;
+        font-weight: 700;
+        letter-spacing: .06em;
+        white-space: nowrap;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-page-outline > summary::after {
+        margin-left: .15rem;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list {
         display: block !important;
+        margin: 0;
+        padding: .75rem 0 .9rem;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link {
-        padding-block: .34rem;
-        font-size: .8rem;
-        line-height: 1.4;
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        padding: .42rem .55rem;
+        border-radius: 9px;
+        font-size: .79rem;
+        line-height: 1.28;
+      }
+
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link[data-level="3"],
+      .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link[data-level="4"] {
+        padding-left: 1.05rem;
       }
 
       .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-list li + li {
-        margin-top: .1rem;
+        margin-top: .08rem;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      .dndwiki-shell .dndwiki-outline-trigger {
+        display: none !important;
       }
     }
 
@@ -261,9 +359,13 @@
   <script type="module">
     /* The shell route uses a hash-within-a-hash, so native anchor scrolling is
        not available. Delegate outline clicks here and scroll only after the
-       shell has rerendered and reader chrome has settled for two frames. */
+       shell has rerendered and reader chrome has settled for two frames. This
+       module also gives the desktop outline the same persistent/collapsible
+       workspace semantics as the left Browse rail. */
     const root = document.getElementById('dndwiki-app');
+    const OUTLINE_DESKTOP_MIN = 1200;
     let scrollRequest = 0;
+    let outlineSyncQueued = false;
 
     function routeHeading(hash = window.location.hash) {
       const match = /^#\/page\/[a-z0-9][a-z0-9._-]{0,63}#(.*)$/.exec(String(hash ?? ''));
@@ -297,7 +399,98 @@
       }));
     }
 
+    function outlinePreferenceKey(shell) {
+      const campaignId = String(shell?.getAttribute('data-dndwiki-campaign-id') ?? '').trim();
+      return campaignId.length > 0 ? `dndwiki:${campaignId}:outline-open` : 'dndwiki:reader:outline-open';
+    }
+
+    function storedOutlinePreference(shell) {
+      try {
+        const value = window.localStorage.getItem(outlinePreferenceKey(shell));
+        if (value === 'open') return true;
+        if (value === 'closed') return false;
+      } catch {
+        // Storage is optional; desktop still defaults open.
+      }
+      return null;
+    }
+
+    function persistOutlinePreference(shell, open) {
+      try {
+        window.localStorage.setItem(outlinePreferenceKey(shell), open ? 'open' : 'closed');
+      } catch {
+        // A blocked storage backend must not break outline navigation.
+      }
+    }
+
+    function syncOutlinePanel() {
+      outlineSyncQueued = false;
+      const shell = root?.querySelector('.dndwiki-shell');
+      const rail = root?.querySelector('[data-dndwiki-outline-rail]');
+      const details = rail?.querySelector('[data-dndwiki-page-outline]');
+      const persistent = Number(window.innerWidth ?? 0) >= OUTLINE_DESKTOP_MIN && shell != null && rail != null && details != null;
+
+      if (!persistent) {
+        shell?.removeAttribute('data-dndwiki-outline-persistent');
+        shell?.removeAttribute('data-dndwiki-outline-open');
+        shell?.querySelector('[data-dndwiki-outline-trigger]')?.remove();
+        return;
+      }
+
+      shell.setAttribute('data-dndwiki-outline-persistent', '');
+      rail.setAttribute('id', 'dndwiki-outline-panel');
+      if (!details.hasAttribute('data-dndwiki-outline-state-ready')) {
+        const preferred = storedOutlinePreference(shell);
+        details.open = preferred ?? true;
+        details.setAttribute('data-dndwiki-outline-state-ready', '');
+      }
+
+      const open = details.open === true;
+      if (open) shell.setAttribute('data-dndwiki-outline-open', '');
+      else shell.removeAttribute('data-dndwiki-outline-open');
+
+      const access = shell.querySelector('.dndwiki-access');
+      if (access != null && shell.querySelector('[data-dndwiki-outline-trigger]') == null) {
+        access.insertAdjacentHTML('afterbegin', '<button class="dndwiki-outline-trigger" type="button" data-dndwiki-outline-trigger aria-controls="dndwiki-outline-panel" aria-expanded="true">On this page</button>');
+      }
+      shell.querySelector('[data-dndwiki-outline-trigger]')?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function scheduleOutlineSync() {
+      if (outlineSyncQueued) return;
+      outlineSyncQueued = true;
+      queueMicrotask(syncOutlinePanel);
+    }
+
+    function setOutlineOpen(open) {
+      const shell = root?.querySelector('.dndwiki-shell');
+      const details = root?.querySelector('[data-dndwiki-outline-rail] [data-dndwiki-page-outline]');
+      if (shell == null || details == null) return false;
+      details.open = open === true;
+      persistOutlinePreference(shell, details.open);
+      syncOutlinePanel();
+      return true;
+    }
+
     root?.addEventListener('click', (event) => {
+      const outlineTrigger = event.target?.closest?.('[data-dndwiki-outline-trigger]');
+      if (outlineTrigger != null) {
+        event.preventDefault();
+        const shell = root.querySelector('.dndwiki-shell');
+        setOutlineOpen(shell?.hasAttribute('data-dndwiki-outline-open') !== true);
+        return;
+      }
+
+      const outlineSummary = event.target?.closest?.('[data-dndwiki-outline-rail] [data-dndwiki-page-outline] > summary');
+      if (outlineSummary != null) {
+        setTimeout(() => {
+          const shell = root.querySelector('.dndwiki-shell');
+          const details = outlineSummary.closest('[data-dndwiki-page-outline]');
+          if (shell != null && details != null) persistOutlinePreference(shell, details.open === true);
+          syncOutlinePanel();
+        }, 0);
+      }
+
       const link = event.target?.closest?.('[data-dndwiki-toc-index]');
       if (link == null) return;
       const route = String(link.getAttribute('href') ?? '');
@@ -306,8 +499,18 @@
       if (window.location.hash === route) scheduleRouteHeadingScroll();
       else window.location.hash = route;
     }, true);
-    window.addEventListener('hashchange', scheduleRouteHeadingScroll, true);
+
+    const outlineObserver = typeof MutationObserver === 'function' && root != null
+      ? new MutationObserver(scheduleOutlineSync)
+      : null;
+    outlineObserver?.observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['open'] });
+    window.addEventListener('hashchange', () => {
+      scheduleRouteHeadingScroll();
+      scheduleOutlineSync();
+    }, true);
+    window.addEventListener('resize', scheduleOutlineSync, { passive: true });
     scheduleRouteHeadingScroll();
+    scheduleOutlineSync();
   </script>
 </body>
 </html>
