@@ -1,5 +1,120 @@
 const BROWSE_DESKTOP_MIN = 1100;
 const OUTLINE_RAIL_MIN = 1200;
+const READER_V48_STYLE_ID = 'dndwiki-reader-v48-polish';
+
+const READER_V48_CSS = `
+:root {
+  --text-accent: hsl(258 88% 66%);
+  --text-accent-hover: hsl(258 88% 58%);
+  --interactive-accent: hsl(258 88% 66%);
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-brand::before {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-brand > a {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-browse-panel-head > div {
+  display: flex !important;
+  align-items: center;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-browse-panel-eyebrow {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-browse-panel-title {
+  font-size: .96rem !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-toc-children {
+  position: relative;
+  display: block !important;
+  margin: .08rem 0 .08rem .95rem !important;
+  padding: 0 0 0 .65rem !important;
+  list-style: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-toc-children::before {
+  content: '';
+  position: absolute;
+  top: .12rem;
+  bottom: .12rem;
+  left: 0;
+  width: 1px;
+  background: var(--background-modifier-border);
+  pointer-events: none;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-outline-dot {
+  width: .52rem !important;
+  height: .52rem !important;
+  min-width: .52rem !important;
+  min-height: .52rem !important;
+  flex: 0 0 .52rem !important;
+}
+
+@media (min-width: 1100px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-primary-nav .dndwiki-access {
+    width: 2.55rem !important;
+    margin-inline: auto !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-primary-nav .dndwiki-access-menu > summary {
+    width: 2.55rem !important;
+    min-width: 2.55rem !important;
+    max-width: 2.55rem !important;
+    height: 2.55rem !important;
+    min-height: 2.55rem !important;
+    margin-inline: auto !important;
+    padding: .48rem !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger] {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1099px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger] {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    display: inline-grid !important;
+    place-items: center;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger]::before {
+    display: block !important;
+    content: '☰' !important;
+    font-size: .95rem !important;
+    line-height: 1 !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-page-header > .dndwiki-page-outline > summary::after {
+    display: block !important;
+    content: '⌄' !important;
+    flex: 0 0 auto;
+    color: var(--text-faint);
+    transform: none !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-page-header > .dndwiki-page-outline[open] > summary::after {
+    transform: rotate(180deg) !important;
+  }
+}
+`;
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -13,6 +128,31 @@ function escapeHtml(value) {
 function safeRoute(value) {
   const route = String(value ?? '');
   return /^#\/(?:$|tag\/|page\/)/.test(route) ? route : '#/';
+}
+
+function ensureReaderV48Styles(document) {
+  if (document == null) return false;
+  let style = document.getElementById?.(READER_V48_STYLE_ID) ?? null;
+  if (style == null) {
+    style = document.createElement?.('style') ?? null;
+    if (style == null) return false;
+    style.id = READER_V48_STYLE_ID;
+    style.textContent = READER_V48_CSS;
+    document.head?.append?.(style);
+    return true;
+  }
+  if (style.textContent !== READER_V48_CSS) style.textContent = READER_V48_CSS;
+  return false;
+}
+
+function campaignTitle(root) {
+  const shell = root?.querySelector?.('.dndwiki-shell');
+  if (shell == null) return '';
+  const cached = String(shell.getAttribute?.('data-dndwiki-campaign-title') ?? '').trim();
+  if (cached.length > 0) return cached;
+  const title = String(shell.querySelector?.('.dndwiki-brand > a')?.textContent ?? '').trim();
+  if (title.length > 0) shell.setAttribute?.('data-dndwiki-campaign-title', title);
+  return title;
 }
 
 export function updateContextHeadings(root) {
@@ -61,13 +201,37 @@ export function syncPageBreadcrumbs(root) {
 
 function tocEntries(article) {
   const records = [];
-  for (const heading of article?.querySelectorAll?.('h2,h3,h4') ?? []) {
+  for (const heading of article?.querySelectorAll?.('h1,h2,h3,h4,h5,h6') ?? []) {
     const label = String(heading.textContent ?? '').trim();
     const level = Number(String(heading.tagName ?? '').slice(1));
-    if (label.length === 0 || !Number.isInteger(level) || level < 2 || level > 4) continue;
+    if (label.length === 0 || !Number.isInteger(level) || level < 1 || level > 6) continue;
     records.push({ label, level, heading });
   }
   return records;
+}
+
+function tocHierarchyHtml(entries, routeHash) {
+  const roots = [];
+  const stack = [];
+  for (const [index, entry] of entries.entries()) {
+    const route = headingRoute(routeHash, entry.label);
+    if (route == null) continue;
+    const node = { ...entry, index, route, children: [] };
+    while (stack.length > 0 && stack[stack.length - 1].level >= node.level) stack.pop();
+    const parent = stack[stack.length - 1] ?? null;
+    if (parent == null) roots.push(node);
+    else parent.children.push(node);
+    stack.push(node);
+  }
+
+  const renderNodes = (nodes, nested = false) => nodes.map((node) => {
+    const children = node.children.length > 0
+      ? `<ul class="dndwiki-toc-children">${renderNodes(node.children, true)}</ul>`
+      : '';
+    return `<li data-dndwiki-toc-level="${node.level}"><a class="dndwiki-toc-link" data-dndwiki-toc-index="${node.index}" data-level="${node.level}" href="${escapeHtml(node.route)}">${escapeHtml(node.label)}</a>${children}</li>`;
+  }).join('');
+
+  return renderNodes(roots, false);
 }
 
 export function outlineUsesRightRail(browserWindow) {
@@ -110,12 +274,7 @@ export function syncPageTableOfContents(root, browserWindow) {
   const signature = `${placement}:${entries.map((entry) => `${entry.level}:${entry.label}`).join('|')}`;
   if (existing?.getAttribute?.('data-dndwiki-toc-signature') === signature) return false;
 
-  const links = entries.map((entry, index) => {
-    const route = headingRoute(routeHash, entry.label);
-    if (route == null) return '';
-    return `<li><a class="dndwiki-toc-link" data-dndwiki-toc-index="${index}" data-level="${entry.level}" href="${escapeHtml(route)}">${escapeHtml(entry.label)}</a></li>`;
-  }).filter(Boolean).join('');
-
+  const links = tocHierarchyHtml(entries, routeHash);
   if (links.length === 0) {
     existingRail?.remove?.();
     if (existingRail == null) existing?.remove?.();
@@ -217,6 +376,7 @@ export function syncBrowsePanel(root, browserWindow = null) {
   const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
   if (shell == null || nav == null) return false;
   let changed = false;
+  const title = campaignTitle(root) || 'Campaign wiki';
 
   if (nav.getAttribute?.('id') !== 'dndwiki-browse-panel') {
     nav.setAttribute?.('id', 'dndwiki-browse-panel');
@@ -227,8 +387,19 @@ export function syncBrowsePanel(root, browserWindow = null) {
     changed = true;
   }
   if (nav.querySelector?.('[data-dndwiki-browse-panel-head]') == null) {
-    nav.insertAdjacentHTML?.('afterbegin', '<div class="dndwiki-browse-panel-head" data-dndwiki-browse-panel-head><div><span class="dndwiki-browse-panel-eyebrow">Campaign index</span><span class="dndwiki-browse-panel-title">Browse</span></div><button class="dndwiki-browse-close" type="button" data-dndwiki-browse-close aria-label="Collapse browse">×</button></div>');
+    nav.insertAdjacentHTML?.('afterbegin', `<div class="dndwiki-browse-panel-head" data-dndwiki-browse-panel-head><div><span class="dndwiki-browse-panel-title">${escapeHtml(title)}</span></div><button class="dndwiki-browse-close" type="button" data-dndwiki-browse-close aria-label="Collapse browse">×</button></div>`);
     changed = true;
+  } else {
+    const railTitle = nav.querySelector?.('.dndwiki-browse-panel-title');
+    if (railTitle != null && railTitle.textContent !== title) {
+      railTitle.textContent = title;
+      changed = true;
+    }
+    const eyebrow = nav.querySelector?.('.dndwiki-browse-panel-eyebrow');
+    if (eyebrow != null) {
+      eyebrow.remove?.();
+      changed = true;
+    }
   }
   if (nav.querySelector?.('[data-dndwiki-browse-filter]') == null) {
     const head = nav.querySelector?.('[data-dndwiki-browse-panel-head]');
@@ -300,8 +471,10 @@ export function syncSearchChrome(root) {
     label.insertAdjacentHTML?.('beforeend', '<span class="dndwiki-search-shortcut" data-dndwiki-search-shortcut aria-hidden="true">Ctrl K</span>');
     changed = true;
   }
-  if (input.getAttribute?.('placeholder') !== 'Search the wiki…') {
-    input.setAttribute?.('placeholder', 'Search the wiki…');
+  const title = campaignTitle(root);
+  const placeholder = title.length > 0 ? `Search ${title} wiki` : 'Search the wiki';
+  if (input.getAttribute?.('placeholder') !== placeholder) {
+    input.setAttribute?.('placeholder', placeholder);
     changed = true;
   }
   return changed;
@@ -513,6 +686,7 @@ function handleReaderClick(root, target, browserWindow) {
 export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
   if (root == null || browserWindow == null) return { destroy() {} };
 
+  ensureReaderV48Styles(browserWindow.document);
   moveReaderStylesheetLast(browserWindow.document);
 
   let queued = false;
@@ -532,6 +706,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
     queued = true;
     queueMicrotask(() => {
       queued = false;
+      ensureReaderV48Styles(browserWindow.document);
       moveReaderStylesheetLast(browserWindow.document);
       syncBrowsePanel(root, browserWindow);
       syncSearchChrome(root);
