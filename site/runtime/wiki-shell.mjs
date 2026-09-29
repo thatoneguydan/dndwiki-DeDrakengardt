@@ -8,6 +8,205 @@ import {
 import { createPlayerIdentitySession } from './player-identity.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
+const PLAYER_KEY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8.25" cy="12" r="3.25"></circle><path d="M11.5 12H21"></path><path d="m17.5 12 0 3"></path><path d="m14.5 12 0 2"></path></svg>';
+const READER_V47_POLISH_CSS = `
+#dndwiki-app .dndwiki-shell .dndwiki-brand > [data-dndwiki-browse-trigger] {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-topbar > .dndwiki-access {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-primary-nav .dndwiki-access {
+  display: block !important;
+  width: 100%;
+  margin: .18rem 0 .35rem;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-access-menu {
+  position: relative;
+  width: 100%;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-access-menu > summary {
+  min-height: 38px !important;
+  display: flex !important;
+  align-items: center;
+  gap: .62rem;
+  box-sizing: border-box;
+  width: 100%;
+  padding: .42rem .55rem !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  box-shadow: none !important;
+  list-style: none;
+  text-align: left;
+  font-size: .82rem !important;
+  font-weight: 500 !important;
+  line-height: 1.28;
+  cursor: pointer;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-access-menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-access-menu > summary:hover,
+#dndwiki-app .dndwiki-shell .dndwiki-access-menu[open] > summary {
+  background: var(--background-modifier-hover) !important;
+  color: var(--text-normal) !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-player-key-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 1.05rem;
+  display: inline-grid;
+  place-items: center;
+  color: var(--text-faint);
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-player-key-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-access-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-popover {
+  display: grid;
+  gap: .65rem;
+  margin: .18rem .2rem .45rem;
+  padding: .72rem;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-primary);
+  box-shadow: none;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-popover > p {
+  margin: 0;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-popover [data-dndwiki-clear-key] {
+  width: 100%;
+}
+
+#dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-access-label {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+#dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-access-menu > summary {
+  justify-content: center;
+  padding-inline: .35rem !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-outline-dot {
+  width: .52rem !important;
+  height: .52rem !important;
+  flex: 0 0 .52rem !important;
+  opacity: 1 !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link,
+#dndwiki-app .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link[data-level="3"],
+#dndwiki-app .dndwiki-shell .dndwiki-outline-rail .dndwiki-toc-link[data-level="4"] {
+  padding-left: .55rem !important;
+  font-size: .82rem !important;
+  line-height: 1.28 !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-main > .dndwiki-sidebar[data-dndwiki-context-footer] {
+  padding-top: 0 !important;
+  border-top: 0 !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-context-footer-head {
+  display: none !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-sidebar[data-dndwiki-context-footer] .dndwiki-link-list a {
+  font-size: .76rem !important;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-related-empty {
+  min-height: 1px !important;
+  height: 1px !important;
+  margin-top: 2rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-related-empty > h2,
+#dndwiki-app .dndwiki-shell .dndwiki-related-empty > p {
+  display: none !important;
+}
+
+@media (min-width: 1100px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar {
+    min-height: 78px !important;
+    height: 78px !important;
+    box-sizing: border-box !important;
+    grid-template-columns: minmax(0, 1fr) minmax(19rem, var(--line-width)) minmax(0, 1fr) !important;
+    grid-template-areas: none !important;
+    gap: clamp(.75rem, 1.6vw, 1.5rem) !important;
+    padding-block: .58rem !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-brand,
+  #dndwiki-app .dndwiki-shell .dndwiki-search {
+    grid-area: auto !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-panel-head,
+  #dndwiki-app .dndwiki-shell .dndwiki-outline-rail-head {
+    position: sticky !important;
+    top: 0;
+    min-height: 78px !important;
+    height: 78px !important;
+    box-sizing: border-box !important;
+    border-bottom: 0 !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-panel-head::after,
+  #dndwiki-app .dndwiki-shell .dndwiki-outline-rail-head::after {
+    content: '';
+    position: absolute;
+    left: -3rem;
+    right: -3rem;
+    bottom: 0;
+    border-bottom: 1px solid var(--dndwiki-soft-line);
+    pointer-events: none;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-filter {
+    top: 78px !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-close .dndwiki-rail-toggle-icon {
+    transform: scaleX(-1) !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-browse-close .dndwiki-rail-toggle-icon {
+    transform: scaleX(-1) rotate(180deg) !important;
+  }
+}
+`;
 
 export class WikiShellError extends Error {
   constructor(message) {
@@ -23,6 +222,16 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
+}
+
+function playerDisplayName(playerId) {
+  const value = String(playerId ?? '').trim();
+  if (value.length === 0) return 'Player';
+  return value
+    .split(/[._-]+/)
+    .filter(Boolean)
+    .map((part) => `${part.slice(0, 1).toLocaleUpperCase('en-US')}${part.slice(1)}`)
+    .join(' ');
 }
 
 function validateSnapshot(snapshot) {
@@ -122,6 +331,7 @@ export function buildWikiShellModel(snapshotInput, perspective, {
     },
     access: {
       active: perspective?.kind === 'player',
+      playerId: perspective?.kind === 'player' && typeof perspective.playerId === 'string' ? perspective.playerId : null,
       message: accessMessage,
     },
     query: normalizedQuery,
@@ -213,41 +423,29 @@ function keyForm(message = null) {
       <span class="dndwiki-meta">Player key</span>
       <input name="playerKey" type="password" autocomplete="off" required aria-label="Player key">
     </label>
-    <button type="submit">Unlock</button>
+    <button type="submit">Use key</button>
     ${message ? `<p class="dndwiki-form-error" role="alert">${escapeHtml(message)}</p>` : ''}
   </form>`;
 }
 
-function accessCard(model) {
-  if (model.access.active) {
-    return `<section class="dndwiki-card" aria-labelledby="dndwiki-access-heading">
-      <h2 id="dndwiki-access-heading">Access</h2>
-      <p class="dndwiki-meta">Player access active.</p>
-      <button type="button" data-dndwiki-clear-key>Clear player key</button>
-    </section>`;
-  }
-  return `<section class="dndwiki-card" aria-labelledby="dndwiki-access-heading">
-    <h2 id="dndwiki-access-heading">Access</h2>
-    <p class="dndwiki-meta">Enter your campaign key to reveal material shared with you.</p>
-    ${keyForm(model.access.message)}
-  </section>`;
-}
-
 function topbarAccess(model) {
-  const accessStatus = model.access.active ? 'Player access active' : 'Public view';
+  const open = model.access.message ? ' open' : '';
   if (model.access.active) {
-    return `<div class="dndwiki-access">
-      <span class="dndwiki-access-status">${accessStatus}</span>
-      <button type="button" data-dndwiki-clear-key>Lock</button>
+    const player = playerDisplayName(model.access.playerId);
+    return `<div class="dndwiki-access" data-dndwiki-player-access>
+      <details class="dndwiki-access-menu" data-dndwiki-access-menu>
+        <summary class="dndwiki-button" data-dndwiki-player-access-summary>${PLAYER_KEY_ICON.replace('<svg ', '<span class="dndwiki-player-key-icon"><svg ').replace('</svg>', '</svg></span>')}<span class="dndwiki-access-label">Logged in as ${escapeHtml(player)}</span></summary>
+        <div class="dndwiki-key-popover">
+          <button type="button" data-dndwiki-clear-key>Remove player key</button>
+        </div>
+      </details>
     </div>`;
   }
-  const open = model.access.message ? ' open' : '';
-  return `<div class="dndwiki-access">
-    <span class="dndwiki-access-status">${accessStatus}</span>
-    <details data-dndwiki-access-menu${open} style="position:relative">
-      <summary class="dndwiki-button" style="list-style:none;min-height:32px;display:flex;align-items:center">Unlock</summary>
-      <div style="position:absolute;right:0;top:calc(100% + .45rem);z-index:40;width:min(20rem,calc(100vw - 1.3rem));padding:.8rem;border:1px solid var(--background-modifier-border);border-radius:var(--radius-m);background:var(--background-primary);box-shadow:0 12px 32px rgba(0,0,0,.18)">
-        <p class="dndwiki-meta" style="margin:0">Enter your campaign key to reveal material shared with you.</p>
+  return `<div class="dndwiki-access" data-dndwiki-player-access>
+    <details class="dndwiki-access-menu" data-dndwiki-access-menu${open}>
+      <summary class="dndwiki-button" data-dndwiki-player-access-summary>${PLAYER_KEY_ICON.replace('<svg ', '<span class="dndwiki-player-key-icon"><svg ').replace('</svg>', '</svg></span>')}<span class="dndwiki-access-label">Insert player key</span></summary>
+      <div class="dndwiki-key-popover">
+        <p class="dndwiki-meta">Enter your campaign key to reveal material shared with you.</p>
         ${keyForm(model.access.message)}
       </div>
     </details>
@@ -349,6 +547,7 @@ function linkList(records, { backlink = false } = {}) {
 export function renderWikiShellHtml(model) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
   return `<div class="dndwiki-shell" data-dndwiki-campaign-id="${escapeHtml(model.campaign.id)}">
+    <style id="dndwiki-reader-v47-polish">${READER_V47_POLISH_CSS}</style>
     <header class="dndwiki-topbar">
       <div class="dndwiki-brand">
         <a href="#/">${escapeHtml(model.campaign.title)}</a>
@@ -372,7 +571,6 @@ export function renderWikiShellHtml(model) {
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
         ${model.forward.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-links-heading"><h2 id="dndwiki-links-heading">Links</h2>${linkList(model.forward)}</section>` : ''}
         ${model.backlinks.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading"><h2 id="dndwiki-backlinks-heading">Backlinks</h2>${linkList(model.backlinks, { backlink: true })}</section>` : ''}
-        ${accessCard(model)}
       </aside>
     </div>
   </div>`;
@@ -449,6 +647,15 @@ function highlightSearchOccurrence(root, browserWindow, target) {
     const reduced = browserWindow?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
     first.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
   }
+  return true;
+}
+
+function syncPlayerAccessPlacement(root) {
+  const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
+  const access = root?.querySelector?.('[data-dndwiki-player-access]');
+  const homeSection = nav?.querySelector?.('.dndwiki-primary-nav-section');
+  if (nav == null || access == null || homeSection == null || access.parentElement === homeSection) return false;
+  homeSection.append?.(access);
   return true;
 }
 
@@ -591,6 +798,8 @@ export async function mountWikiShell({
       }
     }
 
+    syncPlayerAccessPlacement(root);
+
     if (pendingSearchTarget != null) {
       if (model.page?.pageId !== pendingSearchTarget.pageId || model.page?.status !== 'visible') {
         pendingSearchTarget = null;
@@ -609,9 +818,27 @@ export async function mountWikiShell({
     if (searchForm?.contains?.(event.target)) return;
     setSearchResultsOpen(false);
   };
+  const onPlayerAccessClick = (event) => {
+    const summary = event.target?.closest?.('[data-dndwiki-player-access-summary]');
+    if (summary == null) return;
+    const shell = root.querySelector?.('.dndwiki-shell');
+    if (Number(browserWindow.innerWidth ?? 0) < 1100
+      || shell?.hasAttribute?.('data-dndwiki-browse-persistent') !== true
+      || shell?.hasAttribute?.('data-dndwiki-browse-open') === true) return;
+    event.preventDefault?.();
+    const menu = summary.closest?.('[data-dndwiki-access-menu]');
+    shell.querySelector?.('[data-dndwiki-browse-close]')?.click?.();
+    browserWindow.queueMicrotask?.(() => { if (menu != null) menu.open = true; });
+  };
+
+  const accessObserver = typeof browserWindow.MutationObserver === 'function'
+    ? new browserWindow.MutationObserver(() => { syncPlayerAccessPlacement(root); })
+    : null;
+  accessObserver?.observe?.(root, { childList: true, subtree: true });
 
   browserWindow.addEventListener?.('hashchange', onHashChange);
   browserWindow.document?.addEventListener?.('pointerdown', onDocumentPointerDown);
+  root.addEventListener?.('click', onPlayerAccessClick);
   render();
 
   return {
@@ -620,8 +847,10 @@ export async function mountWikiShell({
     },
     session,
     destroy() {
+      accessObserver?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange);
       browserWindow.document?.removeEventListener?.('pointerdown', onDocumentPointerDown);
+      root.removeEventListener?.('click', onPlayerAccessClick);
     },
   };
 }
