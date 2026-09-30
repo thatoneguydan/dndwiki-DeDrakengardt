@@ -415,7 +415,7 @@ function outlineRecords(root, browserWindow) {
     if (target == null) continue;
     const top = Number(target.getBoundingClientRect?.()?.top ?? NaN);
     if (!Number.isFinite(top)) continue;
-    records.push({ link, documentTop: top + scrollY });
+    records.push({ link, target, documentTop: top + scrollY });
   }
   return records;
 }
@@ -427,6 +427,9 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     signature: '',
     frameQueued: false,
     stepTimer: 0,
+    explicitIndex: -1,
+    explicitScrollY: null,
+    clickScrollReleaseTimer: 0,
   };
 
   const clearStepTimer = () => {
@@ -434,11 +437,53 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     state.stepTimer = 0;
   };
 
+  const stopClickScrollPropagation = (event) => {
+    event?.stopImmediatePropagation?.();
+  };
+
+  const clearClickScrollLock = () => {
+    if (state.clickScrollReleaseTimer !== 0) browserWindow.clearTimeout?.(state.clickScrollReleaseTimer);
+    state.clickScrollReleaseTimer = 0;
+    browserWindow.removeEventListener?.('scroll', stopClickScrollPropagation, true);
+  };
+
+  const lockClickScroll = () => {
+    clearClickScrollLock();
+    browserWindow.addEventListener?.('scroll', stopClickScrollPropagation, { capture: true });
+    state.clickScrollReleaseTimer = browserWindow.setTimeout?.(() => {
+      state.clickScrollReleaseTimer = 0;
+      browserWindow.removeEventListener?.('scroll', stopClickScrollPropagation, true);
+    }, 72) ?? 0;
+  };
+
+  const clearExplicitSelection = () => {
+    state.explicitIndex = -1;
+    state.explicitScrollY = null;
+  };
+
+  const applyActive = (records, activeIndex, { animate = true } = {}) => {
+    const transition = animate
+      ? 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease'
+      : 'none';
+    for (const [index, record] of records.entries()) {
+      record.link.style?.setProperty?.('transition', transition);
+      const current = record.link.getAttribute?.('aria-current') === 'location';
+      const desired = index === activeIndex;
+      if (desired && !current) record.link.setAttribute?.('aria-current', 'location');
+      else if (!desired && current) record.link.removeAttribute?.('aria-current');
+    }
+  };
+
+  const explicitSelectionIsCurrent = (scrollY) => state.explicitIndex >= 0
+    && Number.isFinite(state.explicitScrollY)
+    && Math.abs(scrollY - state.explicitScrollY) <= 2;
+
   const sync = () => {
     const records = outlineRecords(root, browserWindow);
     if (records.length === 0) {
       state.activeIndex = -1;
       state.signature = '';
+      clearExplicitSelection();
       clearStepTimer();
       return;
     }
@@ -446,6 +491,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     if (signature !== state.signature) {
       state.signature = signature;
       state.activeIndex = -1;
+      clearExplicitSelection();
       clearStepTimer();
     }
 
@@ -453,23 +499,22 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     const viewportHeight = Math.max(0, Number(browserWindow.innerHeight ?? 0));
     const maxScrollY = Math.max(0, outlineDocumentHeight(browserWindow) - viewportHeight);
     const topbarBottom = Math.max(0, Number(root.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0));
-    const targetIndex = bottomAwareOutlineIndex(records.map((record) => record.documentTop), {
-      scrollY,
-      anchorOffset: topbarBottom + 28,
-      maxScrollY,
-      viewportHeight,
-    });
-    const nextIndex = stagedOutlineIndex(state.activeIndex, targetIndex);
+    const explicit = explicitSelectionIsCurrent(scrollY) && state.explicitIndex < records.length;
+    if (!explicit && state.explicitIndex >= 0) clearExplicitSelection();
+    const targetIndex = explicit
+      ? state.explicitIndex
+      : bottomAwareOutlineIndex(records.map((record) => record.documentTop), {
+        scrollY,
+        anchorOffset: topbarBottom + 28,
+        maxScrollY,
+        viewportHeight,
+      });
+    const nextIndex = explicit ? targetIndex : stagedOutlineIndex(state.activeIndex, targetIndex);
     state.activeIndex = nextIndex;
-
-    for (const [index, record] of records.entries()) {
-      record.link.style?.setProperty?.('transition', 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease');
-      if (index === nextIndex) record.link.setAttribute?.('aria-current', 'location');
-      else record.link.removeAttribute?.('aria-current');
-    }
+    applyActive(records, nextIndex, { animate: !explicit });
 
     clearStepTimer();
-    if (nextIndex !== targetIndex) {
+    if (!explicit && nextIndex !== targetIndex) {
       state.stepTimer = browserWindow.setTimeout?.(() => {
         state.stepTimer = 0;
         schedule();
@@ -489,31 +534,64 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
 
   const resetAndSchedule = () => {
     state.activeIndex = -1;
+    clearExplicitSelection();
+    clearClickScrollLock();
     clearStepTimer();
     schedule();
   };
 
-  const onClick = (event) => {
-    if (event?.target?.closest?.('[data-dndwiki-toc-index], [data-dndwiki-related-link]') != null) resetAndSchedule();
+  const onExplicitClick = (event) => {
+    const link = event?.target?.closest?.('[data-dndwiki-outline-rail] [data-dndwiki-toc-index], [data-dndwiki-outline-rail] [data-dndwiki-related-link]') ?? null;
+    if (link == null || root.contains?.(link) !== true) return;
+    const records = outlineRecords(root, browserWindow);
+    const selectedIndex = records.findIndex((record) => record.link === link);
+    if (selectedIndex < 0) return;
+
+    event.preventDefault?.();
+    event.stopImmediatePropagation?.();
+    clearStepTimer();
+    clearExplicitSelection();
+    state.activeIndex = selectedIndex;
+    state.explicitIndex = selectedIndex;
+    applyActive(records, selectedIndex, { animate: false });
+
+    const topbarBottom = Math.max(0, Number(root.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0));
+    const top = Math.max(0, records[selectedIndex].documentTop - topbarBottom - 16);
+    lockClickScroll();
+    browserWindow.scrollTo?.({ top, behavior: 'auto' });
+    state.explicitScrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
+
+    const route = String(link.getAttribute?.('href') ?? '');
+    if (/^#\/page\/[a-z0-9][a-z0-9._-]{0,63}#/.test(route)) {
+      try {
+        browserWindow.history?.replaceState?.(browserWindow.history.state, '', route);
+      } catch {
+        // The click must remain local even when history mutation is unavailable.
+      }
+    }
+    schedule();
   };
+
   const observer = typeof browserWindow.MutationObserver === 'function'
     ? new browserWindow.MutationObserver(schedule)
     : null;
   observer?.observe?.(root, { childList: true, subtree: true });
+  browserWindow.document?.addEventListener?.('click', onExplicitClick, true);
   browserWindow.addEventListener?.('scroll', schedule, { passive: true });
-  browserWindow.addEventListener?.('resize', schedule, { passive: true });
+  browserWindow.addEventListener?.('resize', resetAndSchedule, { passive: true });
   browserWindow.addEventListener?.('hashchange', resetAndSchedule, true);
-  root.addEventListener?.('click', onClick, true);
   schedule();
 
   return {
     destroy() {
       clearStepTimer();
+      clearExplicitSelection();
+      clearClickScrollLock();
       observer?.disconnect?.();
+      browserWindow.document?.removeEventListener?.('click', onExplicitClick, true);
       browserWindow.removeEventListener?.('scroll', schedule);
-      browserWindow.removeEventListener?.('resize', schedule);
+      browserWindow.removeEventListener?.('resize', resetAndSchedule);
       browserWindow.removeEventListener?.('hashchange', resetAndSchedule, true);
-      root.removeEventListener?.('click', onClick, true);
     },
   };
 }
