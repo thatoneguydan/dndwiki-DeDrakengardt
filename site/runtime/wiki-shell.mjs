@@ -478,7 +478,7 @@ function keyForm(message = null) {
     <label>
       <input name="playerKey" type="password" autocomplete="off" required aria-label="Player key" placeholder="Paste your key here">
     </label>
-    <button type="submit">Use key</button>
+    <button type="submit">Unlock</button>
     ${message ? `<p class="dndwiki-form-error" role="alert">${escapeHtml(message)}</p>` : ''}
   </form>`;
 }
