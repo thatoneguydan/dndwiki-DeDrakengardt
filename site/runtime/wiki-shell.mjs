@@ -1,4 +1,4 @@
-import { renderMarkdownToHtml } from './markdown-renderer.mjs';
+import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import {
   backlinkNavigationForPage,
   forwardNavigationForPage,
@@ -99,7 +99,38 @@ const READER_V47_POLISH_CSS = `
   margin: 0;
 }
 
+#dndwiki-app .dndwiki-shell .dndwiki-key-form {
+  align-items: stretch;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-form > label {
+  min-width: 0;
+  display: flex;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-form input,
+#dndwiki-app .dndwiki-shell .dndwiki-key-form > button {
+  height: 38px;
+  min-height: 38px !important;
+  box-sizing: border-box;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-key-form input::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
 #dndwiki-app .dndwiki-shell .dndwiki-key-popover [data-dndwiki-clear-key] {
+  width: 100%;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-page hr.short {
+  width: 28%;
+  min-width: 5rem;
+  margin-inline: auto;
+}
+
+#dndwiki-app .dndwiki-shell .dndwiki-page hr.long {
   width: 100%;
 }
 
@@ -204,6 +235,23 @@ const READER_V47_POLISH_CSS = `
 
   #dndwiki-app .dndwiki-shell .dndwiki-browse-filter {
     top: 78px !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-close,
+  #dndwiki-app .dndwiki-shell .dndwiki-outline-trigger {
+    width: 2.55rem !important;
+    min-width: 2.55rem !important;
+    max-width: 2.55rem !important;
+    height: 2.55rem !important;
+    min-height: 2.55rem !important;
+    padding-inline: 0 !important;
+    justify-content: center !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-browse-panel-head,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail-head {
+    justify-content: center !important;
+    padding-inline: 0 !important;
   }
 
   #dndwiki-app .dndwiki-shell .dndwiki-browse-close .dndwiki-rail-toggle-icon {
@@ -428,8 +476,7 @@ export async function bootWikiShell({
 function keyForm(message = null) {
   return `<form class="dndwiki-key-form" data-dndwiki-key-form>
     <label>
-      <span class="dndwiki-meta">Player key</span>
-      <input name="playerKey" type="password" autocomplete="off" required aria-label="Player key">
+      <input name="playerKey" type="password" autocomplete="off" required aria-label="Player key" placeholder="Paste your key here">
     </label>
     <button type="submit">Use key</button>
     ${message ? `<p class="dndwiki-form-error" role="alert">${escapeHtml(message)}</p>` : ''}

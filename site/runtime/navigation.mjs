@@ -429,31 +429,11 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     stepTimer: 0,
     explicitIndex: -1,
     explicitScrollY: null,
-    clickScrollReleaseTimer: 0,
   };
 
   const clearStepTimer = () => {
     if (state.stepTimer !== 0) browserWindow.clearTimeout?.(state.stepTimer);
     state.stepTimer = 0;
-  };
-
-  const stopClickScrollPropagation = (event) => {
-    event?.stopImmediatePropagation?.();
-  };
-
-  const clearClickScrollLock = () => {
-    if (state.clickScrollReleaseTimer !== 0) browserWindow.clearTimeout?.(state.clickScrollReleaseTimer);
-    state.clickScrollReleaseTimer = 0;
-    browserWindow.removeEventListener?.('scroll', stopClickScrollPropagation, true);
-  };
-
-  const lockClickScroll = () => {
-    clearClickScrollLock();
-    browserWindow.addEventListener?.('scroll', stopClickScrollPropagation, { capture: true });
-    state.clickScrollReleaseTimer = browserWindow.setTimeout?.(() => {
-      state.clickScrollReleaseTimer = 0;
-      browserWindow.removeEventListener?.('scroll', stopClickScrollPropagation, true);
-    }, 72) ?? 0;
   };
 
   const clearExplicitSelection = () => {
@@ -477,6 +457,19 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
   const explicitSelectionIsCurrent = (scrollY) => state.explicitIndex >= 0
     && Number.isFinite(state.explicitScrollY)
     && Math.abs(scrollY - state.explicitScrollY) <= 2;
+
+  const activeStateMatches = (records, activeIndex) => records.every((record, index) => (
+    record.link.getAttribute?.('aria-current') === 'location'
+  ) === (index === activeIndex));
+
+  const reconcileActiveState = () => {
+    const records = outlineRecords(root, browserWindow);
+    if (records.length === 0 || state.activeIndex < 0 || state.activeIndex >= records.length) return;
+    if (activeStateMatches(records, state.activeIndex)) return;
+    const scrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
+    const explicit = explicitSelectionIsCurrent(scrollY) && state.explicitIndex < records.length;
+    applyActive(records, state.activeIndex, { animate: !explicit });
+  };
 
   const sync = () => {
     const records = outlineRecords(root, browserWindow);
@@ -535,7 +528,6 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
   const resetAndSchedule = () => {
     state.activeIndex = -1;
     clearExplicitSelection();
-    clearClickScrollLock();
     clearStepTimer();
     schedule();
   };
@@ -557,7 +549,6 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
 
     const topbarBottom = Math.max(0, Number(root.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0));
     const top = Math.max(0, records[selectedIndex].documentTop - topbarBottom - 16);
-    lockClickScroll();
     browserWindow.scrollTo?.({ top, behavior: 'auto' });
     state.explicitScrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
 
@@ -573,9 +564,20 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
   };
 
   const observer = typeof browserWindow.MutationObserver === 'function'
-    ? new browserWindow.MutationObserver(schedule)
+    ? new browserWindow.MutationObserver((mutations = []) => {
+      const activeChanged = mutations.some((mutation) => mutation?.type === 'attributes'
+        && mutation?.attributeName === 'aria-current'
+        && mutation?.target?.closest?.('[data-dndwiki-outline-rail]') != null);
+      if (activeChanged) reconcileActiveState();
+      if (mutations.some((mutation) => mutation?.type === 'childList')) schedule();
+    })
     : null;
-  observer?.observe?.(root, { childList: true, subtree: true });
+  observer?.observe?.(root, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['aria-current'],
+  });
   browserWindow.document?.addEventListener?.('click', onExplicitClick, true);
   browserWindow.addEventListener?.('scroll', schedule, { passive: true });
   browserWindow.addEventListener?.('resize', resetAndSchedule, { passive: true });
@@ -586,7 +588,6 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     destroy() {
       clearStepTimer();
       clearExplicitSelection();
-      clearClickScrollLock();
       observer?.disconnect?.();
       browserWindow.document?.removeEventListener?.('click', onExplicitClick, true);
       browserWindow.removeEventListener?.('scroll', schedule);
