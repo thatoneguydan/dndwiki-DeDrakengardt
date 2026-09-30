@@ -318,3 +318,207 @@ export function embedNavigationForPage(snapshot, perspective, sourcePageId) {
   return forwardNavigationForPage(snapshot, perspective, sourcePageId)
     .filter((record) => record.kind === 'embed');
 }
+
+export function bottomAwareOutlineTriggers(itemDocumentTops, {
+  anchorOffset = 0,
+  maxScrollY = 0,
+  viewportHeight = 0,
+  stepGap = null,
+  endLead = null,
+} = {}) {
+  if (!Array.isArray(itemDocumentTops) || itemDocumentTops.length === 0) return [];
+  const anchor = Math.max(0, Number(anchorOffset) || 0);
+  const maxScroll = Math.max(0, Number(maxScrollY) || 0);
+  const viewport = Math.max(0, Number(viewportHeight) || 0);
+  const desiredGap = stepGap != null && Number.isFinite(Number(stepGap))
+    ? Math.max(1, Number(stepGap))
+    : Math.max(96, Math.min(140, viewport * 0.14 || 112));
+  const lead = endLead != null && Number.isFinite(Number(endLead))
+    ? Math.max(0, Number(endLead))
+    : desiredGap;
+  const natural = itemDocumentTops.map((value) => {
+    const top = Number(value);
+    return Number.isFinite(top) ? Math.max(0, top - anchor) : Infinity;
+  });
+  const triggers = [...natural];
+  const last = triggers.length - 1;
+  if (Number.isFinite(triggers[last])) triggers[last] = Math.min(triggers[last], Math.max(0, maxScroll - lead));
+  for (let index = last - 1; index >= 0; index -= 1) {
+    if (!Number.isFinite(triggers[index])) continue;
+    const next = triggers[index + 1];
+    if (!Number.isFinite(next)) continue;
+    triggers[index] = Math.max(0, Math.min(triggers[index], next - desiredGap));
+  }
+  return triggers;
+}
+
+export function bottomAwareOutlineIndex(itemDocumentTops, {
+  scrollY = 0,
+  anchorOffset = 0,
+  maxScrollY = 0,
+  viewportHeight = 0,
+  stepGap = null,
+  endLead = null,
+} = {}) {
+  const triggers = bottomAwareOutlineTriggers(itemDocumentTops, {
+    anchorOffset,
+    maxScrollY,
+    viewportHeight,
+    stepGap,
+    endLead,
+  });
+  if (triggers.length === 0) return -1;
+  const currentScroll = Math.max(0, Number(scrollY) || 0);
+  let active = 0;
+  for (let index = 0; index < triggers.length; index += 1) {
+    const trigger = Number(triggers[index]);
+    if (Number.isFinite(trigger) && currentScroll >= trigger) active = index;
+    else if (Number.isFinite(trigger) && currentScroll < trigger) break;
+  }
+  return active;
+}
+
+export function stagedOutlineIndex(currentIndex, targetIndex) {
+  const target = Number(targetIndex);
+  if (!Number.isInteger(target) || target < 0) return -1;
+  const current = Number(currentIndex);
+  if (!Number.isInteger(current) || current < 0) return target;
+  if (target > current + 1) return current + 1;
+  if (target < current - 1) return current - 1;
+  return target;
+}
+
+function outlineDocumentHeight(browserWindow) {
+  const document = browserWindow?.document;
+  return Math.max(
+    0,
+    Number(document?.documentElement?.scrollHeight ?? 0),
+    Number(document?.body?.scrollHeight ?? 0),
+  );
+}
+
+function outlineRecords(root, browserWindow) {
+  const rail = root?.querySelector?.('[data-dndwiki-outline-rail]');
+  const article = root?.querySelector?.('[data-dndwiki-page]');
+  if (rail == null || article == null) return [];
+  const headings = [...(article.querySelectorAll?.('h1,h2,h3,h4,h5,h6') ?? [])];
+  const scrollY = Math.max(0, Number(browserWindow?.scrollY ?? browserWindow?.pageYOffset ?? 0));
+  const related = root?.querySelector?.('#dndwiki-related') ?? null;
+  const records = [];
+  for (const link of rail.querySelectorAll?.('.dndwiki-toc-link') ?? []) {
+    let target = null;
+    if (link.hasAttribute?.('data-dndwiki-related-link')) target = related;
+    else {
+      const index = Number(link.getAttribute?.('data-dndwiki-toc-index'));
+      if (Number.isInteger(index) && index >= 0) target = headings[index] ?? null;
+    }
+    if (target == null) continue;
+    const top = Number(target.getBoundingClientRect?.()?.top ?? NaN);
+    if (!Number.isFinite(top)) continue;
+    records.push({ link, documentTop: top + scrollY });
+  }
+  return records;
+}
+
+function installBottomAwareOutlineProgress(root, browserWindow) {
+  if (root == null || browserWindow == null) return { destroy() {} };
+  const state = {
+    activeIndex: -1,
+    signature: '',
+    frameQueued: false,
+    stepTimer: 0,
+  };
+
+  const clearStepTimer = () => {
+    if (state.stepTimer !== 0) browserWindow.clearTimeout?.(state.stepTimer);
+    state.stepTimer = 0;
+  };
+
+  const sync = () => {
+    const records = outlineRecords(root, browserWindow);
+    if (records.length === 0) {
+      state.activeIndex = -1;
+      state.signature = '';
+      clearStepTimer();
+      return;
+    }
+    const signature = records.map(({ link }) => `${link.getAttribute?.('href') ?? ''}|${link.textContent ?? ''}`).join('\n');
+    if (signature !== state.signature) {
+      state.signature = signature;
+      state.activeIndex = -1;
+      clearStepTimer();
+    }
+
+    const scrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
+    const viewportHeight = Math.max(0, Number(browserWindow.innerHeight ?? 0));
+    const maxScrollY = Math.max(0, outlineDocumentHeight(browserWindow) - viewportHeight);
+    const topbarBottom = Math.max(0, Number(root.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0));
+    const targetIndex = bottomAwareOutlineIndex(records.map((record) => record.documentTop), {
+      scrollY,
+      anchorOffset: topbarBottom + 28,
+      maxScrollY,
+      viewportHeight,
+    });
+    const nextIndex = stagedOutlineIndex(state.activeIndex, targetIndex);
+    state.activeIndex = nextIndex;
+
+    for (const [index, record] of records.entries()) {
+      record.link.style?.setProperty?.('transition', 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease');
+      if (index === nextIndex) record.link.setAttribute?.('aria-current', 'location');
+      else record.link.removeAttribute?.('aria-current');
+    }
+
+    clearStepTimer();
+    if (nextIndex !== targetIndex) {
+      state.stepTimer = browserWindow.setTimeout?.(() => {
+        state.stepTimer = 0;
+        schedule();
+      }, 72) ?? 0;
+    }
+  };
+
+  const schedule = () => {
+    if (state.frameQueued) return;
+    state.frameQueued = true;
+    const frame = browserWindow.requestAnimationFrame ?? ((callback) => browserWindow.setTimeout?.(callback, 0));
+    frame(() => frame(() => {
+      state.frameQueued = false;
+      sync();
+    }));
+  };
+
+  const resetAndSchedule = () => {
+    state.activeIndex = -1;
+    clearStepTimer();
+    schedule();
+  };
+
+  const onClick = (event) => {
+    if (event?.target?.closest?.('[data-dndwiki-toc-index], [data-dndwiki-related-link]') != null) resetAndSchedule();
+  };
+  const observer = typeof browserWindow.MutationObserver === 'function'
+    ? new browserWindow.MutationObserver(schedule)
+    : null;
+  observer?.observe?.(root, { childList: true, subtree: true });
+  browserWindow.addEventListener?.('scroll', schedule, { passive: true });
+  browserWindow.addEventListener?.('resize', schedule, { passive: true });
+  browserWindow.addEventListener?.('hashchange', resetAndSchedule, true);
+  root.addEventListener?.('click', onClick, true);
+  schedule();
+
+  return {
+    destroy() {
+      clearStepTimer();
+      observer?.disconnect?.();
+      browserWindow.removeEventListener?.('scroll', schedule);
+      browserWindow.removeEventListener?.('resize', schedule);
+      browserWindow.removeEventListener?.('hashchange', resetAndSchedule, true);
+      root.removeEventListener?.('click', onClick, true);
+    },
+  };
+}
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  const root = document.getElementById?.('dndwiki-app') ?? null;
+  if (root != null) installBottomAwareOutlineProgress(root, window);
+}
