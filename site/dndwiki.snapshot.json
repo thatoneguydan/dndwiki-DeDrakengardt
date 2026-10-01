@@ -20,10 +20,6 @@
       {
         "label": "Magic",
         "tag": "magic"
-      },
-      {
-        "label": "Feats",
-        "tag": "feat"
       }
     ],
     "schemaVersion": 1
@@ -5558,11 +5554,18 @@
     {
       "categories": [
         {
-          "backgroundColor": "lch(63.655 20.892 330.68)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 23.892 330.68)",
-          "label": "Feats",
-          "tag": "Feat"
+          "color": "lch(26.164 74.184 79.457)",
+          "label": "Items",
+          "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "slipstream-escape",
@@ -5576,10 +5579,16 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.655 20.892 330.68)",
+          "backgroundColor": "lch(83.726 36.66 81.615)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 23.892 330.68)",
-          "name": "Feat"
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "Item"
         }
       ],
       "title": "Slipstream Escape"
