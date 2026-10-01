@@ -20,6 +20,10 @@
       {
         "label": "Magic",
         "tag": "magic"
+      },
+      {
+        "label": "Feats",
+        "tag": "feat"
       }
     ],
     "schemaVersion": 1
@@ -5552,6 +5556,15 @@
       "title": "Rook Avelle"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(63.655 20.892 330.68)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 23.892 330.68)",
+          "label": "Feats",
+          "tag": "Feat"
+        }
+      ],
       "pageId": "slipstream-escape",
       "public": true,
       "segments": [
