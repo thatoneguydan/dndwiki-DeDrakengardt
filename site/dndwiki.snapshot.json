@@ -16,6 +16,10 @@
       {
         "label": "Items",
         "tag": "item"
+      },
+      {
+        "label": "Magic",
+        "tag": "magic"
       }
     ],
     "schemaVersion": 1
@@ -3672,6 +3676,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "chronogual-orb",
@@ -3700,6 +3711,15 @@
       "title": "Chronogual Orb"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "crude-maktilline",
       "public": true,
       "segments": [
@@ -3726,6 +3746,15 @@
       "title": "Crude Maktilline"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "emberline",
       "public": true,
       "segments": [
@@ -3752,6 +3781,15 @@
       "title": "Emberline"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "flash",
       "public": true,
       "segments": [
@@ -3785,6 +3823,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "gearlock-stompers",
@@ -3813,6 +3858,15 @@
       "title": "Gearlock Stompers"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "gleam",
       "public": true,
       "segments": [
@@ -3839,6 +3893,15 @@
       "title": "Gleam"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "maktilline",
       "public": true,
       "segments": [
@@ -3865,6 +3928,15 @@
       "title": "Maktilline"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "steel-diamond-hulls",
       "public": true,
       "segments": [],
@@ -3886,6 +3958,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "stratos-tether",
@@ -3921,6 +4000,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "the-artifact-from-saint-cogito",
@@ -3949,6 +4035,15 @@
       "title": "The Artifact from Saint Cogito"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "the-sword-of-binding",
       "public": true,
       "segments": [],
@@ -3976,6 +4071,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "the-transposer",
@@ -4004,6 +4106,15 @@
       "title": "The Transposer"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
       "pageId": "the-whisper-of-chaos",
       "public": true,
       "segments": [],
@@ -5319,6 +5430,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "spellbook-jailbreak",
@@ -5354,6 +5472,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "reflex-bells",
@@ -5507,6 +5632,13 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
         }
       ],
       "pageId": "twin-links",
