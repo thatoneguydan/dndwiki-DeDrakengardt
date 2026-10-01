@@ -28,16 +28,17 @@ const TAXONOMY_CSS = `
     min-height:44px !important;
     padding:0 !important;
     gap:0 !important;
+    align-self:center !important;
     align-items:center !important;
     justify-content:center !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger] {
+    position:relative !important;
     width:44px !important;
     height:44px !important;
     min-width:44px !important;
     min-height:44px !important;
-    display:inline-grid !important;
-    place-items:center !important;
+    display:block !important;
     margin:0 !important;
     padding:0 !important;
     font-size:0 !important;
@@ -45,6 +46,9 @@ const TAXONOMY_CSS = `
   }
   #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger]::before {
     content:'' !important;
+    position:absolute !important;
+    left:50% !important;
+    top:50% !important;
     display:block !important;
     width:18px !important;
     height:14px !important;
@@ -55,18 +59,38 @@ const TAXONOMY_CSS = `
       linear-gradient(currentColor,currentColor) top / 18px 2px no-repeat,
       linear-gradient(currentColor,currentColor) center / 18px 2px no-repeat,
       linear-gradient(currentColor,currentColor) bottom / 18px 2px no-repeat !important;
-    transform:translateY(-1px) !important;
+    transform:translate(-50%,-50%) !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-search {
     grid-area:search !important;
     width:100% !important;
     min-width:0 !important;
     max-width:none !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) auto !important;
+    align-items:center !important;
+    align-self:center !important;
+    gap:.35rem !important;
     margin:0 !important;
   }
+  #dndwiki-app .dndwiki-shell .dndwiki-search label {
+    display:block !important;
+    min-width:0 !important;
+    height:44px !important;
+    line-height:0 !important;
+  }
   #dndwiki-app .dndwiki-shell .dndwiki-search input {
+    display:block !important;
     height:44px !important;
     min-height:44px !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-search > button[type="submit"] {
+    height:44px !important;
+    min-height:44px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    padding-inline:.72rem !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-access {
     grid-area:access !important;
@@ -156,9 +180,6 @@ const TAXONOMY_CSS = `
     padding-inline:.7rem !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-topbar > .dndwiki-access {
-    display:none !important;
-  }
-  #dndwiki-app .dndwiki-shell .dndwiki-search > button[type="submit"] {
     display:none !important;
   }
 }
