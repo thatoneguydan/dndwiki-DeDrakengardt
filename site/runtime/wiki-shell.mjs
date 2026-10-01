@@ -5,10 +5,20 @@ import {
   pageForRoute,
   searchNavigation,
 } from './navigation.mjs';
+import { buildPageView } from './page-visibility.mjs';
 import { createPlayerIdentitySession } from './player-identity.mjs';
+import { buildViewerGraph } from './viewer-graph.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
 const PLAYER_KEY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8.25" cy="12" r="3.25"></circle><path d="M11.5 12H21"></path><path d="m17.5 12 0 3"></path><path d="m14.5 12 0 2"></path></svg>';
+const RELATED_PAGE_LIMIT = 4;
+const RELATED_STOP_WORDS = new Set([
+  'about', 'after', 'again', 'also', 'another', 'because', 'been', 'before', 'being', 'between', 'both',
+  'could', 'does', 'each', 'from', 'have', 'into', 'just', 'more', 'most', 'other', 'over', 'same', 'some',
+  'such', 'than', 'that', 'their', 'them', 'then', 'there', 'these', 'they', 'this', 'those', 'through',
+  'under', 'very', 'what', 'when', 'where', 'which', 'while', 'with', 'would', 'your', 'were', 'will',
+]);
+const RELATED_INDEX_CACHE = new WeakMap();
 const READER_V47_POLISH_CSS = `
 #dndwiki-app .dndwiki-shell .dndwiki-brand > [data-dndwiki-browse-trigger] {
   display: none !important;
@@ -348,6 +358,174 @@ function cleanNavigationLinks(records) {
     })), 'targetPageId');
 }
 
+function normalizeRelatedValue(value) {
+  return String(value ?? '').trim().replace(/^#+/, '').toLocaleLowerCase('en-US');
+}
+
+function relatedPerspectiveKey(perspective) {
+  if (perspective?.kind !== 'player') return 'anonymous';
+  const ids = Array.isArray(perspective.playerIds)
+    ? [...new Set(perspective.playerIds.map((value) => String(value)))].sort((left, right) => left.localeCompare(right, 'en-US'))
+    : [];
+  return `player:${ids.join('|')}`;
+}
+
+function relatedInlineText(value) {
+  return String(value ?? '')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[`*_~]/g, '')
+    .replace(/\\([\\`*{}\[\]()#+\-.!_>])/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function relatedVisibleTitle(page, view) {
+  if (view.status !== 'visible') return null;
+  if (typeof page?.title === 'string' && page.title.trim().length > 0) return page.title.trim();
+  for (const line of String(view.markdown ?? '').split(/\r?\n/)) {
+    const match = /^ {0,3}#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/.exec(line);
+    if (match == null) continue;
+    const title = relatedInlineText(match[1]);
+    if (title.length > 0) return title;
+  }
+  return null;
+}
+
+function relatedTerms(title, markdown) {
+  const text = `${String(title ?? '')} ${String(markdown ?? '')}`.toLocaleLowerCase('en-US');
+  const terms = new Set();
+  for (const match of text.matchAll(/[a-z0-9][a-z0-9'-]{2,}/g)) {
+    const term = match[0].replace(/^'+|'+$/g, '');
+    if (term.length < 3 || RELATED_STOP_WORDS.has(term)) continue;
+    terms.add(term);
+  }
+  return terms;
+}
+
+function relatedEnsureSet(map, key) {
+  let value = map.get(key);
+  if (value == null) {
+    value = new Set();
+    map.set(key, value);
+  }
+  return value;
+}
+
+function relatedIntersectionSize(left, right) {
+  if (left == null || right == null || left.size === 0 || right.size === 0) return 0;
+  const [small, large] = left.size <= right.size ? [left, right] : [right, left];
+  let count = 0;
+  for (const value of small) if (large.has(value)) count += 1;
+  return count;
+}
+
+function buildRelatedIndex(snapshot, perspective) {
+  const pages = new Map();
+  for (const page of snapshot.pages) {
+    if (typeof page?.pageId !== 'string') continue;
+    const view = buildPageView(page, perspective);
+    if (view.status !== 'visible') continue;
+    const title = relatedVisibleTitle(page, view) ?? page.pageId;
+    pages.set(page.pageId, {
+      pageId: page.pageId,
+      title,
+      route: `#/page/${page.pageId}`,
+      tags: new Set((view.tags ?? []).map((tag) => normalizeRelatedValue(tag?.name)).filter(Boolean)),
+      terms: relatedTerms(title, view.markdown),
+    });
+  }
+
+  const broadTags = new Set((snapshot.browse?.categories ?? [])
+    .map((category) => normalizeRelatedValue(category?.tag))
+    .filter(Boolean));
+  const outgoing = new Map();
+  const incoming = new Map();
+  const neighbors = new Map();
+  const viewerGraph = buildViewerGraph(snapshot.graph, perspective);
+
+  for (const reference of viewerGraph.references) {
+    if (reference.targetType !== 'page') continue;
+    if (!pages.has(reference.sourcePageId) || !pages.has(reference.targetPageId)) continue;
+    relatedEnsureSet(outgoing, reference.sourcePageId).add(reference.targetPageId);
+    relatedEnsureSet(incoming, reference.targetPageId).add(reference.sourcePageId);
+    relatedEnsureSet(neighbors, reference.sourcePageId).add(reference.targetPageId);
+    relatedEnsureSet(neighbors, reference.targetPageId).add(reference.sourcePageId);
+  }
+
+  const documentFrequency = new Map();
+  for (const page of pages.values()) {
+    for (const term of page.terms) documentFrequency.set(term, (documentFrequency.get(term) ?? 0) + 1);
+  }
+
+  return { pages, broadTags, outgoing, incoming, neighbors, documentFrequency };
+}
+
+function relatedIndexFor(snapshot, perspective) {
+  let byPerspective = RELATED_INDEX_CACHE.get(snapshot);
+  if (byPerspective == null) {
+    byPerspective = new Map();
+    RELATED_INDEX_CACHE.set(snapshot, byPerspective);
+  }
+  const key = relatedPerspectiveKey(perspective);
+  let index = byPerspective.get(key);
+  if (index == null) {
+    index = buildRelatedIndex(snapshot, perspective);
+    byPerspective.set(key, index);
+  }
+  return index;
+}
+
+function relatedTextScore(source, candidate, documentFrequency, pageCount) {
+  let weightedOverlap = 0;
+  const [small, large] = source.terms.size <= candidate.terms.size
+    ? [source.terms, candidate.terms]
+    : [candidate.terms, source.terms];
+  for (const term of small) {
+    if (!large.has(term)) continue;
+    const frequency = documentFrequency.get(term) ?? pageCount;
+    if (frequency > Math.max(4, Math.ceil(pageCount * 0.7))) continue;
+    weightedOverlap += Math.log((pageCount + 1) / (frequency + 1)) + 1;
+  }
+  return Math.min(900, Math.round(weightedOverlap * 18));
+}
+
+function relatedCandidateScore(index, source, candidate) {
+  let score = 0;
+  if (index.outgoing.get(source.pageId)?.has(candidate.pageId)) score += 10000;
+  if (index.incoming.get(source.pageId)?.has(candidate.pageId)) score += 8000;
+
+  for (const tag of source.tags) {
+    if (!candidate.tags.has(tag)) continue;
+    score += index.broadTags.has(tag) ? 300 : 1400;
+  }
+
+  score += relatedIntersectionSize(index.neighbors.get(source.pageId), index.neighbors.get(candidate.pageId)) * 650;
+  score += relatedTextScore(source, candidate, index.documentFrequency, index.pages.size);
+  return score;
+}
+
+export function relatedNavigationForPage(snapshot, perspective, sourcePageId, { limit = RELATED_PAGE_LIMIT } = {}) {
+  if (!Number.isInteger(limit) || limit < 1) throw new TypeError('Related-page limit must be a positive integer.');
+  const index = relatedIndexFor(snapshot, perspective);
+  const source = index.pages.get(String(sourcePageId ?? ''));
+  if (source == null || index.pages.size <= 1) return [];
+
+  return [...index.pages.values()]
+    .filter((candidate) => candidate.pageId !== source.pageId)
+    .map((candidate) => ({ candidate, score: relatedCandidateScore(index, source, candidate) }))
+    .sort((left, right) => right.score - left.score
+      || left.candidate.title.localeCompare(right.candidate.title, 'en-US')
+      || left.candidate.pageId.localeCompare(right.candidate.pageId, 'en-US'))
+    .slice(0, Math.min(limit, index.pages.size - 1))
+    .map(({ candidate }) => ({
+      targetPageId: candidate.pageId,
+      label: candidate.title,
+      route: candidate.route,
+      status: 'visible',
+    }));
+}
+
 export function buildWikiShellModel(snapshotInput, perspective, {
   hash = '',
   query = '',
@@ -369,6 +547,9 @@ export function buildWikiShellModel(snapshotInput, perspective, {
   const forwardPageIds = new Set(forward.map((record) => record.targetPageId));
   const backlinks = page != null && page.status !== 'missing'
     ? uniqueByPage(backlinkNavigationForPage(snapshot, perspective, page.pageId), 'sourcePageId', forwardPageIds)
+    : [];
+  const related = page != null && page.status === 'visible'
+    ? relatedNavigationForPage(snapshot, perspective, page.pageId)
     : [];
 
   return {
@@ -395,6 +576,7 @@ export function buildWikiShellModel(snapshotInput, perspective, {
     page,
     backlinks,
     forward,
+    related,
   };
 }
 
@@ -599,6 +781,25 @@ function linkList(records, { backlink = false } = {}) {
   }).join('')}</ul>`;
 }
 
+function contextSidebar(model) {
+  const related = Array.isArray(model.related) ? model.related : [];
+  const shown = new Set(related.map((record) => record.targetPageId));
+  const forward = model.forward.filter((record) => !shown.has(record.targetPageId));
+  for (const record of forward) shown.add(record.targetPageId);
+  const backlinks = model.backlinks.filter((record) => !shown.has(record.sourcePageId));
+  const sections = [];
+  if (related.length > 0) {
+    sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-related-heading"><h2 id="dndwiki-related-heading">Related</h2>${linkList(related)}</section>`);
+  }
+  if (forward.length > 0) {
+    sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-links-heading"><h2 id="dndwiki-links-heading">Links</h2>${linkList(forward)}</section>`);
+  }
+  if (backlinks.length > 0) {
+    sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading"><h2 id="dndwiki-backlinks-heading">Backlinks</h2>${linkList(backlinks, { backlink: true })}</section>`);
+  }
+  return sections.join('');
+}
+
 export function renderWikiShellHtml(model) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
   return `<div class="dndwiki-shell" data-dndwiki-campaign-id="${escapeHtml(model.campaign.id)}">
@@ -624,8 +825,7 @@ export function renderWikiShellHtml(model) {
         ${pageBody(model)}
       </main>
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
-        ${model.forward.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-links-heading"><h2 id="dndwiki-links-heading">Links</h2>${linkList(model.forward)}</section>` : ''}
-        ${model.backlinks.length > 0 ? `<section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading"><h2 id="dndwiki-backlinks-heading">Backlinks</h2>${linkList(model.backlinks, { backlink: true })}</section>` : ''}
+        ${contextSidebar(model)}
       </aside>
     </div>
   </div>`;
