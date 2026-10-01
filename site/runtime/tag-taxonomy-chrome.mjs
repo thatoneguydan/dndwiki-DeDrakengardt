@@ -55,7 +55,7 @@ const TAXONOMY_CSS = `
       linear-gradient(currentColor,currentColor) top / 18px 2px no-repeat,
       linear-gradient(currentColor,currentColor) center / 18px 2px no-repeat,
       linear-gradient(currentColor,currentColor) bottom / 18px 2px no-repeat !important;
-    transform:none !important;
+    transform:translateY(-1px) !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-search {
     grid-area:search !important;
