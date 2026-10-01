@@ -3245,6 +3245,15 @@
       "title": "Nox Observatory"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
       "pageId": "scorchsand-desert",
       "public": true,
       "segments": [],
@@ -3256,10 +3265,10 @@
           "name": "Region"
         },
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "ScorchsandDesert"
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
         }
       ],
       "title": "Scorchsand Desert"
