@@ -1857,7 +1857,6 @@
       {
         "audience": {
           "playerIds": [
-            "celeste",
             "kiktal"
           ],
           "public": false
@@ -2598,7 +2597,6 @@
       {
         "audience": {
           "playerIds": [
-            "celeste",
             "kiktal"
           ],
           "public": false
@@ -5962,7 +5960,6 @@
           "kind": "keyed",
           "markdown": "\nSpent some time in [Zul'Kar](#/page/zulkar). Kiktal ran into her several times as her targets sometimes included the Red Claws.\n\nFirst time Kiktal \"caught\" her, she kept a cheery demeanor and acted as if she was *supposed* to be in a room that she *definitely wasn't* supposed to be in.\n\nSecond time was a similar situation, but she had crafted herself an entirely different disguise and persona. There was no longer any ambiguity there; they both knew she was up to something. But she still didn't drop the act. She spun up some excuse about \"dropping her dog tags\" and then grabbed them. Alongside a bundle of papers with sensitive info. She dropped 3 gold pieces on the table beside Kiktal and flashed her a thankful smile.\n\nThe third time, Rook tried to endear herself to Kiktal, acting like they were good friends, and even strongly hinted that a \"man on the inside\" would really grease the wheels on what she had cooking.\n\n",
           "playerIds": [
-            "celeste",
             "kiktal"
           ]
         },
