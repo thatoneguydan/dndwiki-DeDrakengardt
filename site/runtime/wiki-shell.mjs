@@ -254,14 +254,50 @@ const READER_V47_POLISH_CSS = `
     max-width: 2.55rem !important;
     height: 2.55rem !important;
     min-height: 2.55rem !important;
-    padding-inline: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 0 !important;
     justify-content: center !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-rail-toggle-icon {
+    width: 1.05rem !important;
+    height: 1.05rem !important;
+    display: grid !important;
+    place-items: center !important;
+    margin: 0 !important;
+    transform-origin: 50% 50% !important;
+  }
+
+  #dndwiki-app .dndwiki-shell .dndwiki-rail-toggle-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
   }
 
   #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-browse-panel-head,
   #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail-head {
     justify-content: center !important;
     padding-inline: 0 !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-browse-close,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent]:not([data-dndwiki-outline-open]) .dndwiki-outline-trigger {
+    margin-inline: auto !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-primary-nav,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail {
+    scrollbar-gutter: auto !important;
+    scrollbar-width: none !important;
+  }
+
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent]:not([data-dndwiki-browse-open]) .dndwiki-primary-nav::-webkit-scrollbar,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
   }
 
   #dndwiki-app .dndwiki-shell .dndwiki-browse-close .dndwiki-rail-toggle-icon {
@@ -505,19 +541,23 @@ function relatedCandidateScore(index, source, candidate) {
   return score;
 }
 
-export function relatedNavigationForPage(snapshot, perspective, sourcePageId, { limit = RELATED_PAGE_LIMIT } = {}) {
+export function relatedNavigationForPage(snapshot, perspective, sourcePageId, {
+  limit = RELATED_PAGE_LIMIT,
+  excludePageIds = [],
+} = {}) {
   if (!Number.isInteger(limit) || limit < 1) throw new TypeError('Related-page limit must be a positive integer.');
+  const excluded = new Set(Array.from(excludePageIds ?? [], (value) => String(value)));
   const index = relatedIndexFor(snapshot, perspective);
   const source = index.pages.get(String(sourcePageId ?? ''));
   if (source == null || index.pages.size <= 1) return [];
 
   return [...index.pages.values()]
-    .filter((candidate) => candidate.pageId !== source.pageId)
+    .filter((candidate) => candidate.pageId !== source.pageId && !excluded.has(candidate.pageId))
     .map((candidate) => ({ candidate, score: relatedCandidateScore(index, source, candidate) }))
     .sort((left, right) => right.score - left.score
       || left.candidate.title.localeCompare(right.candidate.title, 'en-US')
       || left.candidate.pageId.localeCompare(right.candidate.pageId, 'en-US'))
-    .slice(0, Math.min(limit, index.pages.size - 1))
+    .slice(0, limit)
     .map(({ candidate }) => ({
       targetPageId: candidate.pageId,
       label: candidate.title,
@@ -544,12 +584,15 @@ export function buildWikiShellModel(snapshotInput, perspective, {
   const forward = page != null && page.status === 'visible'
     ? cleanNavigationLinks(forwardNavigationForPage(snapshot, perspective, page.pageId))
     : [];
-  const forwardPageIds = new Set(forward.map((record) => record.targetPageId));
   const backlinks = page != null && page.status !== 'missing'
-    ? uniqueByPage(backlinkNavigationForPage(snapshot, perspective, page.pageId), 'sourcePageId', forwardPageIds)
+    ? uniqueByPage(backlinkNavigationForPage(snapshot, perspective, page.pageId), 'sourcePageId')
     : [];
+  const directPageIds = new Set([
+    ...forward.map((record) => record.targetPageId),
+    ...backlinks.map((record) => record.sourcePageId),
+  ]);
   const related = page != null && page.status === 'visible'
-    ? relatedNavigationForPage(snapshot, perspective, page.pageId)
+    ? relatedNavigationForPage(snapshot, perspective, page.pageId, { excludePageIds: directPageIds })
     : [];
 
   return {
@@ -783,10 +826,9 @@ function linkList(records, { backlink = false } = {}) {
 
 function contextSidebar(model) {
   const related = Array.isArray(model.related) ? model.related : [];
-  const shown = new Set(related.map((record) => record.targetPageId));
-  const forward = model.forward.filter((record) => !shown.has(record.targetPageId));
-  for (const record of forward) shown.add(record.targetPageId);
-  const backlinks = model.backlinks.filter((record) => !shown.has(record.sourcePageId));
+  const backlinks = Array.isArray(model.backlinks) ? model.backlinks : [];
+  const backlinkPageIds = new Set(backlinks.map((record) => record.sourcePageId));
+  const forward = model.forward.filter((record) => !backlinkPageIds.has(record.targetPageId));
   const sections = [];
   if (related.length > 0) {
     sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-related-heading"><h2 id="dndwiki-related-heading">Related</h2>${linkList(related)}</section>`);
