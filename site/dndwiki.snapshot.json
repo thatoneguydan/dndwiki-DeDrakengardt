@@ -245,19 +245,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Zul'Kar",
-        "segmentIndex": 0,
-        "sourcePageId": "dry-reach",
-        "targetPageId": "zulkar",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "Professor Marduun",
         "segmentIndex": 0,
         "sourcePageId": "ex-hoc-mundo-academy-of-arcane-learning",
@@ -418,6 +405,45 @@
         "segmentIndex": 0,
         "sourcePageId": "nox-observatory",
         "targetPageId": "the-silver-city",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Dry Reach",
+        "segmentIndex": 0,
+        "sourcePageId": "scorchsand-desert",
+        "targetPageId": "dry-reach",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Glillind North",
+        "segmentIndex": 0,
+        "sourcePageId": "scorchsand-desert",
+        "targetPageId": "glillind-north",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Zul'Kar",
+        "segmentIndex": 0,
+        "sourcePageId": "scorchsand-desert",
+        "targetPageId": "zulkar",
         "targetType": "page"
       },
       {
@@ -2036,15 +2062,6 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Contains:\n- [Zul'Kar](#/page/zulkar)",
-        "pageId": "dry-reach",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "The Kingdom that Disappeared.",
         "pageId": "eternis",
         "segmentIndex": 0
@@ -2101,6 +2118,15 @@
         },
         "markdown": "#### Exterior\nAs you head to the Capital Ring's center, the density of clustered buildings gives way to lush green lawns, carefully planted and meticulously manicured. Exotic flora, imported from the lands below, is tastefully scattered here and there, under the tall, sturdy trees. \n\nIt's all arranged to frame the crown jewel of [The Silver City](#/page/the-silver-city): Nox Observatory. A towering symbol of the city's ambition, a monolith of its pride. You can see it's beautiful golden dome even from the surface below, it's golden dome like a second sun. It's breathtaking.\n\nThe cylindrical exterior is etched with the celestial bodies of the night sky. Constellations that move in unison with their counterparts above. It's tuned to perfect accuracy.\n\nA calm breeze dances through.\n\n#### Interior\nThe interior is a Valhalla of beauty. Majestic murals bring to life allegorical accounts of the three rings, the , The Silver City. They are inscrutable; even when they were explained to you, Celeste, they never formed into anything with real substance. But they are elegantly crafted. A pearlescent staircase spirals upward along the outer curved wall, supported by nothing, yet perfectly stable.\n\nA central pillar of golden gears click and chunk quietly, keeping the city calendar accurate and true. Without them, the etched exterior would fall out of sync with the stars above. A few of your fellow students have *tried* to catch any *minute* imprecision, attempting to win the considerably large error bounty. But no one ever has, as far as you know.\n\nUp in the dome, the whirring and ticking from below hushes, replaced by a soft, droning melody like a whale's call. The stars above, filtered into sound that mortals can hear. Useful data for arcanists of the sky; a cosmic lullaby for everyone else.\n\nAn immense Celestial telescope sits in the center, a dense mass of gold gears and glass lenses and Speckle veins. A lense twice the size of your body slots in as another slots out of place. There's no one at it's control panel, but it still ticks, observes, records. At its heart is a crown of glass, spinning, moving against the gears that sprawl outward and power the mammoth machine.",
         "pageId": "nox-observatory",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Contains:\n- [Dry Reach](#/page/dry-reach)\n- [Glillind North](#/page/glillind-north)\n- [Zul'Kar](#/page/zulkar)",
+        "pageId": "scorchsand-desert",
         "segmentIndex": 0
       },
       {
@@ -2971,13 +2997,7 @@
       ],
       "pageId": "dry-reach",
       "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Contains:\n- [Zul'Kar](#/page/zulkar)",
-          "playerIds": []
-        }
-      ],
+      "segments": [],
       "tags": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
@@ -3280,7 +3300,13 @@
       ],
       "pageId": "scorchsand-desert",
       "public": true,
-      "segments": [],
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Contains:\n- [Dry Reach](#/page/dry-reach)\n- [Glillind North](#/page/glillind-north)\n- [Zul'Kar](#/page/zulkar)",
+          "playerIds": []
+        }
+      ],
       "tags": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
