@@ -599,6 +599,11 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
   visibility: visible;
 }
 
+/* A closed drawer has no composited backdrop, including during search. */
+.dndwiki-shell:not([data-dndwiki-browse-open]) .dndwiki-browse-scrim {
+  display: none;
+}
+
 /* ---------- Home / discovery ---------- */
 
 .dndwiki-shell .dndwiki-home {

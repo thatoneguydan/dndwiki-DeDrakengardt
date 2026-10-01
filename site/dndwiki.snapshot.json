@@ -2681,6 +2681,7 @@
   },
   "pages": [
     {
+      "createdAt": "2026-07-20T14:29:01.851Z",
       "pageId": "cepheus",
       "public": true,
       "segments": [
@@ -2690,7 +2691,8 @@
           "playerIds": []
         }
       ],
-      "title": "Cepheus"
+      "title": "Cepheus",
+      "updatedAt": "2026-09-26T13:35:25.860Z"
     },
     {
       "categories": [
@@ -2702,6 +2704,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-20T17:58:47.051Z",
       "pageId": "east-claw-trading-company",
       "public": true,
       "segments": [],
@@ -2725,7 +2728,8 @@
           "name": "TheBlackFleet"
         }
       ],
-      "title": "East Claw Trading Company"
+      "title": "East Claw Trading Company",
+      "updatedAt": "2026-10-01T16:25:52.186Z"
     },
     {
       "categories": [
@@ -2737,6 +2741,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-21T20:27:08.642Z",
       "pageId": "forgecreed",
       "public": true,
       "segments": [
@@ -2766,7 +2771,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "Forgecreed"
+      "title": "Forgecreed",
+      "updatedAt": "2026-10-01T16:25:52.266Z"
     },
     {
       "categories": [
@@ -2778,6 +2784,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-22T23:07:37.863Z",
       "pageId": "red-claw",
       "public": true,
       "segments": [],
@@ -2801,7 +2808,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Red Claw"
+      "title": "Red Claw",
+      "updatedAt": "2026-09-26T13:35:26.315Z"
     },
     {
       "categories": [
@@ -2813,6 +2821,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-20T17:53:46.847Z",
       "pageId": "the-black-fleet",
       "public": true,
       "segments": [],
@@ -2830,7 +2839,8 @@
           "name": "TheBlackFleet"
         }
       ],
-      "title": "The Black Fleet"
+      "title": "The Black Fleet",
+      "updatedAt": "2026-10-01T18:45:17.074Z"
     },
     {
       "categories": [
@@ -2842,6 +2852,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-21T20:18:14.330Z",
       "pageId": "the-blaze",
       "public": true,
       "segments": [
@@ -2871,7 +2882,8 @@
           "name": "TheBlaze"
         }
       ],
-      "title": "The Blaze"
+      "title": "The Blaze",
+      "updatedAt": "2026-10-01T16:25:52.108Z"
     },
     {
       "categories": [
@@ -2883,6 +2895,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-20T18:27:33.447Z",
       "pageId": "the-broken-wing",
       "public": true,
       "segments": [
@@ -2924,7 +2937,8 @@
           "name": "TheSunkenCity"
         }
       ],
-      "title": "The Broken Wing"
+      "title": "The Broken Wing",
+      "updatedAt": "2026-10-01T16:25:52.041Z"
     },
     {
       "categories": [
@@ -2936,6 +2950,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-05-16T16:47:50.723Z",
       "pageId": "the-nameless",
       "public": true,
       "segments": [
@@ -2965,7 +2980,8 @@
           "name": "TheNameless"
         }
       ],
-      "title": "The Nameless"
+      "title": "The Nameless",
+      "updatedAt": "2026-10-01T16:25:52.092Z"
     },
     {
       "categories": [
@@ -2977,6 +2993,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-06-02T22:40:29.270Z",
       "pageId": "voyager-rails",
       "public": true,
       "segments": [
@@ -2994,9 +3011,11 @@
           "name": "Faction"
         }
       ],
-      "title": "Voyager Rails"
+      "title": "Voyager Rails",
+      "updatedAt": "2026-09-26T13:35:26.556Z"
     },
     {
+      "createdAt": "2026-09-13T18:35:43.038Z",
       "pageId": "letter-to-celeste",
       "public": true,
       "segments": [
@@ -3028,7 +3047,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Letter to Celeste"
+      "title": "Letter to Celeste",
+      "updatedAt": "2026-09-26T17:57:50.544Z"
     },
     {
       "categories": [
@@ -3040,6 +3060,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-21T20:15:49.330Z",
       "pageId": "blaze-headquarters",
       "public": true,
       "segments": [
@@ -3069,7 +3090,8 @@
           "name": "TheBlaze"
         }
       ],
-      "title": "Blaze Headquarters"
+      "title": "Blaze Headquarters",
+      "updatedAt": "2026-09-26T13:35:26.610Z"
     },
     {
       "categories": [
@@ -3081,6 +3103,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-06-02T20:28:51.519Z",
       "pageId": "dry-reach",
       "public": true,
       "segments": [],
@@ -3098,7 +3121,8 @@
           "name": "ScorchsandDesert"
         }
       ],
-      "title": "Dry Reach"
+      "title": "Dry Reach",
+      "updatedAt": "2026-10-01T15:03:12.008Z"
     },
     {
       "categories": [
@@ -3110,6 +3134,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-26T15:15:52.911Z",
       "pageId": "eternis",
       "public": true,
       "segments": [
@@ -3133,7 +3158,8 @@
           "name": "Eternis"
         }
       ],
-      "title": "Eternis"
+      "title": "Eternis",
+      "updatedAt": "2026-09-26T13:35:26.650Z"
     },
     {
       "categories": [
@@ -3145,6 +3171,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-21T20:47:37.546Z",
       "pageId": "ex-hoc-mundo-academy-of-arcane-learning",
       "public": true,
       "segments": [
@@ -3168,7 +3195,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Ex Hoc Mundo Academy of Arcane Learning"
+      "title": "Ex Hoc Mundo Academy of Arcane Learning",
+      "updatedAt": "2026-10-01T16:25:52.032Z"
     },
     {
       "categories": [
@@ -3180,6 +3208,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-06-02T20:33:36.479Z",
       "pageId": "glillind-north",
       "public": true,
       "segments": [
@@ -3203,7 +3232,8 @@
           "name": "ScorchsandDesert"
         }
       ],
-      "title": "Glillind North"
+      "title": "Glillind North",
+      "updatedAt": "2026-09-26T13:35:26.679Z"
     },
     {
       "categories": [
@@ -3215,6 +3245,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-06-02T23:10:48.225Z",
       "pageId": "greatmeadow-plains",
       "public": true,
       "segments": [
@@ -3244,7 +3275,8 @@
           "name": "GreatmeadowPlains"
         }
       ],
-      "title": "Greatmeadow Plains"
+      "title": "Greatmeadow Plains",
+      "updatedAt": "2026-10-01T15:01:51.841Z"
     },
     {
       "categories": [
@@ -3256,6 +3288,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-20T17:58:04.919Z",
       "pageId": "hocku-port",
       "public": true,
       "segments": [
@@ -3279,7 +3312,8 @@
           "name": "HockuPort"
         }
       ],
-      "title": "Hocku Port"
+      "title": "Hocku Port",
+      "updatedAt": "2026-10-01T16:25:52.027Z"
     },
     {
       "categories": [
@@ -3291,6 +3325,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-19T15:02:48.587Z",
       "pageId": "mitsurin",
       "public": true,
       "segments": [],
@@ -3308,7 +3343,8 @@
           "name": "Location"
         }
       ],
-      "title": "Mitsurin"
+      "title": "Mitsurin",
+      "updatedAt": "2026-10-01T15:02:03.084Z"
     },
     {
       "categories": [
@@ -3320,6 +3356,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-19T14:35:38.355Z",
       "pageId": "mount-vulk",
       "public": true,
       "segments": [
@@ -3349,7 +3386,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "Mount Vulk"
+      "title": "Mount Vulk",
+      "updatedAt": "2026-10-01T16:25:52.023Z"
     },
     {
       "categories": [
@@ -3361,6 +3399,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-24T13:10:32.959Z",
       "pageId": "nox-observatory",
       "public": true,
       "segments": [
@@ -3384,7 +3423,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Nox Observatory"
+      "title": "Nox Observatory",
+      "updatedAt": "2026-10-01T16:25:52.019Z"
     },
     {
       "categories": [
@@ -3396,6 +3436,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-22T23:06:30.399Z",
       "pageId": "scorchsand-desert",
       "public": true,
       "segments": [
@@ -3425,7 +3466,8 @@
           "name": "ScorchsandDesert"
         }
       ],
-      "title": "Scorchsand Desert"
+      "title": "Scorchsand Desert",
+      "updatedAt": "2026-10-01T15:03:45.608Z"
     },
     {
       "categories": [
@@ -3437,6 +3479,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-26T15:17:46.325Z",
       "pageId": "shroudgully",
       "public": true,
       "segments": [
@@ -3460,7 +3503,8 @@
           "name": "TheSunkenCity"
         }
       ],
-      "title": "Shroudgully"
+      "title": "Shroudgully",
+      "updatedAt": "2026-09-26T13:35:27.002Z"
     },
     {
       "categories": [
@@ -3472,6 +3516,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-06-02T22:40:48.606Z",
       "pageId": "subspace",
       "public": true,
       "segments": [
@@ -3489,7 +3534,8 @@
           "name": "Location"
         }
       ],
-      "title": "Subspace"
+      "title": "Subspace",
+      "updatedAt": "2026-09-26T13:35:27.053Z"
     },
     {
       "categories": [
@@ -3501,6 +3547,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-23T16:39:45.570Z",
       "pageId": "the-arena",
       "public": true,
       "segments": [],
@@ -3518,7 +3565,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "The Arena"
+      "title": "The Arena",
+      "updatedAt": "2026-10-01T16:25:52.017Z"
     },
     {
       "categories": [
@@ -3530,6 +3578,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-26T15:12:02.555Z",
       "pageId": "the-chamber-of-tomorrows",
       "public": true,
       "segments": [
@@ -3553,7 +3602,8 @@
           "name": "Eternis"
         }
       ],
-      "title": "The Chamber of Tomorrows"
+      "title": "The Chamber of Tomorrows",
+      "updatedAt": "2026-09-26T13:35:27.107Z"
     },
     {
       "categories": [
@@ -3565,6 +3615,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-21T19:55:41.598Z",
       "pageId": "the-grand-library",
       "public": true,
       "segments": [
@@ -3588,7 +3639,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "The Grand Library"
+      "title": "The Grand Library",
+      "updatedAt": "2026-10-01T16:25:51.972Z"
     },
     {
       "categories": [
@@ -3600,6 +3652,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-21T20:21:11.154Z",
       "pageId": "the-megadome",
       "public": true,
       "segments": [],
@@ -3617,7 +3670,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "The Megadome"
+      "title": "The Megadome",
+      "updatedAt": "2026-09-26T13:35:27.154Z"
     },
     {
       "categories": [
@@ -3629,6 +3683,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-14T23:07:16.517Z",
       "pageId": "the-silver-city",
       "public": true,
       "segments": [
@@ -3652,7 +3707,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "The Silver City"
+      "title": "The Silver City",
+      "updatedAt": "2026-10-01T16:25:51.937Z"
     },
     {
       "categories": [
@@ -3664,6 +3720,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-26T15:18:42.604Z",
       "pageId": "the-sunken-city-pelotharna",
       "public": true,
       "segments": [],
@@ -3681,7 +3738,8 @@
           "name": "TheSunkenCity"
         }
       ],
-      "title": "The Sunken City - Pelotharna"
+      "title": "The Sunken City - Pelotharna",
+      "updatedAt": "2026-09-26T13:35:27.199Z"
     },
     {
       "categories": [
@@ -3693,6 +3751,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-23T17:45:50.550Z",
       "pageId": "ulakiruto",
       "public": true,
       "segments": [
@@ -3716,7 +3775,8 @@
           "name": "Location"
         }
       ],
-      "title": "Ulakiruto"
+      "title": "Ulakiruto",
+      "updatedAt": "2026-10-01T15:01:53.386Z"
     },
     {
       "categories": [
@@ -3728,6 +3788,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-14T22:34:15.847Z",
       "pageId": "vulk-ildstad",
       "public": true,
       "segments": [
@@ -3751,7 +3812,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "Vulk Ildstad"
+      "title": "Vulk Ildstad",
+      "updatedAt": "2026-10-01T16:25:51.892Z"
     },
     {
       "categories": [
@@ -3763,6 +3825,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-05-22T23:05:11.999Z",
       "pageId": "zulkar",
       "public": true,
       "segments": [
@@ -3786,7 +3849,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Zul'Kar"
+      "title": "Zul'Kar",
+      "updatedAt": "2026-10-01T16:25:51.874Z"
     },
     {
       "categories": [
@@ -3805,6 +3869,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-26T15:10:34.336Z",
       "pageId": "chronogual-orb",
       "public": true,
       "segments": [
@@ -3834,7 +3899,8 @@
           "name": "Gardener"
         }
       ],
-      "title": "Chronogual Orb"
+      "title": "Chronogual Orb",
+      "updatedAt": "2026-09-26T13:35:27.298Z"
     },
     {
       "categories": [
@@ -3846,6 +3912,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-19T14:38:01.563Z",
       "pageId": "crude-maktilline",
       "public": true,
       "segments": [
@@ -3869,7 +3936,8 @@
           "name": "Fuel"
         }
       ],
-      "title": "Crude Maktilline"
+      "title": "Crude Maktilline",
+      "updatedAt": "2026-09-26T13:35:27.309Z"
     },
     {
       "categories": [
@@ -3881,6 +3949,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-19T14:25:20.771Z",
       "pageId": "emberline",
       "public": true,
       "segments": [
@@ -3904,7 +3973,8 @@
           "name": "Drug"
         }
       ],
-      "title": "Emberline"
+      "title": "Emberline",
+      "updatedAt": "2026-09-26T13:35:27.324Z"
     },
     {
       "categories": [
@@ -3916,6 +3986,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-19T14:29:29.019Z",
       "pageId": "flash",
       "public": true,
       "segments": [
@@ -3939,7 +4010,8 @@
           "name": "Drug"
         }
       ],
-      "title": "Flash"
+      "title": "Flash",
+      "updatedAt": "2026-09-26T13:35:27.336Z"
     },
     {
       "categories": [
@@ -3958,6 +4030,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-21T19:25:09.406Z",
       "pageId": "gearlock-stompers",
       "public": true,
       "segments": [
@@ -3987,7 +4060,8 @@
           "name": "PrimeRelic"
         }
       ],
-      "title": "Gearlock Stompers"
+      "title": "Gearlock Stompers",
+      "updatedAt": "2026-09-26T13:35:27.348Z"
     },
     {
       "categories": [
@@ -3999,6 +4073,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-19T15:01:22.919Z",
       "pageId": "gleam",
       "public": true,
       "segments": [
@@ -4022,7 +4097,8 @@
           "name": "Drug"
         }
       ],
-      "title": "Gleam"
+      "title": "Gleam",
+      "updatedAt": "2026-09-26T13:35:27.365Z"
     },
     {
       "categories": [
@@ -4034,6 +4110,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-14T22:53:34.419Z",
       "pageId": "maktilline",
       "public": true,
       "segments": [
@@ -4057,7 +4134,8 @@
           "name": "Fuel"
         }
       ],
-      "title": "Maktilline"
+      "title": "Maktilline",
+      "updatedAt": "2026-09-26T13:35:27.387Z"
     },
     {
       "categories": [
@@ -4069,6 +4147,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-06-02T23:06:17.830Z",
       "pageId": "steel-diamond-hulls",
       "public": true,
       "segments": [],
@@ -4080,7 +4159,8 @@
           "name": "Magic"
         }
       ],
-      "title": "Steel Diamond Hulls"
+      "title": "Steel Diamond Hulls",
+      "updatedAt": "2026-09-26T13:35:27.420Z"
     },
     {
       "categories": [
@@ -4099,6 +4179,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-26T14:18:06.998Z",
       "pageId": "stratos-tether",
       "public": true,
       "segments": [
@@ -4122,7 +4203,8 @@
           "name": "Item"
         }
       ],
-      "title": "Stratos Tether"
+      "title": "Stratos Tether",
+      "updatedAt": "2026-09-26T13:35:27.432Z"
     },
     {
       "categories": [
@@ -4141,6 +4223,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-21T19:28:40.482Z",
       "pageId": "the-artifact-from-saint-cogito",
       "public": true,
       "segments": [
@@ -4170,7 +4253,8 @@
           "name": "Gardener"
         }
       ],
-      "title": "The Artifact from Saint Cogito"
+      "title": "The Artifact from Saint Cogito",
+      "updatedAt": "2026-09-26T13:35:27.442Z"
     },
     {
       "categories": [
@@ -4182,6 +4266,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-19T14:17:16.087Z",
       "pageId": "the-sword-of-binding",
       "public": true,
       "segments": [],
@@ -4205,7 +4290,8 @@
           "name": "Cemus"
         }
       ],
-      "title": "The Sword of Binding"
+      "title": "The Sword of Binding",
+      "updatedAt": "2026-09-26T13:35:27.451Z"
     },
     {
       "categories": [
@@ -4224,6 +4310,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-06-02T23:37:46.359Z",
       "pageId": "the-transposer",
       "public": true,
       "segments": [
@@ -4259,7 +4346,8 @@
           "name": "TheBlaze"
         }
       ],
-      "title": "The Transposer"
+      "title": "The Transposer",
+      "updatedAt": "2026-10-01T16:25:52.036Z"
     },
     {
       "categories": [
@@ -4271,6 +4359,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-06-02T20:41:45.303Z",
       "pageId": "the-whisper-of-chaos",
       "public": true,
       "segments": [],
@@ -4282,7 +4371,8 @@
           "name": "Magic"
         }
       ],
-      "title": "The Whisper of Chaos"
+      "title": "The Whisper of Chaos",
+      "updatedAt": "2026-09-26T13:35:27.465Z"
     },
     {
       "categories": [
@@ -4294,6 +4384,7 @@
           "tag": "Faction"
         }
       ],
+      "createdAt": "2026-09-26T18:37:41.240Z",
       "pageId": "miracle-tech",
       "public": true,
       "segments": [
@@ -4323,7 +4414,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "Miracle Tech"
+      "title": "Miracle Tech",
+      "updatedAt": "2026-10-01T16:25:51.395Z"
     },
     {
       "categories": [
@@ -4335,6 +4427,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T16:49:17.206Z",
       "pageId": "ardent",
       "public": true,
       "segments": [
@@ -4358,7 +4451,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "Ardent"
+      "title": "Ardent",
+      "updatedAt": "2026-09-27T14:11:25.363Z"
     },
     {
       "categories": [
@@ -4370,6 +4464,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T21:25:25.647Z",
       "pageId": "belbe-the-son-of-madness",
       "public": true,
       "segments": [],
@@ -4399,7 +4494,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Belbe - The Son of Madness"
+      "title": "Belbe - The Son of Madness",
+      "updatedAt": "2026-09-26T13:35:27.495Z"
     },
     {
       "categories": [
@@ -4411,6 +4507,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T21:20:21.287Z",
       "pageId": "castiel-ralora",
       "public": true,
       "segments": [
@@ -4434,7 +4531,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Castiel Ralora"
+      "title": "Castiel Ralora",
+      "updatedAt": "2026-09-26T13:35:27.510Z"
     },
     {
       "categories": [
@@ -4446,6 +4544,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-22T17:22:29.877Z",
       "pageId": "cemus-overseer-of-time",
       "public": true,
       "segments": [],
@@ -4463,7 +4562,8 @@
           "name": "Overseer"
         }
       ],
-      "title": "Cemus - Overseer of Time"
+      "title": "Cemus - Overseer of Time",
+      "updatedAt": "2026-09-26T13:35:27.539Z"
     },
     {
       "categories": [
@@ -4475,6 +4575,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-22T17:17:56.141Z",
       "pageId": "chronos-the-second-hand",
       "public": true,
       "segments": [],
@@ -4492,7 +4593,8 @@
           "name": "Gardener"
         }
       ],
-      "title": "Chronos - The Second Hand"
+      "title": "Chronos - The Second Hand",
+      "updatedAt": "2026-09-26T13:35:27.555Z"
     },
     {
       "categories": [
@@ -4504,6 +4606,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-21T15:44:19.663Z",
       "pageId": "councilwoman-veldrin-illiir",
       "public": true,
       "segments": [
@@ -4527,7 +4630,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Councilwoman Veldrin Illiir"
+      "title": "Councilwoman Veldrin Illiir",
+      "updatedAt": "2026-09-26T13:35:27.567Z"
     },
     {
       "categories": [
@@ -4539,6 +4643,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:57:20.190Z",
       "pageId": "crimson-the-depraved",
       "public": true,
       "segments": [],
@@ -4568,7 +4673,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Crimson the Depraved"
+      "title": "Crimson the Depraved",
+      "updatedAt": "2026-09-26T13:35:27.615Z"
     },
     {
       "categories": [
@@ -4580,6 +4686,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-15T00:23:28.661Z",
       "pageId": "dworn-shieldside",
       "public": true,
       "segments": [],
@@ -4597,7 +4704,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "Dworn Shieldside"
+      "title": "Dworn Shieldside",
+      "updatedAt": "2026-09-26T13:35:27.636Z"
     },
     {
       "categories": [
@@ -4609,6 +4717,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:26:29.574Z",
       "pageId": "elias-brock",
       "public": true,
       "segments": [
@@ -4638,7 +4747,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Elias Brock"
+      "title": "Elias Brock",
+      "updatedAt": "2026-10-01T16:25:51.851Z"
     },
     {
       "categories": [
@@ -4650,6 +4760,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-16T18:25:57.423Z",
       "pageId": "entross",
       "public": true,
       "segments": [
@@ -4679,7 +4790,8 @@
           "name": "GodOfChaos"
         }
       ],
-      "title": "Entross"
+      "title": "Entross",
+      "updatedAt": "2026-09-26T13:35:27.690Z"
     },
     {
       "categories": [
@@ -4691,6 +4803,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:38:16.690Z",
       "pageId": "eva-salazar",
       "public": true,
       "segments": [
@@ -4708,7 +4821,8 @@
           "name": "NPC"
         }
       ],
-      "title": "Eva Salazar"
+      "title": "Eva Salazar",
+      "updatedAt": "2026-09-26T13:35:27.705Z"
     },
     {
       "categories": [
@@ -4720,6 +4834,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T20:18:04.027Z",
       "pageId": "exander-efthalia",
       "public": true,
       "segments": [
@@ -4743,7 +4858,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Exander Efthalia"
+      "title": "Exander Efthalia",
+      "updatedAt": "2026-09-26T13:35:27.731Z"
     },
     {
       "categories": [
@@ -4755,6 +4871,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:21:34.686Z",
       "pageId": "fara-carrigan",
       "public": true,
       "segments": [
@@ -4784,7 +4901,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Fara Carrigan"
+      "title": "Fara Carrigan",
+      "updatedAt": "2026-10-01T16:25:51.824Z"
     },
     {
       "categories": [
@@ -4796,6 +4914,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T14:08:12.507Z",
       "pageId": "fid-sundew",
       "public": true,
       "segments": [],
@@ -4819,7 +4938,8 @@
           "name": "TheNameless"
         }
       ],
-      "title": "Fid Sundew"
+      "title": "Fid Sundew",
+      "updatedAt": "2026-09-26T13:35:27.777Z"
     },
     {
       "categories": [
@@ -4831,6 +4951,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-09T16:03:29.669Z",
       "pageId": "flynn-proudglide",
       "public": true,
       "segments": [
@@ -4854,7 +4975,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Flynn Proudglide"
+      "title": "Flynn Proudglide",
+      "updatedAt": "2026-09-26T13:35:27.805Z"
     },
     {
       "categories": [
@@ -4866,6 +4988,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-14T22:37:42.093Z",
       "pageId": "grondbrow",
       "public": true,
       "segments": [
@@ -4895,7 +5018,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "GrondBrow"
+      "title": "GrondBrow",
+      "updatedAt": "2026-09-26T13:35:27.819Z"
     },
     {
       "categories": [
@@ -4907,6 +5031,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-20T17:49:54.871Z",
       "pageId": "hargrim-krakensbain",
       "public": true,
       "segments": [
@@ -4930,7 +5055,8 @@
           "name": "TheBlackFleet"
         }
       ],
-      "title": "Hargrim Krakensbain"
+      "title": "Hargrim Krakensbain",
+      "updatedAt": "2026-09-26T13:35:27.832Z"
     },
     {
       "categories": [
@@ -4942,6 +5068,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:10:40.438Z",
       "pageId": "harle-and-penelo",
       "public": true,
       "segments": [
@@ -4965,7 +5092,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "Harle and Penelo"
+      "title": "Harle and Penelo",
+      "updatedAt": "2026-09-26T13:35:27.841Z"
     },
     {
       "categories": [
@@ -4977,6 +5105,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-09T19:53:58.074Z",
       "pageId": "leon-illiir",
       "public": true,
       "segments": [
@@ -5000,7 +5129,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Leon Illiir"
+      "title": "Leon Illiir",
+      "updatedAt": "2026-09-26T13:35:27.852Z"
     },
     {
       "categories": [
@@ -5012,6 +5142,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T20:14:35.595Z",
       "pageId": "maeve-efthalia",
       "public": true,
       "segments": [
@@ -5035,7 +5166,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Maeve Efthalia"
+      "title": "Maeve Efthalia",
+      "updatedAt": "2026-09-26T13:35:27.862Z"
     },
     {
       "categories": [
@@ -5047,6 +5179,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-06-02T22:45:46.574Z",
       "pageId": "masuda-thoki",
       "public": true,
       "segments": [
@@ -5070,7 +5203,8 @@
           "name": "TheSunkenCity"
         }
       ],
-      "title": "Masuda Thoki"
+      "title": "Masuda Thoki",
+      "updatedAt": "2026-09-26T13:35:27.871Z"
     },
     {
       "categories": [
@@ -5082,6 +5216,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:33:36.542Z",
       "pageId": "mattias-shaw",
       "public": true,
       "segments": [
@@ -5111,7 +5246,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Mattias Shaw"
+      "title": "Mattias Shaw",
+      "updatedAt": "2026-10-01T16:25:51.751Z"
     },
     {
       "categories": [
@@ -5123,6 +5259,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-20T18:08:22.387Z",
       "pageId": "mirian-faremeadow",
       "public": true,
       "segments": [],
@@ -5134,7 +5271,8 @@
           "name": "NPC"
         }
       ],
-      "title": "Mirian Faremeadow"
+      "title": "Mirian Faremeadow",
+      "updatedAt": "2026-09-26T13:35:27.934Z"
     },
     {
       "categories": [
@@ -5146,6 +5284,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-14T22:55:25.273Z",
       "pageId": "pholtus",
       "public": true,
       "segments": [],
@@ -5169,7 +5308,8 @@
           "name": "GodOfOrder"
         }
       ],
-      "title": "Pholtus"
+      "title": "Pholtus",
+      "updatedAt": "2026-09-26T13:35:27.959Z"
     },
     {
       "categories": [
@@ -5181,6 +5321,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-16T15:19:18.445Z",
       "pageId": "professor-allao-marduun",
       "public": true,
       "segments": [],
@@ -5198,7 +5339,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Professor Allao Marduun"
+      "title": "Professor Allao Marduun",
+      "updatedAt": "2026-09-26T13:35:27.984Z"
     },
     {
       "categories": [
@@ -5210,6 +5352,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-25T14:54:55.162Z",
       "pageId": "punar-tillam",
       "public": true,
       "segments": [
@@ -5233,7 +5376,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Punar Tillam"
+      "title": "Punar Tillam",
+      "updatedAt": "2026-09-26T13:35:27.994Z"
     },
     {
       "categories": [
@@ -5245,6 +5389,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-20T17:51:25.827Z",
       "pageId": "quinton-morgan",
       "public": true,
       "segments": [
@@ -5268,7 +5413,8 @@
           "name": "TheBlackFleet"
         }
       ],
-      "title": "Quinton Morgan"
+      "title": "Quinton Morgan",
+      "updatedAt": "2026-09-26T13:35:28.012Z"
     },
     {
       "categories": [
@@ -5280,6 +5426,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T14:17:37.075Z",
       "pageId": "raddraim",
       "public": true,
       "segments": [
@@ -5309,7 +5456,8 @@
           "name": "GodOfOrder"
         }
       ],
-      "title": "Raddraim"
+      "title": "Raddraim",
+      "updatedAt": "2026-09-26T13:35:28.028Z"
     },
     {
       "categories": [
@@ -5321,6 +5469,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-26T14:09:13.258Z",
       "pageId": "rivald-flintbloom",
       "public": true,
       "segments": [],
@@ -5332,7 +5481,8 @@
           "name": "NPC"
         }
       ],
-      "title": "Rivald Flintbloom"
+      "title": "Rivald Flintbloom",
+      "updatedAt": "2026-09-26T13:35:28.040Z"
     },
     {
       "categories": [
@@ -5344,6 +5494,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-20T23:40:15.117Z",
       "pageId": "roxie",
       "public": true,
       "segments": [
@@ -5367,7 +5518,8 @@
           "name": "TheBlackFleet"
         }
       ],
-      "title": "Roxie"
+      "title": "Roxie",
+      "updatedAt": "2026-09-26T13:35:28.082Z"
     },
     {
       "categories": [
@@ -5379,6 +5531,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-21T19:26:01.954Z",
       "pageId": "saint-cogito",
       "public": true,
       "segments": [
@@ -5420,7 +5573,8 @@
           "name": "TheBlaze"
         }
       ],
-      "title": "Saint Cogito"
+      "title": "Saint Cogito",
+      "updatedAt": "2026-10-01T16:25:51.472Z"
     },
     {
       "categories": [
@@ -5432,6 +5586,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-19T14:12:10.459Z",
       "pageId": "sela-morelli",
       "public": true,
       "segments": [
@@ -5461,7 +5616,8 @@
           "name": "TheNameless"
         }
       ],
-      "title": "Sela Morelli"
+      "title": "Sela Morelli",
+      "updatedAt": "2026-10-01T16:25:51.463Z"
     },
     {
       "categories": [
@@ -5473,6 +5629,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T17:53:47.494Z",
       "pageId": "seth-skitters-jehkal",
       "public": true,
       "segments": [
@@ -5496,7 +5653,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Seth 'Skitters' Jehkal"
+      "title": "Seth 'Skitters' Jehkal",
+      "updatedAt": "2026-09-26T13:35:28.157Z"
     },
     {
       "categories": [
@@ -5508,6 +5666,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-16T19:55:41.499Z",
       "pageId": "soaruun-hunath",
       "public": true,
       "segments": [
@@ -5531,7 +5690,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Soaruun Hun’ath"
+      "title": "Soaruun Hun’ath",
+      "updatedAt": "2026-09-26T13:35:28.197Z"
     },
     {
       "categories": [
@@ -5543,6 +5703,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-14T22:35:16.033Z",
       "pageId": "solia-flintrest",
       "public": true,
       "segments": [],
@@ -5560,7 +5721,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "Solia Flintrest"
+      "title": "Solia Flintrest",
+      "updatedAt": "2026-09-26T13:35:28.221Z"
     },
     {
       "categories": [
@@ -5572,6 +5734,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-15T00:26:26.573Z",
       "pageId": "the-gate-guardian",
       "public": true,
       "segments": [
@@ -5595,7 +5758,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "The Gate Guardian"
+      "title": "The Gate Guardian",
+      "updatedAt": "2026-09-26T13:35:28.299Z"
     },
     {
       "categories": [
@@ -5607,6 +5771,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-26T15:03:47.861Z",
       "pageId": "timar-overseer-of-sky",
       "public": true,
       "segments": [],
@@ -5624,7 +5789,8 @@
           "name": "Overseer"
         }
       ],
-      "title": "Timar - Overseer of Sky"
+      "title": "Timar - Overseer of Sky",
+      "updatedAt": "2026-09-26T13:35:28.328Z"
     },
     {
       "categories": [
@@ -5636,6 +5802,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-14T22:55:33.033Z",
       "pageId": "ula",
       "public": true,
       "segments": [],
@@ -5659,7 +5826,8 @@
           "name": "GodOfOrder"
         }
       ],
-      "title": "Ula"
+      "title": "Ula",
+      "updatedAt": "2026-09-26T13:35:28.350Z"
     },
     {
       "categories": [
@@ -5671,6 +5839,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-21T20:23:42.482Z",
       "pageId": "umtor-presven",
       "public": true,
       "segments": [
@@ -5694,7 +5863,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Umtor Presven"
+      "title": "Umtor Presven",
+      "updatedAt": "2026-09-26T13:35:28.372Z"
     },
     {
       "categories": [
@@ -5706,6 +5876,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-23T16:37:42.046Z",
       "pageId": "vira-lash",
       "public": true,
       "segments": [
@@ -5729,7 +5900,8 @@
           "name": "TheMegadome"
         }
       ],
-      "title": "Vira Lash"
+      "title": "Vira Lash",
+      "updatedAt": "2026-09-26T13:35:28.394Z"
     },
     {
       "categories": [
@@ -5741,6 +5913,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-16T15:19:21.064Z",
       "pageId": "ylris",
       "public": true,
       "segments": [],
@@ -5758,7 +5931,8 @@
           "name": "Overseer"
         }
       ],
-      "title": "Ylris"
+      "title": "Ylris",
+      "updatedAt": "2026-09-26T13:35:28.417Z"
     },
     {
       "categories": [
@@ -5770,6 +5944,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-05-09T20:59:37.446Z",
       "pageId": "zennea-ritsuka",
       "public": true,
       "segments": [
@@ -5799,7 +5974,8 @@
           "name": "TheNameless"
         }
       ],
-      "title": "Zennea Ritsuka"
+      "title": "Zennea Ritsuka",
+      "updatedAt": "2026-09-26T13:35:28.429Z"
     },
     {
       "categories": [
@@ -5811,6 +5987,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-08-29T20:24:43.149Z",
       "pageId": "olander-sunpearl",
       "public": true,
       "segments": [
@@ -5852,7 +6029,8 @@
           "name": "TheBlaze"
         }
       ],
-      "title": "Olander Sunpearl"
+      "title": "Olander Sunpearl",
+      "updatedAt": "2026-10-01T16:25:51.249Z"
     },
     {
       "categories": [
@@ -5871,6 +6049,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-05-22T16:54:58.469Z",
       "pageId": "spellbook-jailbreak",
       "public": true,
       "segments": [
@@ -5894,7 +6073,8 @@
           "name": "Item"
         }
       ],
-      "title": "Spellbook Jailbreak"
+      "title": "Spellbook Jailbreak",
+      "updatedAt": "2026-09-24T19:39:29.194Z"
     },
     {
       "categories": [
@@ -5913,6 +6093,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-06-18T01:25:51.096Z",
       "pageId": "reflex-bells",
       "public": true,
       "segments": [
@@ -5936,7 +6117,8 @@
           "name": "Item"
         }
       ],
-      "title": "Reflex Bells"
+      "title": "Reflex Bells",
+      "updatedAt": "2026-09-26T13:35:28.817Z"
     },
     {
       "categories": [
@@ -5948,6 +6130,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-09-26T18:12:48.084Z",
       "pageId": "rook-avelle",
       "public": true,
       "segments": [
@@ -5995,7 +6178,8 @@
           "name": "ZulKar"
         }
       ],
-      "title": "Rook Avelle"
+      "title": "Rook Avelle",
+      "updatedAt": "2026-10-01T18:51:44.797Z"
     },
     {
       "categories": [
@@ -6014,6 +6198,7 @@
           "tag": "Feat"
         }
       ],
+      "createdAt": "2026-06-17T23:10:13.384Z",
       "pageId": "slipstream-escape",
       "public": true,
       "segments": [
@@ -6037,9 +6222,11 @@
           "name": "Feat"
         }
       ],
-      "title": "Slipstream Escape"
+      "title": "Slipstream Escape",
+      "updatedAt": "2026-10-01T15:08:40.596Z"
     },
     {
+      "createdAt": "2026-09-13T19:13:11.710Z",
       "pageId": "the-art-of-discipline",
       "public": true,
       "segments": [
@@ -6069,7 +6256,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "The Art of Discipline"
+      "title": "The Art of Discipline",
+      "updatedAt": "2026-09-26T13:35:29.256Z"
     },
     {
       "categories": [
@@ -6081,6 +6269,7 @@
           "tag": "Location"
         }
       ],
+      "createdAt": "2026-06-03T16:59:09.533Z",
       "pageId": "the-dread-wastes",
       "public": true,
       "segments": [],
@@ -6098,7 +6287,8 @@
           "name": "Location"
         }
       ],
-      "title": "The Dread Wastes"
+      "title": "The Dread Wastes",
+      "updatedAt": "2026-10-01T15:02:00.182Z"
     },
     {
       "categories": [
@@ -6110,6 +6300,7 @@
           "tag": "NPC"
         }
       ],
+      "createdAt": "2026-08-29T20:26:45.641Z",
       "pageId": "therule-dramon",
       "public": true,
       "segments": [
@@ -6133,7 +6324,8 @@
           "name": "TheSilverCity"
         }
       ],
-      "title": "Therule Dramon"
+      "title": "Therule Dramon",
+      "updatedAt": "2026-09-26T13:35:29.291Z"
     },
     {
       "categories": [
@@ -6152,6 +6344,7 @@
           "tag": "Magic"
         }
       ],
+      "createdAt": "2026-08-16T20:54:23.696Z",
       "pageId": "twin-links",
       "public": true,
       "segments": [
@@ -6175,9 +6368,11 @@
           "name": "Item"
         }
       ],
-      "title": "Twin Links"
+      "title": "Twin Links",
+      "updatedAt": "2026-09-26T13:35:29.339Z"
     },
     {
+      "createdAt": "2026-06-03T15:52:33.812Z",
       "pageId": "volis-backstory-fid-sundew-and-the-nameless",
       "public": true,
       "segments": [
@@ -6195,9 +6390,11 @@
           "name": "Vignette"
         }
       ],
-      "title": "Voli's Backstory - Fid Sundew and The Nameless"
+      "title": "Voli's Backstory - Fid Sundew and The Nameless",
+      "updatedAt": "2026-09-26T13:35:29.363Z"
     },
     {
+      "createdAt": "2026-05-19T17:27:01.493Z",
       "pageId": "a-constructs-confession-about-dreams",
       "public": true,
       "segments": [
@@ -6221,9 +6418,11 @@
           "name": "WorldLore"
         }
       ],
-      "title": "A Construct's Confession About Dreams"
+      "title": "A Construct's Confession About Dreams",
+      "updatedAt": "2026-09-24T19:39:29.195Z"
     },
     {
+      "createdAt": "2026-05-22T22:30:50.095Z",
       "pageId": "raid-team-6-vulkian-ruins",
       "public": true,
       "segments": [
@@ -6259,7 +6458,8 @@
           "name": "VulkIldstad"
         }
       ],
-      "title": "Raid Team 6 - Vulkian Ruins"
+      "title": "Raid Team 6 - Vulkian Ruins",
+      "updatedAt": "2026-09-27T14:26:26.990Z"
     }
   ],
   "players": {

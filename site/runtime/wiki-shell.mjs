@@ -4,6 +4,8 @@ import {
   forwardNavigationForPage,
   pageForRoute,
   searchNavigation,
+  normalizeSearchOptions,
+  visibleSearchTags,
 } from './navigation.mjs';
 import { buildPageView } from './page-visibility.mjs';
 import { createPlayerIdentitySession } from './player-identity.mjs';
@@ -310,6 +312,57 @@ const READER_V47_POLISH_CSS = `
 }
 `;
 
+const SEARCH_UI_CSS = `
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search .dndwiki-search-input-wrap {position:relative;min-width:0;width:100%;}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search .dndwiki-search-input-wrap label {display:block;width:100%;}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search input[name="query"] {padding-right:6rem !important;}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [data-dndwiki-search-clear] {right:3rem !important;width:40px !important;height:40px !important;min-width:40px !important;min-height:40px !important;border:0;background:transparent;box-shadow:none;}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search .dndwiki-search-filter-toggle {position:absolute;right:2px;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;gap:2px;width:44px;min-width:44px;min-height:40px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--text-muted);box-shadow:none;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filter-toggle svg {width:19px;height:19px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filter-toggle span {font-size:10px;font-weight:700;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filter-toggle:hover,#dndwiki-app .dndwiki-shell .dndwiki-search-filter-toggle[aria-expanded="true"],#dndwiki-app .dndwiki-shell .dndwiki-search-filter-toggle.is-active {background:var(--background-modifier-hover);color:var(--text-accent);}
+/* The mount owns clipping only; the child owns the single scroll surface. */
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search > [data-dndwiki-search-results] {position:absolute;inset:calc(100% + .4rem) 0 auto;z-index:120;max-height:none;overflow:hidden;border-radius:14px;background:transparent;box-shadow:var(--dndwiki-panel-shadow);}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [data-dndwiki-search-results] > .dndwiki-search-results {position:static !important;max-height:min(65dvh,34rem) !important;overflow-y:auto !important;overflow-x:hidden !important;scrollbar-width:thin;border-radius:14px;background:var(--background-primary);box-shadow:none;transform:none !important;}
+#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [hidden] {display:none !important;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filters {position:absolute;top:calc(100% + .4rem);right:0;z-index:125;width:min(100%,24rem);padding:1rem;border:1px solid var(--background-modifier-border);border-radius:14px;background:var(--background-primary);box-shadow:var(--dndwiki-panel-shadow);color:var(--text-normal);font-size:14px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filter-heading {display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-filter-heading button {min-height:32px;padding:.3rem .6rem;font-size:12px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search .dndwiki-search-sort {display:flex !important;height:auto !important;line-height:normal !important;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.75rem;}
+#dndwiki-app .dndwiki-shell .dndwiki-search .dndwiki-search-sort::before {content:none;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-sort select {min-width:0;max-width:70%;min-height:36px;padding:.35rem .5rem;border:1px solid var(--background-modifier-border);border-radius:7px;background:var(--background-secondary);color:var(--text-normal);font:inherit;}
+#dndwiki-app .dndwiki-shell .dndwiki-search input[data-dndwiki-search-tag-query] {min-height:36px;padding:.4rem .65rem !important;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading,#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row {display:grid;grid-template-columns:minmax(0,1fr) 54px 54px;align-items:center;gap:4px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading {margin:.85rem 0 .35rem;color:var(--text-muted);font-size:11px;text-align:center;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading > :first-child {text-align:left;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-list {max-height:min(38dvh,20rem);overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row > span {min-width:0;overflow-wrap:anywhere;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row small {margin-left:.45rem;color:var(--text-faint);font-size:11px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row button {justify-self:center;width:36px;height:36px;min-height:36px;padding:0;margin:2px 0;border-color:transparent;border-radius:7px;background:transparent;color:var(--text-muted);font-size:20px;box-shadow:none;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row button:hover {background:var(--background-modifier-hover);}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row button[aria-pressed="true"] {background:var(--text-accent);color:var(--background-primary);}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page {width:var(--dndwiki-reading-max);max-width:100%;margin:0 auto 3rem;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page h1 {font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.2;margin:.4rem 0 1rem;overflow-wrap:anywhere;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results {font-size:14px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-result-count {color:var(--text-muted);font-size:12px;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results ul {list-style:none;padding:0;margin:0;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-group {margin:0 0 .85rem;border:1px solid var(--background-modifier-border);border-radius:10px;overflow:hidden;background:var(--background-primary);}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results a {display:block;padding:.8rem 1rem;text-decoration:none;color:var(--text-normal);}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results a:hover {background:var(--background-modifier-hover);}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results strong {display:block;font-size:14px;font-weight:600;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results a > span {display:block;margin-top:.3rem;color:var(--text-muted);font-size:13px;line-height:1.5;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-page-results li + li {border-top:1px solid var(--background-modifier-border);}
+#dndwiki-app .dndwiki-shell [data-dndwiki-search-selected] {display:flex;flex-wrap:wrap;gap:.4rem;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-selected-tag {display:inline-flex;align-items:center;gap:.5rem;min-height:32px;font-size:12px;border-radius:999px;}
+#dndwiki-app .dndwiki-shell[data-dndwiki-route-kind="search"] .dndwiki-sidebar {display:none !important;}
+@media(max-width:860px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search input[name="query"] {padding-right:6rem !important;}
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search .dndwiki-search-filter-toggle,#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [data-dndwiki-search-clear] {min-height:44px !important;height:44px !important;width:44px !important;}
+  #dndwiki-app .dndwiki-shell .dndwiki-search-filters {width:100%;}
+  #dndwiki-app .dndwiki-shell .dndwiki-search-tag-row button {width:44px;height:44px;min-height:44px;}
+}
+`;
+
 export class WikiShellError extends Error {
   constructor(message) {
     super(message);
@@ -362,9 +415,24 @@ function decodeHeading(value) {
 
 export function parseWikiRoute(hash) {
   const value = String(hash ?? '');
+  const search = /^#\/search(?:\?(.*))?$/.exec(value);
+  if (search) {
+    const params = new URLSearchParams(search[1] ?? '');
+    return { kind: 'search', pageId: null, heading: null, query: params.get('q') ?? '', searchOptions: normalizeSearchOptions({ includeTags: params.getAll('include'), excludeTags: params.getAll('exclude'), sort: params.get('sort') }) };
+  }
   const match = /^#\/page\/([a-z0-9][a-z0-9._-]{0,63})(?:#(.*))?$/.exec(value);
   if (!match) return { kind: 'home', pageId: null, heading: null };
   return { kind: 'page', pageId: match[1], heading: decodeHeading(match[2]) };
+}
+
+export function routeForSearch(query = '', options = {}) {
+  const filters = normalizeSearchOptions(options);
+  const params = new URLSearchParams();
+  if (String(query).trim()) params.set('q', String(query).trim());
+  for (const tag of filters.includeTags) params.append('include', tag);
+  for (const tag of filters.excludeTags) params.append('exclude', tag);
+  if (filters.sort !== 'relevance') params.set('sort', filters.sort);
+  return `#/search${params.size ? `?${params}` : ''}`;
 }
 
 function pageLabel(page) {
@@ -568,7 +636,8 @@ export function relatedNavigationForPage(snapshot, perspective, sourcePageId, {
 
 export function buildWikiShellModel(snapshotInput, perspective, {
   hash = '',
-  query = '',
+  query = null,
+  searchOptions = null,
   accessMessage = null,
 } = {}) {
   const snapshot = validateSnapshot(snapshotInput);
@@ -577,10 +646,13 @@ export function buildWikiShellModel(snapshotInput, perspective, {
   const page = requestedPageId == null
     ? null
     : pageForRoute(snapshot, perspective, requestedPageId);
-  const normalizedQuery = String(query ?? '').trim();
-  const searchResults = normalizedQuery.length === 0
-    ? []
-    : searchNavigation(snapshot, perspective, normalizedQuery);
+  const normalizedQuery = String(query ?? parsedRoute.query ?? '').trim();
+  const searchTags = visibleSearchTags(snapshot, perspective);
+  const tagKeys = new Set(searchTags.map((tag) => tag.key));
+  const options = normalizeSearchOptions(searchOptions ?? parsedRoute.searchOptions);
+  options.includeTags = options.includeTags.filter((tag) => tagKeys.has(tag));
+  options.excludeTags = options.excludeTags.filter((tag) => tagKeys.has(tag));
+  const searchResults = searchNavigation(snapshot, perspective, normalizedQuery, { ...options, browse: parsedRoute.kind === 'search' || options.includeTags.length + options.excludeTags.length > 0 });
   const forward = page != null && page.status === 'visible'
     ? cleanNavigationLinks(forwardNavigationForPage(snapshot, perspective, page.pageId))
     : [];
@@ -602,7 +674,8 @@ export function buildWikiShellModel(snapshotInput, perspective, {
       title: snapshot.campaign.title,
     },
     route: {
-      hash: parsedRoute.kind === 'page' ? hash : '#/',
+      kind: parsedRoute.kind,
+      hash: parsedRoute.kind === 'page' || parsedRoute.kind === 'search' ? hash : '#/',
       requested: parsedRoute.kind === 'page',
       heading: parsedRoute.heading,
     },
@@ -615,6 +688,8 @@ export function buildWikiShellModel(snapshotInput, perspective, {
       message: accessMessage,
     },
     query: normalizedQuery,
+    searchOptions: options,
+    searchTags,
     searchResults,
     page,
     backlinks,
@@ -634,13 +709,23 @@ export function createWikiShellSession({ snapshot: snapshotInput, storage, crypt
   let perspective = { kind: 'anonymous', playerId: null, playerIds: [], reason: 'not-loaded' };
   let hash = '';
   let query = '';
+  let searchOptions = normalizeSearchOptions();
   let accessMessage = null;
 
-  const model = () => buildWikiShellModel(snapshot, perspective, { hash, query, accessMessage });
+  const model = () => {
+    const next = buildWikiShellModel(snapshot, perspective, { hash, query, searchOptions, accessMessage });
+    searchOptions = next.searchOptions;
+    return next;
+  };
+  const readSearchRoute = () => {
+    const route = parseWikiRoute(hash);
+    if (route.kind === 'search') { query = route.query; searchOptions = route.searchOptions; }
+  };
 
   return {
     async load({ routeHash = '' } = {}) {
       hash = String(routeHash ?? '');
+      readSearchRoute();
       perspective = await identity.load();
       accessMessage = null;
       return model();
@@ -648,11 +733,17 @@ export function createWikiShellSession({ snapshot: snapshotInput, storage, crypt
 
     setRoute(routeHash) {
       hash = String(routeHash ?? '');
+      readSearchRoute();
       return model();
     },
 
     search(value) {
       query = String(value ?? '');
+      return model();
+    },
+
+    filterSearch(options) {
+      searchOptions = normalizeSearchOptions(options);
       return model();
     },
 
@@ -742,8 +833,21 @@ function highlightedSnippet(result) {
   return `${escapeHtml(snippet.slice(0, start))}<mark style="background:var(--text-highlight-bg);color:inherit;padding:0 .08em">${escapeHtml(snippet.slice(start, start + length))}</mark>${escapeHtml(snippet.slice(start + length))}`;
 }
 
-function searchResults(model, expandedPageIds = new Set()) {
-  if (model.query.length === 0) return '';
+function hasSearchFilters(model) { return (model.searchOptions?.includeTags.length ?? 0) + (model.searchOptions?.excludeTags.length ?? 0) > 0; }
+
+function searchFilterPanel(model) {
+  const options = model.searchOptions ?? normalizeSearchOptions();
+  return `<div class="dndwiki-search-filters" data-dndwiki-search-filters id="dndwiki-search-filters" role="dialog" aria-label="Search filters" hidden>
+    <div class="dndwiki-search-filter-heading"><strong>Filters</strong><button type="button" data-dndwiki-search-reset>Reset</button></div>
+    <label class="dndwiki-search-sort">Sort by<select data-dndwiki-search-sort aria-label="Sort search results">${[['relevance', 'Relevance'], ['newest', 'Newest'], ['oldest', 'Oldest'], ['updated', 'Recently updated'], ['az', 'Title A–Z'], ['za', 'Title Z–A']].map(([value, label]) => `<option value="${value}"${options.sort === value ? ' selected' : ''}>${label}</option>`).join('')}</select></label>
+    <input type="text" data-dndwiki-search-tag-query aria-label="Find tags" placeholder="Find tags" autocomplete="off">
+    <div class="dndwiki-search-tag-heading"><span>Tags</span><span>Include</span><span>Exclude</span></div>
+    <div class="dndwiki-search-tag-list">${(model.searchTags ?? []).map((tag) => `<div class="dndwiki-search-tag-row" data-dndwiki-filter-tag="${escapeHtml(tag.key)}"><span>#${escapeHtml(tag.name)}<small>${tag.count}</small></span><button type="button" data-dndwiki-tag-include="${escapeHtml(tag.key)}" aria-label="Include #${escapeHtml(tag.name)}" aria-pressed="${options.includeTags.includes(tag.key)}">+</button><button type="button" data-dndwiki-tag-exclude="${escapeHtml(tag.key)}" aria-label="Exclude #${escapeHtml(tag.name)}" aria-pressed="${options.excludeTags.includes(tag.key)}">−</button></div>`).join('') || '<p class="dndwiki-meta">No visible tags.</p>'}</div>
+  </div>`;
+}
+
+function searchResults(model, expandedPageIds = new Set(), fullPage = false) {
+  if (model.query.length === 0 && !hasSearchFilters(model) && !fullPage) return '';
 
   const groups = [];
   const byPage = new Map();
@@ -761,14 +865,14 @@ function searchResults(model, expandedPageIds = new Set()) {
     const expanded = expandedPageIds.has(group.pageId);
     const visibleResults = expanded ? group.results : group.results.slice(0, 5);
     const matches = visibleResults.map((result) => {
-      const matchType = result.matchType === 'title' || result.matchType === 'tag'
+      const matchType = ['title', 'tag', 'page'].includes(result.matchType)
         ? result.matchType
         : 'content';
       const occurrenceAttribute = matchType === 'content'
         ? ` data-dndwiki-search-occurrence="${result.pageOccurrenceIndex}"`
         : '';
       const titlePreview = String(result.preview ?? '').trim();
-      const resultBody = matchType === 'title'
+      const resultBody = matchType === 'title' || matchType === 'page'
         ? `<strong>${highlightedSnippet(result)}</strong>${titlePreview.length > 0 ? `<span>${escapeHtml(titlePreview)}</span>` : ''}`
         : matchType === 'tag'
           ? `<strong>${highlightedSnippet(result)}</strong><span>Tag · ${escapeHtml(result.title ?? 'Page')}</span>`
@@ -786,17 +890,20 @@ function searchResults(model, expandedPageIds = new Set()) {
           <span aria-hidden="true" style="display:inline-flex;margin:0;color:inherit;font-size:.9rem;line-height:1">${expanded ? '▴' : '▾'}</span>
         </button></li>`
       : '';
-    return `${matches}${toggle}`;
+    return fullPage ? `<li class="dndwiki-search-page-group"><ul>${matches}${toggle}</ul></li>` : `${matches}${toggle}`;
   }).join('');
 
-  return `<section class="dndwiki-search-results" aria-label="Search results" style="width:100%;max-width:none;margin:0">
-    <h2>${model.searchResults.length} result${model.searchResults.length === 1 ? '' : 's'} for “${escapeHtml(model.query)}”</h2>
+  return `<section class="${fullPage ? 'dndwiki-search-page-results' : 'dndwiki-search-results'}" aria-label="Search results" style="width:100%;max-width:none;margin:0">
+    <${fullPage ? 'p' : 'h2'} class="dndwiki-search-result-count">${groups.length} page${groups.length === 1 ? '' : 's'} · ${model.searchResults.length} result${model.searchResults.length === 1 ? '' : 's'}${model.query ? ` for “${escapeHtml(model.query)}”` : ''}</${fullPage ? 'p' : 'h2'}>
     ${items.length > 0 ? `<ul>${items}</ul>` : '<p class="dndwiki-meta" style="padding:0 1rem 1rem">No visible matches.</p>'}
   </section>`;
 }
 
 function pageBody(model) {
   const page = model.page;
+  if (model.route.kind === 'search') {
+    return `<section class="dndwiki-search-page" data-dndwiki-search-page><header><p class="dndwiki-meta">Search</p><h1>${model.query ? `Results for “${escapeHtml(model.query)}”` : 'All pages'}</h1><div data-dndwiki-search-selected>${searchSelectedFilters(model)}</div></header><div data-dndwiki-search-page-results>${searchResults(model, new Set(), true)}</div></section>`;
+  }
   if (page == null && model.route.requested !== true) {
     return '<section class="dndwiki-home-placeholder" data-dndwiki-home-placeholder aria-hidden="true"></section>';
   }
@@ -813,6 +920,12 @@ function pageBody(model) {
     return '<section class="dndwiki-empty"><h1>Nothing to show</h1><p>This page has no content available in the current view.</p></section>';
   }
   return `<article class="dndwiki-page" data-dndwiki-page>${renderMarkdownToHtml(page.markdown)}</article>`;
+}
+
+function searchSelectedFilters(model) {
+  const options = model.searchOptions ?? normalizeSearchOptions();
+  const names = new Map((model.searchTags ?? []).map((tag) => [tag.key, tag.name]));
+  return ['include', 'exclude'].flatMap((kind) => options[`${kind}Tags`].map((tag) => `<button type="button" data-dndwiki-search-remove-tag="${escapeHtml(tag)}" data-kind="${kind}" class="dndwiki-search-selected-tag" aria-label="Remove ${kind} #${escapeHtml(names.get(tag) ?? tag)}">${kind === 'exclude' ? '−' : '+'} #${escapeHtml(names.get(tag) ?? tag)}<span aria-hidden="true">×</span></button>`)).join('');
 }
 
 function linkList(records, { backlink = false } = {}) {
@@ -846,19 +959,24 @@ export function renderWikiShellHtml(model) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
   return `<div class="dndwiki-shell" data-dndwiki-campaign-id="${escapeHtml(model.campaign.id)}">
     <style id="dndwiki-reader-v47-polish">${READER_V47_POLISH_CSS}</style>
+    <style id="dndwiki-search-ui">${SEARCH_UI_CSS}</style>
     <header class="dndwiki-topbar">
       <div class="dndwiki-brand">
         <a href="#/">${escapeHtml(model.campaign.title)}</a>
         <small>dndwiki</small>
       </div>
       <form class="dndwiki-search" role="search" data-dndwiki-search-form style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem">
-        <label style="min-width:0;position:relative">
+        <div class="dndwiki-search-input-wrap" style="min-width:0;position:relative">
+        <label>
           <span class="dndwiki-meta" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search visible wiki content</span>
-          <input name="query" type="text" value="${escapeHtml(model.query)}" placeholder="Search this wiki" autocomplete="off" style="padding-right:2.4rem">
-          <button type="button" data-dndwiki-search-clear aria-label="Clear search"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;right:.22rem;top:50%;transform:translateY(-50%);width:1.8rem;height:1.8rem;min-height:0;padding:0;border:1px solid transparent;border-radius:999px;color:var(--text-muted);font-size:1.05rem;line-height:1">×</button>
+          <input name="query" type="text" value="${escapeHtml(model.query)}" placeholder="Search this wiki" autocomplete="off">
         </label>
+          <button type="button" data-dndwiki-search-clear aria-label="Clear search"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;right:.22rem;top:50%;transform:translateY(-50%);width:1.8rem;height:1.8rem;min-height:0;padding:0;border:1px solid transparent;border-radius:999px;color:var(--text-muted);font-size:1.05rem;line-height:1">×</button>
+          <button type="button" data-dndwiki-search-filter-toggle aria-label="Search filters" aria-expanded="false" aria-controls="dndwiki-search-filters" class="dndwiki-search-filter-toggle${hasSearchFilters(model) ? ' is-active' : ''}"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--background-primary)"/><circle cx="15" cy="17" r="3" fill="var(--background-primary)"/></svg><span data-dndwiki-search-filter-count${hasSearchFilters(model) ? '' : ' hidden'}>${(model.searchOptions?.includeTags.length ?? 0) + (model.searchOptions?.excludeTags.length ?? 0)}</span></button>
+        </div>
         <button type="submit">Search</button>
-        <div data-dndwiki-search-results aria-live="polite"${model.query.length === 0 ? ' hidden' : ''} style="position:absolute;left:0;right:0;top:calc(100% + .4rem);z-index:30;max-height:min(70vh,34rem);overflow:auto">${searchResults(model)}</div>
+        <div data-dndwiki-search-results aria-live="polite"${model.query.length === 0 ? ' hidden' : ''}>${searchResults(model)}</div>
+        ${searchFilterPanel(model)}
       </form>
       ${topbarAccess(model)}
     </header>
@@ -975,11 +1093,11 @@ export async function mountWikiShell({
 
   let model = session.currentModel;
   let pendingSearchTarget = null;
-  let searchResultsOpen = model.query.length > 0;
+  let searchResultsOpen = model.route.kind !== 'search' && model.query.length > 0;
   const expandedSearchPages = new Set();
 
   const setSearchResultsOpen = (open) => {
-    searchResultsOpen = open === true && model.query.length > 0;
+    searchResultsOpen = open === true && model.route.kind !== 'search' && (model.query.length > 0 || hasSearchFilters(model));
     const resultsRoot = root.querySelector?.('[data-dndwiki-search-results]');
     if (resultsRoot != null) resultsRoot.hidden = !searchResultsOpen;
   };
@@ -997,43 +1115,114 @@ export async function mountWikiShell({
       const searchInput = searchForm?.elements?.query;
       const resultsRoot = root.querySelector('[data-dndwiki-search-results]');
       const clearSearchButton = root.querySelector('[data-dndwiki-search-clear]');
-      if (resultsRoot != null) resultsRoot.hidden = !searchResultsOpen || model.query.length === 0;
+      const pageResultsRoot = root.querySelector('[data-dndwiki-search-page-results]');
+      const filterPanel = root.querySelector('[data-dndwiki-search-filters]');
+      const filterToggle = root.querySelector('[data-dndwiki-search-filter-toggle]');
+      if (resultsRoot != null) resultsRoot.hidden = !searchResultsOpen;
+
+      const closeFilters = () => {
+        if (filterPanel != null) filterPanel.hidden = true;
+        filterToggle?.setAttribute('aria-expanded', 'false');
+      };
+      const refreshSearch = () => {
+        if (resultsRoot != null) {
+          resultsRoot.innerHTML = searchResults(model, expandedSearchPages);
+          resultsRoot.hidden = !searchResultsOpen || filterPanel?.hidden === false;
+        }
+        if (pageResultsRoot != null) {
+          pageResultsRoot.innerHTML = searchResults(model, expandedSearchPages, true);
+          const heading = root.querySelector('.dndwiki-search-page header h1');
+          if (heading) heading.textContent = model.query ? `Results for “${model.query}”` : 'All pages';
+          const selected = root.querySelector('[data-dndwiki-search-selected]');
+          if (selected) selected.innerHTML = searchSelectedFilters(model);
+          const route = routeForSearch(model.query, model.searchOptions);
+          browserWindow.history?.replaceState?.(null, '', route);
+          model = session.setRoute(route);
+        }
+        const count = model.searchOptions.includeTags.length + model.searchOptions.excludeTags.length;
+        filterToggle?.classList.toggle('is-active', count > 0 || model.searchOptions.sort !== 'relevance');
+        const badge = root.querySelector('[data-dndwiki-search-filter-count]');
+        if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
+        for (const button of filterPanel?.querySelectorAll('[data-dndwiki-tag-include],[data-dndwiki-tag-exclude]') ?? []) {
+          const include = button.hasAttribute('data-dndwiki-tag-include');
+          const tag = button.getAttribute(include ? 'data-dndwiki-tag-include' : 'data-dndwiki-tag-exclude');
+          button.setAttribute('aria-pressed', String(model.searchOptions[include ? 'includeTags' : 'excludeTags'].includes(tag)));
+        }
+        const sort = filterPanel?.querySelector('[data-dndwiki-search-sort]');
+        if (sort) sort.value = model.searchOptions.sort;
+      };
 
       const updateSearch = (value) => {
         const rawValue = String(value ?? '');
         model = session.search(rawValue);
         expandedSearchPages.clear();
-        searchResultsOpen = model.query.length > 0;
-        if (resultsRoot != null) {
-          resultsRoot.innerHTML = searchResults(model, expandedSearchPages);
-          resultsRoot.hidden = !searchResultsOpen;
-        }
+        searchResultsOpen = model.route.kind !== 'search' && (model.query.length > 0 || hasSearchFilters(model));
+        refreshSearch();
         if (clearSearchButton != null) clearSearchButton.hidden = rawValue.length === 0;
       };
 
       searchForm?.addEventListener?.('submit', (event) => {
         event.preventDefault();
         updateSearch(searchInput?.value ?? '');
+        closeFilters();
+        searchResultsOpen = false;
+        const route = routeForSearch(model.query, model.searchOptions);
+        if (browserWindow.location?.hash === route) { model = session.setRoute(route); render(); }
+        else if (browserWindow.location) browserWindow.location.hash = route;
+        else { model = session.setRoute(route); render(); }
       });
       searchInput?.addEventListener?.('input', () => {
         updateSearch(searchInput.value ?? '');
       });
       searchInput?.addEventListener?.('focus', () => {
-        if (String(searchInput.value ?? '').trim().length > 0) setSearchResultsOpen(true);
+        closeFilters();
+        if (String(searchInput.value ?? '').trim().length > 0 || hasSearchFilters(model)) setSearchResultsOpen(true);
       });
       clearSearchButton?.addEventListener?.('click', () => {
         if (searchInput != null) searchInput.value = '';
-        model = session.search('');
-        expandedSearchPages.clear();
-        if (resultsRoot != null) {
-          resultsRoot.innerHTML = '';
-          resultsRoot.hidden = true;
-        }
+        updateSearch('');
         clearSearchButton.hidden = true;
         searchResultsOpen = false;
         searchInput?.focus?.();
       });
-      resultsRoot?.addEventListener?.('click', (event) => {
+      filterToggle?.addEventListener?.('click', () => {
+        const open = filterPanel?.hidden !== false;
+        setSearchResultsOpen(false);
+        if (filterPanel) filterPanel.hidden = !open;
+        filterToggle.setAttribute('aria-expanded', String(open));
+        if (open) filterPanel?.querySelector('[data-dndwiki-search-tag-query]')?.focus();
+      });
+      const applyFilters = (options) => {
+        model = session.filterSearch(options);
+        expandedSearchPages.clear();
+        searchResultsOpen = model.route.kind !== 'search' && (model.query.length > 0 || hasSearchFilters(model));
+        refreshSearch();
+      };
+      filterPanel?.addEventListener?.('click', (event) => {
+        if (event.target?.closest?.('[data-dndwiki-search-reset]')) { applyFilters({}); return; }
+        const button = event.target?.closest?.('[data-dndwiki-tag-include],[data-dndwiki-tag-exclude]');
+        if (!button) return;
+        const include = button.hasAttribute('data-dndwiki-tag-include');
+        const field = include ? 'includeTags' : 'excludeTags', opposite = include ? 'excludeTags' : 'includeTags';
+        const tag = button.getAttribute(include ? 'data-dndwiki-tag-include' : 'data-dndwiki-tag-exclude');
+        const options = structuredClone(model.searchOptions);
+        options[field] = options[field].includes(tag) ? options[field].filter((value) => value !== tag) : [...options[field], tag];
+        options[opposite] = options[opposite].filter((value) => value !== tag);
+        applyFilters(options);
+      });
+      filterPanel?.querySelector('[data-dndwiki-search-sort]')?.addEventListener('change', (event) => applyFilters({ ...model.searchOptions, sort: event.target.value }));
+      filterPanel?.querySelector('[data-dndwiki-search-tag-query]')?.addEventListener('input', (event) => {
+        const value = String(event.target.value).trim().replace(/^#+/, '').toLocaleLowerCase('en-US');
+        for (const row of filterPanel.querySelectorAll('[data-dndwiki-filter-tag]')) row.hidden = !row.getAttribute('data-dndwiki-filter-tag').includes(value);
+      });
+      root.querySelector('[data-dndwiki-search-selected]')?.addEventListener('click', (event) => {
+        const button = event.target.closest?.('[data-dndwiki-search-remove-tag]');
+        if (!button) return;
+        const field = `${button.getAttribute('data-kind')}Tags`;
+        applyFilters({ ...model.searchOptions, [field]: model.searchOptions[field].filter((tag) => tag !== button.getAttribute('data-dndwiki-search-remove-tag')) });
+      });
+      const onResultClick = (event) => {
+        const targetRoot = event.currentTarget;
         const moreButton = event.target?.closest?.('[data-dndwiki-search-more]');
         if (moreButton != null) {
           const pageId = moreButton.getAttribute?.('data-dndwiki-search-page') ?? '';
@@ -1044,9 +1233,7 @@ export async function mountWikiShell({
           } else {
             expandedSearchPages.add(pageId);
           }
-          resultsRoot.innerHTML = searchResults(model, expandedSearchPages);
-          resultsRoot.hidden = false;
-          searchResultsOpen = true;
+          targetRoot.innerHTML = searchResults(model, expandedSearchPages, targetRoot === pageResultsRoot);
           return;
         }
 
@@ -1059,8 +1246,8 @@ export async function mountWikiShell({
         const route = link.getAttribute?.('href') ?? '';
         const contentTarget = matchType === 'content';
         if (!PAGE_ID_RE.test(pageId)
-          || query.trim().length === 0
-          || !['title', 'tag', 'content'].includes(matchType)
+          || (contentTarget && query.trim().length === 0)
+          || !['title', 'tag', 'content', 'page'].includes(matchType)
           || (contentTarget && (!Number.isInteger(occurrenceIndex) || occurrenceIndex < 0))
           || route.length === 0) return;
         event.preventDefault();
@@ -1076,7 +1263,9 @@ export async function mountWikiShell({
           model = session.setRoute(route);
           render();
         }
-      });
+      };
+      resultsRoot?.addEventListener?.('click', onResultClick);
+      pageResultsRoot?.addEventListener?.('click', onResultClick);
 
       for (const form of root.querySelectorAll?.('[data-dndwiki-key-form]') ?? []) {
         form.addEventListener?.('submit', async (event) => {
@@ -1108,11 +1297,25 @@ export async function mountWikiShell({
 
   const onHashChange = () => {
     model = session.setRoute(browserWindow.location?.hash ?? '');
+    searchResultsOpen = false;
     render();
   };
   const onDocumentPointerDown = (event) => {
     const searchForm = root.querySelector?.('[data-dndwiki-search-form]');
     if (searchForm?.contains?.(event.target)) return;
+    setSearchResultsOpen(false);
+    const panel = root.querySelector?.('[data-dndwiki-search-filters]');
+    if (panel) panel.hidden = true;
+    root.querySelector?.('[data-dndwiki-search-filter-toggle]')?.setAttribute('aria-expanded', 'false');
+  };
+  const onDocumentKeyDown = (event) => {
+    if (event.key !== 'Escape') return;
+    const panel = root.querySelector?.('[data-dndwiki-search-filters]');
+    if (panel?.hidden === false) {
+      panel.hidden = true;
+      const button = root.querySelector?.('[data-dndwiki-search-filter-toggle]');
+      button?.setAttribute('aria-expanded', 'false'); button?.focus();
+    }
     setSearchResultsOpen(false);
   };
   const onPlayerAccessClick = (event) => {
@@ -1135,6 +1338,7 @@ export async function mountWikiShell({
 
   browserWindow.addEventListener?.('hashchange', onHashChange);
   browserWindow.document?.addEventListener?.('pointerdown', onDocumentPointerDown);
+  browserWindow.document?.addEventListener?.('keydown', onDocumentKeyDown);
   root.addEventListener?.('click', onPlayerAccessClick);
   render();
 
@@ -1147,6 +1351,7 @@ export async function mountWikiShell({
       accessObserver?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange);
       browserWindow.document?.removeEventListener?.('pointerdown', onDocumentPointerDown);
+      browserWindow.document?.removeEventListener?.('keydown', onDocumentKeyDown);
       root.removeEventListener?.('click', onPlayerAccessClick);
     },
   };

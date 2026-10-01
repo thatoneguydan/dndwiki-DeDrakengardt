@@ -50,6 +50,7 @@ function inlineText(value) {
 
 function searchableText(value) {
   return String(value ?? '')
+    .replace(/<[^>]*>/g, ' ')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/^ {0,3}#{1,6}[ \t]+/gm, '')
@@ -221,15 +222,66 @@ export function backlinkNavigationForPage(snapshot, perspective, targetPageId) {
   });
 }
 
-export function searchNavigation(snapshot, perspective, query) {
+const SEARCH_SORTS = new Set(['relevance', 'newest', 'oldest', 'updated', 'az', 'za']);
+function searchTagKey(value) { return String(value ?? '').trim().replace(/^#+/, '').toLocaleLowerCase('en-US'); }
+
+export function normalizeSearchOptions(options = {}) {
+  options ??= {};
+  const tags = (values) => [...new Set((Array.isArray(values) ? values : []).filter((value) => typeof value === 'string').map(searchTagKey).filter(Boolean))];
+  const excludeTags = tags(options.excludeTags);
+  return { includeTags: tags(options.includeTags).filter((tag) => !excludeTags.includes(tag)), excludeTags, sort: SEARCH_SORTS.has(options.sort) ? options.sort : 'relevance' };
+}
+
+export function visibleSearchTags(snapshot, perspective) {
+  const tags = new Map();
+  for (const page of snapshot.pages) {
+    const view = buildPageView(page, perspective);
+    if (view.status !== 'visible') continue;
+    for (const tag of view.tags ?? []) {
+      const key = searchTagKey(tag.name);
+      if (!tags.has(key)) tags.set(key, { name: tag.name, key, count: 0 });
+      tags.get(key).count += 1;
+    }
+  }
+  return [...tags.values()].sort((a, b) => a.name.localeCompare(b.name, 'en-US'));
+}
+
+export function sortSearchResults(results, snapshot, sort = 'relevance') {
+  const groups = new Map();
+  const pages = new Map(snapshot.pages.map((page) => [page.pageId, page]));
+  for (const result of results) {
+    if (!groups.has(result.pageId)) groups.set(result.pageId, { page: pages.get(result.pageId), title: result.title ?? result.pageId, results: [], relevance: 0 });
+    const group = groups.get(result.pageId);
+    group.results.push(result);
+    group.relevance = Math.max(group.relevance, result.matchType === 'title' ? 3 : result.matchType === 'tag' ? 2 : 1);
+  }
+  const date = (group, field) => { const value = Date.parse(group.page?.[field]); return Number.isFinite(value) ? value : null; };
+  const dates = (a, b, field, direction) => {
+    const left = date(a, field), right = date(b, field);
+    if (left === null || right === null) return left === right ? 0 : left === null ? 1 : -1;
+    return (left - right) * direction;
+  };
+  return [...groups.values()].sort((a, b) => {
+    const title = a.title.localeCompare(b.title, 'en-US', { numeric: true, sensitivity: 'base' });
+    const primary = sort === 'newest' ? dates(a, b, 'createdAt', -1)
+      : sort === 'oldest' ? dates(a, b, 'createdAt', 1)
+        : sort === 'updated' ? dates(a, b, 'updatedAt', -1)
+          : sort === 'az' ? title : sort === 'za' ? -title : b.relevance - a.relevance;
+    return primary || title || a.page.pageId.localeCompare(b.page.pageId, 'en-US');
+  }).flatMap((group) => group.results);
+}
+
+export function searchNavigation(snapshot, perspective, query, options = {}) {
   const { pages, graph } = snapshotParts(snapshot);
+  const filters = normalizeSearchOptions(options);
   const normalizedQuery = String(query ?? '').trim().toLocaleLowerCase('en-US');
-  if (normalizedQuery.length === 0) return [];
+  if (normalizedQuery.length === 0 && options.browse !== true) return [];
 
   const results = [];
   const pageOccurrenceCounts = new Map();
   const pageViews = new Map();
   const pageTitles = new Map();
+  const eligiblePages = new Set();
 
   const viewForPage = (id, page) => {
     let view = pageViews.get(id);
@@ -243,9 +295,16 @@ export function searchNavigation(snapshot, perspective, query) {
   for (const [id, page] of pages) {
     const view = viewForPage(id, page);
     if (view.status !== 'visible') continue;
+    const tags = new Set((view.tags ?? []).map((tag) => searchTagKey(tag.name)));
+    if (!filters.includeTags.every((tag) => tags.has(tag)) || filters.excludeTags.some((tag) => tags.has(tag))) continue;
+    eligiblePages.add(id);
     const title = visibleTitle(page, view);
     if (title == null) continue;
     pageTitles.set(id, title);
+    if (normalizedQuery.length === 0) {
+      results.push({ matchType: 'page', pageId: id, title, preview: firstVisibleLine(view.markdown, title), snippet: title, route: routeForPage(id) });
+      continue;
+    }
     const matchIndex = title.toLocaleLowerCase('en-US').indexOf(normalizedQuery);
     if (matchIndex >= 0) {
       results.push({
@@ -281,6 +340,7 @@ export function searchNavigation(snapshot, perspective, query) {
   }
 
   for (const record of buildViewerGraph(graph, perspective).search) {
+    if (normalizedQuery.length === 0 || !eligiblePages.has(record.pageId)) continue;
     const page = pages.get(record.pageId);
     if (page == null) continue;
     const view = viewForPage(record.pageId, page);
@@ -311,7 +371,7 @@ export function searchNavigation(snapshot, perspective, query) {
       fromIndex = matchIndex + Math.max(1, normalizedQuery.length);
     }
   }
-  return results;
+  return sortSearchResults(results, snapshot, filters.sort);
 }
 
 export function embedNavigationForPage(snapshot, perspective, sourcePageId) {
