@@ -3100,6 +3100,15 @@
       "title": "Glillind North"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
       "pageId": "greatmeadow-plains",
       "public": true,
       "segments": [
@@ -3117,10 +3126,10 @@
           "name": "Region"
         },
         {
-          "backgroundColor": "lch(55.393 89.584 31.136)",
+          "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 92.584 31.136)",
-          "name": "GreatmeadowPlains"
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
         }
       ],
       "title": "Greatmeadow Plains"
@@ -3530,6 +3539,15 @@
       "title": "The Sunken City - Pelotharna"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
       "pageId": "ulakiruto",
       "public": true,
       "segments": [
@@ -3545,6 +3563,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
         }
       ],
       "title": "Ulakiruto"
