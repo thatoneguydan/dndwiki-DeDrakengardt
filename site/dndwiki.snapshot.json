@@ -3170,6 +3170,15 @@
       "title": "Hocku Port"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
       "pageId": "mitsurin",
       "public": true,
       "segments": [],
@@ -3179,6 +3188,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
         }
       ],
       "title": "Mitsurin"
@@ -5557,6 +5572,15 @@
       "title": "The Art of Discipline"
     },
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
       "pageId": "the-dread-wastes",
       "public": true,
       "segments": [],
@@ -5566,6 +5590,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
         }
       ],
       "title": "The Dread Wastes"
