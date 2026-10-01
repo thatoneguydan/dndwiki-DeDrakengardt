@@ -1,3 +1,4 @@
+import './reader-ui-contracts.mjs';
 import { renderMarkdownToHtml as renderLegacyMarkdownToHtml } from './markdown-renderer.mjs';
 import {
   authoredHtmlBlockStart,

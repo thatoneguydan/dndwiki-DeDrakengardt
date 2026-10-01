@@ -387,7 +387,6 @@ function rewriteTagPage(root, taxonomy, state) {
   if (page == null || page.hasAttribute?.('data-dndwiki-taxonomy-applied')) return;
 
   if (state.rootKey == null) {
-    page.innerHTML = '<div class="dndwiki-tag-hero"><p class="dndwiki-tag-kicker">Category</p><h1>Category unavailable</h1><p class="dndwiki-home-intro">This tag is not a player-facing category.</p></div>';
     page.setAttribute?.('data-dndwiki-taxonomy-applied', '');
     return;
   }
@@ -404,20 +403,24 @@ function polishPageTags(root, taxonomy, snapshot, state) {
   if (state.kind !== 'page') return;
   const pageRecord = snapshot?.pages?.find((page) => page?.pageId === state.pageId);
   const categories = new Map((pageRecord?.categories ?? []).map((category) => [normalize(category.tag), category]));
-  for (const link of root?.querySelectorAll?.('[data-dndwiki-page-header] .dndwiki-tag') ?? []) {
-    const key = normalize(link.textContent);
-    if (categories.has(key)) {
-      link.setAttribute?.('href', tagRoute(categories.get(key).tag));
+  for (const tagNode of root?.querySelectorAll?.('[data-dndwiki-page-header] .dndwiki-tag') ?? []) {
+    const key = normalize(tagNode.textContent);
+    const category = categories.get(key);
+    const visibleName = String(tagNode.textContent ?? '').trim().replace(/^#+/, '');
+    const routeName = String(category?.tag ?? visibleName).trim().replace(/^#+/, '');
+    if (routeName.length === 0) continue;
+    if (String(tagNode.tagName ?? '').toLocaleLowerCase('en-US') === 'a') {
+      tagNode.setAttribute?.('href', tagRoute(routeName));
       continue;
     }
-    if (String(link.tagName ?? '').toLocaleLowerCase('en-US') !== 'a') continue;
-    const replacement = root.ownerDocument?.createElement?.('span');
+    const replacement = root.ownerDocument?.createElement?.('a');
     if (replacement == null) continue;
-    replacement.className = link.className;
-    replacement.textContent = link.textContent;
-    const style = link.getAttribute?.('style');
+    replacement.className = tagNode.className;
+    replacement.textContent = tagNode.textContent;
+    replacement.setAttribute?.('href', tagRoute(routeName));
+    const style = tagNode.getAttribute?.('style');
     if (style) replacement.setAttribute?.('style', style);
-    link.replaceWith?.(replacement);
+    tagNode.replaceWith?.(replacement);
   }
 
   const breadcrumbs = root?.querySelector?.('[data-dndwiki-page-breadcrumbs]');
