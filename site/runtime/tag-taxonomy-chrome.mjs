@@ -236,7 +236,7 @@ function sortByName(records) {
   return [...records].sort((a, b) => a.tag.name.localeCompare(b.tag.name, 'en-US', { sensitivity: 'base', numeric: true }));
 }
 
-export function buildTagTaxonomy(pages, { legacyTags = false } = {}) {
+export function buildTagTaxonomy(pages, { legacyTags = false, categoryOrder = [] } = {}) {
   const roots = new Map();
   for (const page of pages ?? []) {
     if (typeof page?.pageId !== 'string') continue;
@@ -255,7 +255,10 @@ export function buildTagTaxonomy(pages, { legacyTags = false } = {}) {
       root.pageIds.add(page.pageId);
     }
   }
-  return new Map(sortByName(roots.values()).map((record) => [normalize(record.tag.sourceTag), record]));
+  const ranks = new Map(categoryOrder.map((category, index) => [normalize(category?.tag), index]));
+  const ordered = sortByName(roots.values()).sort((a, b) =>
+    (ranks.get(normalize(a.tag.sourceTag)) ?? Infinity) - (ranks.get(normalize(b.tag.sourceTag)) ?? Infinity));
+  return new Map(ordered.map((record) => [normalize(record.tag.sourceTag), record]));
 }
 
 function visiblePageIds(root) {
@@ -456,7 +459,7 @@ export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetc
     ensureStyles(browserWindow.document);
     const pages = visiblePages(snapshot, root);
     if (pages.length === 0 && root.querySelector?.('[data-dndwiki-primary-nav]') == null) return;
-    const taxonomy = buildTagTaxonomy(pages, { legacyTags: snapshot?.browse == null });
+    const taxonomy = buildTagTaxonomy(pages, { legacyTags: snapshot?.browse == null, categoryOrder: snapshot?.browse?.categories ?? [] });
     const state = currentState(snapshot, taxonomy, browserWindow.location?.hash ?? '');
     rewriteDesktopNavigation(root, taxonomy, state);
     rewriteMobileNavigation(root, taxonomy, state);
