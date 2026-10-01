@@ -1,22 +1,6 @@
 const STYLE_ID = 'dndwiki-tag-taxonomy-styles';
 
 const TAXONOMY_CSS = `
-.dndwiki-taxonomy-children {
-  list-style:none;
-  margin:.18rem 0 .35rem .95rem;
-  padding:0 0 0 .55rem;
-  display:grid;
-  gap:.08rem;
-  border-left:1px solid var(--background-modifier-border);
-}
-.dndwiki-taxonomy-child-link {
-  min-height:30px;
-  font-size:.76rem;
-}
-.dndwiki-taxonomy-child-link .dndwiki-primary-nav-tag-dot {
-  width:.48rem;
-  height:.48rem;
-}
 .dndwiki-tag-breadcrumb {
   display:flex;
   align-items:center;
@@ -26,40 +10,121 @@ const TAXONOMY_CSS = `
   font-size:.78rem;
 }
 .dndwiki-tag-breadcrumb a { color:inherit; }
-.dndwiki-tag-subcategories {
-  margin-top:1rem;
+
+@media (max-width:980px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar {
+    min-height:58px !important;
+    grid-template-columns:40px minmax(0,1fr) auto !important;
+    grid-template-areas:"brand search access" !important;
+    align-items:center !important;
+    gap:.45rem !important;
+    padding-block:.42rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-brand {
+    grid-area:brand !important;
+    width:40px !important;
+    min-width:40px !important;
+    padding:0 !important;
+    gap:0 !important;
+    justify-content:flex-start !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-brand > [data-dndwiki-browse-trigger] {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+    margin:0 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-search {
+    grid-area:search !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    margin:0 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-access {
+    grid-area:access !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-search-results {
+    top:62px !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav {
+    width:min(21rem,calc(100vw - .65rem)) !important;
+    padding:0 .65rem 1rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-panel-head {
+    min-height:60px !important;
+    margin-inline:-.65rem !important;
+    padding:.62rem .7rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-panel-title {
+    font-size:.9rem !important;
+    line-height:1.2 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-close {
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    min-height:40px !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-filter {
+    top:60px !important;
+    margin:0 0 .55rem !important;
+    padding:.55rem 0 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-browse-filter input {
+    min-height:42px !important;
+    padding:.42rem .65rem !important;
+    border-radius:9px !important;
+    font-size:.82rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-section + .dndwiki-primary-nav-section {
+    margin-top:.5rem !important;
+    padding-top:.5rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-heading {
+    margin:.15rem .38rem .3rem !important;
+    font-size:.64rem !important;
+    letter-spacing:.065em !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-list {
+    gap:.08rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-link,
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-details > summary {
+    min-height:42px !important;
+    padding:.42rem .5rem !important;
+    border-radius:8px !important;
+    font-size:.8rem !important;
+    line-height:1.25 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-primary-nav-badge {
+    font-size:.66rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-player-key-icon,
+  #dndwiki-app .dndwiki-shell .dndwiki-nav-icon,
+  #dndwiki-app .dndwiki-shell .dndwiki-nav-summary-icon {
+    width:1rem !important;
+    height:1rem !important;
+    flex:0 0 1rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-key-popover {
+    font-size:.8rem !important;
+  }
 }
-.dndwiki-tag-subcategories h2 {
-  margin:0 0 .6rem;
-  color:var(--text-muted);
-  font-size:.78rem;
-  font-weight:700;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-}
-.dndwiki-tag-subcategories-list {
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  flex-wrap:wrap;
-  gap:.45rem;
-}
-.dndwiki-tag-subcategory {
-  display:inline-flex;
-  align-items:center;
-  gap:.4rem;
-  min-height:34px;
-  padding:.34rem .62rem;
-  border:1px solid var(--background-modifier-border);
-  border-radius:999px;
-  color:var(--text-muted);
-  background:var(--background-primary);
-  text-decoration:none;
-}
-.dndwiki-tag-subcategory:hover { color:var(--text-normal); background:var(--background-modifier-hover); text-decoration:none; }
-@media (max-width:860px) {
-  .dndwiki-taxonomy-child-link { min-height:44px; }
+
+@media (max-width:560px) {
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar {
+    grid-template-columns:40px minmax(0,1fr) !important;
+    grid-template-areas:"brand search" !important;
+    padding-inline:.7rem !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar > .dndwiki-access {
+    display:none !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-search > button[type="submit"] {
+    display:none !important;
+  }
 }
 `;
 
@@ -88,54 +153,52 @@ function normalize(value) {
   return String(value ?? '').trim().replace(/^#+/, '').toLocaleLowerCase('en-US');
 }
 
-function cloneTag(tag) {
-  return tag == null ? null : structuredClone(tag);
+function cloneCategory(category) {
+  if (category == null) return null;
+  return {
+    name: String(category.label ?? category.tag ?? '').trim(),
+    sourceTag: String(category.tag ?? '').trim().replace(/^#+/, ''),
+    ...Object.fromEntries(['color', 'backgroundColor', 'borderColor']
+      .filter((field) => String(category?.[field] ?? '').trim().length > 0)
+      .map((field) => [field, category[field]])),
+  };
+}
+
+function legacyCategories(page) {
+  if (!Array.isArray(page?.tags)) return [];
+  return page.tags.slice(0, 2).map((tag) => ({
+    tag: tag?.name,
+    label: tag?.name,
+    ...Object.fromEntries(['color', 'backgroundColor', 'borderColor']
+      .filter((field) => String(tag?.[field] ?? '').trim().length > 0)
+      .map((field) => [field, tag[field]])),
+  }));
 }
 
 function sortByName(records) {
   return [...records].sort((a, b) => a.tag.name.localeCompare(b.tag.name, 'en-US', { sensitivity: 'base', numeric: true }));
 }
 
-export function buildTagTaxonomy(pages) {
+export function buildTagTaxonomy(pages, { legacyTags = false } = {}) {
   const roots = new Map();
-  const childParents = new Map();
-
   for (const page of pages ?? []) {
-    if (typeof page?.pageId !== 'string' || !Array.isArray(page.tags) || page.tags.length === 0) continue;
-    const rootTag = page.tags[0];
-    const rootKey = normalize(rootTag?.name);
-    if (rootKey.length === 0) continue;
-
-    let root = roots.get(rootKey);
-    if (root == null) {
-      root = { tag: cloneTag(rootTag), pageIds: new Set(), children: new Map() };
-      roots.set(rootKey, root);
+    if (typeof page?.pageId !== 'string') continue;
+    const categories = Array.isArray(page.categories)
+      ? page.categories
+      : (legacyTags ? legacyCategories(page) : []);
+    for (const category of categories) {
+      const key = normalize(category?.tag);
+      const tag = cloneCategory(category);
+      if (key.length === 0 || tag == null || tag.name.length === 0) continue;
+      let root = roots.get(key);
+      if (root == null) {
+        root = { tag, pageIds: new Set(), children: new Map() };
+        roots.set(key, root);
+      }
+      root.pageIds.add(page.pageId);
     }
-    root.pageIds.add(page.pageId);
-
-    const childTag = page.tags[1];
-    const childKey = normalize(childTag?.name);
-    if (childKey.length === 0 || childKey === rootKey) continue;
-    let child = root.children.get(childKey);
-    if (child == null) {
-      child = { tag: cloneTag(childTag), pageIds: new Set() };
-      root.children.set(childKey, child);
-    }
-    child.pageIds.add(page.pageId);
-    const parents = childParents.get(childKey) ?? new Set();
-    parents.add(rootKey);
-    childParents.set(childKey, parents);
   }
-
-  for (const [rootKey, root] of roots) {
-    for (const childKey of [...root.children.keys()]) {
-      if ((childParents.get(childKey)?.size ?? 0) > 1) root.children.delete(childKey);
-    }
-    root.children = new Map(sortByName(root.children.values()).map((record) => [normalize(record.tag.name), record]));
-    roots.set(rootKey, root);
-  }
-
-  return new Map(sortByName(roots.values()).map((record) => [normalize(record.tag.name), record]));
+  return new Map(sortByName(roots.values()).map((record) => [normalize(record.tag.sourceTag), record]));
 }
 
 function visiblePageIds(root) {
@@ -158,26 +221,22 @@ function currentState(snapshot, taxonomy, hash) {
     let tag = '';
     try { tag = decodeURIComponent(tagMatch[1]); } catch { tag = ''; }
     const key = normalize(tag);
-    if (taxonomy.has(key)) return { kind: 'tag', tag, rootKey: key, childKey: null };
-    for (const [rootKey, root] of taxonomy) {
-      if (root.children.has(key)) return { kind: 'tag', tag, rootKey, childKey: key };
-    }
-    return { kind: 'tag', tag, rootKey: null, childKey: null };
+    return { kind: 'tag', tag, rootKey: taxonomy.has(key) ? key : null, childKey: null };
   }
 
   const pageMatch = /^#\/page\/([a-z0-9][a-z0-9._-]{0,63})/.exec(String(hash ?? ''));
   if (pageMatch) {
     const page = snapshot?.pages?.find((record) => record?.pageId === pageMatch[1]);
-    const rootKey = normalize(page?.tags?.[0]?.name);
-    const childKey = normalize(page?.tags?.[1]?.name);
+    const rootKey = normalize(page?.categories?.[0]?.tag ?? (snapshot?.browse == null ? page?.tags?.[0]?.name : ''));
     return {
       kind: 'page',
       tag: null,
       rootKey: taxonomy.has(rootKey) ? rootKey : null,
-      childKey: taxonomy.get(rootKey)?.children?.has(childKey) ? childKey : null,
+      childKey: null,
+      pageId: pageMatch[1],
     };
   }
-  return { kind: 'home', tag: null, rootKey: null, childKey: null };
+  return { kind: 'home', tag: null, rootKey: null, childKey: null, pageId: null };
 }
 
 function tagAccentStyle(tag) {
@@ -189,13 +248,7 @@ function rootNavigationItems(taxonomy, state) {
   return [...taxonomy.entries()].map(([rootKey, root]) => {
     const active = state.rootKey === rootKey;
     const style = tagAccentStyle(root.tag);
-    const children = active && root.children.size > 0
-      ? `<ul class="dndwiki-taxonomy-children">${[...root.children.entries()].map(([childKey, child]) => {
-          const childStyle = tagAccentStyle(child.tag);
-          return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link dndwiki-taxonomy-child-link" href="${escapeHtml(tagRoute(child.tag.name))}"${state.childKey === childKey ? ' aria-current="page"' : ''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot"${childStyle ? ` style="${escapeHtml(childStyle)}"` : ''}></span><span>${escapeHtml(child.tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${child.pageIds.size}</span></a></li>`;
-        }).join('')}</ul>`
-      : '';
-    return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link" href="${escapeHtml(tagRoute(root.tag.name))}"${state.kind === 'tag' && state.childKey == null && active ? ' aria-current="page"' : ''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot"${style ? ` style="${escapeHtml(style)}"` : ''}></span><span>${escapeHtml(root.tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${root.pageIds.size}</span></a>${children}</li>`;
+    return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link" href="${escapeHtml(tagRoute(root.tag.sourceTag))}"${state.kind === 'tag' && active ? ' aria-current="page"' : ''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot"${style ? ` style="${escapeHtml(style)}"` : ''}></span><span>${escapeHtml(root.tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${root.pageIds.size}</span></a></li>`;
   }).join('');
 }
 
@@ -205,9 +258,11 @@ function rewriteDesktopNavigation(root, taxonomy, state) {
   const sections = [...(nav.querySelectorAll?.(':scope > .dndwiki-primary-nav-section') ?? [])];
   const categorySection = sections.find((section) => section.querySelector?.('.dndwiki-primary-nav-heading')?.textContent?.trim() === 'Categories');
   if (categorySection != null) {
-    categorySection.innerHTML = taxonomy.size === 0
-      ? ''
-      : `<p class="dndwiki-primary-nav-heading">Browse</p><ul class="dndwiki-primary-nav-list">${rootNavigationItems(taxonomy, state)}</ul>`;
+    if (taxonomy.size === 0) categorySection.remove?.();
+    else categorySection.innerHTML = `<p class="dndwiki-primary-nav-heading">Browse</p><ul class="dndwiki-primary-nav-list">${rootNavigationItems(taxonomy, state)}</ul>`;
+  } else if (taxonomy.size > 0) {
+    const homeSection = sections[0];
+    homeSection?.insertAdjacentHTML?.('afterend', `<section class="dndwiki-primary-nav-section"><p class="dndwiki-primary-nav-heading">Browse</p><ul class="dndwiki-primary-nav-list">${rootNavigationItems(taxonomy, state)}</ul></section>`);
   }
   nav.setAttribute?.('data-dndwiki-taxonomy-applied', '');
 }
@@ -220,10 +275,23 @@ function rewriteMobileNavigation(root, taxonomy, state) {
   const heading = [...(body.querySelectorAll?.('.dndwiki-primary-nav-heading') ?? [])].find((record) => record.textContent?.trim() === 'Categories');
   if (heading != null) {
     const list = heading.nextElementSibling;
-    heading.textContent = 'Browse';
-    if (list?.classList?.contains('dndwiki-primary-nav-list')) list.innerHTML = rootNavigationItems(taxonomy, state);
+    if (taxonomy.size === 0) {
+      list?.remove?.();
+      heading.remove?.();
+    } else {
+      heading.textContent = 'Browse';
+      if (list?.classList?.contains('dndwiki-primary-nav-list')) list.innerHTML = rootNavigationItems(taxonomy, state);
+    }
   }
   mobile.setAttribute?.('data-dndwiki-taxonomy-applied', '');
+}
+
+function categoryStyle(tag) {
+  return [
+    safeColor(tag?.color) && `--tag-fg:${safeColor(tag.color)}`,
+    safeColor(tag?.backgroundColor) && `--tag-bg:${safeColor(tag.backgroundColor)}`,
+    safeColor(tag?.borderColor) && `--tag-border:${safeColor(tag.borderColor)}`,
+  ].filter(Boolean).join(';');
 }
 
 function rewriteHome(root, taxonomy) {
@@ -231,21 +299,27 @@ function rewriteHome(root, taxonomy) {
   if (home == null || home.hasAttribute?.('data-dndwiki-taxonomy-applied')) return;
   const heading = home.querySelector?.('#dndwiki-home-categories-heading');
   const list = home.querySelector?.('.dndwiki-home-categories');
-  if (heading != null) heading.textContent = 'Browse the wiki';
+  if (heading != null) heading.textContent = 'Explore the world';
   if (list != null) {
     list.innerHTML = [...taxonomy.values()].map((rootRecord) => {
-      const style = [
-        safeColor(rootRecord.tag?.color) && `--tag-fg:${safeColor(rootRecord.tag.color)}`,
-        safeColor(rootRecord.tag?.backgroundColor) && `--tag-bg:${safeColor(rootRecord.tag.backgroundColor)}`,
-        safeColor(rootRecord.tag?.borderColor) && `--tag-border:${safeColor(rootRecord.tag.borderColor)}`,
-      ].filter(Boolean).join(';');
-      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.name))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span></a></li>`;
+      const style = categoryStyle(rootRecord.tag);
+      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.sourceTag))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span></a></li>`;
     }).join('');
+    const section = list.closest?.('.dndwiki-home-section');
+    if (taxonomy.size === 0) section?.remove?.();
   }
   const sectionHead = heading?.closest?.('.dndwiki-home-section-head');
   const count = sectionHead?.querySelector?.('span');
-  if (count != null) count.textContent = `${taxonomy.size} categor${taxonomy.size === 1 ? 'y' : 'ies'}`;
+  if (count != null) count.remove?.();
   home.setAttribute?.('data-dndwiki-taxonomy-applied', '');
+}
+
+function polishHome(root) {
+  const home = root?.querySelector?.('[data-dndwiki-home]');
+  if (home == null) return;
+  home.querySelector?.('.dndwiki-home-browse')?.remove?.();
+  home.querySelector?.('.dndwiki-home-stat')?.remove?.();
+  home.querySelector?.('.dndwiki-home-directory-meta')?.remove?.();
 }
 
 function rewriteTagPage(root, taxonomy, state) {
@@ -253,28 +327,63 @@ function rewriteTagPage(root, taxonomy, state) {
   if (page == null || page.hasAttribute?.('data-dndwiki-taxonomy-applied')) return;
 
   if (state.rootKey == null) {
-    page.innerHTML = '<div class="dndwiki-tag-hero"><p class="dndwiki-tag-kicker">Category</p><h1>Category unavailable</h1><p class="dndwiki-home-intro">This tag is not part of the player-facing browse hierarchy.</p></div>';
+    page.innerHTML = '<div class="dndwiki-tag-hero"><p class="dndwiki-tag-kicker">Category</p><h1>Category unavailable</h1><p class="dndwiki-home-intro">This tag is not a player-facing category.</p></div>';
     page.setAttribute?.('data-dndwiki-taxonomy-applied', '');
     return;
   }
 
-  const rootRecord = taxonomy.get(state.rootKey);
+  const record = taxonomy.get(state.rootKey);
   const hero = page.querySelector?.('.dndwiki-tag-hero');
-  if (state.childKey != null && hero != null) {
-    hero.insertAdjacentHTML?.('beforeend', `<p class="dndwiki-tag-breadcrumb"><a href="${escapeHtml(tagRoute(rootRecord.tag.name))}">${escapeHtml(rootRecord.tag.name)}</a><span aria-hidden="true">›</span><span>${escapeHtml(rootRecord.children.get(state.childKey)?.tag?.name ?? state.tag)}</span></p>`);
-  } else if (hero != null && rootRecord.children.size > 0) {
-    hero.insertAdjacentHTML?.('afterend', `<section class="dndwiki-tag-subcategories"><h2>Within ${escapeHtml(rootRecord.tag.name)}</h2><ul class="dndwiki-tag-subcategories-list">${[...rootRecord.children.values()].map((child) => `<li><a class="dndwiki-tag-subcategory" href="${escapeHtml(tagRoute(child.tag.name))}"><span>${escapeHtml(child.tag.name)}</span><span class="dndwiki-home-category-count">${child.pageIds.size}</span></a></li>`).join('')}</ul></section>`);
-  }
+  const heading = hero?.querySelector?.('h1');
+  if (heading != null) heading.textContent = record.tag.name;
+  hero?.querySelector?.('.dndwiki-page-tags')?.remove?.();
   page.setAttribute?.('data-dndwiki-taxonomy-applied', '');
 }
 
+function polishPageTags(root, taxonomy, snapshot, state) {
+  if (state.kind !== 'page') return;
+  const pageRecord = snapshot?.pages?.find((page) => page?.pageId === state.pageId);
+  const categories = new Map((pageRecord?.categories ?? []).map((category) => [normalize(category.tag), category]));
+  for (const link of root?.querySelectorAll?.('[data-dndwiki-page-header] .dndwiki-tag') ?? []) {
+    const key = normalize(link.textContent);
+    if (categories.has(key)) {
+      link.setAttribute?.('href', tagRoute(categories.get(key).tag));
+      continue;
+    }
+    if (String(link.tagName ?? '').toLocaleLowerCase('en-US') !== 'a') continue;
+    const replacement = root.ownerDocument?.createElement?.('span');
+    if (replacement == null) continue;
+    replacement.className = link.className;
+    replacement.textContent = link.textContent;
+    const style = link.getAttribute?.('style');
+    if (style) replacement.setAttribute?.('style', style);
+    link.replaceWith?.(replacement);
+  }
+
+  const breadcrumbs = root?.querySelector?.('[data-dndwiki-page-breadcrumbs]');
+  if (breadcrumbs != null) {
+    const crumbs = ['<a href="#/">Home</a>'];
+    for (const category of pageRecord?.categories ?? []) {
+      const key = normalize(category.tag);
+      const taxonomyRecord = taxonomy.get(key);
+      if (taxonomyRecord == null) continue;
+      crumbs.push('<span class="dndwiki-page-breadcrumbs-separator" aria-hidden="true">›</span>');
+      crumbs.push(`<a href="${escapeHtml(tagRoute(category.tag))}">${escapeHtml(category.label)}</a>`);
+    }
+    const nextBreadcrumbs = crumbs.join('');
+    if (breadcrumbs.innerHTML !== nextBreadcrumbs) breadcrumbs.innerHTML = nextBreadcrumbs;
+  }
+}
+
 function ensureStyles(document) {
-  if (document?.getElementById?.(STYLE_ID) != null) return;
-  const style = document?.createElement?.('style');
-  if (style == null) return;
-  style.id = STYLE_ID;
-  style.textContent = TAXONOMY_CSS;
-  document.head?.append?.(style);
+  let style = document?.getElementById?.(STYLE_ID) ?? null;
+  if (style == null) {
+    style = document?.createElement?.('style');
+    if (style == null) return;
+    style.id = STYLE_ID;
+    document.head?.append?.(style);
+  }
+  if (style.textContent !== TAXONOMY_CSS) style.textContent = TAXONOMY_CSS;
 }
 
 export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetchImpl = browserWindow?.fetch?.bind(browserWindow), snapshotUrl = './dndwiki.snapshot.json' } = {}) {
@@ -287,14 +396,17 @@ export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetc
   let queued = false;
   const apply = () => {
     queued = false;
+    ensureStyles(browserWindow.document);
     const pages = visiblePages(snapshot, root);
     if (pages.length === 0 && root.querySelector?.('[data-dndwiki-primary-nav]') == null) return;
-    const taxonomy = buildTagTaxonomy(pages);
+    const taxonomy = buildTagTaxonomy(pages, { legacyTags: snapshot?.browse == null });
     const state = currentState(snapshot, taxonomy, browserWindow.location?.hash ?? '');
     rewriteDesktopNavigation(root, taxonomy, state);
     rewriteMobileNavigation(root, taxonomy, state);
     rewriteHome(root, taxonomy);
+    polishHome(root);
     rewriteTagPage(root, taxonomy, state);
+    polishPageTags(root, taxonomy, snapshot, state);
   };
   const schedule = () => {
     if (queued) return;
@@ -308,11 +420,13 @@ export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetc
     : null;
   observer?.observe?.(root, { childList: true, subtree: true });
   browserWindow.addEventListener?.('hashchange', schedule);
+  browserWindow.addEventListener?.('resize', schedule);
 
   return {
     destroy() {
       observer?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', schedule);
+      browserWindow.removeEventListener?.('resize', schedule);
     },
   };
 }
