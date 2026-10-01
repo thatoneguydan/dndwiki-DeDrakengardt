@@ -13,8 +13,8 @@ const TAXONOMY_CSS = `
 
 @media (max-width:980px) {
   #dndwiki-app .dndwiki-shell .dndwiki-topbar {
-    min-height:58px !important;
-    grid-template-columns:40px minmax(0,1fr) auto !important;
+    min-height:60px !important;
+    grid-template-columns:44px minmax(0,1fr) auto !important;
     grid-template-areas:"brand search access" !important;
     align-items:center !important;
     gap:.45rem !important;
@@ -22,18 +22,40 @@ const TAXONOMY_CSS = `
   }
   #dndwiki-app .dndwiki-shell .dndwiki-brand {
     grid-area:brand !important;
-    width:40px !important;
-    min-width:40px !important;
+    width:44px !important;
+    min-width:44px !important;
+    height:44px !important;
+    min-height:44px !important;
     padding:0 !important;
     gap:0 !important;
-    justify-content:flex-start !important;
+    align-items:center !important;
+    justify-content:center !important;
   }
-  #dndwiki-app .dndwiki-shell .dndwiki-brand > [data-dndwiki-browse-trigger] {
-    width:40px !important;
-    height:40px !important;
-    min-width:40px !important;
-    min-height:40px !important;
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger] {
+    width:44px !important;
+    height:44px !important;
+    min-width:44px !important;
+    min-height:44px !important;
+    display:inline-grid !important;
+    place-items:center !important;
     margin:0 !important;
+    padding:0 !important;
+    font-size:0 !important;
+    line-height:0 !important;
+  }
+  #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-brand > [data-dndwiki-browse-trigger]::before {
+    content:'' !important;
+    display:block !important;
+    width:18px !important;
+    height:14px !important;
+    margin:0 !important;
+    border:0 !important;
+    border-radius:0 !important;
+    background:
+      linear-gradient(currentColor,currentColor) top / 18px 2px no-repeat,
+      linear-gradient(currentColor,currentColor) center / 18px 2px no-repeat,
+      linear-gradient(currentColor,currentColor) bottom / 18px 2px no-repeat !important;
+    transform:none !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-search {
     grid-area:search !important;
@@ -42,14 +64,28 @@ const TAXONOMY_CSS = `
     max-width:none !important;
     margin:0 !important;
   }
+  #dndwiki-app .dndwiki-shell .dndwiki-search input {
+    height:44px !important;
+    min-height:44px !important;
+  }
   #dndwiki-app .dndwiki-shell .dndwiki-access {
     grid-area:access !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-search-results {
-    top:62px !important;
+    top:64px !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-primary-nav {
     width:min(21rem,calc(100vw - .65rem)) !important;
+    height:100vh !important;
+    height:100dvh !important;
+    max-height:100vh !important;
+    max-height:100dvh !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    overscroll-behavior-x:none !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:pan-y !important;
+    -webkit-overflow-scrolling:touch;
     padding:0 .65rem 1rem !important;
   }
   #dndwiki-app .dndwiki-shell .dndwiki-browse-panel-head {
@@ -115,7 +151,7 @@ const TAXONOMY_CSS = `
 
 @media (max-width:560px) {
   #dndwiki-app .dndwiki-shell .dndwiki-topbar {
-    grid-template-columns:40px minmax(0,1fr) !important;
+    grid-template-columns:44px minmax(0,1fr) !important;
     grid-template-areas:"brand search" !important;
     padding-inline:.7rem !important;
   }
@@ -381,9 +417,9 @@ function ensureStyles(document) {
     style = document?.createElement?.('style');
     if (style == null) return;
     style.id = STYLE_ID;
-    document.head?.append?.(style);
   }
   if (style.textContent !== TAXONOMY_CSS) style.textContent = TAXONOMY_CSS;
+  if (document?.head != null && document.head.lastElementChild !== style) document.head.append?.(style);
 }
 
 export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetchImpl = browserWindow?.fetch?.bind(browserWindow), snapshotUrl = './dndwiki.snapshot.json' } = {}) {
