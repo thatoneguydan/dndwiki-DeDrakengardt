@@ -1269,6 +1269,10 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
   box-shadow: none;
 }
 
+.dndwiki-shell .dndwiki-sidebar[data-dndwiki-context-footer] .dndwiki-card:only-of-type {
+  grid-column: 1 / -1;
+}
+
 .dndwiki-shell .dndwiki-sidebar[data-dndwiki-context-footer] .dndwiki-card h2 {
   margin: 0 0 .56rem;
   color: var(--text-muted);

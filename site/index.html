@@ -1042,6 +1042,7 @@
     }
 
     function syncRelatedActiveState() {
+      if (root?.querySelector('[data-dndwiki-outline-progress-owner]') != null) return;
       const related = root?.querySelector('#dndwiki-related');
       const relatedLink = root?.querySelector('[data-dndwiki-related-link]');
       if (related == null || relatedLink == null) return;
@@ -1096,6 +1097,11 @@
         setOutlineOpen(shell?.hasAttribute('data-dndwiki-outline-open') !== true);
         return;
       }
+
+      // The progress tracker also owns outline navigation. Let its handler
+      // consume the click without this legacy handler queuing a hashchange
+      // that would discard the explicit dot selection.
+      if (event.target?.closest?.('[data-dndwiki-outline-progress-owner] .dndwiki-toc-link') != null) return;
 
       const relatedLink = event.target?.closest?.('[data-dndwiki-related-link]');
       if (relatedLink != null) {

@@ -312,6 +312,8 @@ export function syncPageTableOfContents(root, browserWindow) {
 }
 
 export function syncActiveOutlineSection(root) {
+  // The unified tracker owns title, authored sections, and Related together.
+  if (root?.querySelector?.('[data-dndwiki-outline-progress-owner]') != null) return false;
   const article = root?.querySelector?.('[data-dndwiki-page]');
   const links = [...(root?.querySelectorAll?.('[data-dndwiki-toc-index]') ?? [])];
   const entries = tocEntries(article);

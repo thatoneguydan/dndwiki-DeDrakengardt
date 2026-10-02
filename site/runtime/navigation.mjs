@@ -429,6 +429,9 @@ export function bottomAwareOutlineIndex(itemDocumentTops, {
   });
   if (triggers.length === 0) return -1;
   const currentScroll = Math.max(0, Number(scrollY) || 0);
+  // The start of a note always belongs to its title, including notes whose
+  // short tail has been compressed into the available scroll range.
+  if (currentScroll <= 1) return 0;
   let active = 0;
   for (let index = 0; index < triggers.length; index += 1) {
     const trigger = Number(triggers[index]);
@@ -458,7 +461,7 @@ function outlineDocumentHeight(browserWindow) {
 }
 
 function outlineRecords(root, browserWindow) {
-  const rail = root?.querySelector?.('[data-dndwiki-outline-rail]');
+  const rail = root?.querySelector?.('[data-dndwiki-page-outline]');
   const article = root?.querySelector?.('[data-dndwiki-page]');
   if (rail == null || article == null) return [];
   const headings = [...(article.querySelectorAll?.('h1,h2,h3,h4,h5,h6') ?? [])];
@@ -467,15 +470,18 @@ function outlineRecords(root, browserWindow) {
   const records = [];
   for (const link of rail.querySelectorAll?.('.dndwiki-toc-link') ?? []) {
     let target = null;
-    if (link.hasAttribute?.('data-dndwiki-related-link')) target = related;
+    const titleLink = link.hasAttribute?.('data-dndwiki-title-link');
+    if (titleLink) target = root.querySelector?.('[data-dndwiki-page-header] h1');
+    else if (link.hasAttribute?.('data-dndwiki-related-link')) target = related;
     else {
-      const index = Number(link.getAttribute?.('data-dndwiki-toc-index'));
+      const attribute = link.getAttribute?.('data-dndwiki-toc-index');
+      const index = attribute == null ? -1 : Number(attribute);
       if (Number.isInteger(index) && index >= 0) target = headings[index] ?? null;
     }
-    if (target == null) continue;
+    if (target == null || target.hasAttribute?.('data-dndwiki-outline-contract-sentinel')) continue;
     const top = Number(target.getBoundingClientRect?.()?.top ?? NaN);
     if (!Number.isFinite(top)) continue;
-    records.push({ link, target, documentTop: top + scrollY });
+    records.push({ link, target, documentTop: titleLink ? 0 : top + scrollY });
   }
   return records;
 }
@@ -505,6 +511,10 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     const transition = animate
       ? 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease'
       : 'none';
+    const trackedLinks = new Set(records.map((record) => record.link));
+    for (const link of root.querySelectorAll?.('[data-dndwiki-page-outline] .dndwiki-toc-link') ?? []) {
+      if (!trackedLinks.has(link)) link.removeAttribute?.('aria-current');
+    }
     for (const [index, record] of records.entries()) {
       record.link.style?.setProperty?.('transition', transition);
       const current = record.link.getAttribute?.('aria-current') === 'location';
@@ -540,6 +550,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
       clearStepTimer();
       return;
     }
+    root.querySelector?.('[data-dndwiki-page-outline]')?.setAttribute?.('data-dndwiki-outline-progress-owner', '');
     const signature = records.map(({ link }) => `${link.getAttribute?.('href') ?? ''}|${link.textContent ?? ''}`).join('\n');
     if (signature !== state.signature) {
       state.signature = signature;
@@ -562,7 +573,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
         maxScrollY,
         viewportHeight,
       });
-    const nextIndex = explicit ? targetIndex : stagedOutlineIndex(state.activeIndex, targetIndex);
+    const nextIndex = explicit || scrollY <= 1 ? targetIndex : stagedOutlineIndex(state.activeIndex, targetIndex);
     state.activeIndex = nextIndex;
     applyActive(records, nextIndex, { animate: !explicit });
 
@@ -593,7 +604,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
   };
 
   const onExplicitClick = (event) => {
-    const link = event?.target?.closest?.('[data-dndwiki-outline-rail] [data-dndwiki-toc-index], [data-dndwiki-outline-rail] [data-dndwiki-related-link]') ?? null;
+    const link = event?.target?.closest?.('[data-dndwiki-page-outline] .dndwiki-toc-link') ?? null;
     if (link == null || root.contains?.(link) !== true) return;
     const records = outlineRecords(root, browserWindow);
     const selectedIndex = records.findIndex((record) => record.link === link);
@@ -608,12 +619,12 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     applyActive(records, selectedIndex, { animate: false });
 
     const topbarBottom = Math.max(0, Number(root.querySelector?.('.dndwiki-topbar')?.getBoundingClientRect?.()?.bottom ?? 0));
-    const top = Math.max(0, records[selectedIndex].documentTop - topbarBottom - 16);
+    const top = link.hasAttribute?.('data-dndwiki-title-link') ? 0 : Math.max(0, records[selectedIndex].documentTop - topbarBottom - 16);
     browserWindow.scrollTo?.({ top, behavior: 'auto' });
     state.explicitScrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
 
     const route = String(link.getAttribute?.('href') ?? '');
-    if (/^#\/page\/[a-z0-9][a-z0-9._-]{0,63}#/.test(route)) {
+    if (/^#\/page\/[a-z0-9][a-z0-9._-]{0,63}(?:#|$)/.test(route)) {
       try {
         browserWindow.history?.replaceState?.(browserWindow.history.state, '', route);
       } catch {
@@ -627,7 +638,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     ? new browserWindow.MutationObserver((mutations = []) => {
       const activeChanged = mutations.some((mutation) => mutation?.type === 'attributes'
         && mutation?.attributeName === 'aria-current'
-        && mutation?.target?.closest?.('[data-dndwiki-outline-rail]') != null);
+        && mutation?.target?.closest?.('[data-dndwiki-page-outline]') != null);
       if (activeChanged) reconcileActiveState();
       if (mutations.some((mutation) => mutation?.type === 'childList')) schedule();
     })

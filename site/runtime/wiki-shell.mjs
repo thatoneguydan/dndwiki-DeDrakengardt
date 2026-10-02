@@ -938,16 +938,16 @@ function linkList(records, { backlink = false } = {}) {
 }
 
 function contextSidebar(model) {
-  const related = Array.isArray(model.related) ? model.related : [];
   const backlinks = Array.isArray(model.backlinks) ? model.backlinks : [];
   const backlinkPageIds = new Set(backlinks.map((record) => record.sourcePageId));
   const forward = model.forward.filter((record) => !backlinkPageIds.has(record.targetPageId));
+  const related = uniqueByPage([
+    ...forward,
+    ...(model.related ?? []),
+  ], 'targetPageId', backlinkPageIds);
   const sections = [];
   if (related.length > 0) {
     sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-related-heading"><h2 id="dndwiki-related-heading">Related</h2>${linkList(related)}</section>`);
-  }
-  if (forward.length > 0) {
-    sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-links-heading"><h2 id="dndwiki-links-heading">Links</h2>${linkList(forward)}</section>`);
   }
   if (backlinks.length > 0) {
     sections.push(`<section class="dndwiki-card" aria-labelledby="dndwiki-backlinks-heading"><h2 id="dndwiki-backlinks-heading">Backlinks</h2>${linkList(backlinks, { backlink: true })}</section>`);
