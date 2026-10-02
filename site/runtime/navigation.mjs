@@ -507,6 +507,10 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     state.explicitScrollY = null;
   };
 
+  const outlineSignature = (records) => records.map(({ link }) => (
+    `${link.getAttribute?.('href') ?? ''}|${link.textContent ?? ''}`
+  )).join('\n');
+
   const applyActive = (records, activeIndex, { animate = true } = {}) => {
     const transition = animate
       ? 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease'
@@ -551,7 +555,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
       return;
     }
     root.querySelector?.('[data-dndwiki-page-outline]')?.setAttribute?.('data-dndwiki-outline-progress-owner', '');
-    const signature = records.map(({ link }) => `${link.getAttribute?.('href') ?? ''}|${link.textContent ?? ''}`).join('\n');
+    const signature = outlineSignature(records);
     if (signature !== state.signature) {
       state.signature = signature;
       state.activeIndex = -1;
@@ -614,6 +618,9 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     event.stopImmediatePropagation?.();
     clearStepTimer();
     clearExplicitSelection();
+    // Title-link contracts can settle after the previous progress frame.
+    // This click belongs to the current outline, not the cached earlier one.
+    state.signature = outlineSignature(records);
     state.activeIndex = selectedIndex;
     state.explicitIndex = selectedIndex;
     applyActive(records, selectedIndex, { animate: false });
@@ -640,14 +647,17 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
         && mutation?.attributeName === 'aria-current'
         && mutation?.target?.closest?.('[data-dndwiki-page-outline]') != null);
       if (activeChanged) reconcileActiveState();
-      if (mutations.some((mutation) => mutation?.type === 'childList')) schedule();
+      const outlineChanged = mutations.some((mutation) => mutation?.type === 'attributes'
+        && mutation?.attributeName !== 'aria-current'
+        && mutation?.target?.closest?.('[data-dndwiki-page-outline]') != null);
+      if (outlineChanged || mutations.some((mutation) => mutation?.type === 'childList')) schedule();
     })
     : null;
   observer?.observe?.(root, {
     childList: true,
     subtree: true,
     attributes: true,
-    attributeFilter: ['aria-current'],
+    attributeFilter: ['aria-current', 'href', 'data-dndwiki-title-link', 'data-dndwiki-toc-index'],
   });
   browserWindow.document?.addEventListener?.('click', onExplicitClick, true);
   browserWindow.addEventListener?.('scroll', schedule, { passive: true });
