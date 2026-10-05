@@ -3035,9 +3035,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
+          "color": "rgb(117, 117, 117)",
           "name": "WorldLore"
         },
         {
@@ -3374,9 +3374,9 @@
           "name": "Location"
         },
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
+          "color": "rgb(117, 117, 117)",
           "name": "MountVulk"
         },
         {
@@ -3967,9 +3967,9 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
+          "color": "rgb(117, 117, 117)",
           "name": "Drug"
         }
       ],
@@ -4004,9 +4004,9 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
+          "color": "rgb(117, 117, 117)",
           "name": "Drug"
         }
       ],
@@ -4091,9 +4091,9 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
+          "color": "rgb(117, 117, 117)",
           "name": "Drug"
         }
       ],
@@ -4284,9 +4284,9 @@
           "name": "PrimeRelic"
         },
         {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
+          "color": "rgb(117, 117, 117)",
           "name": "Cemus"
         }
       ],
@@ -6244,9 +6244,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
+          "color": "rgb(117, 117, 117)",
           "name": "WorldLore"
         },
         {
@@ -6412,9 +6412,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
+          "color": "rgb(117, 117, 117)",
           "name": "WorldLore"
         }
       ],
@@ -6440,9 +6440,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
+          "color": "rgb(117, 117, 117)",
           "name": "WorldLore"
         },
         {
