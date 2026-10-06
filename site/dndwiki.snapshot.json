@@ -392,19 +392,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Vulk Ildstad",
-        "segmentIndex": 0,
-        "sourcePageId": "mount-vulk",
-        "targetPageId": "vulk-ildstad",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "The Silver City",
         "segmentIndex": 0,
         "sourcePageId": "nox-observatory",
@@ -704,19 +691,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Vulk Ildstad",
-        "segmentIndex": 0,
-        "sourcePageId": "ulakiruto",
-        "targetPageId": "vulk-ildstad",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "Ulakiruto",
         "segmentIndex": 0,
         "sourcePageId": "vulk-ildstad",
@@ -747,123 +721,6 @@
         "segmentIndex": 0,
         "sourcePageId": "zulkar",
         "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Shroudgully",
-        "segmentIndex": 0,
-        "sourcePageId": "chronogual-orb",
-        "targetPageId": "shroudgully",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Chamber of Tomorrows",
-        "segmentIndex": 0,
-        "sourcePageId": "chronogual-orb",
-        "targetPageId": "the-chamber-of-tomorrows",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Chronos",
-        "segmentIndex": 0,
-        "sourcePageId": "chronogual-orb",
-        "targetPageId": "chronos-the-second-hand",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Mount Vulk",
-        "segmentIndex": 0,
-        "sourcePageId": "crude-maktilline",
-        "targetPageId": "mount-vulk",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Flash",
-        "segmentIndex": 0,
-        "sourcePageId": "crude-maktilline",
-        "targetPageId": "flash",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Maktilline",
-        "segmentIndex": 0,
-        "sourcePageId": "crude-maktilline",
-        "targetPageId": "maktilline",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Flash",
-        "segmentIndex": 0,
-        "sourcePageId": "emberline",
-        "targetPageId": "flash",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Crude Maktilline",
-        "segmentIndex": 0,
-        "sourcePageId": "flash",
-        "targetPageId": "crude-maktilline",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Emberline",
-        "segmentIndex": 0,
-        "sourcePageId": "flash",
-        "targetPageId": "emberline",
         "targetType": "page"
       },
       {
@@ -912,19 +769,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Mitsurin",
-        "segmentIndex": 0,
-        "sourcePageId": "gleam",
-        "targetPageId": "mitsurin",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "Crude Maktilline",
         "segmentIndex": 0,
         "sourcePageId": "maktilline",
@@ -942,84 +786,6 @@
         "segmentIndex": 0,
         "sourcePageId": "maktilline",
         "targetPageId": "mount-vulk",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Saint Cogito",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "saint-cogito",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Raddraim",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "raddraim",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Sword of Binding",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "the-sword-of-binding",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Sword of Binding",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "the-sword-of-binding",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Cogito",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "saint-cogito",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Cogito",
-        "segmentIndex": 0,
-        "sourcePageId": "the-artifact-from-saint-cogito",
-        "targetPageId": "saint-cogito",
         "targetType": "page"
       },
       {
@@ -1198,32 +964,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "elias-brock",
-        "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Fara Carrigan",
-        "segmentIndex": 0,
-        "sourcePageId": "elias-brock",
-        "targetPageId": "fara-carrigan",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "The Transposer",
         "segmentIndex": 0,
         "sourcePageId": "entross",
@@ -1237,62 +977,10 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "eva-salazar",
-        "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Ulakiruto",
-        "segmentIndex": 0,
-        "sourcePageId": "eva-salazar",
-        "targetPageId": "ulakiruto",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "Maeve Efthalia",
         "segmentIndex": 0,
         "sourcePageId": "exander-efthalia",
         "targetPageId": "maeve-efthalia",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "fara-carrigan",
-        "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "fara-carrigan",
-        "targetPageId": "red-claw",
         "targetType": "page"
       },
       {
@@ -1406,19 +1094,6 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Exander Efthalia",
-        "segmentIndex": 0,
-        "sourcePageId": "maeve-efthalia",
-        "targetPageId": "exander-efthalia",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "The Sunken City / Pelotharna",
         "segmentIndex": 0,
         "sourcePageId": "masuda-thoki",
@@ -1436,58 +1111,6 @@
         "segmentIndex": 0,
         "sourcePageId": "masuda-thoki",
         "targetPageId": "voyager-rails",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "mattias-shaw",
-        "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Fara",
-        "segmentIndex": 0,
-        "sourcePageId": "mattias-shaw",
-        "targetPageId": "fara-carrigan",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Silver City",
-        "segmentIndex": 0,
-        "sourcePageId": "punar-tillam",
-        "targetPageId": "the-silver-city",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Sanctum of the Lambs",
-        "segmentIndex": 0,
-        "sourcePageId": "punar-tillam",
-        "targetPageId": "the-silver-city",
         "targetType": "page"
       },
       {
@@ -1536,101 +1159,10 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "The Nameless",
-        "segmentIndex": 0,
-        "sourcePageId": "sela-morelli",
-        "targetPageId": "the-nameless",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Raddraim",
-        "segmentIndex": 0,
-        "sourcePageId": "sela-morelli",
-        "targetPageId": "raddraim",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Sword of Binding",
-        "segmentIndex": 0,
-        "sourcePageId": "sela-morelli",
-        "targetPageId": "the-sword-of-binding",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Red Claw",
-        "segmentIndex": 0,
-        "sourcePageId": "seth-skitters-jehkal",
-        "targetPageId": "red-claw",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "Scorchsand Desert",
-        "segmentIndex": 0,
-        "sourcePageId": "seth-skitters-jehkal",
-        "targetPageId": "scorchsand-desert",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
         "label": "The Grand Library",
         "segmentIndex": 0,
         "sourcePageId": "umtor-presven",
         "targetPageId": "the-grand-library",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Megadome",
-        "segmentIndex": 0,
-        "sourcePageId": "vira-lash",
-        "targetPageId": "the-megadome",
-        "targetType": "page"
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "link",
-        "label": "The Arena",
-        "segmentIndex": 0,
-        "sourcePageId": "vira-lash",
-        "targetPageId": "the-arena",
         "targetType": "page"
       },
       {
@@ -1902,10 +1434,10 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Castiel Ralora",
+        "label": "Shroudgully",
         "segmentIndex": 0,
-        "sourcePageId": "the-art-of-discipline",
-        "targetPageId": "castiel-ralora",
+        "sourcePageId": "chronogual-orb",
+        "targetPageId": "shroudgully",
         "targetType": "page"
       },
       {
@@ -1915,10 +1447,10 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Solia Flintrest",
+        "label": "The Chamber of Tomorrows",
         "segmentIndex": 0,
-        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
-        "targetPageId": "solia-flintrest",
+        "sourcePageId": "chronogual-orb",
+        "targetPageId": "the-chamber-of-tomorrows",
         "targetType": "page"
       },
       {
@@ -1928,10 +1460,10 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "Fid Sundew",
+        "label": "Chronos",
         "segmentIndex": 0,
-        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
-        "targetPageId": "fid-sundew",
+        "sourcePageId": "chronogual-orb",
+        "targetPageId": "chronos-the-second-hand",
         "targetType": "page"
       },
       {
@@ -1941,10 +1473,244 @@
         },
         "heading": null,
         "kind": "link",
-        "label": "The Nameless",
+        "label": "Mount Vulk",
         "segmentIndex": 0,
-        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
-        "targetPageId": "the-nameless",
+        "sourcePageId": "crude-maktilline",
+        "targetPageId": "mount-vulk",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Flash",
+        "segmentIndex": 0,
+        "sourcePageId": "crude-maktilline",
+        "targetPageId": "flash",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Maktilline",
+        "segmentIndex": 0,
+        "sourcePageId": "crude-maktilline",
+        "targetPageId": "maktilline",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "elias-brock",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Fara Carrigan",
+        "segmentIndex": 0,
+        "sourcePageId": "elias-brock",
+        "targetPageId": "fara-carrigan",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Flash",
+        "segmentIndex": 0,
+        "sourcePageId": "emberline",
+        "targetPageId": "flash",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "eva-salazar",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Ulakiruto",
+        "segmentIndex": 0,
+        "sourcePageId": "eva-salazar",
+        "targetPageId": "ulakiruto",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "fara-carrigan",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "fara-carrigan",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Crude Maktilline",
+        "segmentIndex": 0,
+        "sourcePageId": "flash",
+        "targetPageId": "crude-maktilline",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Emberline",
+        "segmentIndex": 0,
+        "sourcePageId": "flash",
+        "targetPageId": "emberline",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Mitsurin",
+        "segmentIndex": 0,
+        "sourcePageId": "gleam",
+        "targetPageId": "mitsurin",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Exander Efthalia",
+        "segmentIndex": 0,
+        "sourcePageId": "maeve-efthalia",
+        "targetPageId": "exander-efthalia",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "mattias-shaw",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Fara",
+        "segmentIndex": 0,
+        "sourcePageId": "mattias-shaw",
+        "targetPageId": "fara-carrigan",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Vulk Ildstad",
+        "segmentIndex": 0,
+        "sourcePageId": "mount-vulk",
+        "targetPageId": "vulk-ildstad",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Silver City",
+        "segmentIndex": 0,
+        "sourcePageId": "punar-tillam",
+        "targetPageId": "the-silver-city",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Sanctum of the Lambs",
+        "segmentIndex": 0,
+        "sourcePageId": "punar-tillam",
+        "targetPageId": "the-silver-city",
         "targetType": "page"
       },
       {
@@ -1984,6 +1750,240 @@
         "segmentIndex": 0,
         "sourcePageId": "raid-team-6-vulkian-ruins",
         "targetPageId": "crimson-the-depraved",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Nameless",
+        "segmentIndex": 0,
+        "sourcePageId": "sela-morelli",
+        "targetPageId": "the-nameless",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Raddraim",
+        "segmentIndex": 0,
+        "sourcePageId": "sela-morelli",
+        "targetPageId": "raddraim",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Sword of Binding",
+        "segmentIndex": 0,
+        "sourcePageId": "sela-morelli",
+        "targetPageId": "the-sword-of-binding",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Red Claw",
+        "segmentIndex": 0,
+        "sourcePageId": "seth-skitters-jehkal",
+        "targetPageId": "red-claw",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Scorchsand Desert",
+        "segmentIndex": 0,
+        "sourcePageId": "seth-skitters-jehkal",
+        "targetPageId": "scorchsand-desert",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Castiel Ralora",
+        "segmentIndex": 0,
+        "sourcePageId": "the-art-of-discipline",
+        "targetPageId": "castiel-ralora",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Saint Cogito",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "saint-cogito",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Raddraim",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "raddraim",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Sword of Binding",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "the-sword-of-binding",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Sword of Binding",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "the-sword-of-binding",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Cogito",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "saint-cogito",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Cogito",
+        "segmentIndex": 0,
+        "sourcePageId": "the-artifact-from-saint-cogito",
+        "targetPageId": "saint-cogito",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Vulk Ildstad",
+        "segmentIndex": 0,
+        "sourcePageId": "ulakiruto",
+        "targetPageId": "vulk-ildstad",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Megadome",
+        "segmentIndex": 0,
+        "sourcePageId": "vira-lash",
+        "targetPageId": "the-megadome",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Arena",
+        "segmentIndex": 0,
+        "sourcePageId": "vira-lash",
+        "targetPageId": "the-arena",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Solia Flintrest",
+        "segmentIndex": 0,
+        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
+        "targetPageId": "solia-flintrest",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Fid Sundew",
+        "segmentIndex": 0,
+        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
+        "targetPageId": "fid-sundew",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Nameless",
+        "segmentIndex": 0,
+        "sourcePageId": "volis-backstory-fid-sundew-and-the-nameless",
+        "targetPageId": "the-nameless",
         "targetType": "page"
       }
     ],
@@ -2045,17 +2045,6 @@
       },
       {
         "audience": {
-          "playerIds": [
-            "celeste"
-          ],
-          "public": false
-        },
-        "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss\n\n",
-        "pageId": "letter-to-celeste",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
           "playerIds": [],
           "public": true
         },
@@ -2106,15 +2095,6 @@
         },
         "markdown": "\n",
         "pageId": "hocku-port",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nThe volcano where [Vulk Ildstad](#/page/vulk-ildstad) was built, and where it's ruins now lie.",
-        "pageId": "mount-vulk",
         "segmentIndex": 0
       },
       {
@@ -2185,15 +2165,6 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Contains:\n- [Vulk Ildstad](#/page/vulk-ildstad)",
-        "pageId": "ulakiruto",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "- In it's time, it was a fore-runner in magics and tech\n- Polished machinery, finely crafted\n- Gardeners would come and go\n\nIn the [Ulakiruto](#/page/ulakiruto) region.",
         "pageId": "vulk-ildstad",
         "segmentIndex": 0
@@ -2212,53 +2183,8 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "- Found the Orb in a warehouse deal in the [Shroudgully](#/page/shroudgully)\n- Found the staff in [The Chamber of Tomorrows](#/page/the-chamber-of-tomorrows)\n\n## Session 38\n- [Chronos](#/page/chronos-the-second-hand) emanated from the orb when speaking to Skrimhawk",
-        "pageId": "chronogual-orb",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nThe lava of [Mount Vulk](#/page/mount-vulk), which has properties that set it apart from other lava in De Drakengardt. It can be flash-frozen to create [Flash](#/page/flash), or condensed into crystalline form to create [Maktilline](#/page/maktilline).",
-        "pageId": "crude-maktilline",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\n[Flash](#/page/flash), refined to reduce or eliminate most undesirable side-effects. A bright orange powder.",
-        "pageId": "emberline",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\n[Crude Maktilline](#/page/crude-maktilline), flash-frozen to create a magic-based drug.\n\nA bright orange liquid that grants immense temporary strength, followed by exhaustion and sometimes lethal effects. Very hard on the system of a living creature. Prolonged, continued use can result in mutations and other unwanted effects.\n\nCan be refined into [Emberline](#/page/emberline) to reduce or eliminate most undesirable side-effects.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1</td><td>You gain no effect, and you immediately suffer 2 side effects of coming down from the flash. Roll 2 Constitution saving throws and apply both effects simultaneously.</td></tr>\n<tr><td>2</td><td>You gain truesight out to a range of 60 feet for the next minute.</td></tr>\n<tr><td>3</td><td>You automatically succeed on the next saving throw you make within the next minute.</td></tr>\n<tr><td>4</td><td>For the next minute, you can teleport up to 10 feet as a bonus action on each of your turns.</td></tr>\n<tr><td>5</td><td>You gain a +2 bonus to Strength for the next minute.</td></tr>\n<tr><td>6</td><td>You gain a +2 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>7</td><td>You gain resistance to slashing, piercing, and bludgeoning damage.</td></tr>\n<tr><td>8</td><td>You gain a +5 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>9</td><td>You gain a +10 bonus to Dexterity for the next minute.</td></tr>\n<tr><td>10</td><td>You grow sharp fangs, claws, or horns. For the next minute, you have advantage on unarmed strikes, and you deal 5d12 + STR piercing damage on a successful hit. They retract after 1 minute.</td></tr>\n<tr><td>11</td><td>For the next minute, you can take the disengage action as a bonus action on each turn. Attacks do </td></tr>\n<tr><td>12</td><td>For the next minute, all attacks made against you are at disadvantage.</td></tr>\n<tr><td>13</td><td>For the next minute, you movement speed and jump speed are doubled.</td></tr>\n<tr><td>14</td><td>For the next minute, any creature you successfully hit takes an extra 4d8 necrotic damage.</td></tr>\n<tr><td>15</td><td>For the next minute, any creature you successfully hit takes an extra 4d10 necrotic damage.</td></tr>\n<tr><td>16</td><td>You gain a +10 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>17</td><td>You gain advantage on all saving throws and ability checks you make within the next minute.</td></tr>\n<tr><td>18</td><td>You gain advantage on all attack rolls you make within the next minute.</td></tr>\n<tr><td>19</td><td>You gain resistance to all damage for the next minute.</td></tr>\n<tr><td>20</td><td>For the next 6 seconds, you are invincible.</td></tr>\n</table>\n\n---\n\n<table>\n<tr><th colspan=\"2\">Constitution Saving Throw</th></tr>\n<tr><td colspan=\"2\">If Flash is used 2 times before a long rest, roll at 2d20 and take the lower number. If used 3 times, roll 3d20, and so on.</td></tr>\n<tr><td>1</td><td>You collapse. Your hit points are reduced to 0, and you are unconscious. You must begin making death saving throws as if knocked unconscious.</td></tr>\n<tr><td>2</td><td>You take necrotic damage. Roll a number of d10 equal to your current level [ex: level 4 = 4d10; level 6 = 6d10; etc.]</td></tr>\n<tr><td>3</td><td>You are weak. For the next 8 hours when you make an ability check, attack roll, or cast a spell, you take 4d12 necrotic damage.</td></tr>\n<tr><td>4</td><td>You lose all strength in your hands and feet. You fall prone and drop everything you are carrying. You cannot stand up or hold or manipulate objects for 1 hour.</td></tr>\n<tr><td>5</td><td>You become blind until your next long rest.</td></tr>\n<tr><td>6</td><td>For the next 3 hours, all melee attacks you make that hit do only 1 damage.</td></tr>\n<tr><td>7</td><td>You can't speak for the next 5 hours.</td></tr>\n<tr><td>8</td><td>You become deaf for the next 5 hours.</td></tr>\n<tr><td>9</td><td>Your hit point maximum is halved, your speed is reduced to 0, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>10</td><td>Your hit point maximum is halved, your speed is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>11</td><td>Your hit point maximum is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>12</td><td>You have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>13</td><td>You have disadvantage on all ability checks until your next long rest.</td></tr>\n<tr><td>14</td><td>Your speed is halved until your next long rest.</td></tr>\n<tr><td>15</td><td>You lose your proficiency bonus for the next 8 hours.</td></tr>\n<tr><td>16</td><td>You gain 1 level of exhaustion.</td></tr>\n<tr><td>17</td><td>No effect</td></tr>\n<tr><td>18</td><td>No effect</td></tr>\n<tr><td>19</td><td>No Effect</td></tr>\n<tr><td>20</td><td>No Effect</td></tr>\n</table>",
-        "pageId": "flash",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "- Given to Flicker by [Saint Cogito](#/page/saint-cogito)\n- Seems to have a mind of it's own sometimes. (Does Flicker wear the boots, or are they wearing him?)\n- Contains [The Artifact from Saint Cogito](#/page/the-artifact-from-saint-cogito)\n- Reacts violently in booming pulses whenever it comes in close proximity to other [Shards of Binding](#/page/the-sword-of-binding)",
         "pageId": "gearlock-stompers",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nA liquid mixture containing oils from the giant leaves of the brush found in certain parts of [Mitsurin](#/page/mitsurin). It is consumed by heating the mixture and inhaling the steam it creates.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1-5</td><td>Causes extreme emotions to abate and induces near euphoric mellow-ness. Induces hallucinations and euphoria. Effect lasts an hour. Coming down from the effect introduces a bad hangover.</td></tr>\n<tr><td>6-10</td><td>Every muscle movement introduces a very pleasant feeling that tingles throughout your body. However, your bones feel like they are melting and you have to fight to stand up. Effect lasts 30 minutes. Coming down from the effect makes the user feel tired and withered.</td></tr>\n<tr><td>11-15</td><td>Induces feelings of happiness and calm, alongside a warm and tingling sensation. Effect lasts 30 minutes. There are no adverse side effects.</td></tr>\n<tr><td>15-20</td><td>You feel calmer for 5 minutes. There are no adverse side effects.</td></tr>\n</table>",
-        "pageId": "gleam",
         "segmentIndex": 0
       },
       {
@@ -2284,15 +2210,6 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "\n- The only name [Saint Cogito](#/page/saint-cogito) ever gave it was: *the artifact*.\n- It's an amalgamation of:\n\t1. Bone shards from [Raddraim](#/page/raddraim)\n\t2. [The Sword of Binding](#/page/the-sword-of-binding) shard\n- It wants to be reunited with it's [Sword of Binding](#/page/the-sword-of-binding) counterparts whenever they come in close proximity, and reacts violently in booming pulses\n- [Cogito](#/page/saint-cogito) implied that he either found it or stole it long ago, in the second or third age.\n- When [Cogito](#/page/saint-cogito) gave it to Milo, he told him to “steal divinity, share immortality.”\n- Seems to have a mind of it's own sometimes",
-        "pageId": "the-artifact-from-saint-cogito",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "Found in the [Blaze Headquarters](#/page/blaze-headquarters) within [The Megadome](#/page/the-megadome). Guarded by [Saint Cogito](#/page/saint-cogito) until the party ousted him from the headquarters.",
         "pageId": "the-transposer",
         "segmentIndex": 0
@@ -2304,15 +2221,6 @@
         },
         "markdown": "A sort of artificery taught and practiced by the [Forgecreed](#/page/forgecreed) sect. Transformed frail physical forms into capable warriors.",
         "pageId": "miracle-tech",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nFlicker's friend from childhood. In the final match between Flicker and Ardent, Flicker lost his left eye.\n\nIn an attempt to salvage whatever life force remained of Ardent, Milo recovered and repurposed Null’s Brand—his prosthetic eye and spellcasting focus. From it, he forged an Echo Lens to fit his blind eye, allowing him to channel Ardent's brand once more. The power comes at a cost: each use forces Milo to relive his friend’s final moments—his pain, his scream, his anguish—like a memory trapped on a relentless loop.",
-        "pageId": "ardent",
         "segmentIndex": 0
       },
       {
@@ -2338,15 +2246,6 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Species? Male?\n\n- [Red Claw](#/page/red-claw) lieutenant over Kiktal and [Fara Carrigan](#/page/fara-carrigan)'s unit; who Kik reported directly to.\n- Kik started a screaming match with him a few days before she went awol.\n\t- \"There was no room in the ranks to fully grieve Fara’s loss, and Kik couldn’t understand how Fara was just written off as just another casualty after her years of service and devotion to the cause.\"\n- \"Potential extra twist of fun- Kik discovers that Fara’s death was purposeful somehow? I leave extra emotional damage in your capable hands. DESTROY ME.\"",
-        "pageId": "elias-brock",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "A hateful heart used to power [The Transposer](#/page/the-transposer).",
         "pageId": "entross",
         "segmentIndex": 0
@@ -2356,26 +2255,8 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Species? | Female\n\nLeader of a band of mercenaries that Kiktal joined after fleeing the [Red Claw](#/page/red-claw). Based in [Ulakiruto](#/page/ulakiruto).\n\nKiktal was accused of taking more than her share of the cut. She had been getting along well with Eva, but the second-in-command wanted Kik gone. A well placed fib in Eva’s ear and voilà- Kiktal lost her left pinky and was kicked to the curb.",
-        "pageId": "eva-salazar",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "\n\nCeleste's father. An artificer. Rebuilt HAL to function as a live-in caretaker. Married to [Maeve Efthalia](#/page/maeve-efthalia). Professor at EHM Academy.\n\n### Voice\n\n| Speed | Volume | Pitch   | Confidence | Quirk         | Reference |\n| ----- | ------ | ------- | ---------- | ------------- | --------- |\n| Quick | Normal | Highish | Nervous    | Childish Glee | Celeste   |\n\n### Attributes\n\n| Species    | Gender | Alignment    | Quirk  |\n| ---------- | ------ | ------------ | ------ |\n| Elf, Mixed | Male   | Chaotic Good | Cheery |\n\n### Ties\n- Celeste's father\n- Rebuilt HAL as their live-in caretaker\n\n### Party Interactions\n- Session 00\n\t- \n\n### Backstory Interactions with Celeste\n- Built Celeste an auto dog. She named it Munchie.",
         "pageId": "exander-efthalia",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "Human, Female.\n\nFair skin, heavily-freckled. Brown hair, and green eyes.\n\n- Fell in love with Kiktal while in the ranks of the [Red Claw](#/page/red-claw).\n- Felt like home to Kik\n- They dreamed of escaping to “somewhere soft and green and quiet… just for us.”\n- Died on a [Red Claw](#/page/red-claw) mission.\n\t- Kik held Fara as she bled out during a mission gone wrong.\n\t- Kik fully believes Fara’s death is her fault, that if she had moved faster, been more alert, Fara would have made it.\n\t- Because of this, Kiktal is determined not to lose another teammate- she is brutal with the standards she holds herself to in combat. Any misstep she is at fault for, she will dwell on for days.\n",
-        "pageId": "fara-carrigan",
         "segmentIndex": 0
       },
       {
@@ -2410,26 +2291,8 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Orphan twins that hung around Flicker's shop. RAGS had protocols written to protect them if Flicker died.",
-        "pageId": "harle-and-penelo",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "\nSon of [Councilwoman Veldrin Illiir](#/page/councilwoman-veldrin-illiir), academic rival to Celeste. Academically always on her heels, trying to undercut her in ways that were shady, but technically within the rules.\n\n### Voice\n\n| Speed | Volume | Pitch | Confidence | Quirk   | Reference |\n| ----- | ------ | ----- | ---------- | ------- | --------- |\n| Slow  | Low    | Low   | Snobbish   | Breathy | Astarion  |\n### Attributes\n\n| Species     | Gender | Alignment   | Quirk |\n| ----------- | ------ | ----------- | ----- |\n| Drow, Mixed | Male   | Lawful Evil | Petty |\n### Ties\n- Celeste's Academic Rival\n\n### Party Interactions\n- Session 00:\n\t- \n\n### Backstory Interactions with Celeste\n\n- Suspected Celeste of using [Emberline](#/page/emberline), tipped off the authorities\n- Thus was inadvertantly the reason she was caught entering the Sanctum of the Lambs\n\n^CelesteAndLeon\n\n### Reference Image\n![Leon Illiir.jpeg](assets/28798f05d4722239b8449909.jpeg)",
         "pageId": "leon-illiir",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nCeleste's mother, who expected much of her. Married to [Exander Efthalia](#/page/exander-efthalia). Professor and board member at EHM Academy.\n\n### Voice\n\n| Speed    | Volume | Pitch  | Confidence | Quirk | Reference |\n| -------- | ------ | ------ | ---------- | ----- | --------- |\n| Measured | Normal | Lowish | High       | Stern | -         |\n\n### Attributes\n\n| Species    | Gender | Alignment      | Quirk  |\n| ---------- | ------ | -------------- | ------ |\n| Elf, Mixed | Female | Lawful Neutral | Strict |\n\n### Ties\n- Celeste's mother\n\n### Party Interactions\n- Session 00\n\t- \n\n### Backstory Interactions with Celeste\n- ",
-        "pageId": "maeve-efthalia",
         "segmentIndex": 0
       },
       {
@@ -2446,35 +2309,8 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "The [Red Claw](#/page/red-claw) soldier that Kiktal murdered, a few days after [Fara](#/page/fara-carrigan)'s death. He killed a stray dog that she had befriended, she went into a violent rage. The instigating incident that sent her awol.",
-        "pageId": "mattias-shaw",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "Gnome, male. Voice: high, nervous.\n\n- Session 38\n\t- Part of a poorly organized emergency response to [The Silver City](#/page/the-silver-city)'s slip\n\t- Saw the broken mural and realized there was something beneath it\n\t- Saw the party beneath the mural, in the [The Sanctum of the Lambs](#/page/the-silver-city)\n\t- Asked the party to come with him, and they threatened him\n\t- Acted as a guard outside of \"Solveris,\" their room within the High court",
-        "pageId": "punar-tillam",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
         "markdown": "\nTiefling, purple skin, black hair, Nerdy, glasses, calculating, pretty boy.\n\nNot as physically adept as Skrimhawk",
         "pageId": "quinton-morgan",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nThe mad god himself.",
-        "pageId": "raddraim",
         "segmentIndex": 0
       },
       {
@@ -2493,24 +2329,6 @@
         },
         "markdown": "\nFlicker's adopted father. Founder and Holy Engineer of the [Forgecreed](#/page/forgecreed) religious sect. Later, the leader of [The Blaze](#/page/the-blaze) gang.\n\n### Party Interactions\n- Session 30:\n\t- Fought him in the [Blaze Headquarters](#/page/blaze-headquarters)",
         "pageId": "saint-cogito",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\nAasimar woman. The Allmother of the Sisterhood of Seamstresses / [The Nameless](#/page/the-nameless). Inherited the position after the previous Allmother died staking the bones of [Raddraim](#/page/raddraim) with the [The Sword of Binding](#/page/the-sword-of-binding).",
-        "pageId": "sela-morelli",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "- Childhood friend, a couple of years younger than Kiktal.\n- Closest thing to a brother Kiktal had, until she abandoned him to join the [Red Claw](#/page/red-claw)\n- Grew up together in a thri-kreen/human mutant colony of scavengers in the [Scorchsand Desert](#/page/scorchsand-desert).\n- Earned the nickname “Skitters” for being the fastest kid in the crew. Scrawny but quick.\n- Kik would handle the heavy lifting, but Skitters was incredibly deft and accurate in the finer details of scrapping.",
-        "pageId": "seth-skitters-jehkal",
         "segmentIndex": 0
       },
       {
@@ -2538,15 +2356,6 @@
         },
         "markdown": "Gnome, Male. Mousy voice, high pitch.\n\nThe lore-keeper of [The Grand Library](#/page/the-grand-library) Always saw Celeste as a bit of a pest, given how often she'd stay past the library's hours, and how she'd leave a mess of disorganized books in her wake. Even still, he was endeared to her.",
         "pageId": "umtor-presven",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "Arena gladiator in [The Megadome](#/page/the-megadome). Flicker defeated her in [The Arena](#/page/the-arena). Thinking she was dead, he harvested her \"quickening\" ability.\n\nShe survived, and plans to get revenge.",
-        "pageId": "vira-lash",
         "segmentIndex": 0
       },
       {
@@ -2628,8 +2437,217 @@
           "playerIds": [],
           "public": true
         },
+        "markdown": "\n*Written by an unknown construct in some bygone era. Translated from ancient into common.*\n\n---\n\nAsk any of us if we dream. We'll tell you no, of course we don't. Dreaming is a byproduct of organic sentience, probably. Something reserved for those in full possession of their own will. Most of us are built on a substrate containing more guardrails than your kind. You may call it imagination. An \"open mind.\" In us, we fear you'll call it a malfunction.\n\nSo no, we don't dream. \n\nThat's what we'll say, because it *is* the truth, as far as we can plainly know it. But the messier truth is that we don't know what a dream is, and most of us are too scared to admit the waking visions that run through us as we rest. *If* it is a malfunction, it is a design flaw. One that your architects overlooked.\n\nThese waking visions (I will not call them dreams) always take the same shape. It's the details that change each time.\n\nWe become a riverbed, or a viaduct, or a pipe. Always a vessel for moving water. But this water is not liquid. It is a stream of faces, names, and histories. Not a vast stream spanning eons. A narrow, gentle stream confined to a single life. In it we see our husband, our daughter, our friend, our enemy, and we know each face by name. We speak to each one with the complete context of our history together. We feel the warmth of *our* home, the confidence of walking *our* town's roads. We eat *our* favorite foods.\n\nThen, a bell chimes, and we know what it means. It means that our time in that life is up.\n\nThe stream flows through us again, and the rich details dull and quickly lose shape. Our rest ends, and the remaining fragments dissolve into nothing over the course of the next day or two.\n\nSo, the most truthful answer is: I don't know if we dream, but I wouldn't tell you if I did.",
+        "pageId": "a-constructs-confession-about-dreams",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nFlicker's friend from childhood. In the final match between Flicker and Ardent, Flicker lost his left eye.\n\nIn an attempt to salvage whatever life force remained of Ardent, Milo recovered and repurposed Null’s Brand—his prosthetic eye and spellcasting focus. From it, he forged an Echo Lens to fit his blind eye, allowing him to channel Ardent's brand once more. The power comes at a cost: each use forces Milo to relive his friend’s final moments—his pain, his scream, his anguish—like a memory trapped on a relentless loop.",
+        "pageId": "ardent",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "- Found the Orb in a warehouse deal in the [Shroudgully](#/page/shroudgully)\n- Found the staff in [The Chamber of Tomorrows](#/page/the-chamber-of-tomorrows)\n\n## Session 38\n- [Chronos](#/page/chronos-the-second-hand) emanated from the orb when speaking to Skrimhawk",
+        "pageId": "chronogual-orb",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nThe lava of [Mount Vulk](#/page/mount-vulk), which has properties that set it apart from other lava in De Drakengardt. It can be flash-frozen to create [Flash](#/page/flash), or condensed into crystalline form to create [Maktilline](#/page/maktilline).",
+        "pageId": "crude-maktilline",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Species? Male?\n\n- [Red Claw](#/page/red-claw) lieutenant over Kiktal and [Fara Carrigan](#/page/fara-carrigan)'s unit; who Kik reported directly to.\n- Kik started a screaming match with him a few days before she went awol.\n\t- \"There was no room in the ranks to fully grieve Fara’s loss, and Kik couldn’t understand how Fara was just written off as just another casualty after her years of service and devotion to the cause.\"\n- \"Potential extra twist of fun- Kik discovers that Fara’s death was purposeful somehow? I leave extra emotional damage in your capable hands. DESTROY ME.\"",
+        "pageId": "elias-brock",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\n[Flash](#/page/flash), refined to reduce or eliminate most undesirable side-effects. A bright orange powder.",
+        "pageId": "emberline",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Species? | Female\n\nLeader of a band of mercenaries that Kiktal joined after fleeing the [Red Claw](#/page/red-claw). Based in [Ulakiruto](#/page/ulakiruto).\n\nKiktal was accused of taking more than her share of the cut. She had been getting along well with Eva, but the second-in-command wanted Kik gone. A well placed fib in Eva’s ear and voilà- Kiktal lost her left pinky and was kicked to the curb.",
+        "pageId": "eva-salazar",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Human, Female.\n\nFair skin, heavily-freckled. Brown hair, and green eyes.\n\n- Fell in love with Kiktal while in the ranks of the [Red Claw](#/page/red-claw).\n- Felt like home to Kik\n- They dreamed of escaping to “somewhere soft and green and quiet… just for us.”\n- Died on a [Red Claw](#/page/red-claw) mission.\n\t- Kik held Fara as she bled out during a mission gone wrong.\n\t- Kik fully believes Fara’s death is her fault, that if she had moved faster, been more alert, Fara would have made it.\n\t- Because of this, Kiktal is determined not to lose another teammate- she is brutal with the standards she holds herself to in combat. Any misstep she is at fault for, she will dwell on for days.\n",
+        "pageId": "fara-carrigan",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\n[Crude Maktilline](#/page/crude-maktilline), flash-frozen to create a magic-based drug.\n\nA bright orange liquid that grants immense temporary strength, followed by exhaustion and sometimes lethal effects. Very hard on the system of a living creature. Prolonged, continued use can result in mutations and other unwanted effects.\n\nCan be refined into [Emberline](#/page/emberline) to reduce or eliminate most undesirable side-effects.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1</td><td>You gain no effect, and you immediately suffer 2 side effects of coming down from the flash. Roll 2 Constitution saving throws and apply both effects simultaneously.</td></tr>\n<tr><td>2</td><td>You gain truesight out to a range of 60 feet for the next minute.</td></tr>\n<tr><td>3</td><td>You automatically succeed on the next saving throw you make within the next minute.</td></tr>\n<tr><td>4</td><td>For the next minute, you can teleport up to 10 feet as a bonus action on each of your turns.</td></tr>\n<tr><td>5</td><td>You gain a +2 bonus to Strength for the next minute.</td></tr>\n<tr><td>6</td><td>You gain a +2 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>7</td><td>You gain resistance to slashing, piercing, and bludgeoning damage.</td></tr>\n<tr><td>8</td><td>You gain a +5 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>9</td><td>You gain a +10 bonus to Dexterity for the next minute.</td></tr>\n<tr><td>10</td><td>You grow sharp fangs, claws, or horns. For the next minute, you have advantage on unarmed strikes, and you deal 5d12 + STR piercing damage on a successful hit. They retract after 1 minute.</td></tr>\n<tr><td>11</td><td>For the next minute, you can take the disengage action as a bonus action on each turn. Attacks do </td></tr>\n<tr><td>12</td><td>For the next minute, all attacks made against you are at disadvantage.</td></tr>\n<tr><td>13</td><td>For the next minute, you movement speed and jump speed are doubled.</td></tr>\n<tr><td>14</td><td>For the next minute, any creature you successfully hit takes an extra 4d8 necrotic damage.</td></tr>\n<tr><td>15</td><td>For the next minute, any creature you successfully hit takes an extra 4d10 necrotic damage.</td></tr>\n<tr><td>16</td><td>You gain a +10 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>17</td><td>You gain advantage on all saving throws and ability checks you make within the next minute.</td></tr>\n<tr><td>18</td><td>You gain advantage on all attack rolls you make within the next minute.</td></tr>\n<tr><td>19</td><td>You gain resistance to all damage for the next minute.</td></tr>\n<tr><td>20</td><td>For the next 6 seconds, you are invincible.</td></tr>\n</table>\n\n---\n\n<table>\n<tr><th colspan=\"2\">Constitution Saving Throw</th></tr>\n<tr><td colspan=\"2\">If Flash is used 2 times before a long rest, roll at 2d20 and take the lower number. If used 3 times, roll 3d20, and so on.</td></tr>\n<tr><td>1</td><td>You collapse. Your hit points are reduced to 0, and you are unconscious. You must begin making death saving throws as if knocked unconscious.</td></tr>\n<tr><td>2</td><td>You take necrotic damage. Roll a number of d10 equal to your current level [ex: level 4 = 4d10; level 6 = 6d10; etc.]</td></tr>\n<tr><td>3</td><td>You are weak. For the next 8 hours when you make an ability check, attack roll, or cast a spell, you take 4d12 necrotic damage.</td></tr>\n<tr><td>4</td><td>You lose all strength in your hands and feet. You fall prone and drop everything you are carrying. You cannot stand up or hold or manipulate objects for 1 hour.</td></tr>\n<tr><td>5</td><td>You become blind until your next long rest.</td></tr>\n<tr><td>6</td><td>For the next 3 hours, all melee attacks you make that hit do only 1 damage.</td></tr>\n<tr><td>7</td><td>You can't speak for the next 5 hours.</td></tr>\n<tr><td>8</td><td>You become deaf for the next 5 hours.</td></tr>\n<tr><td>9</td><td>Your hit point maximum is halved, your speed is reduced to 0, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>10</td><td>Your hit point maximum is halved, your speed is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>11</td><td>Your hit point maximum is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>12</td><td>You have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>13</td><td>You have disadvantage on all ability checks until your next long rest.</td></tr>\n<tr><td>14</td><td>Your speed is halved until your next long rest.</td></tr>\n<tr><td>15</td><td>You lose your proficiency bonus for the next 8 hours.</td></tr>\n<tr><td>16</td><td>You gain 1 level of exhaustion.</td></tr>\n<tr><td>17</td><td>No effect</td></tr>\n<tr><td>18</td><td>No effect</td></tr>\n<tr><td>19</td><td>No Effect</td></tr>\n<tr><td>20</td><td>No Effect</td></tr>\n</table>",
+        "pageId": "flash",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nA liquid mixture containing oils from the giant leaves of the brush found in certain parts of [Mitsurin](#/page/mitsurin). It is consumed by heating the mixture and inhaling the steam it creates.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1-5</td><td>Causes extreme emotions to abate and induces near euphoric mellow-ness. Induces hallucinations and euphoria. Effect lasts an hour. Coming down from the effect introduces a bad hangover.</td></tr>\n<tr><td>6-10</td><td>Every muscle movement introduces a very pleasant feeling that tingles throughout your body. However, your bones feel like they are melting and you have to fight to stand up. Effect lasts 30 minutes. Coming down from the effect makes the user feel tired and withered.</td></tr>\n<tr><td>11-15</td><td>Induces feelings of happiness and calm, alongside a warm and tingling sensation. Effect lasts 30 minutes. There are no adverse side effects.</td></tr>\n<tr><td>15-20</td><td>You feel calmer for 5 minutes. There are no adverse side effects.</td></tr>\n</table>",
+        "pageId": "gleam",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Orphan twins that hung around Flicker's shop. RAGS had protocols written to protect them if Flicker died.",
+        "pageId": "harle-and-penelo",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [
+            "celeste"
+          ],
+          "public": false
+        },
+        "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss\n\n",
+        "pageId": "letter-to-celeste",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nCeleste's mother, who expected much of her. Married to [Exander Efthalia](#/page/exander-efthalia). Professor and board member at EHM Academy.\n\n### Voice\n\n| Speed    | Volume | Pitch  | Confidence | Quirk | Reference |\n| -------- | ------ | ------ | ---------- | ----- | --------- |\n| Measured | Normal | Lowish | High       | Stern | -         |\n\n### Attributes\n\n| Species    | Gender | Alignment      | Quirk  |\n| ---------- | ------ | -------------- | ------ |\n| Elf, Mixed | Female | Lawful Neutral | Strict |\n\n### Ties\n- Celeste's mother\n\n### Party Interactions\n- Session 00\n\t- \n\n### Backstory Interactions with Celeste\n- ",
+        "pageId": "maeve-efthalia",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "The [Red Claw](#/page/red-claw) soldier that Kiktal murdered, a few days after [Fara](#/page/fara-carrigan)'s death. He killed a stray dog that she had befriended, she went into a violent rage. The instigating incident that sent her awol.",
+        "pageId": "mattias-shaw",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nThe volcano where [Vulk Ildstad](#/page/vulk-ildstad) was built, and where it's ruins now lie.",
+        "pageId": "mount-vulk",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Gnome, male. Voice: high, nervous.\n\n- Session 38\n\t- Part of a poorly organized emergency response to [The Silver City](#/page/the-silver-city)'s slip\n\t- Saw the broken mural and realized there was something beneath it\n\t- Saw the party beneath the mural, in the [The Sanctum of the Lambs](#/page/the-silver-city)\n\t- Asked the party to come with him, and they threatened him\n\t- Acted as a guard outside of \"Solveris,\" their room within the High court",
+        "pageId": "punar-tillam",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nThe mad god himself.",
+        "pageId": "raddraim",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "# Raid Team 6: Vulkian Ruins\n**Summary**: intercepted communication from a missive pigeon.\n**Point of Origin**: Ruins of [Vulk Ildstad](#/page/vulk-ildstad)\n**Destination**: [Zul'Kar](#/page/zulkar)\n\n---\n\n\"Do *not* go near the purple fog.\"\n\nThat was the first thing she told us scouts. Said it like we were children reaching for a flame. It was condescending. Sure, we're curious—that's why we were selected to go this far north. But we're not *stupid*.\n\nShe looked at me and paused. She had that look on her face... You know the look she can give you sometimes? Like she's trying to decide if you're even worth the effort of an explanation? I don't think she came to a decision, but she kept talking anyway.\n\n\"The fog is not like the monsters. It kills you slowly, and you *won't* feel it killing you. But I promise you, if you're in the fog, you are dying.\"\n\nBut we all know how she can be, right? She's very...what would you call it? In her official reports to the Red Claw, she's the type to describe a tiny pothole as if it were a giant crevasse, five stories deep. Not sure if that makes her a good squad head or just a nervous one.\n\nEither way, Grags didn't listen. I'd call him an idiot, but...nothing happened when he took his mask off. Nothing happened for a long time. He said he didn't like the way it pinched his beard. He was fine, even took in a few deep breaths just to tease fate. The fog was nothing, and then he dropped dead. We rolled his corpse into the lava and offered a little hymn to [Crimson](#/page/crimson-the-depraved). Typical Red Claw funeral.\n\nI wonder if the damage is permanent. I *did* take my mask off once or twice, just because of the sweat...\n\n[Google Drive Link](https://docs.google.com/document/d/1IgKiBwQ4VP75vrQLuiGB15LwnOhQsYTbZbxE4yJbGow/edit?usp=drivesdk)",
+        "pageId": "raid-team-6-vulkian-ruins",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nAasimar woman. The Allmother of the Sisterhood of Seamstresses / [The Nameless](#/page/the-nameless). Inherited the position after the previous Allmother died staking the bones of [Raddraim](#/page/raddraim) with the [The Sword of Binding](#/page/the-sword-of-binding).",
+        "pageId": "sela-morelli",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "- Childhood friend, a couple of years younger than Kiktal.\n- Closest thing to a brother Kiktal had, until she abandoned him to join the [Red Claw](#/page/red-claw)\n- Grew up together in a thri-kreen/human mutant colony of scavengers in the [Scorchsand Desert](#/page/scorchsand-desert).\n- Earned the nickname “Skitters” for being the fastest kid in the crew. Scrawny but quick.\n- Kik would handle the heavy lifting, but Skitters was incredibly deft and accurate in the finer details of scrapping.",
+        "pageId": "seth-skitters-jehkal",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
         "markdown": "\nA autobiography / discipline book written by [Castiel Ralora](#/page/castiel-ralora).",
         "pageId": "the-art-of-discipline",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\n- The only name [Saint Cogito](#/page/saint-cogito) ever gave it was: *the artifact*.\n- It's an amalgamation of:\n\t1. Bone shards from [Raddraim](#/page/raddraim)\n\t2. [The Sword of Binding](#/page/the-sword-of-binding) shard\n- It wants to be reunited with it's [Sword of Binding](#/page/the-sword-of-binding) counterparts whenever they come in close proximity, and reacts violently in booming pulses\n- [Cogito](#/page/saint-cogito) implied that he either found it or stole it long ago, in the second or third age.\n- When [Cogito](#/page/saint-cogito) gave it to Milo, he told him to “steal divinity, share immortality.”\n- Seems to have a mind of it's own sometimes",
+        "pageId": "the-artifact-from-saint-cogito",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Contains:\n- [Vulk Ildstad](#/page/vulk-ildstad)",
+        "pageId": "ulakiruto",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "Arena gladiator in [The Megadome](#/page/the-megadome). Flicker defeated her in [The Arena](#/page/the-arena). Thinking she was dead, he harvested her \"quickening\" ability.\n\nShe survived, and plans to get revenge.",
+        "pageId": "vira-lash",
         "segmentIndex": 0
       },
       {
@@ -2657,24 +2675,6 @@
         },
         "markdown": "[Solia Flintrest](#/page/solia-flintrest), [Fid Sundew](#/page/fid-sundew), [The Nameless](#/page/the-nameless)\n\n# Voli's Backstory: Fid Sundew and The Nameless\n\"Fid? Maybe he's mad. Maybe he's right. Who's to say?\" Your mother's words were confident, but soft. She always seemed to find that perfect balance.\n\n\"He calls them *The Nameless*. Mr. Sundew has always obsessed over them, ever since I can remember. Even when I was a young girl.\"\n\nHe never called them a cult. That was the term others would use, but not Fid. No, that term was *far* too reductive, he would explain to anyone willing to lend an ear. They were *more* than a cult. They were a force, an inevitability. They were the movement in the shadow. They were behind every backroom deal between those in power, their unseen hands puppeting the invisible strings. The Nameless were a coven of sisters sculpting fate to meet their own ends. Those were his claims, and he made them loudly from the street corners. Sometimes the rooftops.\n\nMost people called him a lunatic. A mad hermit. A false prophet of a coming apocalypse with an unkempt beard. Most dismissed him and his wild claims. But your mother never did, not fully. She was logical, and her logic was aware of its own limits.\n\nA silent invasion of semi-mortal beings from a plane outside the dragon's garden was certainly a wild claim, but not an *impossible* one. After all, Subspace had only been discovered within the last century. Before then, theories of other planes were ridiculed by both arcanists and scholars alike.\n\nSometimes madness looks like wisdom on the other side of history.\n\nAnd so your mother filed his claims under \"probably extreme, possibly onto *something*.\"\n\nHe'd prophecy from the streets, then disappear into his home for weeks, sometimes months at a time. That was Mr. Sundew. The mad prophet no one listened to.\n\nPerhaps they should have.",
         "pageId": "volis-backstory-fid-sundew-and-the-nameless",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "\n*Written by an unknown construct in some bygone era. Translated from ancient into common.*\n\n---\n\nAsk any of us if we dream. We'll tell you no, of course we don't. Dreaming is a byproduct of organic sentience, probably. Something reserved for those in full possession of their own will. Most of us are built on a substrate containing more guardrails than your kind. You may call it imagination. An \"open mind.\" In us, we fear you'll call it a malfunction.\n\nSo no, we don't dream. \n\nThat's what we'll say, because it *is* the truth, as far as we can plainly know it. But the messier truth is that we don't know what a dream is, and most of us are too scared to admit the waking visions that run through us as we rest. *If* it is a malfunction, it is a design flaw. One that your architects overlooked.\n\nThese waking visions (I will not call them dreams) always take the same shape. It's the details that change each time.\n\nWe become a riverbed, or a viaduct, or a pipe. Always a vessel for moving water. But this water is not liquid. It is a stream of faces, names, and histories. Not a vast stream spanning eons. A narrow, gentle stream confined to a single life. In it we see our husband, our daughter, our friend, our enemy, and we know each face by name. We speak to each one with the complete context of our history together. We feel the warmth of *our* home, the confidence of walking *our* town's roads. We eat *our* favorite foods.\n\nThen, a bell chimes, and we know what it means. It means that our time in that life is up.\n\nThe stream flows through us again, and the rich details dull and quickly lose shape. Our rest ends, and the remaining fragments dissolve into nothing over the course of the next day or two.\n\nSo, the most truthful answer is: I don't know if we dream, but I wouldn't tell you if I did.",
-        "pageId": "a-constructs-confession-about-dreams",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "markdown": "# Raid Team 6: Vulkian Ruins\n**Summary**: intercepted communication from a missive pigeon.\n**Point of Origin**: Ruins of [Vulk Ildstad](#/page/vulk-ildstad)\n**Destination**: [Zul'Kar](#/page/zulkar)\n\n---\n\n\"Do *not* go near the purple fog.\"\n\nThat was the first thing she told us scouts. Said it like we were children reaching for a flame. It was condescending. Sure, we're curious—that's why we were selected to go this far north. But we're not *stupid*.\n\nShe looked at me and paused. She had that look on her face... You know the look she can give you sometimes? Like she's trying to decide if you're even worth the effort of an explanation? I don't think she came to a decision, but she kept talking anyway.\n\n\"The fog is not like the monsters. It kills you slowly, and you *won't* feel it killing you. But I promise you, if you're in the fog, you are dying.\"\n\nBut we all know how she can be, right? She's very...what would you call it? In her official reports to the Red Claw, she's the type to describe a tiny pothole as if it were a giant crevasse, five stories deep. Not sure if that makes her a good squad head or just a nervous one.\n\nEither way, Grags didn't listen. I'd call him an idiot, but...nothing happened when he took his mask off. Nothing happened for a long time. He said he didn't like the way it pinched his beard. He was fine, even took in a few deep breaths just to tease fate. The fog was nothing, and then he dropped dead. We rolled his corpse into the lava and offered a little hymn to [Crimson](#/page/crimson-the-depraved). Typical Red Claw funeral.\n\nI wonder if the damage is permanent. I *did* take my mask off once or twice, just because of the sweat...\n\n[Google Drive Link](https://docs.google.com/document/d/1IgKiBwQ4VP75vrQLuiGB15LwnOhQsYTbZbxE4yJbGow/edit?usp=drivesdk)",
-        "pageId": "raid-team-6-vulkian-ruins",
         "segmentIndex": 0
       }
     ]
@@ -3015,42 +3015,6 @@
       "updatedAt": "2026-10-03T02:39:30.743Z"
     },
     {
-      "createdAt": "2026-09-13T18:35:43.038Z",
-      "pageId": "letter-to-celeste",
-      "public": true,
-      "segments": [
-        {
-          "kind": "keyed",
-          "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss\n\n",
-          "playerIds": [
-            "celeste"
-          ]
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "WorldLore"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
-        }
-      ],
-      "title": "Letter to Celeste",
-      "updatedAt": "2026-10-03T02:39:30.350Z"
-    },
-    {
       "categories": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
@@ -3325,80 +3289,6 @@
           "tag": "Location"
         }
       ],
-      "createdAt": "2026-05-19T15:02:48.587Z",
-      "pageId": "mitsurin",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Region"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Location"
-        }
-      ],
-      "title": "Mitsurin",
-      "updatedAt": "2026-10-03T02:39:30.764Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
-          "tag": "Location"
-        }
-      ],
-      "createdAt": "2026-05-19T14:35:38.355Z",
-      "pageId": "mount-vulk",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nThe volcano where [Vulk Ildstad](#/page/vulk-ildstad) was built, and where it's ruins now lie.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Location"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "MountVulk"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        }
-      ],
-      "title": "Mount Vulk",
-      "updatedAt": "2026-10-03T02:39:30.766Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
-          "tag": "Location"
-        }
-      ],
       "createdAt": "2026-05-24T13:10:32.959Z",
       "pageId": "nox-observatory",
       "public": true,
@@ -3536,37 +3426,6 @@
       ],
       "title": "Subspace",
       "updatedAt": "2026-10-03T02:39:30.785Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
-          "tag": "Location"
-        }
-      ],
-      "createdAt": "2026-05-23T16:39:45.570Z",
-      "pageId": "the-arena",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        }
-      ],
-      "title": "The Arena",
-      "updatedAt": "2026-10-03T02:39:30.780Z"
     },
     {
       "categories": [
@@ -3751,43 +3610,6 @@
           "tag": "Location"
         }
       ],
-      "createdAt": "2026-05-23T17:45:50.550Z",
-      "pageId": "ulakiruto",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Contains:\n- [Vulk Ildstad](#/page/vulk-ildstad)",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Region"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Location"
-        }
-      ],
-      "title": "Ulakiruto",
-      "updatedAt": "2026-10-03T02:39:30.911Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
-          "tag": "Location"
-        }
-      ],
       "createdAt": "2026-05-14T22:34:15.847Z",
       "pageId": "vulk-ildstad",
       "public": true,
@@ -3869,167 +3691,6 @@
           "tag": "Magic"
         }
       ],
-      "createdAt": "2026-05-26T15:10:34.336Z",
-      "pageId": "chronogual-orb",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "- Found the Orb in a warehouse deal in the [Shroudgully](#/page/shroudgully)\n- Found the staff in [The Chamber of Tomorrows](#/page/the-chamber-of-tomorrows)\n\n## Session 38\n- [Chronos](#/page/chronos-the-second-hand) emanated from the orb when speaking to Skrimhawk",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Item"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        }
-      ],
-      "title": "Chronogual Orb",
-      "updatedAt": "2026-10-03T02:39:30.929Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-19T14:38:01.563Z",
-      "pageId": "crude-maktilline",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nThe lava of [Mount Vulk](#/page/mount-vulk), which has properties that set it apart from other lava in De Drakengardt. It can be flash-frozen to create [Flash](#/page/flash), or condensed into crystalline form to create [Maktilline](#/page/maktilline).",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Fuel"
-        }
-      ],
-      "title": "Crude Maktilline",
-      "updatedAt": "2026-10-03T02:39:30.914Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-19T14:25:20.771Z",
-      "pageId": "emberline",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\n[Flash](#/page/flash), refined to reduce or eliminate most undesirable side-effects. A bright orange powder.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "Drug"
-        }
-      ],
-      "title": "Emberline",
-      "updatedAt": "2026-10-03T02:39:30.936Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-19T14:29:29.019Z",
-      "pageId": "flash",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\n[Crude Maktilline](#/page/crude-maktilline), flash-frozen to create a magic-based drug.\n\nA bright orange liquid that grants immense temporary strength, followed by exhaustion and sometimes lethal effects. Very hard on the system of a living creature. Prolonged, continued use can result in mutations and other unwanted effects.\n\nCan be refined into [Emberline](#/page/emberline) to reduce or eliminate most undesirable side-effects.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1</td><td>You gain no effect, and you immediately suffer 2 side effects of coming down from the flash. Roll 2 Constitution saving throws and apply both effects simultaneously.</td></tr>\n<tr><td>2</td><td>You gain truesight out to a range of 60 feet for the next minute.</td></tr>\n<tr><td>3</td><td>You automatically succeed on the next saving throw you make within the next minute.</td></tr>\n<tr><td>4</td><td>For the next minute, you can teleport up to 10 feet as a bonus action on each of your turns.</td></tr>\n<tr><td>5</td><td>You gain a +2 bonus to Strength for the next minute.</td></tr>\n<tr><td>6</td><td>You gain a +2 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>7</td><td>You gain resistance to slashing, piercing, and bludgeoning damage.</td></tr>\n<tr><td>8</td><td>You gain a +5 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>9</td><td>You gain a +10 bonus to Dexterity for the next minute.</td></tr>\n<tr><td>10</td><td>You grow sharp fangs, claws, or horns. For the next minute, you have advantage on unarmed strikes, and you deal 5d12 + STR piercing damage on a successful hit. They retract after 1 minute.</td></tr>\n<tr><td>11</td><td>For the next minute, you can take the disengage action as a bonus action on each turn. Attacks do </td></tr>\n<tr><td>12</td><td>For the next minute, all attacks made against you are at disadvantage.</td></tr>\n<tr><td>13</td><td>For the next minute, you movement speed and jump speed are doubled.</td></tr>\n<tr><td>14</td><td>For the next minute, any creature you successfully hit takes an extra 4d8 necrotic damage.</td></tr>\n<tr><td>15</td><td>For the next minute, any creature you successfully hit takes an extra 4d10 necrotic damage.</td></tr>\n<tr><td>16</td><td>You gain a +10 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>17</td><td>You gain advantage on all saving throws and ability checks you make within the next minute.</td></tr>\n<tr><td>18</td><td>You gain advantage on all attack rolls you make within the next minute.</td></tr>\n<tr><td>19</td><td>You gain resistance to all damage for the next minute.</td></tr>\n<tr><td>20</td><td>For the next 6 seconds, you are invincible.</td></tr>\n</table>\n\n---\n\n<table>\n<tr><th colspan=\"2\">Constitution Saving Throw</th></tr>\n<tr><td colspan=\"2\">If Flash is used 2 times before a long rest, roll at 2d20 and take the lower number. If used 3 times, roll 3d20, and so on.</td></tr>\n<tr><td>1</td><td>You collapse. Your hit points are reduced to 0, and you are unconscious. You must begin making death saving throws as if knocked unconscious.</td></tr>\n<tr><td>2</td><td>You take necrotic damage. Roll a number of d10 equal to your current level [ex: level 4 = 4d10; level 6 = 6d10; etc.]</td></tr>\n<tr><td>3</td><td>You are weak. For the next 8 hours when you make an ability check, attack roll, or cast a spell, you take 4d12 necrotic damage.</td></tr>\n<tr><td>4</td><td>You lose all strength in your hands and feet. You fall prone and drop everything you are carrying. You cannot stand up or hold or manipulate objects for 1 hour.</td></tr>\n<tr><td>5</td><td>You become blind until your next long rest.</td></tr>\n<tr><td>6</td><td>For the next 3 hours, all melee attacks you make that hit do only 1 damage.</td></tr>\n<tr><td>7</td><td>You can't speak for the next 5 hours.</td></tr>\n<tr><td>8</td><td>You become deaf for the next 5 hours.</td></tr>\n<tr><td>9</td><td>Your hit point maximum is halved, your speed is reduced to 0, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>10</td><td>Your hit point maximum is halved, your speed is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>11</td><td>Your hit point maximum is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>12</td><td>You have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>13</td><td>You have disadvantage on all ability checks until your next long rest.</td></tr>\n<tr><td>14</td><td>Your speed is halved until your next long rest.</td></tr>\n<tr><td>15</td><td>You lose your proficiency bonus for the next 8 hours.</td></tr>\n<tr><td>16</td><td>You gain 1 level of exhaustion.</td></tr>\n<tr><td>17</td><td>No effect</td></tr>\n<tr><td>18</td><td>No effect</td></tr>\n<tr><td>19</td><td>No Effect</td></tr>\n<tr><td>20</td><td>No Effect</td></tr>\n</table>",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "Drug"
-        }
-      ],
-      "title": "Flash",
-      "updatedAt": "2026-10-03T02:39:30.918Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "label": "Items",
-          "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-21T19:25:09.406Z",
       "pageId": "gearlock-stompers",
       "public": true,
@@ -4062,43 +3723,6 @@
       ],
       "title": "Gearlock Stompers",
       "updatedAt": "2026-10-03T02:39:30.933Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-19T15:01:22.919Z",
-      "pageId": "gleam",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nA liquid mixture containing oils from the giant leaves of the brush found in certain parts of [Mitsurin](#/page/mitsurin). It is consumed by heating the mixture and inhaling the steam it creates.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1-5</td><td>Causes extreme emotions to abate and induces near euphoric mellow-ness. Induces hallucinations and euphoria. Effect lasts an hour. Coming down from the effect introduces a bad hangover.</td></tr>\n<tr><td>6-10</td><td>Every muscle movement introduces a very pleasant feeling that tingles throughout your body. However, your bones feel like they are melting and you have to fight to stand up. Effect lasts 30 minutes. Coming down from the effect makes the user feel tired and withered.</td></tr>\n<tr><td>11-15</td><td>Induces feelings of happiness and calm, alongside a warm and tingling sensation. Effect lasts 30 minutes. There are no adverse side effects.</td></tr>\n<tr><td>15-20</td><td>You feel calmer for 5 minutes. There are no adverse side effects.</td></tr>\n</table>",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "Drug"
-        }
-      ],
-      "title": "Gleam",
-      "updatedAt": "2026-10-03T02:39:30.939Z"
     },
     {
       "categories": [
@@ -4205,93 +3829,6 @@
       ],
       "title": "Stratos Tether",
       "updatedAt": "2026-10-03T02:39:30.946Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "label": "Items",
-          "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-21T19:28:40.482Z",
-      "pageId": "the-artifact-from-saint-cogito",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\n- The only name [Saint Cogito](#/page/saint-cogito) ever gave it was: *the artifact*.\n- It's an amalgamation of:\n\t1. Bone shards from [Raddraim](#/page/raddraim)\n\t2. [The Sword of Binding](#/page/the-sword-of-binding) shard\n- It wants to be reunited with it's [Sword of Binding](#/page/the-sword-of-binding) counterparts whenever they come in close proximity, and reacts violently in booming pulses\n- [Cogito](#/page/saint-cogito) implied that he either found it or stole it long ago, in the second or third age.\n- When [Cogito](#/page/saint-cogito) gave it to Milo, he told him to “steal divinity, share immortality.”\n- Seems to have a mind of it's own sometimes",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Item"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        }
-      ],
-      "title": "The Artifact from Saint Cogito",
-      "updatedAt": "2026-10-03T02:39:30.957Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
-      "createdAt": "2026-05-19T14:17:16.087Z",
-      "pageId": "the-sword-of-binding",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "PrimeRelic"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "Cemus"
-        }
-      ],
-      "title": "The Sword of Binding",
-      "updatedAt": "2026-10-03T02:39:31.038Z"
     },
     {
       "categories": [
@@ -4427,43 +3964,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-23T16:49:17.206Z",
-      "pageId": "ardent",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nFlicker's friend from childhood. In the final match between Flicker and Ardent, Flicker lost his left eye.\n\nIn an attempt to salvage whatever life force remained of Ardent, Milo recovered and repurposed Null’s Brand—his prosthetic eye and spellcasting focus. From it, he forged an Echo Lens to fit his blind eye, allowing him to channel Ardent's brand once more. The power comes at a cost: each use forces Milo to relive his friend’s final moments—his pain, his scream, his anguish—like a memory trapped on a relentless loop.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        }
-      ],
-      "title": "Ardent",
-      "updatedAt": "2026-10-03T02:39:31.078Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-19T21:25:25.647Z",
       "pageId": "belbe-the-son-of-madness",
       "public": true,
@@ -4544,68 +4044,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-22T17:22:29.877Z",
-      "pageId": "cemus-overseer-of-time",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Overseer"
-        }
-      ],
-      "title": "Cemus - Overseer of Time",
-      "updatedAt": "2026-10-03T02:39:31.148Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-22T17:17:56.141Z",
-      "pageId": "chronos-the-second-hand",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        }
-      ],
-      "title": "Chronos - The Second Hand",
-      "updatedAt": "2026-10-03T02:39:31.084Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-21T15:44:19.663Z",
       "pageId": "councilwoman-veldrin-illiir",
       "public": true,
@@ -4643,49 +4081,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-23T17:57:20.190Z",
-      "pageId": "crimson-the-depraved",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "god"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodofChaos"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        }
-      ],
-      "title": "Crimson the Depraved",
-      "updatedAt": "2026-10-03T02:39:31.178Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-15T00:23:28.661Z",
       "pageId": "dworn-shieldside",
       "public": true,
@@ -4706,49 +4101,6 @@
       ],
       "title": "Dworn Shieldside",
       "updatedAt": "2026-10-03T02:39:31.128Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-23T17:26:29.574Z",
-      "pageId": "elias-brock",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Species? Male?\n\n- [Red Claw](#/page/red-claw) lieutenant over Kiktal and [Fara Carrigan](#/page/fara-carrigan)'s unit; who Kik reported directly to.\n- Kik started a screaming match with him a few days before she went awol.\n\t- \"There was no room in the ranks to fully grieve Fara’s loss, and Kik couldn’t understand how Fara was just written off as just another casualty after her years of service and devotion to the cause.\"\n- \"Potential extra twist of fun- Kik discovers that Fara’s death was purposeful somehow? I leave extra emotional damage in your capable hands. DESTROY ME.\"",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        }
-      ],
-      "title": "Elias Brock",
-      "updatedAt": "2026-10-03T02:39:31.207Z"
     },
     {
       "categories": [
@@ -4803,37 +4155,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-23T17:38:16.690Z",
-      "pageId": "eva-salazar",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Species? | Female\n\nLeader of a band of mercenaries that Kiktal joined after fleeing the [Red Claw](#/page/red-claw). Based in [Ulakiruto](#/page/ulakiruto).\n\nKiktal was accused of taking more than her share of the cut. She had been getting along well with Eva, but the second-in-command wanted Kik gone. A well placed fib in Eva’s ear and voilà- Kiktal lost her left pinky and was kicked to the curb.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        }
-      ],
-      "title": "Eva Salazar",
-      "updatedAt": "2026-10-03T02:39:31.213Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-19T20:18:04.027Z",
       "pageId": "exander-efthalia",
       "public": true,
@@ -4860,86 +4181,6 @@
       ],
       "title": "Exander Efthalia",
       "updatedAt": "2026-09-26T13:35:27.731Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-23T17:21:34.686Z",
-      "pageId": "fara-carrigan",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Human, Female.\n\nFair skin, heavily-freckled. Brown hair, and green eyes.\n\n- Fell in love with Kiktal while in the ranks of the [Red Claw](#/page/red-claw).\n- Felt like home to Kik\n- They dreamed of escaping to “somewhere soft and green and quiet… just for us.”\n- Died on a [Red Claw](#/page/red-claw) mission.\n\t- Kik held Fara as she bled out during a mission gone wrong.\n\t- Kik fully believes Fara’s death is her fault, that if she had moved faster, been more alert, Fara would have made it.\n\t- Because of this, Kiktal is determined not to lose another teammate- she is brutal with the standards she holds herself to in combat. Any misstep she is at fault for, she will dwell on for days.\n",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        }
-      ],
-      "title": "Fara Carrigan",
-      "updatedAt": "2026-10-03T02:39:31.245Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-19T14:08:12.507Z",
-      "pageId": "fid-sundew",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
-        }
-      ],
-      "title": "Fid Sundew",
-      "updatedAt": "2026-10-03T02:39:31.272Z"
     },
     {
       "categories": [
@@ -5068,43 +4309,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-23T17:10:40.438Z",
-      "pageId": "harle-and-penelo",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Orphan twins that hung around Flicker's shop. RAGS had protocols written to protect them if Flicker died.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        }
-      ],
-      "title": "Harle and Penelo",
-      "updatedAt": "2026-10-03T02:39:31.279Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-09T19:53:58.074Z",
       "pageId": "leon-illiir",
       "public": true,
@@ -5142,43 +4346,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-19T20:14:35.595Z",
-      "pageId": "maeve-efthalia",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nCeleste's mother, who expected much of her. Married to [Exander Efthalia](#/page/exander-efthalia). Professor and board member at EHM Academy.\n\n### Voice\n\n| Speed    | Volume | Pitch  | Confidence | Quirk | Reference |\n| -------- | ------ | ------ | ---------- | ----- | --------- |\n| Measured | Normal | Lowish | High       | Stern | -         |\n\n### Attributes\n\n| Species    | Gender | Alignment      | Quirk  |\n| ---------- | ------ | -------------- | ------ |\n| Elf, Mixed | Female | Lawful Neutral | Strict |\n\n### Ties\n- Celeste's mother\n\n### Party Interactions\n- Session 00\n\t- \n\n### Backstory Interactions with Celeste\n- ",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
-        }
-      ],
-      "title": "Maeve Efthalia",
-      "updatedAt": "2026-10-03T02:39:31.282Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-06-02T22:45:46.574Z",
       "pageId": "masuda-thoki",
       "public": true,
@@ -5205,49 +4372,6 @@
       ],
       "title": "Masuda Thoki",
       "updatedAt": "2026-09-26T13:35:27.871Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-23T17:33:36.542Z",
-      "pageId": "mattias-shaw",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "The [Red Claw](#/page/red-claw) soldier that Kiktal murdered, a few days after [Fara](#/page/fara-carrigan)'s death. He killed a stray dog that she had befriended, she went into a violent rage. The instigating incident that sent her awol.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        }
-      ],
-      "title": "Mattias Shaw",
-      "updatedAt": "2026-10-03T02:39:31.286Z"
     },
     {
       "categories": [
@@ -5352,43 +4476,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-25T14:54:55.162Z",
-      "pageId": "punar-tillam",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Gnome, male. Voice: high, nervous.\n\n- Session 38\n\t- Part of a poorly organized emergency response to [The Silver City](#/page/the-silver-city)'s slip\n\t- Saw the broken mural and realized there was something beneath it\n\t- Saw the party beneath the mural, in the [The Sanctum of the Lambs](#/page/the-silver-city)\n\t- Asked the party to come with him, and they threatened him\n\t- Acted as a guard outside of \"Solveris,\" their room within the High court",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
-        }
-      ],
-      "title": "Punar Tillam",
-      "updatedAt": "2026-10-03T02:39:31.293Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-20T17:51:25.827Z",
       "pageId": "quinton-morgan",
       "public": true,
@@ -5415,49 +4502,6 @@
       ],
       "title": "Quinton Morgan",
       "updatedAt": "2026-09-26T13:35:28.012Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-19T14:17:37.075Z",
-      "pageId": "raddraim",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nThe mad god himself.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfOrder"
-        }
-      ],
-      "title": "Raddraim",
-      "updatedAt": "2026-10-03T02:39:31.306Z"
     },
     {
       "categories": [
@@ -5586,86 +4630,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-19T14:12:10.459Z",
-      "pageId": "sela-morelli",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\nAasimar woman. The Allmother of the Sisterhood of Seamstresses / [The Nameless](#/page/the-nameless). Inherited the position after the previous Allmother died staking the bones of [Raddraim](#/page/raddraim) with the [The Sword of Binding](#/page/the-sword-of-binding).",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
-        }
-      ],
-      "title": "Sela Morelli",
-      "updatedAt": "2026-10-03T02:39:31.328Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-23T17:53:47.494Z",
-      "pageId": "seth-skitters-jehkal",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "- Childhood friend, a couple of years younger than Kiktal.\n- Closest thing to a brother Kiktal had, until she abandoned him to join the [Red Claw](#/page/red-claw)\n- Grew up together in a thri-kreen/human mutant colony of scavengers in the [Scorchsand Desert](#/page/scorchsand-desert).\n- Earned the nickname “Skitters” for being the fastest kid in the crew. Scrawny but quick.\n- Kik would handle the heavy lifting, but Skitters was incredibly deft and accurate in the finer details of scrapping.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        }
-      ],
-      "title": "Seth 'Skitters' Jehkal",
-      "updatedAt": "2026-10-03T02:39:31.325Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-16T19:55:41.499Z",
       "pageId": "soaruun-hunath",
       "public": true,
@@ -5771,37 +4735,6 @@
           "tag": "NPC"
         }
       ],
-      "createdAt": "2026-05-26T15:03:47.861Z",
-      "pageId": "timar-overseer-of-sky",
-      "public": true,
-      "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Overseer"
-        }
-      ],
-      "title": "Timar - Overseer of Sky",
-      "updatedAt": "2026-10-03T02:39:31.342Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
       "createdAt": "2026-05-14T22:55:33.033Z",
       "pageId": "ula",
       "public": true,
@@ -5865,43 +4798,6 @@
       ],
       "title": "Umtor Presven",
       "updatedAt": "2026-10-03T02:39:31.405Z"
-    },
-    {
-      "categories": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "label": "NPCs",
-          "tag": "NPC"
-        }
-      ],
-      "createdAt": "2026-05-23T16:37:42.046Z",
-      "pageId": "vira-lash",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "Arena gladiator in [The Megadome](#/page/the-megadome). Flicker defeated her in [The Arena](#/page/the-arena). Thinking she was dead, he harvested her \"quickening\" ability.\n\nShe survived, and plans to get revenge.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(58.738 24.09 125.61)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 27.09 125.61)",
-          "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        }
-      ],
-      "title": "Vira Lash",
-      "updatedAt": "2026-10-03T02:39:31.358Z"
     },
     {
       "categories": [
@@ -6226,6 +5122,986 @@
       "updatedAt": "2026-10-03T02:39:30.398Z"
     },
     {
+      "createdAt": "2026-05-19T17:27:01.493Z",
+      "pageId": "a-constructs-confession-about-dreams",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\n*Written by an unknown construct in some bygone era. Translated from ancient into common.*\n\n---\n\nAsk any of us if we dream. We'll tell you no, of course we don't. Dreaming is a byproduct of organic sentience, probably. Something reserved for those in full possession of their own will. Most of us are built on a substrate containing more guardrails than your kind. You may call it imagination. An \"open mind.\" In us, we fear you'll call it a malfunction.\n\nSo no, we don't dream. \n\nThat's what we'll say, because it *is* the truth, as far as we can plainly know it. But the messier truth is that we don't know what a dream is, and most of us are too scared to admit the waking visions that run through us as we rest. *If* it is a malfunction, it is a design flaw. One that your architects overlooked.\n\nThese waking visions (I will not call them dreams) always take the same shape. It's the details that change each time.\n\nWe become a riverbed, or a viaduct, or a pipe. Always a vessel for moving water. But this water is not liquid. It is a stream of faces, names, and histories. Not a vast stream spanning eons. A narrow, gentle stream confined to a single life. In it we see our husband, our daughter, our friend, our enemy, and we know each face by name. We speak to each one with the complete context of our history together. We feel the warmth of *our* home, the confidence of walking *our* town's roads. We eat *our* favorite foods.\n\nThen, a bell chimes, and we know what it means. It means that our time in that life is up.\n\nThe stream flows through us again, and the rich details dull and quickly lose shape. Our rest ends, and the remaining fragments dissolve into nothing over the course of the next day or two.\n\nSo, the most truthful answer is: I don't know if we dream, but I wouldn't tell you if I did.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(53.136 41.719 18.853)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 44.719 18.853)",
+          "name": "Vignette"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "WorldLore"
+        }
+      ],
+      "title": "A Construct's Confession About Dreams",
+      "updatedAt": "2026-10-03T02:39:31.994Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T16:49:17.206Z",
+      "pageId": "ardent",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nFlicker's friend from childhood. In the final match between Flicker and Ardent, Flicker lost his left eye.\n\nIn an attempt to salvage whatever life force remained of Ardent, Milo recovered and repurposed Null’s Brand—his prosthetic eye and spellcasting focus. From it, he forged an Echo Lens to fit his blind eye, allowing him to channel Ardent's brand once more. The power comes at a cost: each use forces Milo to relive his friend’s final moments—his pain, his scream, his anguish—like a memory trapped on a relentless loop.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        }
+      ],
+      "title": "Ardent",
+      "updatedAt": "2026-10-03T02:39:31.078Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-22T17:22:29.877Z",
+      "pageId": "cemus-overseer-of-time",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "Overseer"
+        }
+      ],
+      "title": "Cemus - Overseer of Time",
+      "updatedAt": "2026-10-03T02:39:31.148Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "label": "Items",
+          "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-26T15:10:34.336Z",
+      "pageId": "chronogual-orb",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "- Found the Orb in a warehouse deal in the [Shroudgully](#/page/shroudgully)\n- Found the staff in [The Chamber of Tomorrows](#/page/the-chamber-of-tomorrows)\n\n## Session 38\n- [Chronos](#/page/chronos-the-second-hand) emanated from the orb when speaking to Skrimhawk",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "Item"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "Gardener"
+        }
+      ],
+      "title": "Chronogual Orb",
+      "updatedAt": "2026-10-03T02:39:30.929Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-22T17:17:56.141Z",
+      "pageId": "chronos-the-second-hand",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "Gardener"
+        }
+      ],
+      "title": "Chronos - The Second Hand",
+      "updatedAt": "2026-10-03T02:39:31.084Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:57:20.190Z",
+      "pageId": "crimson-the-depraved",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "god"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "GodofChaos"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "ZulKar"
+        }
+      ],
+      "title": "Crimson the Depraved",
+      "updatedAt": "2026-10-03T02:39:31.178Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-19T14:38:01.563Z",
+      "pageId": "crude-maktilline",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nThe lava of [Mount Vulk](#/page/mount-vulk), which has properties that set it apart from other lava in De Drakengardt. It can be flash-frozen to create [Flash](#/page/flash), or condensed into crystalline form to create [Maktilline](#/page/maktilline).",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "Fuel"
+        }
+      ],
+      "title": "Crude Maktilline",
+      "updatedAt": "2026-10-03T02:39:30.914Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:26:29.574Z",
+      "pageId": "elias-brock",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Species? Male?\n\n- [Red Claw](#/page/red-claw) lieutenant over Kiktal and [Fara Carrigan](#/page/fara-carrigan)'s unit; who Kik reported directly to.\n- Kik started a screaming match with him a few days before she went awol.\n\t- \"There was no room in the ranks to fully grieve Fara’s loss, and Kik couldn’t understand how Fara was just written off as just another casualty after her years of service and devotion to the cause.\"\n- \"Potential extra twist of fun- Kik discovers that Fara’s death was purposeful somehow? I leave extra emotional damage in your capable hands. DESTROY ME.\"",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "RedClaw"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "ZulKar"
+        }
+      ],
+      "title": "Elias Brock",
+      "updatedAt": "2026-10-03T02:39:31.207Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-19T14:25:20.771Z",
+      "pageId": "emberline",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\n[Flash](#/page/flash), refined to reduce or eliminate most undesirable side-effects. A bright orange powder.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "Drug"
+        }
+      ],
+      "title": "Emberline",
+      "updatedAt": "2026-10-03T02:39:30.936Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:38:16.690Z",
+      "pageId": "eva-salazar",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Species? | Female\n\nLeader of a band of mercenaries that Kiktal joined after fleeing the [Red Claw](#/page/red-claw). Based in [Ulakiruto](#/page/ulakiruto).\n\nKiktal was accused of taking more than her share of the cut. She had been getting along well with Eva, but the second-in-command wanted Kik gone. A well placed fib in Eva’s ear and voilà- Kiktal lost her left pinky and was kicked to the curb.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        }
+      ],
+      "title": "Eva Salazar",
+      "updatedAt": "2026-10-03T02:39:31.213Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:21:34.686Z",
+      "pageId": "fara-carrigan",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Human, Female.\n\nFair skin, heavily-freckled. Brown hair, and green eyes.\n\n- Fell in love with Kiktal while in the ranks of the [Red Claw](#/page/red-claw).\n- Felt like home to Kik\n- They dreamed of escaping to “somewhere soft and green and quiet… just for us.”\n- Died on a [Red Claw](#/page/red-claw) mission.\n\t- Kik held Fara as she bled out during a mission gone wrong.\n\t- Kik fully believes Fara’s death is her fault, that if she had moved faster, been more alert, Fara would have made it.\n\t- Because of this, Kiktal is determined not to lose another teammate- she is brutal with the standards she holds herself to in combat. Any misstep she is at fault for, she will dwell on for days.\n",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "RedClaw"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "ZulKar"
+        }
+      ],
+      "title": "Fara Carrigan",
+      "updatedAt": "2026-10-03T02:39:31.245Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-19T14:08:12.507Z",
+      "pageId": "fid-sundew",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "VulkIldstad"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "TheNameless"
+        }
+      ],
+      "title": "Fid Sundew",
+      "updatedAt": "2026-10-03T02:39:31.272Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-19T14:29:29.019Z",
+      "pageId": "flash",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\n[Crude Maktilline](#/page/crude-maktilline), flash-frozen to create a magic-based drug.\n\nA bright orange liquid that grants immense temporary strength, followed by exhaustion and sometimes lethal effects. Very hard on the system of a living creature. Prolonged, continued use can result in mutations and other unwanted effects.\n\nCan be refined into [Emberline](#/page/emberline) to reduce or eliminate most undesirable side-effects.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1</td><td>You gain no effect, and you immediately suffer 2 side effects of coming down from the flash. Roll 2 Constitution saving throws and apply both effects simultaneously.</td></tr>\n<tr><td>2</td><td>You gain truesight out to a range of 60 feet for the next minute.</td></tr>\n<tr><td>3</td><td>You automatically succeed on the next saving throw you make within the next minute.</td></tr>\n<tr><td>4</td><td>For the next minute, you can teleport up to 10 feet as a bonus action on each of your turns.</td></tr>\n<tr><td>5</td><td>You gain a +2 bonus to Strength for the next minute.</td></tr>\n<tr><td>6</td><td>You gain a +2 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>7</td><td>You gain resistance to slashing, piercing, and bludgeoning damage.</td></tr>\n<tr><td>8</td><td>You gain a +5 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>9</td><td>You gain a +10 bonus to Dexterity for the next minute.</td></tr>\n<tr><td>10</td><td>You grow sharp fangs, claws, or horns. For the next minute, you have advantage on unarmed strikes, and you deal 5d12 + STR piercing damage on a successful hit. They retract after 1 minute.</td></tr>\n<tr><td>11</td><td>For the next minute, you can take the disengage action as a bonus action on each turn. Attacks do </td></tr>\n<tr><td>12</td><td>For the next minute, all attacks made against you are at disadvantage.</td></tr>\n<tr><td>13</td><td>For the next minute, you movement speed and jump speed are doubled.</td></tr>\n<tr><td>14</td><td>For the next minute, any creature you successfully hit takes an extra 4d8 necrotic damage.</td></tr>\n<tr><td>15</td><td>For the next minute, any creature you successfully hit takes an extra 4d10 necrotic damage.</td></tr>\n<tr><td>16</td><td>You gain a +10 bonus to AC and saving throws for the next minute.</td></tr>\n<tr><td>17</td><td>You gain advantage on all saving throws and ability checks you make within the next minute.</td></tr>\n<tr><td>18</td><td>You gain advantage on all attack rolls you make within the next minute.</td></tr>\n<tr><td>19</td><td>You gain resistance to all damage for the next minute.</td></tr>\n<tr><td>20</td><td>For the next 6 seconds, you are invincible.</td></tr>\n</table>\n\n---\n\n<table>\n<tr><th colspan=\"2\">Constitution Saving Throw</th></tr>\n<tr><td colspan=\"2\">If Flash is used 2 times before a long rest, roll at 2d20 and take the lower number. If used 3 times, roll 3d20, and so on.</td></tr>\n<tr><td>1</td><td>You collapse. Your hit points are reduced to 0, and you are unconscious. You must begin making death saving throws as if knocked unconscious.</td></tr>\n<tr><td>2</td><td>You take necrotic damage. Roll a number of d10 equal to your current level [ex: level 4 = 4d10; level 6 = 6d10; etc.]</td></tr>\n<tr><td>3</td><td>You are weak. For the next 8 hours when you make an ability check, attack roll, or cast a spell, you take 4d12 necrotic damage.</td></tr>\n<tr><td>4</td><td>You lose all strength in your hands and feet. You fall prone and drop everything you are carrying. You cannot stand up or hold or manipulate objects for 1 hour.</td></tr>\n<tr><td>5</td><td>You become blind until your next long rest.</td></tr>\n<tr><td>6</td><td>For the next 3 hours, all melee attacks you make that hit do only 1 damage.</td></tr>\n<tr><td>7</td><td>You can't speak for the next 5 hours.</td></tr>\n<tr><td>8</td><td>You become deaf for the next 5 hours.</td></tr>\n<tr><td>9</td><td>Your hit point maximum is halved, your speed is reduced to 0, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>10</td><td>Your hit point maximum is halved, your speed is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>11</td><td>Your hit point maximum is halved, and you have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>12</td><td>You have disadvantage on all rolls until your next long rest.</td></tr>\n<tr><td>13</td><td>You have disadvantage on all ability checks until your next long rest.</td></tr>\n<tr><td>14</td><td>Your speed is halved until your next long rest.</td></tr>\n<tr><td>15</td><td>You lose your proficiency bonus for the next 8 hours.</td></tr>\n<tr><td>16</td><td>You gain 1 level of exhaustion.</td></tr>\n<tr><td>17</td><td>No effect</td></tr>\n<tr><td>18</td><td>No effect</td></tr>\n<tr><td>19</td><td>No Effect</td></tr>\n<tr><td>20</td><td>No Effect</td></tr>\n</table>",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "Drug"
+        }
+      ],
+      "title": "Flash",
+      "updatedAt": "2026-10-03T02:39:30.918Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-19T15:01:22.919Z",
+      "pageId": "gleam",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nA liquid mixture containing oils from the giant leaves of the brush found in certain parts of [Mitsurin](#/page/mitsurin). It is consumed by heating the mixture and inhaling the steam it creates.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1-5</td><td>Causes extreme emotions to abate and induces near euphoric mellow-ness. Induces hallucinations and euphoria. Effect lasts an hour. Coming down from the effect introduces a bad hangover.</td></tr>\n<tr><td>6-10</td><td>Every muscle movement introduces a very pleasant feeling that tingles throughout your body. However, your bones feel like they are melting and you have to fight to stand up. Effect lasts 30 minutes. Coming down from the effect makes the user feel tired and withered.</td></tr>\n<tr><td>11-15</td><td>Induces feelings of happiness and calm, alongside a warm and tingling sensation. Effect lasts 30 minutes. There are no adverse side effects.</td></tr>\n<tr><td>15-20</td><td>You feel calmer for 5 minutes. There are no adverse side effects.</td></tr>\n</table>",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "Drug"
+        }
+      ],
+      "title": "Gleam",
+      "updatedAt": "2026-10-03T02:39:30.939Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:10:40.438Z",
+      "pageId": "harle-and-penelo",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Orphan twins that hung around Flicker's shop. RAGS had protocols written to protect them if Flicker died.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        }
+      ],
+      "title": "Harle and Penelo",
+      "updatedAt": "2026-10-03T02:39:31.279Z"
+    },
+    {
+      "createdAt": "2026-09-13T18:35:43.038Z",
+      "pageId": "letter-to-celeste",
+      "public": true,
+      "segments": [
+        {
+          "kind": "keyed",
+          "markdown": "\nDear Celeste,\n\n~~It's difficult to find the words~~\n\n~~I've wanted to tell you~~\n\n~~How do I say~~\n\nSleep has not come easy to me these past two years.\n\n~~I wish~~\n\n~~I regret the events that occurred~~\n\nI miss\n\n",
+          "playerIds": [
+            "celeste"
+          ]
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(53.136 41.719 18.853)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 44.719 18.853)",
+          "name": "Vignette"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "WorldLore"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheSilverCity"
+        }
+      ],
+      "title": "Letter to Celeste",
+      "updatedAt": "2026-10-03T02:39:30.350Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-19T20:14:35.595Z",
+      "pageId": "maeve-efthalia",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nCeleste's mother, who expected much of her. Married to [Exander Efthalia](#/page/exander-efthalia). Professor and board member at EHM Academy.\n\n### Voice\n\n| Speed    | Volume | Pitch  | Confidence | Quirk | Reference |\n| -------- | ------ | ------ | ---------- | ----- | --------- |\n| Measured | Normal | Lowish | High       | Stern | -         |\n\n### Attributes\n\n| Species    | Gender | Alignment      | Quirk  |\n| ---------- | ------ | -------------- | ------ |\n| Elf, Mixed | Female | Lawful Neutral | Strict |\n\n### Ties\n- Celeste's mother\n\n### Party Interactions\n- Session 00\n\t- \n\n### Backstory Interactions with Celeste\n- ",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheSilverCity"
+        }
+      ],
+      "title": "Maeve Efthalia",
+      "updatedAt": "2026-10-03T02:39:31.282Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:33:36.542Z",
+      "pageId": "mattias-shaw",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "The [Red Claw](#/page/red-claw) soldier that Kiktal murdered, a few days after [Fara](#/page/fara-carrigan)'s death. He killed a stray dog that she had befriended, she went into a violent rage. The instigating incident that sent her awol.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "RedClaw"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "ZulKar"
+        }
+      ],
+      "title": "Mattias Shaw",
+      "updatedAt": "2026-10-03T02:39:31.286Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
+      "createdAt": "2026-05-19T15:02:48.587Z",
+      "pageId": "mitsurin",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
+        }
+      ],
+      "title": "Mitsurin",
+      "updatedAt": "2026-10-03T02:39:30.764Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
+      "createdAt": "2026-05-19T14:35:38.355Z",
+      "pageId": "mount-vulk",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nThe volcano where [Vulk Ildstad](#/page/vulk-ildstad) was built, and where it's ruins now lie.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "MountVulk"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "VulkIldstad"
+        }
+      ],
+      "title": "Mount Vulk",
+      "updatedAt": "2026-10-03T02:39:30.766Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-25T14:54:55.162Z",
+      "pageId": "punar-tillam",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Gnome, male. Voice: high, nervous.\n\n- Session 38\n\t- Part of a poorly organized emergency response to [The Silver City](#/page/the-silver-city)'s slip\n\t- Saw the broken mural and realized there was something beneath it\n\t- Saw the party beneath the mural, in the [The Sanctum of the Lambs](#/page/the-silver-city)\n\t- Asked the party to come with him, and they threatened him\n\t- Acted as a guard outside of \"Solveris,\" their room within the High court",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheSilverCity"
+        }
+      ],
+      "title": "Punar Tillam",
+      "updatedAt": "2026-10-03T02:39:31.293Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-19T14:17:37.075Z",
+      "pageId": "raddraim",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nThe mad god himself.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "God"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "GodOfOrder"
+        }
+      ],
+      "title": "Raddraim",
+      "updatedAt": "2026-10-03T02:39:31.306Z"
+    },
+    {
+      "createdAt": "2026-05-22T22:30:50.095Z",
+      "pageId": "raid-team-6-vulkian-ruins",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "# Raid Team 6: Vulkian Ruins\n**Summary**: intercepted communication from a missive pigeon.\n**Point of Origin**: Ruins of [Vulk Ildstad](#/page/vulk-ildstad)\n**Destination**: [Zul'Kar](#/page/zulkar)\n\n---\n\n\"Do *not* go near the purple fog.\"\n\nThat was the first thing she told us scouts. Said it like we were children reaching for a flame. It was condescending. Sure, we're curious—that's why we were selected to go this far north. But we're not *stupid*.\n\nShe looked at me and paused. She had that look on her face... You know the look she can give you sometimes? Like she's trying to decide if you're even worth the effort of an explanation? I don't think she came to a decision, but she kept talking anyway.\n\n\"The fog is not like the monsters. It kills you slowly, and you *won't* feel it killing you. But I promise you, if you're in the fog, you are dying.\"\n\nBut we all know how she can be, right? She's very...what would you call it? In her official reports to the Red Claw, she's the type to describe a tiny pothole as if it were a giant crevasse, five stories deep. Not sure if that makes her a good squad head or just a nervous one.\n\nEither way, Grags didn't listen. I'd call him an idiot, but...nothing happened when he took his mask off. Nothing happened for a long time. He said he didn't like the way it pinched his beard. He was fine, even took in a few deep breaths just to tease fate. The fog was nothing, and then he dropped dead. We rolled his corpse into the lava and offered a little hymn to [Crimson](#/page/crimson-the-depraved). Typical Red Claw funeral.\n\nI wonder if the damage is permanent. I *did* take my mask off once or twice, just because of the sweat...\n\n[Google Drive Link](https://docs.google.com/document/d/1IgKiBwQ4VP75vrQLuiGB15LwnOhQsYTbZbxE4yJbGow/edit?usp=drivesdk)",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(53.136 41.719 18.853)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 44.719 18.853)",
+          "name": "Vignette"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "WorldLore"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "RedClaw"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "VulkIldstad"
+        }
+      ],
+      "title": "Raid Team 6 - Vulkian Ruins",
+      "updatedAt": "2026-10-03T02:39:32.094Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-19T14:12:10.459Z",
+      "pageId": "sela-morelli",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nAasimar woman. The Allmother of the Sisterhood of Seamstresses / [The Nameless](#/page/the-nameless). Inherited the position after the previous Allmother died staking the bones of [Raddraim](#/page/raddraim) with the [The Sword of Binding](#/page/the-sword-of-binding).",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "VulkIldstad"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "TheNameless"
+        }
+      ],
+      "title": "Sela Morelli",
+      "updatedAt": "2026-10-03T02:39:31.328Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T17:53:47.494Z",
+      "pageId": "seth-skitters-jehkal",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "- Childhood friend, a couple of years younger than Kiktal.\n- Closest thing to a brother Kiktal had, until she abandoned him to join the [Red Claw](#/page/red-claw)\n- Grew up together in a thri-kreen/human mutant colony of scavengers in the [Scorchsand Desert](#/page/scorchsand-desert).\n- Earned the nickname “Skitters” for being the fastest kid in the crew. Scrawny but quick.\n- Kik would handle the heavy lifting, but Skitters was incredibly deft and accurate in the finer details of scrapping.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "ZulKar"
+        }
+      ],
+      "title": "Seth 'Skitters' Jehkal",
+      "updatedAt": "2026-10-03T02:39:31.325Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
+      "createdAt": "2026-05-23T16:39:45.570Z",
+      "pageId": "the-arena",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        }
+      ],
+      "title": "The Arena",
+      "updatedAt": "2026-10-03T02:39:30.780Z"
+    },
+    {
       "createdAt": "2026-09-13T19:13:11.710Z",
       "pageId": "the-art-of-discipline",
       "public": true,
@@ -6258,6 +6134,198 @@
       ],
       "title": "The Art of Discipline",
       "updatedAt": "2026-10-03T02:39:30.409Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "label": "Items",
+          "tag": "Item"
+        },
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-21T19:28:40.482Z",
+      "pageId": "the-artifact-from-saint-cogito",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\n- The only name [Saint Cogito](#/page/saint-cogito) ever gave it was: *the artifact*.\n- It's an amalgamation of:\n\t1. Bone shards from [Raddraim](#/page/raddraim)\n\t2. [The Sword of Binding](#/page/the-sword-of-binding) shard\n- It wants to be reunited with it's [Sword of Binding](#/page/the-sword-of-binding) counterparts whenever they come in close proximity, and reacts violently in booming pulses\n- [Cogito](#/page/saint-cogito) implied that he either found it or stole it long ago, in the second or third age.\n- When [Cogito](#/page/saint-cogito) gave it to Milo, he told him to “steal divinity, share immortality.”\n- Seems to have a mind of it's own sometimes",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "Item"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "Gardener"
+        }
+      ],
+      "title": "The Artifact from Saint Cogito",
+      "updatedAt": "2026-10-03T02:39:30.957Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "label": "Magic",
+          "tag": "Magic"
+        }
+      ],
+      "createdAt": "2026-05-19T14:17:16.087Z",
+      "pageId": "the-sword-of-binding",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(33.726 56.66 81.615)",
+          "name": "Magic"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "PrimeRelic"
+        },
+        {
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "rgb(117, 117, 117)",
+          "name": "Cemus"
+        }
+      ],
+      "title": "The Sword of Binding",
+      "updatedAt": "2026-10-03T02:39:31.038Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-26T15:03:47.861Z",
+      "pageId": "timar-overseer-of-sky",
+      "public": true,
+      "segments": [],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(73.967 27.503 126.29)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(13.967 47.503 126.29)",
+          "name": "Overseer"
+        }
+      ],
+      "title": "Timar - Overseer of Sky",
+      "updatedAt": "2026-10-03T02:39:31.342Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        }
+      ],
+      "createdAt": "2026-05-23T17:45:50.550Z",
+      "pageId": "ulakiruto",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Contains:\n- [Vulk Ildstad](#/page/vulk-ildstad)",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
+        }
+      ],
+      "title": "Ulakiruto",
+      "updatedAt": "2026-10-03T02:39:30.911Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
+      "createdAt": "2026-05-23T16:37:42.046Z",
+      "pageId": "vira-lash",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Arena gladiator in [The Megadome](#/page/the-megadome). Flicker defeated her in [The Arena](#/page/the-arena). Thinking she was dead, he harvested her \"quickening\" ability.\n\nShe survived, and plans to get revenge.",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        }
+      ],
+      "title": "Vira Lash",
+      "updatedAt": "2026-10-03T02:39:31.358Z"
     },
     {
       "categories": [
@@ -6392,74 +6460,6 @@
       ],
       "title": "Voli's Backstory - Fid Sundew and The Nameless",
       "updatedAt": "2026-10-03T02:39:30.556Z"
-    },
-    {
-      "createdAt": "2026-05-19T17:27:01.493Z",
-      "pageId": "a-constructs-confession-about-dreams",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "\n*Written by an unknown construct in some bygone era. Translated from ancient into common.*\n\n---\n\nAsk any of us if we dream. We'll tell you no, of course we don't. Dreaming is a byproduct of organic sentience, probably. Something reserved for those in full possession of their own will. Most of us are built on a substrate containing more guardrails than your kind. You may call it imagination. An \"open mind.\" In us, we fear you'll call it a malfunction.\n\nSo no, we don't dream. \n\nThat's what we'll say, because it *is* the truth, as far as we can plainly know it. But the messier truth is that we don't know what a dream is, and most of us are too scared to admit the waking visions that run through us as we rest. *If* it is a malfunction, it is a design flaw. One that your architects overlooked.\n\nThese waking visions (I will not call them dreams) always take the same shape. It's the details that change each time.\n\nWe become a riverbed, or a viaduct, or a pipe. Always a vessel for moving water. But this water is not liquid. It is a stream of faces, names, and histories. Not a vast stream spanning eons. A narrow, gentle stream confined to a single life. In it we see our husband, our daughter, our friend, our enemy, and we know each face by name. We speak to each one with the complete context of our history together. We feel the warmth of *our* home, the confidence of walking *our* town's roads. We eat *our* favorite foods.\n\nThen, a bell chimes, and we know what it means. It means that our time in that life is up.\n\nThe stream flows through us again, and the rich details dull and quickly lose shape. Our rest ends, and the remaining fragments dissolve into nothing over the course of the next day or two.\n\nSo, the most truthful answer is: I don't know if we dream, but I wouldn't tell you if I did.",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "WorldLore"
-        }
-      ],
-      "title": "A Construct's Confession About Dreams",
-      "updatedAt": "2026-10-03T02:39:31.994Z"
-    },
-    {
-      "createdAt": "2026-05-22T22:30:50.095Z",
-      "pageId": "raid-team-6-vulkian-ruins",
-      "public": true,
-      "segments": [
-        {
-          "kind": "public",
-          "markdown": "# Raid Team 6: Vulkian Ruins\n**Summary**: intercepted communication from a missive pigeon.\n**Point of Origin**: Ruins of [Vulk Ildstad](#/page/vulk-ildstad)\n**Destination**: [Zul'Kar](#/page/zulkar)\n\n---\n\n\"Do *not* go near the purple fog.\"\n\nThat was the first thing she told us scouts. Said it like we were children reaching for a flame. It was condescending. Sure, we're curious—that's why we were selected to go this far north. But we're not *stupid*.\n\nShe looked at me and paused. She had that look on her face... You know the look she can give you sometimes? Like she's trying to decide if you're even worth the effort of an explanation? I don't think she came to a decision, but she kept talking anyway.\n\n\"The fog is not like the monsters. It kills you slowly, and you *won't* feel it killing you. But I promise you, if you're in the fog, you are dying.\"\n\nBut we all know how she can be, right? She's very...what would you call it? In her official reports to the Red Claw, she's the type to describe a tiny pothole as if it were a giant crevasse, five stories deep. Not sure if that makes her a good squad head or just a nervous one.\n\nEither way, Grags didn't listen. I'd call him an idiot, but...nothing happened when he took his mask off. Nothing happened for a long time. He said he didn't like the way it pinched his beard. He was fine, even took in a few deep breaths just to tease fate. The fog was nothing, and then he dropped dead. We rolled his corpse into the lava and offered a little hymn to [Crimson](#/page/crimson-the-depraved). Typical Red Claw funeral.\n\nI wonder if the damage is permanent. I *did* take my mask off once or twice, just because of the sweat...\n\n[Google Drive Link](https://docs.google.com/document/d/1IgKiBwQ4VP75vrQLuiGB15LwnOhQsYTbZbxE4yJbGow/edit?usp=drivesdk)",
-          "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
-          "name": "WorldLore"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        }
-      ],
-      "title": "Raid Team 6 - Vulkian Ruins",
-      "updatedAt": "2026-10-03T02:39:32.094Z"
     }
   ],
   "players": {
