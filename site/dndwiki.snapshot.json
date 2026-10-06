@@ -1994,9 +1994,29 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "Owl. Celeste's familiar.\n\n",
+        "markdown": "Owl. Celeste's familiar.\n\n\n",
         "pageId": "cepheus",
         "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [
+            "dm"
+          ],
+          "public": false
+        },
+        "markdown": "Hello\n\n",
+        "pageId": "cepheus",
+        "segmentIndex": 1
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\n",
+        "pageId": "cepheus",
+        "segmentIndex": 2
       },
       {
         "audience": {
@@ -2687,12 +2707,24 @@
       "segments": [
         {
           "kind": "public",
-          "markdown": "Owl. Celeste's familiar.\n\n",
+          "markdown": "Owl. Celeste's familiar.\n\n\n",
+          "playerIds": []
+        },
+        {
+          "kind": "keyed",
+          "markdown": "Hello\n\n",
+          "playerIds": [
+            "dm"
+          ]
+        },
+        {
+          "kind": "public",
+          "markdown": "\n",
           "playerIds": []
         }
       ],
       "title": "Cepheus",
-      "updatedAt": "2026-10-06T17:20:38.891Z"
+      "updatedAt": "2026-10-06T17:21:31.988Z"
     },
     {
       "categories": [
