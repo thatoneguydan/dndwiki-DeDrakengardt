@@ -2005,7 +2005,7 @@
           ],
           "public": false
         },
-        "markdown": "Hello\n\n",
+        "markdown": "Hello\n",
         "pageId": "cepheus",
         "segmentIndex": 1
       },
@@ -2712,7 +2712,7 @@
         },
         {
           "kind": "keyed",
-          "markdown": "Hello\n\n",
+          "markdown": "Hello\n",
           "playerIds": [
             "dm"
           ]
@@ -2724,7 +2724,7 @@
         }
       ],
       "title": "Cepheus",
-      "updatedAt": "2026-10-06T17:21:31.988Z"
+      "updatedAt": "2026-10-06T17:23:27.355Z"
     },
     {
       "categories": [
