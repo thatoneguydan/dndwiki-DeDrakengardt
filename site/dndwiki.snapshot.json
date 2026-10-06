@@ -3598,7 +3598,7 @@
         }
       ],
       "title": "The Sunken City - Pelotharna",
-      "updatedAt": "2026-10-03T02:39:30.868Z"
+      "updatedAt": "2026-10-06T15:04:59.825Z"
     },
     {
       "categories": [
@@ -4618,7 +4618,7 @@
         }
       ],
       "title": "Saint Cogito",
-      "updatedAt": "2026-10-03T02:39:31.298Z"
+      "updatedAt": "2026-10-06T15:04:59.729Z"
     },
     {
       "categories": [
@@ -4723,7 +4723,7 @@
         }
       ],
       "title": "The Gate Guardian",
-      "updatedAt": "2026-10-03T02:39:31.350Z"
+      "updatedAt": "2026-10-06T15:04:59.706Z"
     },
     {
       "categories": [
@@ -5140,14 +5140,14 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(13.967 47.503 126.29)",
           "name": "WorldLore"
         }
       ],
       "title": "A Construct's Confession About Dreams",
-      "updatedAt": "2026-10-03T02:39:31.994Z"
+      "updatedAt": "2026-10-06T15:04:59.538Z"
     },
     {
       "categories": [
@@ -5184,7 +5184,7 @@
         }
       ],
       "title": "Ardent",
-      "updatedAt": "2026-10-03T02:39:31.078Z"
+      "updatedAt": "2026-10-06T15:04:59.512Z"
     },
     {
       "categories": [
@@ -5215,7 +5215,7 @@
         }
       ],
       "title": "Cemus - Overseer of Time",
-      "updatedAt": "2026-10-03T02:39:31.148Z"
+      "updatedAt": "2026-10-06T15:04:59.495Z"
     },
     {
       "categories": [
@@ -5265,7 +5265,7 @@
         }
       ],
       "title": "Chronogual Orb",
-      "updatedAt": "2026-10-03T02:39:30.929Z"
+      "updatedAt": "2026-10-06T15:04:59.480Z"
     },
     {
       "categories": [
@@ -5296,7 +5296,7 @@
         }
       ],
       "title": "Chronos - The Second Hand",
-      "updatedAt": "2026-10-03T02:39:31.084Z"
+      "updatedAt": "2026-10-06T15:04:59.465Z"
     },
     {
       "categories": [
@@ -5339,7 +5339,7 @@
         }
       ],
       "title": "Crimson the Depraved",
-      "updatedAt": "2026-10-03T02:39:31.178Z"
+      "updatedAt": "2026-10-06T15:04:59.453Z"
     },
     {
       "categories": [
@@ -5376,7 +5376,7 @@
         }
       ],
       "title": "Crude Maktilline",
-      "updatedAt": "2026-10-03T02:39:30.914Z"
+      "updatedAt": "2026-10-06T15:04:59.443Z"
     },
     {
       "categories": [
@@ -5419,7 +5419,7 @@
         }
       ],
       "title": "Elias Brock",
-      "updatedAt": "2026-10-03T02:39:31.207Z"
+      "updatedAt": "2026-10-06T15:04:59.428Z"
     },
     {
       "categories": [
@@ -5449,14 +5449,14 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(26.164 74.184 79.457)",
           "name": "Drug"
         }
       ],
       "title": "Emberline",
-      "updatedAt": "2026-10-03T02:39:30.936Z"
+      "updatedAt": "2026-10-06T15:04:59.412Z"
     },
     {
       "categories": [
@@ -5487,7 +5487,7 @@
         }
       ],
       "title": "Eva Salazar",
-      "updatedAt": "2026-10-03T02:39:31.213Z"
+      "updatedAt": "2026-10-06T15:04:59.388Z"
     },
     {
       "categories": [
@@ -5530,7 +5530,7 @@
         }
       ],
       "title": "Fara Carrigan",
-      "updatedAt": "2026-10-03T02:39:31.245Z"
+      "updatedAt": "2026-10-06T15:04:59.345Z"
     },
     {
       "categories": [
@@ -5567,7 +5567,7 @@
         }
       ],
       "title": "Fid Sundew",
-      "updatedAt": "2026-10-03T02:39:31.272Z"
+      "updatedAt": "2026-10-06T15:04:59.375Z"
     },
     {
       "categories": [
@@ -5597,14 +5597,14 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(26.164 74.184 79.457)",
           "name": "Drug"
         }
       ],
       "title": "Flash",
-      "updatedAt": "2026-10-03T02:39:30.918Z"
+      "updatedAt": "2026-10-06T15:04:59.329Z"
     },
     {
       "categories": [
@@ -5634,14 +5634,14 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(26.164 74.184 79.457)",
           "name": "Drug"
         }
       ],
       "title": "Gleam",
-      "updatedAt": "2026-10-03T02:39:30.939Z"
+      "updatedAt": "2026-10-06T15:04:59.312Z"
     },
     {
       "categories": [
@@ -5678,7 +5678,7 @@
         }
       ],
       "title": "Harle and Penelo",
-      "updatedAt": "2026-10-03T02:39:31.279Z"
+      "updatedAt": "2026-10-06T15:04:59.296Z"
     },
     {
       "createdAt": "2026-09-13T18:35:43.038Z",
@@ -5701,9 +5701,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(13.967 47.503 126.29)",
           "name": "WorldLore"
         },
         {
@@ -5714,7 +5714,7 @@
         }
       ],
       "title": "Letter to Celeste",
-      "updatedAt": "2026-10-03T02:39:30.350Z"
+      "updatedAt": "2026-10-06T15:04:59.282Z"
     },
     {
       "categories": [
@@ -5751,7 +5751,7 @@
         }
       ],
       "title": "Maeve Efthalia",
-      "updatedAt": "2026-10-03T02:39:31.282Z"
+      "updatedAt": "2026-10-06T15:04:59.270Z"
     },
     {
       "categories": [
@@ -5794,7 +5794,7 @@
         }
       ],
       "title": "Mattias Shaw",
-      "updatedAt": "2026-10-03T02:39:31.286Z"
+      "updatedAt": "2026-10-06T15:04:59.255Z"
     },
     {
       "categories": [
@@ -5825,7 +5825,7 @@
         }
       ],
       "title": "Mitsurin",
-      "updatedAt": "2026-10-03T02:39:30.764Z"
+      "updatedAt": "2026-10-06T15:04:59.239Z"
     },
     {
       "categories": [
@@ -5855,9 +5855,9 @@
           "name": "Location"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(100 22.696 331.49)",
           "name": "MountVulk"
         },
         {
@@ -5868,7 +5868,7 @@
         }
       ],
       "title": "Mount Vulk",
-      "updatedAt": "2026-10-03T02:39:30.766Z"
+      "updatedAt": "2026-10-06T15:04:59.228Z"
     },
     {
       "categories": [
@@ -5905,7 +5905,7 @@
         }
       ],
       "title": "Punar Tillam",
-      "updatedAt": "2026-10-03T02:39:31.293Z"
+      "updatedAt": "2026-10-06T15:04:59.195Z"
     },
     {
       "categories": [
@@ -5948,7 +5948,7 @@
         }
       ],
       "title": "Raddraim",
-      "updatedAt": "2026-10-03T02:39:31.306Z"
+      "updatedAt": "2026-10-06T15:04:59.180Z"
     },
     {
       "createdAt": "2026-05-22T22:30:50.095Z",
@@ -5969,9 +5969,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(13.967 47.503 126.29)",
           "name": "WorldLore"
         },
         {
@@ -5988,7 +5988,7 @@
         }
       ],
       "title": "Raid Team 6 - Vulkian Ruins",
-      "updatedAt": "2026-10-03T02:39:32.094Z"
+      "updatedAt": "2026-10-06T15:04:59.212Z"
     },
     {
       "categories": [
@@ -6031,7 +6031,7 @@
         }
       ],
       "title": "Sela Morelli",
-      "updatedAt": "2026-10-03T02:39:31.328Z"
+      "updatedAt": "2026-10-06T15:04:59.164Z"
     },
     {
       "categories": [
@@ -6068,7 +6068,7 @@
         }
       ],
       "title": "Seth 'Skitters' Jehkal",
-      "updatedAt": "2026-10-03T02:39:31.325Z"
+      "updatedAt": "2026-10-06T15:04:59.150Z"
     },
     {
       "categories": [
@@ -6099,7 +6099,7 @@
         }
       ],
       "title": "The Arena",
-      "updatedAt": "2026-10-03T02:39:30.780Z"
+      "updatedAt": "2026-10-06T15:04:59.124Z"
     },
     {
       "createdAt": "2026-09-13T19:13:11.710Z",
@@ -6120,9 +6120,9 @@
           "name": "Vignette"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(13.967 47.503 126.29)",
           "name": "WorldLore"
         },
         {
@@ -6133,7 +6133,7 @@
         }
       ],
       "title": "The Art of Discipline",
-      "updatedAt": "2026-10-03T02:39:30.409Z"
+      "updatedAt": "2026-10-06T15:04:59.135Z"
     },
     {
       "categories": [
@@ -6183,7 +6183,7 @@
         }
       ],
       "title": "The Artifact from Saint Cogito",
-      "updatedAt": "2026-10-03T02:39:30.957Z"
+      "updatedAt": "2026-10-06T15:04:59.112Z"
     },
     {
       "categories": [
@@ -6213,14 +6213,14 @@
           "name": "PrimeRelic"
         },
         {
-          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "rgb(117, 117, 117)",
+          "color": "lch(13.967 47.503 126.29)",
           "name": "Cemus"
         }
       ],
       "title": "The Sword of Binding",
-      "updatedAt": "2026-10-03T02:39:31.038Z"
+      "updatedAt": "2026-10-06T15:04:59.101Z"
     },
     {
       "categories": [
@@ -6251,7 +6251,7 @@
         }
       ],
       "title": "Timar - Overseer of Sky",
-      "updatedAt": "2026-10-03T02:39:31.342Z"
+      "updatedAt": "2026-10-06T15:04:59.086Z"
     },
     {
       "categories": [
@@ -6288,7 +6288,7 @@
         }
       ],
       "title": "Ulakiruto",
-      "updatedAt": "2026-10-03T02:39:30.911Z"
+      "updatedAt": "2026-10-06T15:04:59.077Z"
     },
     {
       "categories": [
@@ -6325,7 +6325,7 @@
         }
       ],
       "title": "Vira Lash",
-      "updatedAt": "2026-10-03T02:39:31.358Z"
+      "updatedAt": "2026-10-06T15:04:59.065Z"
     },
     {
       "categories": [
