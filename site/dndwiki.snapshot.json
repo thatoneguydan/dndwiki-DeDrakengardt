@@ -2701,6 +2701,15 @@
   },
   "pages": [
     {
+      "categories": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "label": "NPCs",
+          "tag": "NPC"
+        }
+      ],
       "createdAt": "2026-07-20T14:29:01.851Z",
       "pageId": "cepheus",
       "public": true,
@@ -2723,8 +2732,16 @@
           "playerIds": []
         }
       ],
+      "tags": [
+        {
+          "backgroundColor": "lch(58.738 24.09 125.61)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 27.09 125.61)",
+          "name": "NPC"
+        }
+      ],
       "title": "Cepheus",
-      "updatedAt": "2026-10-06T18:31:49.037Z"
+      "updatedAt": "2026-10-10T17:40:20.694Z"
     },
     {
       "categories": [
@@ -6496,13 +6513,13 @@
   ],
   "players": {
     "keyLookup": {
-      "06136b0a3c80f9940bc63dfa12510fe01a30ecca4ae63070d95dd1380090bdb9": "celeste",
-      "2071dea3c03fe06a1d14e44f62c4c4028a6e3da34f86313cee57ba7095fd3dad": "flicker",
       "4acac09408c1fb25fb7cbe5d8d2ff5abb1fc5740f024dce6b3f6dd40702d9937": "dm",
-      "6588f83abf9eb4f44e639724b52d2cc16999b5002b2e8ff54aaab9538e21a9b8": "hal",
-      "c25efc30049b961c51cd5e17176bd783899114a2817fa21c766a14a6dd2a2d61": "voli",
-      "d202acbd0577b405b4211b386f7cedb18aec040c79f621d2db2486a94b4fc740": "skrimhawk",
-      "d4ce06e319c7157b63b375ca23a9c2e86d02109261b79aba736faca3db660473": "kiktal"
+      "9d68006a6c0088646f2ff029aca7f9f18767bd0994bd5fbbe02481d51ba65284": "hal",
+      "b8f72a29f36957fd6b8a391ea3c424067a5649a9d549973a6f675986da2f241b": "voli",
+      "cd415e68498c88016972a856bbf8c1f2938739f383f5826c8991c1627714a00d": "kiktal",
+      "d26f4575afdfa2382c970775cb0ac985f6f12315c6aed3a91ec84afad0b2bd8b": "flicker",
+      "ed6848a84f442527f1ee2dc52c53ef9ccd4c37c6a545ce6781fe085476e2229b": "skrimhawk",
+      "ff4cbcec20b1b8a096921a74e127aa8dd43761df17ee1fc1edcf16af63cc9ea7": "celeste"
     },
     "schemaVersion": 1
   },
