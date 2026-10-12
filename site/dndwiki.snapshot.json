@@ -67,6 +67,97 @@
         },
         "heading": null,
         "kind": "link",
+        "label": "Rook Avelle",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "rook-avelle",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Professor Allao Marduun",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "professor-allao-marduun",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Saint Cogito",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "saint-cogito",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Cemus - Overseer of Time",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "cemus-overseer-of-time",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "Guardian",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "the-gate-guardian",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Silver City",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "the-silver-city",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
+        "label": "The Megadome",
+        "segmentIndex": 0,
+        "sourcePageId": "chatgpt-ledgers",
+        "targetPageId": "the-megadome",
+        "targetType": "page"
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "link",
         "label": "Miracle Tech",
         "segmentIndex": 0,
         "sourcePageId": "forgecreed",
@@ -2023,6 +2114,15 @@
           "playerIds": [],
           "public": true
         },
+        "markdown": "Known Obsidian Links:\n\nPlayer Characters\nCeleste: Celeste\nHAL: HAL\nKallista: Kallista\nFlicker: Flicker\nMilo: Milo\nKiktal: Kiktal\nSkrimhawk: Skrimhawk\nSpark or Voli: Voli\n\nNPCs\n[Rook Avelle](#/page/rook-avelle)\n[Professor Allao Marduun](#/page/professor-allao-marduun)\n[Saint Cogito](#/page/saint-cogito)\n[Cemus - Overseer of Time](#/page/cemus-overseer-of-time)\n[Guardian](#/page/the-gate-guardian)\n\nLocations\n[The Silver City](#/page/the-silver-city)\n[The Megadome](#/page/the-megadome)\n\n",
+        "pageId": "chatgpt-ledgers",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
         "markdown": "\nA religious sect using [Miracle Tech](#/page/miracle-tech) to transform frail physical forms into capable warriors. They were not always successful. Milo grew up in this sect.\n\n[Saint Cogito](#/page/saint-cogito) was the founder and was called the **Holy Engineer**.",
         "pageId": "forgecreed",
         "segmentIndex": 0
@@ -2747,9 +2847,15 @@
       "createdAt": "2026-10-12T15:57:10.970Z",
       "pageId": "chatgpt-ledgers",
       "public": true,
-      "segments": [],
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "Known Obsidian Links:\n\nPlayer Characters\nCeleste: Celeste\nHAL: HAL\nKallista: Kallista\nFlicker: Flicker\nMilo: Milo\nKiktal: Kiktal\nSkrimhawk: Skrimhawk\nSpark or Voli: Voli\n\nNPCs\n[Rook Avelle](#/page/rook-avelle)\n[Professor Allao Marduun](#/page/professor-allao-marduun)\n[Saint Cogito](#/page/saint-cogito)\n[Cemus - Overseer of Time](#/page/cemus-overseer-of-time)\n[Guardian](#/page/the-gate-guardian)\n\nLocations\n[The Silver City](#/page/the-silver-city)\n[The Megadome](#/page/the-megadome)\n\n",
+          "playerIds": []
+        }
+      ],
       "title": "ChatGPT Ledgers",
-      "updatedAt": "2026-10-12T16:02:34.751Z"
+      "updatedAt": "2026-10-12T16:02:54.778Z"
     },
     {
       "categories": [
