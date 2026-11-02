@@ -801,12 +801,41 @@ export function mountViewportOverlayScrollbar(root, browserWindow) {
   };
 }
 
+/**
+ * Animate the desktop outline only for explicit user toggles, never because
+ * a new page rebuilt the rail or replayed a persisted preference.
+ */
+export function mountUserRailTransitions(root, browserWindow) {
+  let clearHandle = 0;
+  const onClick = (event) => {
+    const button = event.target?.closest?.('[data-dndwiki-outline-trigger]');
+    const shell = root?.querySelector?.('.dndwiki-shell');
+    if (button == null || !shell?.contains?.(button) || !shell.hasAttribute('data-dndwiki-outline-persistent')) return;
+    browserWindow.clearTimeout(clearHandle);
+    shell.setAttribute('data-dndwiki-rail-user-transition', '');
+    clearHandle = browserWindow.setTimeout(() => {
+      shell.removeAttribute('data-dndwiki-rail-user-transition');
+      clearHandle = 0;
+    }, 260);
+  };
+  // Runs before the legacy document capture handler changes the open state.
+  browserWindow.addEventListener('click', onClick, true);
+  return {
+    destroy() {
+      browserWindow.removeEventListener('click', onClick, true);
+      browserWindow.clearTimeout(clearHandle);
+      root?.querySelector?.('.dndwiki-shell')?.removeAttribute?.('data-dndwiki-rail-user-transition');
+    },
+  };
+}
+
 export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
   if (root == null || browserWindow == null) return { destroy() {} };
 
   ensureReaderV48Styles(browserWindow.document);
   moveReaderStylesheetLast(browserWindow.document);
   const viewportScrollbar = mountViewportOverlayScrollbar(root, browserWindow);
+  const railTransitions = mountUserRailTransitions(root, browserWindow);
 
   let queued = false;
   let scrollQueued = false;
@@ -892,6 +921,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       root.removeEventListener?.('click', onClick, true);
       root.removeEventListener?.('input', onInput, true);
       viewportScrollbar.destroy();
+      railTransitions.destroy();
     },
   };
 }
