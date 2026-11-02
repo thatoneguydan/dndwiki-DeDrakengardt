@@ -2061,3 +2061,48 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
     left: -6px;
   }
 }
+
+
+/* Page navigation recreates the rail DOM. Only a deliberate user press may
+   animate its width; route updates and restored preferences must snap into
+   their settled state before paint. This does not affect scroll transitions. */
+@media (min-width: 1200px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent] .dndwiki-outline-rail {
+    transition: none !important;
+  }
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-rail-user-transition] .dndwiki-outline-rail {
+    transition: width .2s cubic-bezier(.2,.8,.2,1),
+      max-width .2s cubic-bezier(.2,.8,.2,1),
+      padding .2s cubic-bezier(.2,.8,.2,1) !important;
+  }
+
+  /* Mirror the left rail: in the open right rail the collapse control is
+     against the LEFT inner edge, while the title occupies the right side. */
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-outline-open] .dndwiki-outline-rail-head {
+    flex-direction: row-reverse !important;
+    justify-content: space-between !important;
+  }
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-outline-open][data-dndwiki-viewport-scrollbar-visible] .dndwiki-outline-trigger {
+    left: 0 !important;
+  }
+}
+
+/* The pinned-open Browse toggle should have the same grounded button
+   treatment as the facing right-rail control. */
+@media (min-width: 1100px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent][data-dndwiki-browse-open] .dndwiki-primary-nav .dndwiki-browse-close {
+    background: var(--dndwiki-ui-hover) !important;
+    color: var(--dndwiki-ui-muted);
+  }
+  #dndwiki-app .dndwiki-shell[data-dndwiki-browse-persistent][data-dndwiki-browse-open] .dndwiki-primary-nav .dndwiki-browse-close:hover {
+    background: var(--dndwiki-ui-selected) !important;
+    color: var(--dndwiki-ui-accent-ink);
+  }
+}
+
+/* User-initiated animation still respects the system's reduced-motion setting. */
+@media (prefers-reduced-motion: reduce) and (min-width: 1200px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-rail-user-transition] .dndwiki-outline-rail {
+    transition: none !important;
+  }
+}

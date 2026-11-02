@@ -38,6 +38,19 @@ jobs:
             for file in reader-chrome-refresh.css reader-chrome-refresh.mjs tag-taxonomy-chrome.mjs; do
               cp -- "reader-ui/$file" "site/runtime/$file"
             done
+            # Keep the source registry's exact display-name casing and nested
+            # previews only when all three installed modules are the known
+            # legacy versions. Never overwrite partially upgraded publishers.
+            if [[ "$(git hash-object site/runtime/player-identity.mjs)" == 9d3adec4b8c5e47b376d8ab7394a2d6d04adecf0 ]] &&
+               [[ "$(git hash-object site/runtime/wiki-shell.mjs)" == bc650304d72804fe5fd6eb1319df8dc09ea62729 ]] &&
+               [[ "$(git hash-object site/runtime/note-link-previews.mjs)" == 0f9f03143aace944b62a0b7147ea3a7417b77330 ]]; then
+              for file in player-identity.mjs wiki-shell.mjs note-link-previews.mjs; do
+                cp -- "reader-ui/$file" "site/runtime/$file"
+              done
+              echo "Applied the compatible identity, shell and nested-preview modules."
+            else
+              echo "Publisher identity/preview modules differ from legacy; keeping publisher versions."
+            fi
             echo "Applied the accepted reader interface to the legacy publisher bundle."
           else
             echo "Publisher interface differs from the legacy bundle; keeping its files."
