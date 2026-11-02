@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'site/**'
+      - 'reader-ui/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -27,6 +28,20 @@ jobs:
     steps:
       - name: Check out published campaign
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - name: Preserve reader interface for the legacy publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$(git hash-object site/runtime/reader-chrome-refresh.css)" == c192d15a1ad0134e66b786e92d60141cc6e2c239 ]] &&
+             [[ "$(git hash-object site/runtime/reader-chrome-refresh.mjs)" == 2c3542182a384c45023290dd62e0655eeb0899f0 ]] &&
+             [[ "$(git hash-object site/runtime/tag-taxonomy-chrome.mjs)" == 115eade7d32345732d10a11fdb62b66bedde645d ]]; then
+            for file in reader-chrome-refresh.css reader-chrome-refresh.mjs tag-taxonomy-chrome.mjs; do
+              cp -- "reader-ui/$file" "site/runtime/$file"
+            done
+            echo "Applied the accepted reader interface to the legacy publisher bundle."
+          else
+            echo "Publisher interface differs from the legacy bundle; keeping its files."
+          fi
       - name: Configure GitHub Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - name: Upload generated dndwiki site
@@ -44,3 +59,4 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/observe-domain.yml
+
