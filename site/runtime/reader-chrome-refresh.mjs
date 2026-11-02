@@ -423,7 +423,7 @@ export function syncBrowsePanel(root, browserWindow = null) {
   }
   if (nav.querySelector?.('[data-dndwiki-browse-filter]') == null) {
     const head = nav.querySelector?.('[data-dndwiki-browse-panel-head]');
-    head?.insertAdjacentHTML?.('afterend', '<label class="dndwiki-browse-filter"><span>Filter browse</span><input type="search" autocomplete="off" placeholder="Filter topics and pages…" data-dndwiki-browse-filter></label>');
+    head?.insertAdjacentHTML?.('afterend', '<label class="dndwiki-browse-filter"><span>Filter browse</span><input type="search" autocomplete="off" placeholder="Filter browse…" data-dndwiki-browse-filter></label>');
     changed = true;
   }
 
@@ -576,17 +576,16 @@ export function reshapeHomeDirectory(root) {
     kicker.textContent = 'Campaign compendium';
     changed = true;
   }
+  const intro = home.querySelector?.('.dndwiki-home-intro');
+  if (intro != null && intro.textContent !== 'People, places, and discoveries from your campaign.') {
+    intro.textContent = 'People, places, and discoveries from your campaign.';
+    changed = true;
+  }
   const categoriesHeading = home.querySelector?.('#dndwiki-home-categories-heading');
   if (categoriesHeading != null && categoriesHeading.textContent !== 'Explore the world') {
     categoriesHeading.textContent = 'Explore the world';
     changed = true;
   }
-  const sectionHead = categoriesHeading?.closest?.('.dndwiki-home-section-head');
-  if (sectionHead != null && sectionHead.nextElementSibling?.classList?.contains?.('dndwiki-home-section-intro') !== true) {
-    sectionHead.insertAdjacentHTML?.('afterend', '<p class="dndwiki-home-section-intro">Start with a topic, or search for a person, place, event, or piece of lore.</p>');
-    changed = true;
-  }
-
   const actions = home.querySelector?.('.dndwiki-home-actions');
   const searchButton = actions?.querySelector?.('[data-dndwiki-home-search]');
   if (searchButton != null && searchButton.textContent !== 'Search the campaign') {
@@ -792,3 +791,4 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
 if (typeof document !== 'undefined' && typeof window !== 'undefined') {
   mountReaderChromeRefresh({ root: document.getElementById('dndwiki-app'), window });
 }
+

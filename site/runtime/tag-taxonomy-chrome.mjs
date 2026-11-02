@@ -354,6 +354,23 @@ function categoryStyle(tag) {
   ].filter(Boolean).join(';');
 }
 
+const CATEGORY_ICON_PATHS = Object.freeze({
+  location: '<path d="m9 3 6 3 6-3v15l-6 3-6-3-6 3V6l6-3Z"/><path d="M9 3v15M15 6v15"/>',
+  npc: '<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 4.6V21"/>',
+  faction: '<path d="M5 21V4h14l-3 5 3 5H5"/>',
+  item: '<rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/>',
+  magic: '<path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3ZM20 2v4M18 4h4"/>',
+  feat: '<path d="M8 3h8v7a4 4 0 0 1-8 0V3ZM8 5H4v3a4 4 0 0 0 4 4M16 5h4v3a4 4 0 0 1-4 4M12 14v7M8 21h8"/>',
+});
+
+function categoryIcon(tag) {
+  const key = normalize(tag?.sourceTag);
+  const path = Object.hasOwn(CATEGORY_ICON_PATHS, key)
+    ? CATEGORY_ICON_PATHS[key]
+    : '<path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1ZM12 5v15"/>';
+  return `<svg class="dndwiki-home-category-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+
 function rewriteHome(root, taxonomy) {
   const home = root?.querySelector?.('[data-dndwiki-home]');
   if (home == null || home.hasAttribute?.('data-dndwiki-taxonomy-applied')) return;
@@ -363,7 +380,7 @@ function rewriteHome(root, taxonomy) {
   if (list != null) {
     list.innerHTML = [...taxonomy.values()].map((rootRecord) => {
       const style = categoryStyle(rootRecord.tag);
-      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.sourceTag))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span></a></li>`;
+      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.sourceTag))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span>${categoryIcon(rootRecord.tag)}</a></li>`;
     }).join('');
     const section = list.closest?.('.dndwiki-home-section');
     if (taxonomy.size === 0) section?.remove?.();
@@ -498,3 +515,4 @@ if (typeof document !== 'undefined' && typeof window !== 'undefined') {
   const root = document.getElementById('dndwiki-app');
   mountTagTaxonomyChrome({ root, window }).catch((error) => console.error('dndwiki tag taxonomy enhancement failed.', error));
 }
+
