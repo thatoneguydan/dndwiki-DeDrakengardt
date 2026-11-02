@@ -24,14 +24,52 @@ body,
   background: var(--background-primary);
 }
 
-/* Reserve native scrollbar space before short pages become scrollable. */
-html {
-  scrollbar-gutter: stable;
+/* A pointer-draggable scrollbar overlays the viewport instead of reserving
+   layout space. Enable only after the interactive replacement is mounted. */
+html.dndwiki-viewport-scrollbar-active {
+  scrollbar-width: none;
 }
 
-/* A locked modal retains the gutter; match its canvas to the dimmed page. */
-html:has(.dndwiki-shell[data-dndwiki-browse-open]:not([data-dndwiki-browse-persistent])) {
-  background-color: color-mix(in srgb, #000 var(--dndwiki-browse-scrim-strength), var(--background-primary));
+html.dndwiki-viewport-scrollbar-active::-webkit-scrollbar {
+  display: none;
+}
+
+.dndwiki-viewport-scrollbar {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 160;
+  width: 12px;
+  background: transparent;
+  cursor: default;
+  touch-action: none;
+  user-select: none;
+}
+
+.dndwiki-viewport-scrollbar[hidden] {
+  display: none !important;
+}
+
+.dndwiki-viewport-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  width: 6px;
+  min-height: 36px;
+  border-radius: 999px;
+  background: rgb(83 96 120 / .45);
+  transition: background-color .14s ease, width .14s ease, right .14s ease;
+}
+
+.dndwiki-viewport-scrollbar:hover .dndwiki-viewport-scrollbar-thumb,
+.dndwiki-viewport-scrollbar[data-dragging] .dndwiki-viewport-scrollbar-thumb {
+  right: 2px;
+  width: 7px;
+  background: rgb(83 96 120 / .75);
+}
+
+html:has(.dndwiki-shell[data-dndwiki-browse-open]:not([data-dndwiki-browse-persistent]))
+  .dndwiki-viewport-scrollbar {
+  display: none !important;
 }
 
 body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
