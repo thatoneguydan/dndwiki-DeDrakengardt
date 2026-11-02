@@ -308,7 +308,7 @@ function rootNavigationItems(taxonomy, state) {
   return [...taxonomy.entries()].map(([rootKey, root]) => {
     const active = state.rootKey === rootKey;
     const style = tagAccentStyle(root.tag);
-    return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link" href="${escapeHtml(tagRoute(root.tag.sourceTag))}"${state.kind === 'tag' && active ? ' aria-current="page"' : ''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot"${style ? ` style="${escapeHtml(style)}"` : ''}></span><span>${escapeHtml(root.tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${root.pageIds.size}</span></a></li>`;
+    return `<li><a class="dndwiki-primary-nav-link dndwiki-primary-nav-tag-link" href="${escapeHtml(tagRoute(root.tag.sourceTag))}"${state.kind === 'tag' && active ? ' aria-current="page"' : ''}><span class="dndwiki-primary-nav-tag-name"><span class="dndwiki-primary-nav-tag-dot dndwiki-primary-nav-category-icon"${style ? ` style="${escapeHtml(style)}"` : ''}>${categoryIcon(root.tag)}</span><span>${escapeHtml(root.tag.name)}</span></span><span class="dndwiki-primary-nav-badge">${root.pageIds.size}</span></a></li>`;
   }).join('');
 }
 
@@ -355,20 +355,21 @@ function categoryStyle(tag) {
 }
 
 const CATEGORY_ICON_PATHS = Object.freeze({
-  location: '<path d="m9 3 6 3 6-3v15l-6 3-6-3-6 3V6l6-3Z"/><path d="M9 3v15M15 6v15"/>',
-  npc: '<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 4.6V21"/>',
-  faction: '<path d="M5 21V4h14l-3 5 3 5H5"/>',
-  item: '<rect x="5" y="7" width="14" height="14" rx="2"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/>',
-  magic: '<path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3ZM20 2v4M18 4h4"/>',
-  feat: '<path d="M8 3h8v7a4 4 0 0 1-8 0V3ZM8 5H4v3a4 4 0 0 0 4 4M16 5h4v3a4 4 0 0 1-4 4M12 14v7M8 21h8"/>',
+  location: '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.75"/>',
+  npc: '<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M8 21h8"/>',
+  faction: '<path d="m12 3 8 3v5c0 4.8-3.4 7.6-8 10-4.6-2.4-8-5.2-8-10V6l8-3Z"/><path d="M12 3v18M4 10h16"/>',
+  item: '<rect x="3" y="7" width="18" height="14" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 10.5l7 4.5M21 10.5 14 15"/><rect x="10" y="13" width="4" height="4" rx="1"/>',
+  magic: '<path d="m3 18 12-12 3 3L6 21l-3-3ZM12 9l3 3M5 2v4M3 4h4M20 3v4M18 5h4M20 15v3M18.5 16.5h3"/>',
+  feat: '<circle cx="12" cy="9" r="6"/><path d="m8 13.5-2 8 6-3 6 3-2-8M9.5 9l1.5 1.5 3.5-3.5"/>',
 });
 
-function categoryIcon(tag) {
+function categoryIcon(tag, className = '') {
   const key = normalize(tag?.sourceTag);
   const path = Object.hasOwn(CATEGORY_ICON_PATHS, key)
     ? CATEGORY_ICON_PATHS[key]
-    : '<path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1ZM12 5v15"/>';
-  return `<svg class="dndwiki-home-category-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    : '<path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1ZM12 5v15M6 8l3 .5M15 8.5l3-.5"/>';
+  const classes = ['dndwiki-category-icon', className].filter(Boolean).join(' ');
+  return `<svg class="${escapeHtml(classes)}" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
 }
 
 function rewriteHome(root, taxonomy) {
@@ -380,7 +381,7 @@ function rewriteHome(root, taxonomy) {
   if (list != null) {
     list.innerHTML = [...taxonomy.values()].map((rootRecord) => {
       const style = categoryStyle(rootRecord.tag);
-      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.sourceTag))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span>${categoryIcon(rootRecord.tag)}</a></li>`;
+      return `<li><a class="dndwiki-home-category" href="${escapeHtml(tagRoute(rootRecord.tag.sourceTag))}"${style ? ` style="${escapeHtml(style)}"` : ''}><span>${escapeHtml(rootRecord.tag.name)}</span><span class="dndwiki-home-category-count">${rootRecord.pageIds.size}</span>${categoryIcon(rootRecord.tag, 'dndwiki-home-category-icon')}</a></li>`;
     }).join('');
     const section = list.closest?.('.dndwiki-home-section');
     if (taxonomy.size === 0) section?.remove?.();
@@ -411,7 +412,11 @@ function rewriteTagPage(root, taxonomy, state) {
   const record = taxonomy.get(state.rootKey);
   const hero = page.querySelector?.('.dndwiki-tag-hero');
   const heading = hero?.querySelector?.('h1');
-  if (heading != null) heading.textContent = record.tag.name;
+  if (heading != null) {
+    heading.textContent = record.tag.name;
+    const style = categoryStyle(record.tag);
+    heading.insertAdjacentHTML?.('afterbegin', `<span class="dndwiki-tag-heading-icon"${style ? ` style="${escapeHtml(style)}"` : ''} aria-hidden="true">${categoryIcon(record.tag)}</span>`);
+  }
   hero?.querySelector?.('.dndwiki-page-tags')?.remove?.();
   page.setAttribute?.('data-dndwiki-taxonomy-applied', '');
 }
