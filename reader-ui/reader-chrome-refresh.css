@@ -2099,3 +2099,10 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
     color: var(--dndwiki-ui-accent-ink);
   }
 }
+
+/* User-initiated animation still respects the system's reduced-motion setting. */
+@media (prefers-reduced-motion: reduce) and (min-width: 1200px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-rail-user-transition] .dndwiki-outline-rail {
+    transition: none !important;
+  }
+}

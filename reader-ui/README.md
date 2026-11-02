@@ -4,7 +4,7 @@ The publisher owns generated `site/` content. Its currently installed runtime re
 
 All three core legacy hashes must match before any replacement happens. Three additional modules (player identity, shell UI, and preview cards) are overlaid only if they all match the separately observed legacy hashes. A new publisher version of any of those modules is left intact. A publisher with a different UI bundle passes through unchanged, so a future publisher update can supply its own interface without being masked by older copies here. Files already containing the accepted polish also pass through unchanged.
 
-The runtime files are exact copies of the accepted canonical `dndwiki/runtime/` files at source commit `64bb09757328f3e014137224d5f967655214a852` ([source PR #249](https://github.com/thatoneguydan/dndwiki/pull/249)).
+The runtime files are exact copies of canonical `dndwiki/runtime/` files at source commit `ef5a867d94c17ad40ba59bfe8bdc081add7bcd55` ([source PR #250](https://github.com/thatoneguydan/dndwiki/pull/250)).
 
 ## Updates
 
