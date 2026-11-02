@@ -15,12 +15,23 @@
   --dndwiki-subtle-bg: color-mix(in srgb, var(--background-secondary) 58%, var(--background-primary));
   --dndwiki-panel-shadow: 0 28px 80px color-mix(in srgb, #000 18%, transparent);
   --dndwiki-card-shadow: 0 1px 2px color-mix(in srgb, #000 4%, transparent), 0 14px 40px color-mix(in srgb, #000 5%, transparent);
+  --dndwiki-browse-scrim-strength: 24%;
 }
 
 html,
 body,
 .dndwiki-shell {
   background: var(--background-primary);
+}
+
+/* Reserve native scrollbar space before short pages become scrollable. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* A locked modal retains the gutter; match its canvas to the dimmed page. */
+html:has(.dndwiki-shell[data-dndwiki-browse-open]:not([data-dndwiki-browse-persistent])) {
+  background-color: color-mix(in srgb, #000 var(--dndwiki-browse-scrim-strength), var(--background-primary));
 }
 
 body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
@@ -604,7 +615,7 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
   padding: 0;
   border: 0;
   border-radius: 0;
-  background: color-mix(in srgb, #000 24%, transparent);
+  background: color-mix(in srgb, #000 var(--dndwiki-browse-scrim-strength), transparent);
   opacity: 0;
   visibility: hidden;
   backdrop-filter: blur(2px);
