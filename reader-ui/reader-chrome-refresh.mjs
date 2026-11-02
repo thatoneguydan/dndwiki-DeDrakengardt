@@ -741,6 +741,12 @@ export function mountViewportOverlayScrollbar(root, browserWindow) {
       && shell?.hasAttribute?.('data-dndwiki-browse-persistent') !== true;
     const metrics = geometry();
     track.hidden = modal || metrics.maximum <= 1 || metrics.viewport <= 0;
+    // A visual state for the right rail only. Never alter the document layout
+    // or reserve scrollbar width in the root viewport.
+    const visible = !track.hidden;
+    const attribute = 'data-dndwiki-viewport-scrollbar-visible';
+    if (visible && shell?.hasAttribute?.(attribute) !== true) shell?.setAttribute?.(attribute, '');
+    if (!visible && shell?.hasAttribute?.(attribute) === true) shell?.removeAttribute?.(attribute);
     if (track.hidden) return;
     const offset = Math.min(metrics.maximum, Math.max(0, Number(browserWindow.scrollY) || 0))
       / metrics.maximum * metrics.travel;
@@ -789,6 +795,7 @@ export function mountViewportOverlayScrollbar(root, browserWindow) {
       browserWindow.removeEventListener('scroll', sync);
       browserWindow.removeEventListener('resize', sync);
       track.remove();
+      root?.querySelector?.('.dndwiki-shell')?.removeAttribute?.('data-dndwiki-viewport-scrollbar-visible');
       html.classList.remove('dndwiki-viewport-scrollbar-active');
     },
   };

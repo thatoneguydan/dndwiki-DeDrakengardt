@@ -3,6 +3,7 @@
    and knowledge-base patterns. Authored .dndwiki-page content remains Obsidian-faithful. */
 
 :root {
+  --dndwiki-viewport-scrollbar-width: 12px;
   --dndwiki-shell-max: 96rem;
   --dndwiki-home-max: 64rem;
   --dndwiki-reading-max: min(var(--line-width), var(--max-width));
@@ -38,7 +39,7 @@ html.dndwiki-viewport-scrollbar-active::-webkit-scrollbar {
   position: fixed;
   inset: 0 0 0 auto;
   z-index: 160;
-  width: 12px;
+  width: var(--dndwiki-viewport-scrollbar-width);
   background: transparent;
   cursor: default;
   touch-action: none;
@@ -2040,3 +2041,23 @@ body:has(.dndwiki-shell[data-dndwiki-browse-open]) {
   }
 }
 
+
+/* A narrow right rail needs its original 2.55rem tap targets PLUS space for
+   the overlay scrollbar. Widen the compact rail leftward (not the document)
+   and optically center its controls in the unobstructed portion. The expanded
+   rail keeps its original width and aligned article axis. */
+@media (min-width: 1200px) {
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-viewport-scrollbar-visible]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail {
+    width: calc(var(--dndwiki-mini-rail-width) + var(--dndwiki-viewport-scrollbar-width)) !important;
+    max-width: calc(var(--dndwiki-mini-rail-width) + var(--dndwiki-viewport-scrollbar-width)) !important;
+  }
+
+  /* Positioning the controls does not change intrinsic widths, flex gaps,
+     rail background paint, or any scrollable reading-column dimensions. */
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-viewport-scrollbar-visible]:not([data-dndwiki-outline-open]) .dndwiki-outline-trigger,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-viewport-scrollbar-visible]:not([data-dndwiki-outline-open]) .dndwiki-outline-rail .dndwiki-toc-link,
+  #dndwiki-app .dndwiki-shell[data-dndwiki-outline-persistent][data-dndwiki-viewport-scrollbar-visible][data-dndwiki-outline-open] .dndwiki-outline-trigger {
+    position: relative;
+    left: -6px;
+  }
+}
