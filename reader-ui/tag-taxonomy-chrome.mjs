@@ -356,7 +356,7 @@ function categoryStyle(tag) {
 
 const CATEGORY_ICON_PATHS = Object.freeze({
   location: '<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.75"/>',
-  npc: '<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2M8 21h8"/>',
+  npc: '<circle cx="12" cy="8" r="3.5"/><path d="M5 21v-2a7 7 0 0 1 14 0v2Z"/>',
   faction: '<path d="m12 3 8 3v5c0 4.8-3.4 7.6-8 10-4.6-2.4-8-5.2-8-10V6l8-3Z"/><path d="M12 3v18M4 10h16"/>',
   item: '<rect x="3" y="7" width="18" height="14" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 10.5l7 4.5M21 10.5 14 15"/><rect x="10" y="13" width="4" height="4" rx="1"/>',
   magic: '<path d="m3 18 12-12 3 3L6 21l-3-3ZM12 9l3 3M5 2v4M3 4h4M20 3v4M18 5h4M20 15v3M18.5 16.5h3"/>',

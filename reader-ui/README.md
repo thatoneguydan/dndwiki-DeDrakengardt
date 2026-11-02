@@ -4,7 +4,7 @@ The publisher owns generated `site/` content. Its currently installed runtime re
 
 All three legacy hashes must match before any replacement happens. A publisher with a different UI bundle passes through unchanged, so a future publisher update can supply its own interface without being masked by older copies here. Files already containing the accepted polish also pass through unchanged.
 
-The files are exact copies of the accepted canonical `dndwiki/runtime/` files at source commit `c20a7f6f83e32fa187b0b8e3cfbd53f4507a780f` ([source PR #246](https://github.com/thatoneguydan/dndwiki/pull/246)).
+The files are exact copies of the accepted canonical `dndwiki/runtime/` files at source commit `4cae1090c4781232281f703fe6c3eebb0c165221` ([source PR #247](https://github.com/thatoneguydan/dndwiki/pull/247)).
 
 ## Updates
 
