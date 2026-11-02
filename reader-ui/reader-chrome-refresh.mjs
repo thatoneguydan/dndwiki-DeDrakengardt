@@ -702,11 +702,104 @@ function handleReaderClick(root, target, browserWindow) {
   return false;
 }
 
+/**
+ * Keep document scrolling native (wheel, keys, touch, scroll anchors) while
+ * painting the scrollbar over the full-width page rather than consuming width.
+ * Mobile and forced-colors users retain their platform scrollbars.
+ */
+export function mountViewportOverlayScrollbar(root, browserWindow) {
+  const doc = browserWindow?.document;
+  const html = doc?.documentElement;
+  const body = doc?.body;
+  const supported = browserWindow?.matchMedia?.('(hover: hover) and (pointer: fine)')?.matches === true
+    && browserWindow?.matchMedia?.('(forced-colors: active)')?.matches !== true
+    && html?.style != null && 'scrollbarWidth' in html.style
+    && typeof doc?.createElement === 'function' && typeof body?.append === 'function';
+  if (!supported) return { sync() {}, destroy() {} };
+
+  const track = doc.createElement('div');
+  track.className = 'dndwiki-viewport-scrollbar';
+  track.setAttribute('aria-hidden', 'true');
+  track.hidden = true;
+  const thumb = doc.createElement('div');
+  thumb.className = 'dndwiki-viewport-scrollbar-thumb';
+  track.append(thumb);
+  body.append(track);
+  html.classList.add('dndwiki-viewport-scrollbar-active');
+
+  let draggingOffset = null;
+  const geometry = () => {
+    const viewport = Math.max(0, Number(browserWindow.innerHeight) || 0);
+    const content = Math.max(Number(html.scrollHeight) || 0, Number(body.scrollHeight) || 0);
+    const maximum = Math.max(0, content - viewport);
+    const thumbHeight = Math.min(viewport, Math.max(36, viewport * viewport / Math.max(1, content)));
+    return { viewport, maximum, thumbHeight, travel: Math.max(0, viewport - thumbHeight) };
+  };
+  const sync = () => {
+    const shell = root?.querySelector?.('.dndwiki-shell');
+    const modal = shell?.hasAttribute?.('data-dndwiki-browse-open') === true
+      && shell?.hasAttribute?.('data-dndwiki-browse-persistent') !== true;
+    const metrics = geometry();
+    track.hidden = modal || metrics.maximum <= 1 || metrics.viewport <= 0;
+    if (track.hidden) return;
+    const offset = Math.min(metrics.maximum, Math.max(0, Number(browserWindow.scrollY) || 0))
+      / metrics.maximum * metrics.travel;
+    thumb.style.height = metrics.thumbHeight + 'px';
+    thumb.style.transform = 'translateY(' + offset + 'px)';
+  };
+  const dragTo = (y) => {
+    const metrics = geometry();
+    if (metrics.travel <= 0 || metrics.maximum <= 0) return;
+    const top = Math.max(0, Math.min(metrics.travel, y - draggingOffset));
+    browserWindow.scrollTo({ top: top / metrics.travel * metrics.maximum, behavior: 'instant' });
+    sync();
+  };
+  const onPointerDown = (event) => {
+    if (track.hidden || event.button !== 0) return;
+    const rect = thumb.getBoundingClientRect();
+    draggingOffset = event.target === thumb ? event.clientY - rect.top : rect.height / 2;
+    track.setAttribute('data-dragging', '');
+    track.setPointerCapture?.(event.pointerId);
+    dragTo(event.clientY);
+    event.preventDefault?.();
+  };
+  const onPointerMove = (event) => {
+    if (draggingOffset != null) dragTo(event.clientY);
+  };
+  const onPointerEnd = () => {
+    draggingOffset = null;
+    track.removeAttribute('data-dragging');
+  };
+  track.addEventListener('pointerdown', onPointerDown);
+  track.addEventListener('pointermove', onPointerMove);
+  track.addEventListener('pointerup', onPointerEnd);
+  track.addEventListener('pointercancel', onPointerEnd);
+  track.addEventListener('lostpointercapture', onPointerEnd);
+  browserWindow.addEventListener('scroll', sync, { passive: true });
+  browserWindow.addEventListener('resize', sync, { passive: true });
+  const resizeObserver = typeof browserWindow.ResizeObserver === 'function'
+    ? new browserWindow.ResizeObserver(sync)
+    : null;
+  if (root != null) resizeObserver?.observe?.(root);
+  sync();
+  return {
+    sync,
+    destroy() {
+      resizeObserver?.disconnect?.();
+      browserWindow.removeEventListener('scroll', sync);
+      browserWindow.removeEventListener('resize', sync);
+      track.remove();
+      html.classList.remove('dndwiki-viewport-scrollbar-active');
+    },
+  };
+}
+
 export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
   if (root == null || browserWindow == null) return { destroy() {} };
 
   ensureReaderV48Styles(browserWindow.document);
   moveReaderStylesheetLast(browserWindow.document);
+  const viewportScrollbar = mountViewportOverlayScrollbar(root, browserWindow);
 
   let queued = false;
   let scrollQueued = false;
@@ -718,6 +811,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       scrollQueued = false;
       syncReadingProgress(root, browserWindow);
       syncActiveOutlineSection(root);
+      viewportScrollbar.sync();
     });
   };
   const refresh = () => {
@@ -736,17 +830,23 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       reshapeHomeDirectory(root);
       syncReadingProgress(root, browserWindow);
       syncActiveOutlineSection(root);
+      viewportScrollbar.sync();
     });
   };
 
   const onKeyDown = (event) => {
     if (String(event?.key ?? '') === 'Escape') {
-      if (!persistentBrowseViewport(browserWindow) && setBrowseOpen(root, false, browserWindow, { persist: false })) event.preventDefault?.();
+      if (!persistentBrowseViewport(browserWindow) && setBrowseOpen(root, false, browserWindow, { persist: false })) {
+        event.preventDefault?.();
+        updateScrollState();
+      }
       return;
     }
     focusWikiSearch(root, browserWindow, event);
   };
-  const onClick = (event) => handleReaderClick(root, event?.target, browserWindow);
+  const onClick = (event) => {
+    if (handleReaderClick(root, event?.target, browserWindow)) updateScrollState();
+  };
   const onInput = (event) => {
     if (event?.target?.matches?.('[data-dndwiki-browse-filter]')) {
       const nav = root?.querySelector?.('[data-dndwiki-primary-nav]');
@@ -784,6 +884,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
       browserWindow.removeEventListener?.('resize', onResize);
       root.removeEventListener?.('click', onClick, true);
       root.removeEventListener?.('input', onInput, true);
+      viewportScrollbar.destroy();
     },
   };
 }
