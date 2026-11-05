@@ -2077,6 +2077,15 @@
           "playerIds": [],
           "public": true
         },
+        "markdown": "\nA small town you saved from the Red Devils, a faction of desert goblins. The town used to be blessed with flowing water and greenery, but the expanding desert has consumed its natural resources, leaving it a sandy dustbowl.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+        "pageId": "dry-reach",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
         "markdown": "The Kingdom that Disappeared.",
         "pageId": "eternis",
         "segmentIndex": 0
@@ -2176,8 +2185,26 @@
           "playerIds": [],
           "public": true
         },
+        "markdown": "\nThis city is the post-fall world-capital of entertainment and pleasure. A massive excavation creates the cavern in which the city resides. In the cavern's center sits a huge globe held aloft by two massive steel beams which rotate it in place. From the exterior, the visible part of the structure is a domed metal structure with a radius several miles long.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+        "pageId": "the-megadome",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
         "markdown": "\nA near-impenetrable beacon of wealth, promise, and prosperity. A collection of 3 concentric rings constructed millennia ago, the city floats miles above the surface and survived most of the effects of the fall. Entrance into the city is strictly forbidden and remains heavily guarded. Its only citizens are the families that have lived here for centuries; a mix of Elves, Drow, and Gnomes.\n\n---\n\n# Government Structure\n\n- Maintenance\n\t- Councilman [Castiel Ralora](#/page/castiel-ralora) (Drow, male)\n- Commerce & Wellbeing\n\t- Councilman [Therule Dramon](#/page/therule-dramon) (Mixed, male)\n- Innovation (education & research)\n\t- Councilwoman: [Councilwoman Veldrin Illiir](#/page/councilwoman-veldrin-illiir)  (Drow, female)\n- Order (defense)\n\t- Councilman [Soaruun Hun’ath](#/page/soaruun-hunath) (Elf, Male)\n\n---\n\n# Luna, the Capital Ring of the Silver City\n\nNamed after the moons. The streets are built from polished volcanic rock. Platinum and Silver are used to lay intricate designs and artwork inlaid into the rock. Buildings are domed at their top to mirror the sky.\n\n---\n### Municipal Quarter\n\nThe primary government structures.\n\n- Council chambers  \n    The great halls where the houses of the city meet to govern it.\n- Grand Museum of The Silver City  \n    A showcase of the city’s history and greatest achievements.    \n- Commerce & Trade Buildings  \n    Offices dedicated to commerce within the city and trade with the surface below.\n- Council Residences  \n    Housing for the council members and their families.\n\n---\n\n### Maintenance Quarter\n\nThe offices and facilities dedicated to keeping the city afloat and in pristine condition. Overseen by Councilman [Castiel Ralora](#/page/castiel-ralora) (Elf, male).\n\nIn the context of The Silver City, maintenance means:\n- Keeping the city afloat\n- Putting arcane innovation to \"good use\"\n- Keeping buildings in pristine condition throughout all three rings\n\n\nAlso includes municipal buildings of Order, overseen by Councilman [Soaruun Hun’ath](#/page/soaruun-hunath) (Elf, Male). \n\nIn the context of The Silver City, order means:\n- Keeping the peace\n- Instructing the Peacekeepers\n- Defending the city from intrusion\n\n\t>**Augurium**\n\t>\n\tArcane armory only for government use. Found inside: nothing. It seems the tilt of the city has resulted in drastic measures, including the sacrifice of artifacts to keep the creature sedated.\n\n---\n\n### Innovation Quarter (Collegiate / Education & Research)\n\nOverseen by Councilwoman [Councilwoman Veldrin Illiir](#/page/councilwoman-veldrin-illiir) (Drow, female). Contains offices dedicated to research, as well as schools.\n\n#### [Ex Hoc Mundo Academy of Arcane Learning](#/page/ex-hoc-mundo-academy-of-arcane-learning)\n\n#### [The Grand Library](#/page/the-grand-library)\n\n#### [Nox Observatory](#/page/nox-observatory)\n\n- #### Bell Spire\n\t- Houses artifacts being researched\n\t- Artifacts in creation process\n\t- Rings out signaling the changing hour\n\n---\n\n#### Commerce & Wellbeing Quarter\nOverseen by Councilman Therule Dramon (Mixed, male). Contains municipal buildings dedicated to commerce and health.\n\n- Commerce building (branch of government)\n- Festival grounds\n- The Grand Theatre\n\t- An amphitheater in the shape of a crescent moon\n- Medical Buildings\n\t- Citizens of the city are well-taken care of physically and medically\n\n---\n\n# Stella, Commerce and Lowborn Education Ring\n\nThe buildings her often depict star-like imagery. Many are topped with beautiful shimmering spires. Diamonds line the quartz streets. There are delicate reliefs of constellations carved into the stone, accented with Silver bands. This is where the shops and academy (for lowborns) live.\n\n### Shops\n\n- #### Auric Threads & Fine Jewelry\n\t- *Name* | Species\n\t- Fine garments & jewelry infused with illusory magic to shift color depending on occasion.\n\n- #### Coil & Gear\n\t- Name | Species\n\t- A repair shop where magic-infused gadgets get patched together again.\n\n- #### Dovetail Studio\n\t- Name | Species\n    - Moving paintings and other illusion-based home decor.\n\n- #### Fiddle & Flux\n\t- Name | Species\n\t- Sells self-playing instruments.\n    \n- #### Glintwell’s\n\t- *Name Glintwell* | Species\n\t- Mask carving services\n\t- Tapestries & rugs\n\t- Statues & carved trinkets\n\n- #### Hearthglyphs\n\t- Name | Species\n\t- Custom-engraved sigils to enhance a home’s warmth, scent, and/or security. May not actually do anything\n\n- #### Hex & Hammer\n\t- Name | Species\n\t- A blacksmith that produces tools for everyday construction and peaceful coexistence. Not an armory.\n\n- #### Sapphire & Co.\n\t- Name | Species\n\t- Boutique perfume and incense crafted with rare exotic ingredients.\n\n- #### Smoke & Salt\n\t- Name | Species\n\t- Smoked meats and magical brining techniques served by a chef who cooks with flame-runes.\n\n- #### Second Sun Market\n\t- Name | Species\n\t- Charms, snacks, trinkets.\n\n- #### Whisperbooks\n\t- Name | Species\n\t- Books that read themselves aloud in a variety of voices.\n\n- #### Wick & Whim\n\t- Name | Species (retired council historian)\n\t- Cozy tea shop; full of gossip.\n\n### Restaurants\n\n- Aida's Bakery\n\t- Aida Iceberry\n\t- Sells a variety of Pastries\n\t- Always has fresh bread. Customers can request a custom loaf to be made on the spot.\n\n- Drifter’s Cafe\n\t- Name | Species\n\t- Highest point of the ring, a tower with a glass floor. Clouds often hover slightly below.\n\t- Serves a variety of comfort foods.\n\n- Snaggletooth Diner\n\t- Name | Species\n\t- Late night soup bar known for its “bottomless bowl” stew pot.\n\n- Tincture & Bloom\n\t- Name | Species    \n\t- An elixir bar serving tea with calming effects. Popular among the working-class as an after-work stop.\n\n- The Velvet Table\n\t- Name | Species\n\t- Private dining experiences curated by illusionist-chefs. No two meals are ever alike.\n\n\n\n---\n\n# Solis, the Residential Ring\n\nThe general population lives here. There are a few parks, very well maintained, but little other infrastructure other than the perfectly plotted rows of housing.\n\nThere are lots of immaculately chiseled statues that serve as reminders testifying to the greatness of the city.\n\nArchitecture here is gilded with bronze, gold, and polished white stone. Cut Citrine and Amber are used to accent buildings and statues in this part of the city.\n\n---\n# Sanctum of the Lambs\n\n- In the core of Luna, Where Belbe is captive  \n- Includes an arcane crucible, where artifacts are consumed of their magic in order to maintain the powerful sedation spell on Belbe\n- In the core of Luna, beneath the surface of the Maintenance quarter\n\n---\n",
         "pageId": "the-silver-city",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "markdown": "\nThe Sunken City is what remains of a pre-fall metropolis. As the name implies, much of the structures are now buried underneath several hundred meters of water. Speckle has been restored to many of the buildings throughout.\n\nIt was resurrected as a new center for trade and an icon of relative peace and prosperity. The city motto reflects this: “liberum persequi opes” (roughly translated: the freedom to pursue wealth and a better life).\n\nAt the heart of the city, a twisted mess of copper cabling, lit symbols, and meandering pipes sit atop the clear waters. Under the surface, residents traverse a series of tubes connecting the various residential and business floors which fill the tall structures.\n\nVarious merchant balconies dot the waterways alongside permanently docked rafts and small boats hawking their wares.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+        "pageId": "the-sunken-city-pelotharna",
         "segmentIndex": 0
       },
       {
@@ -3119,7 +3146,13 @@
       "createdAt": "2026-06-02T20:28:51.519Z",
       "pageId": "dry-reach",
       "public": true,
-      "segments": [],
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nA small town you saved from the Red Devils, a faction of desert goblins. The town used to be blessed with flowing water and greenery, but the expanding desert has consumed its natural resources, leaving it a sandy dustbowl.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+          "playerIds": []
+        }
+      ],
       "tags": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
@@ -3135,7 +3168,7 @@
         }
       ],
       "title": "Dry Reach",
-      "updatedAt": "2026-10-03T02:39:30.753Z"
+      "updatedAt": "2026-11-05T18:38:04.469Z"
     },
     {
       "categories": [
@@ -3563,7 +3596,13 @@
       "createdAt": "2026-05-21T20:21:11.154Z",
       "pageId": "the-megadome",
       "public": true,
-      "segments": [],
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nThis city is the post-fall world-capital of entertainment and pleasure. A massive excavation creates the cavern in which the city resides. In the cavern's center sits a huge globe held aloft by two massive steel beams which rotate it in place. From the exterior, the visible part of the structure is a domed metal structure with a radius several miles long.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+          "playerIds": []
+        }
+      ],
       "tags": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
@@ -3579,7 +3618,7 @@
         }
       ],
       "title": "The Megadome",
-      "updatedAt": "2026-10-03T02:39:30.889Z"
+      "updatedAt": "2026-11-05T18:38:04.278Z"
     },
     {
       "categories": [
@@ -3631,7 +3670,13 @@
       "createdAt": "2026-05-26T15:18:42.604Z",
       "pageId": "the-sunken-city-pelotharna",
       "public": true,
-      "segments": [],
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\nThe Sunken City is what remains of a pre-fall metropolis. As the name implies, much of the structures are now buried underneath several hundred meters of water. Speckle has been restored to many of the buildings throughout.\n\nIt was resurrected as a new center for trade and an icon of relative peace and prosperity. The city motto reflects this: “liberum persequi opes” (roughly translated: the freedom to pursue wealth and a better life).\n\nAt the heart of the city, a twisted mess of copper cabling, lit symbols, and meandering pipes sit atop the clear waters. Under the surface, residents traverse a series of tubes connecting the various residential and business floors which fill the tall structures.\n\nVarious merchant balconies dot the waterways alongside permanently docked rafts and small boats hawking their wares.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
+          "playerIds": []
+        }
+      ],
       "tags": [
         {
           "backgroundColor": "lch(52.137 19.696 331.49)",
@@ -3647,7 +3692,7 @@
         }
       ],
       "title": "The Sunken City - Pelotharna",
-      "updatedAt": "2026-10-06T15:04:59.825Z"
+      "updatedAt": "2026-11-05T18:38:04.321Z"
     },
     {
       "categories": [
