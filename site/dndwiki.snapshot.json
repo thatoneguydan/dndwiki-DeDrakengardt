@@ -6557,6 +6557,15 @@
     }
   ],
   "players": {
+    "displayNames": {
+      "celeste": "Celeste",
+      "dm": "DM",
+      "flicker": "Flicker",
+      "hal": "H.A.L.",
+      "kiktal": "Kiktal",
+      "skrimhawk": "Skrimhawk",
+      "voli": "Voli"
+    },
     "keyLookup": {
       "4acac09408c1fb25fb7cbe5d8d2ff5abb1fc5740f024dce6b3f6dd40702d9937": "dm",
       "9d68006a6c0088646f2ff029aca7f9f18767bd0994bd5fbbe02481d51ba65284": "hal",

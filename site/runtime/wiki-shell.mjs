@@ -379,14 +379,12 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function playerDisplayName(playerId) {
-  const value = String(playerId ?? '').trim();
-  if (value.length === 0) return 'Player';
-  return value
-    .split(/[._-]+/)
-    .filter(Boolean)
-    .map((part) => `${part.slice(0, 1).toLocaleUpperCase('en-US')}${part.slice(1)}`)
-    .join(' ');
+function playerDisplayName(playerId, authoredName) {
+  // Player ID is a routing identifier, not a name to title-case. When the
+  // registry supplied an exact display name (including dm), use it verbatim.
+  if (typeof authoredName === 'string' && authoredName.trim().length > 0) return authoredName;
+  const id = String(playerId ?? '').trim();
+  return id.length > 0 ? id : 'Player';
 }
 
 function validateSnapshot(snapshot) {
@@ -685,6 +683,9 @@ export function buildWikiShellModel(snapshotInput, perspective, {
     access: {
       active: perspective?.kind === 'player',
       playerId: perspective?.kind === 'player' && typeof perspective.playerId === 'string' ? perspective.playerId : null,
+      displayName: perspective?.kind === 'player' && typeof perspective.playerId === 'string'
+        ? playerDisplayName(perspective.playerId, snapshot.players?.displayNames?.[perspective.playerId])
+        : null,
       message: accessMessage,
     },
     query: normalizedQuery,
@@ -802,7 +803,7 @@ function keyForm(message = null) {
 function topbarAccess(model) {
   const open = model.access.message ? ' open' : '';
   if (model.access.active) {
-    const player = playerDisplayName(model.access.playerId);
+    const player = playerDisplayName(model.access.playerId, model.access.displayName);
     return `<div class="dndwiki-access" data-dndwiki-player-access>
       <details class="dndwiki-access-menu" data-dndwiki-access-menu>
         <summary class="dndwiki-button" data-dndwiki-player-access-summary>${PLAYER_KEY_ICON.replace('<svg ', '<span class="dndwiki-player-key-icon"><svg ').replace('</svg>', '</svg></span>')}<span class="dndwiki-access-label">Logged in as ${escapeHtml(player)}</span></summary>

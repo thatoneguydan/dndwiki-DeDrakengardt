@@ -34,7 +34,23 @@ export function validatePublicRegistry(registry) {
     lookup[hash] = playerId;
   }
 
-  return { schemaVersion: 1, keyLookup: lookup };
+  // Older published snapshots contain only keyLookup. New snapshots expose
+  // exact-case display names, never private aliases or credentials.
+  const rawNames = registry.displayNames;
+  const displayNames = {};
+  if (rawNames !== undefined) {
+    if (rawNames === null || typeof rawNames !== 'object' || Array.isArray(rawNames)) {
+      throw new PublicRegistryError('displayNames must be an ID-to-name object.');
+    }
+    for (const [id, name] of Object.entries(rawNames)) {
+      if (!PLAYER_ID_RE.test(id) || !playerIds.has(id) || typeof name !== 'string' || name.trim().length === 0) {
+        throw new PublicRegistryError('displayNames must contain valid, recognized IDs and nonempty names.');
+      }
+      displayNames[id] = name;
+    }
+  }
+
+  return { schemaVersion: 1, keyLookup: lookup, ...(rawNames === undefined ? {} : { displayNames }) };
 }
 
 function webCrypto(cryptoImpl) {

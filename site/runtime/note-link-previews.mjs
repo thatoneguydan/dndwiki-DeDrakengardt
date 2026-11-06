@@ -50,6 +50,12 @@ export function notePreviewForLink(snapshot, perspective, href) {
   return { title: view.title ?? 'Page', route: view.route, heading, html: renderMarkdownToHtml(view.markdown) };
 }
 
+
+/**
+ * Each hover depth owns its own fixed-position card. They are appended to
+ * document.body (not nested DOM), preserving the document's scrollWidth.
+ * There is intentionally no maximum depth: A -> B -> C -> A can continue.
+ */
 export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, session } = {}) {
   const document = browserWindow?.document;
   if (root == null || document?.body == null || session == null) return { close() {}, destroy() {} };
@@ -60,170 +66,225 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     document.head.append(style);
   }
 
-  const panel = document.createElement('aside');
-  panel.className = 'dndwiki-note-preview';
-  panel.setAttribute('data-dndwiki-note-preview', '');
-  panel.setAttribute('role', 'region');
-  panel.hidden = true;
-  document.body.append(panel);
-  let anchor = null;
-  let openTimer = 0;
+  const panels = [];
+  let pending = null;
+  let pendingTimer = 0;
   let closeTimer = 0;
-  let destroyed = false;
+  let positionFrame = 0;
   let dismissedAnchor = null;
+  let destroyed = false;
 
-  const clearTimers = () => {
-    browserWindow.clearTimeout(openTimer);
-    browserWindow.clearTimeout(closeTimer);
-    openTimer = closeTimer = 0;
+  const cancelPending = () => {
+    browserWindow.clearTimeout(pendingTimer);
+    pendingTimer = 0;
+    pending = null;
   };
-  const close = () => {
-    clearTimers();
-    panel.hidden = true;
-    panel.replaceChildren();
-    anchor = null;
-  };
-  const position = () => {
-    if (panel.hidden || anchor?.isConnected !== true) return;
-    const rect = anchor.getBoundingClientRect();
-    const width = panel.offsetWidth;
-    const height = panel.offsetHeight;
-    const margin = 12;
-    let left = rect.right + margin;
-    let top = rect.top - 12;
-    if (left + width > browserWindow.innerWidth - margin) {
-      if (rect.left - width - margin >= margin) left = rect.left - width - margin;
-      else {
-        left = rect.left;
-        top = rect.bottom + 8;
-        if (top + height > browserWindow.innerHeight - margin && rect.top - height - 8 >= margin) top = rect.top - height - 8;
-      }
-    }
-    panel.style.left = `${Math.max(margin, Math.min(left, browserWindow.innerWidth - width - margin))}px`;
-    panel.style.top = `${Math.max(margin, Math.min(top, browserWindow.innerHeight - height - margin))}px`;
-  };
-  const open = () => {
-    openTimer = 0;
-    if (destroyed || anchor?.isConnected !== true) return;
-    // Re-read the live perspective at opening time, never a cached public view.
-    const preview = notePreviewForLink(snapshot, session.perspective, anchor.getAttribute('href'));
-    if (preview == null) { close(); return; }
-    panel.setAttribute('aria-label', `${preview.title} preview`);
-    panel.innerHTML = `<header class="dndwiki-note-preview-header"><a href="${escapeHtml(preview.route)}">${escapeHtml(preview.title)}</a><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></header><div class="dndwiki-shell" data-dndwiki-note-preview-scroll tabindex="0" aria-label="Note preview body"><article class="dndwiki-page" data-dndwiki-note-preview-body>${preview.html}</article></div>`;
-    panel.hidden = false;
-    position();
-    const scroll = panel.querySelector('[data-dndwiki-note-preview-scroll]');
-    scroll.scrollTop = 0;
-    if (preview.heading) {
-      const heading = [...panel.querySelectorAll('h1,h2,h3,h4,h5,h6')].find((node) => node.textContent.trim().toLocaleLowerCase('en-US') === preview.heading.trim().toLocaleLowerCase('en-US'));
-      if (heading) scroll.scrollTop = heading.getBoundingClientRect().top - scroll.getBoundingClientRect().top;
-    }
-  };
-  const linkFor = (target) => {
-    const link = target?.closest?.('a[href]');
-    if (!link || !root.contains(link) || link.closest('[data-dndwiki-page-outline]')) return null;
-    return /^#\/page\/([a-z0-9][a-z0-9-]{0,63})(?:#.*)?$/.test(link.getAttribute('href')) ? link : null;
-  };
-  const showSoon = (link) => {
-    if (link === dismissedAnchor) return;
+  const cancelClosing = () => {
     browserWindow.clearTimeout(closeTimer);
     closeTimer = 0;
-    if (anchor === link && (!panel.hidden || openTimer)) return;
-    close();
-    anchor = link;
-    openTimer = browserWindow.setTimeout(open, 220);
+  };
+  const closeFrom = (depth) => {
+    if (pending?.depth >= depth) cancelPending();
+    while (panels.length > depth) panels.pop().element.remove();
+  };
+  const close = () => {
+    cancelClosing();
+    cancelPending();
+    closeFrom(0);
+  };
+
+  const linkInfo = (target) => {
+    const link = target?.closest?.('a[href]');
+    if (!link || link.closest('[data-dndwiki-page-outline]')) return null;
+    const href = link.getAttribute('href');
+    if (!/^#\/page\/[a-z0-9][a-z0-9-]{0,63}(?:#.*)?$/.test(String(href ?? ''))) return null;
+    if (root.contains(link)) return { link, depth: 0 };
+    // Only authored/body links nest. Header title links still navigate.
+    for (let i = panels.length - 1; i >= 0; i--) {
+      if (panels[i].element.contains(link) && link.closest('[data-dndwiki-note-preview-body]')) {
+        return { link, depth: i + 1 };
+      }
+    }
+    return null;
+  };
+  const inInteraction = (target) => target != null && (
+    panels.some(({ element, anchor }) => element.contains(target) || anchor?.contains?.(target))
+    || pending?.link?.contains?.(target) === true
+  );
+
+  const positionOne = (entry) => {
+    const { element, anchor } = entry;
+    if (anchor?.isConnected !== true) { closeFrom(panels.indexOf(entry)); return; }
+    const rect = anchor.getBoundingClientRect();
+    const width = element.offsetWidth;
+    const height = element.offsetHeight;
+    const margin = 12;
+    const viewportWidth = Number(browserWindow.innerWidth) || document.documentElement.clientWidth;
+    const viewportHeight = Number(browserWindow.innerHeight) || document.documentElement.clientHeight;
+    let left = rect.right + margin;
+    let top = rect.top - 12;
+
+    if (left + width > viewportWidth - margin) {
+      // Never flip to the left and create new horizontal space. On the right
+      // boundary, keep the nested card below its hovered link.
+      left = rect.left;
+      top = rect.bottom + 8;
+      if (top + height > viewportHeight - margin) {
+        if (rect.top - height - 8 >= margin) top = rect.top - height - 8;
+        else top = Math.max(margin, viewportHeight - height - margin);
+      }
+    }
+    element.style.left = Math.max(margin, Math.min(left, viewportWidth - width - margin)) + 'px';
+    element.style.top = Math.max(margin, Math.min(top, viewportHeight - height - margin)) + 'px';
+  };
+  const positionAll = () => {
+    positionFrame = 0;
+    for (const entry of [...panels]) {
+      if (!panels.includes(entry)) break;
+      positionOne(entry);
+    }
+  };
+  const schedulePosition = () => {
+    if (positionFrame) return;
+    positionFrame = browserWindow.requestAnimationFrame(positionAll);
+  };
+
+  const open = ({ link, depth }) => {
+    if (destroyed || link?.isConnected !== true) return;
+    const preview = notePreviewForLink(snapshot, session.perspective, link.getAttribute('href'));
+    if (preview == null) { closeFrom(depth); return; }
+    closeFrom(depth);
+
+    const panel = document.createElement('aside');
+    panel.className = 'dndwiki-note-preview';
+    panel.setAttribute('data-dndwiki-note-preview', '');
+    panel.setAttribute('data-dndwiki-note-preview-depth', String(depth));
+    panel.setAttribute('aria-label', preview.title + ' preview');
+    panel.setAttribute('role', 'region');
+    panel.style.zIndex = String(1000 + depth);
+    panel.innerHTML = '<header class="dndwiki-note-preview-header"><a href="'
+      + escapeHtml(preview.route) + '">' + escapeHtml(preview.title)
+      + '</a><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></header>'
+      + '<div class="dndwiki-shell" data-dndwiki-note-preview-scroll tabindex="0" aria-label="Note preview body">'
+      + '<article class="dndwiki-page" data-dndwiki-note-preview-body>' + preview.html + '</article></div>';
+    document.body.append(panel);
+    const entry = { anchor: link, element: panel };
+    panels.push(entry);
+    positionOne(entry);
+    const scroller = panel.querySelector('[data-dndwiki-note-preview-scroll]');
+    scroller.scrollTop = 0;
+    if (preview.heading) {
+      const heading = [...panel.querySelectorAll('h1,h2,h3,h4,h5,h6')]
+        .find((node) => node.textContent.trim().toLocaleLowerCase('en-US') === preview.heading.trim().toLocaleLowerCase('en-US'));
+      if (heading) scroller.scrollTop = heading.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+    }
+  };
+  const showSoon = ({ link, depth }) => {
+    if (link === dismissedAnchor) return;
+    cancelClosing();
+    if (panels[depth]?.anchor === link && pending == null) return;
+    if (pending?.link === link && pending.depth === depth) return;
+    cancelPending();
+    closeFrom(depth);
+    pending = { link, depth };
+    pendingTimer = browserWindow.setTimeout(() => {
+      pendingTimer = 0;
+      const next = pending;
+      pending = null;
+      if (next) open(next);
+    }, 220);
   };
   const leaveSoon = () => {
-    browserWindow.clearTimeout(openTimer);
-    openTimer = 0;
-    browserWindow.clearTimeout(closeTimer);
+    cancelPending();
+    cancelClosing();
     closeTimer = browserWindow.setTimeout(() => {
       closeTimer = 0;
-      if (panel.matches(':hover') || panel.contains(document.activeElement) || anchor === document.activeElement) return;
+      if (panels.some(({ element, anchor }) => element.matches(':hover') || element.contains(document.activeElement) || anchor === document.activeElement)) return;
       close();
     }, 220);
   };
+
   const onPointerOver = (event) => {
-    if (event.pointerType === 'touch') return;
-    if (panel.contains(event.target)) {
-      browserWindow.clearTimeout(closeTimer);
-      closeTimer = 0;
-      return;
-    }
-    if (browserWindow.matchMedia?.('(any-hover: hover)').matches === false) return;
-    const link = linkFor(event.target);
-    if (link) showSoon(link);
+    if (event.pointerType === 'touch' || browserWindow.matchMedia?.('(any-hover: hover)').matches === false) return;
+    const info = linkInfo(event.target);
+    if (info) showSoon(info);
+    else if (inInteraction(event.target)) cancelClosing();
   };
   const onPointerOut = (event) => {
-    const link = linkFor(event.target);
-    if (link?.contains(event.relatedTarget)) return;
-    if (panel.contains(event.relatedTarget) || anchor?.contains(event.relatedTarget)) return;
-    if (link === dismissedAnchor) dismissedAnchor = null;
-    if (link === anchor || panel.contains(event.target)) leaveSoon();
+    const info = linkInfo(event.target);
+    if (info?.link?.contains?.(event.relatedTarget)) return;
+    if (info?.link === dismissedAnchor) dismissedAnchor = null;
+    if (inInteraction(event.relatedTarget)) { cancelClosing(); return; }
+    if (inInteraction(event.target)) leaveSoon();
   };
   const onFocusIn = (event) => {
-    if (panel.contains(event.target)) {
-      browserWindow.clearTimeout(closeTimer);
-      closeTimer = 0;
-      return;
-    }
-    const link = linkFor(event.target);
-    if (link) showSoon(link);
+    const info = linkInfo(event.target);
+    if (info) showSoon(info);
+    else if (inInteraction(event.target)) cancelClosing();
     else leaveSoon();
   };
   const onFocusOut = (event) => {
-    if (panel.contains(event.relatedTarget) || anchor?.contains(event.relatedTarget)) return;
+    if (inInteraction(event.relatedTarget)) return;
     dismissedAnchor = null;
     leaveSoon();
   };
   const onKeyDown = (event) => {
-    if (event.key !== 'Escape' || panel.hidden) return;
-    dismissedAnchor = anchor;
-    const returnFocus = panel.contains(document.activeElement);
-    const source = anchor;
-    close();
-    if (returnFocus && source?.isConnected) source.focus({ preventScroll: true });
+    if (event.key !== 'Escape' || panels.length === 0) return;
+    const depth = panels.length - 1;
+    const entry = panels[depth];
+    dismissedAnchor = entry.anchor;
+    const returnFocus = entry.element.contains(document.activeElement);
+    closeFrom(depth);
+    if (returnFocus && entry.anchor?.isConnected) entry.anchor.focus({ preventScroll: true });
+    event.preventDefault();
   };
   const onClick = (event) => {
-    if (event.target?.closest?.('.dndwiki-note-preview-close')) {
-      dismissedAnchor = anchor;
-      const source = anchor;
-      close();
-      if (source?.isConnected) source.focus({ preventScroll: true });
+    const closeButton = event.target?.closest?.('.dndwiki-note-preview-close');
+    if (closeButton) {
+      const depth = panels.findIndex(({ element }) => element.contains(closeButton));
+      if (depth >= 0) {
+        const source = panels[depth].anchor;
+        dismissedAnchor = source;
+        closeFrom(depth);
+        if (source?.isConnected) source.focus({ preventScroll: true });
+      }
     } else if (event.target?.closest?.('a[href]')) close();
   };
   const onRootMutation = () => {
-    if (anchor?.isConnected === false) close();
+    const missingIndex = panels.findIndex(({ anchor }) => anchor?.isConnected !== true);
+    if (missingIndex >= 0) closeFrom(missingIndex);
+    if (pending?.link?.isConnected === false) cancelPending();
   };
   const observer = typeof browserWindow.MutationObserver === 'function'
     ? new browserWindow.MutationObserver(onRootMutation) : null;
   observer?.observe(root, { childList: true, subtree: true });
-  const onScroll = () => { if (!panel.hidden) position(); };
+
   document.addEventListener('pointerover', onPointerOver);
   document.addEventListener('pointerout', onPointerOut);
   document.addEventListener('focusin', onFocusIn);
   document.addEventListener('focusout', onFocusOut);
   document.addEventListener('keydown', onKeyDown);
   document.addEventListener('click', onClick);
+  document.addEventListener('scroll', schedulePosition, true);
   browserWindow.addEventListener('hashchange', close, true);
-  browserWindow.addEventListener('scroll', onScroll, { passive: true });
-  browserWindow.addEventListener('resize', position, { passive: true });
+  browserWindow.addEventListener('resize', schedulePosition, { passive: true });
+
   return {
     close,
     destroy() {
       destroyed = true;
       close();
+      if (positionFrame) browserWindow.cancelAnimationFrame(positionFrame);
       observer?.disconnect();
-      panel.remove();
       document.removeEventListener('pointerover', onPointerOver);
       document.removeEventListener('pointerout', onPointerOut);
       document.removeEventListener('focusin', onFocusIn);
       document.removeEventListener('focusout', onFocusOut);
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('click', onClick);
+      document.removeEventListener('scroll', schedulePosition, true);
       browserWindow.removeEventListener('hashchange', close, true);
-      browserWindow.removeEventListener('scroll', onScroll);
-      browserWindow.removeEventListener('resize', position);
+      browserWindow.removeEventListener('resize', schedulePosition);
     },
   };
 }
