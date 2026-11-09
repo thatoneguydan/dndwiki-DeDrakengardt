@@ -49,13 +49,6 @@
         }
       },
       {
-        "assetPath": "assets/0e9002529e565adfb7ed7998.jpg",
-        "audience": {
-          "playerIds": [],
-          "public": true
-        }
-      },
-      {
         "assetPath": "assets/28798f05d4722239b8449909.jpeg",
         "audience": {
           "playerIds": [],
@@ -252,19 +245,6 @@
         "sourcePageId": "blaze-headquarters",
         "targetPageId": "saint-cogito",
         "targetType": "page"
-      },
-      {
-        "assetPath": "assets/0e9002529e565adfb7ed7998.jpg",
-        "audience": {
-          "playerIds": [],
-          "public": true
-        },
-        "heading": null,
-        "kind": "embed",
-        "label": "De Drakengardt World Map.jpg",
-        "segmentIndex": 0,
-        "sourcePageId": "de-drakengardt-world-map",
-        "targetType": "asset"
       },
       {
         "audience": {
@@ -2101,7 +2081,7 @@
           "playerIds": [],
           "public": true
         },
-        "markdown": "\n\n\n<!-- Original map reference, preserved from this note:\n# [World Map](www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n![De Drakengardt World Map.jpg](assets/0e9002529e565adfb7ed7998.jpg)\n-->\n",
+        "markdown": "\n\n\n\n",
         "pageId": "de-drakengardt-world-map",
         "segmentIndex": 0
       },
@@ -4745,7 +4725,7 @@
       "segments": [
         {
           "kind": "public",
-          "markdown": "\n<!-- dndwiki:mapsmith de-drakengardt-world-map -->\n\n<!-- Original map reference, preserved from this note:\n# [World Map](www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n![De Drakengardt World Map.jpg](assets/0e9002529e565adfb7ed7998.jpg)\n-->\n",
+          "markdown": "\n<!-- dndwiki:mapsmith de-drakengardt-world-map -->\n\n\n",
           "playerIds": []
         }
       ],
