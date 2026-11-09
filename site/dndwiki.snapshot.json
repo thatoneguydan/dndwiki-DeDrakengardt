@@ -24,6 +24,10 @@
       {
         "label": "Feats",
         "tag": "feat"
+      },
+      {
+        "label": "Maps",
+        "tag": "map"
       }
     ],
     "schemaVersion": 1
@@ -39,6 +43,13 @@
     "assets": [
       {
         "assetPath": "assets/0dbdd264d7589f3f31909a15.jpeg",
+        "audience": {
+          "playerIds": [],
+          "public": true
+        }
+      },
+      {
+        "assetPath": "assets/0e9002529e565adfb7ed7998.jpg",
         "audience": {
           "playerIds": [],
           "public": true
@@ -241,6 +252,19 @@
         "sourcePageId": "blaze-headquarters",
         "targetPageId": "saint-cogito",
         "targetType": "page"
+      },
+      {
+        "assetPath": "assets/0e9002529e565adfb7ed7998.jpg",
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "heading": null,
+        "kind": "embed",
+        "label": "De Drakengardt World Map.jpg",
+        "segmentIndex": 0,
+        "sourcePageId": "de-drakengardt-world-map",
+        "targetType": "asset"
       },
       {
         "audience": {
@@ -2077,6 +2101,15 @@
           "playerIds": [],
           "public": true
         },
+        "markdown": "\n\n\n<!-- Original map reference, preserved from this note:\n# [World Map](www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n![De Drakengardt World Map.jpg](assets/0e9002529e565adfb7ed7998.jpg)\n-->\n",
+        "pageId": "de-drakengardt-world-map",
+        "segmentIndex": 0
+      },
+      {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
         "markdown": "\nA small town you saved from the Red Devils, a faction of desert goblins. The town used to be blessed with flowing water and greenery, but the expanding desert has consumed its natural resources, leaving it a sandy dustbowl.\n\n[Source: World Anvil map](https://www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n",
         "pageId": "dry-reach",
         "segmentIndex": 0
@@ -3132,6 +3165,1606 @@
       ],
       "title": "Blaze Headquarters",
       "updatedAt": "2026-10-03T02:39:30.756Z"
+    },
+    {
+      "categories": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locations",
+          "tag": "Location"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "label": "Maps",
+          "tag": "map"
+        }
+      ],
+      "createdAt": "2026-06-02T19:53:18.111Z",
+      "mapsmith": {
+        "audience": {
+          "playerIds": [],
+          "public": true
+        },
+        "map": {
+          "appearance": {
+            "background": "#a7a69f",
+            "backgroundImage": {
+              "path": "assets/mapsmith-c6fafb6dde0f835371ee6d036dfe9767324c5ebb17397e4e669c982ffb7f8083.jpg"
+            },
+            "boundariesVisible": true,
+            "compass": {
+              "aspect": 1,
+              "corner": "bottom-left",
+              "margin": 16,
+              "width": 12
+            },
+            "interface": {
+              "accent": "#e5e5e5",
+              "edge": "#6d6d6d",
+              "ink": "#414141",
+              "muted": "#7f7f7f",
+              "paper": "#efefef"
+            },
+            "logo": {
+              "anchor": {
+                "bar": 64,
+                "x": 0.014857112884521484,
+                "y": 0.46908374638401285
+              },
+              "aspect": 7.395465994962216,
+              "bounds": {
+                "bottom": 1,
+                "left": 0,
+                "right": 1,
+                "top": 0
+              },
+              "locked": true,
+              "path": "assets/mapsmith-28d68e22cec34b8a898326f7983af93670402bf0f93c21554000b986883007d4.png",
+              "width": 753.2943958623395,
+              "x": 5.14288330078125,
+              "y": 1.14288330078125
+            },
+            "pinColor": "#ffffff",
+            "pinOutlineColor": "#000000",
+            "pinOutlineWidth": 3.1,
+            "pinShadow": {
+              "blur": 0,
+              "color": "#202d1f",
+              "enabled": true,
+              "opacity": 0.25,
+              "spread": 0,
+              "x": 2,
+              "y": 2
+            },
+            "pinSize": 34,
+            "pinTooltips": true,
+            "shadow": {
+              "blur": 7.4,
+              "color": "#182218",
+              "enabled": true,
+              "opacity": 0.3,
+              "spread": 2.5,
+              "x": 0,
+              "y": 0
+            },
+            "tabIcon": "map",
+            "toast": {
+              "background": "#414141",
+              "border": "#6d6d6d",
+              "text": "#efefef"
+            },
+            "tooltip": {
+              "background": "#303d35",
+              "border": "#303d35",
+              "text": "#fffef6"
+            }
+          },
+          "assets": [
+            {
+              "key": "tiles/0/0_0.png",
+              "path": "assets/mapsmith-f60c228bbc94aaa30ae240f47092e9dfe9f8b2d613872cb09f39926c993e75de.png"
+            },
+            {
+              "key": "tiles/1/0_0.png",
+              "path": "assets/mapsmith-da78ea2452c7c904fcfc5aa3165c999a80768a2aaa25e6d1f155c4b99f9f16e9.png"
+            },
+            {
+              "key": "tiles/2/0_0.png",
+              "path": "assets/mapsmith-8f4867428e8e58f4d2e55c3bae2c74b9f568305ff61d6caed1b03a35f1cbe951.png"
+            },
+            {
+              "key": "tiles/3/0_0.png",
+              "path": "assets/mapsmith-46081760e4aedaeade43d92604232dbdd04247b628ab7b54d79f1c9a66661de4.png"
+            },
+            {
+              "key": "tiles/4/0_0.png",
+              "path": "assets/mapsmith-78a9ef6f7244719a6aaaf4226ae2ea4b122bcbf366d2416a9b51772287d4435d.png"
+            },
+            {
+              "key": "tiles/5/0_0.png",
+              "path": "assets/mapsmith-425e18540e798621f2af1ced4d45bf7403887c15174edd1c3080c3f7f15173a6.png"
+            },
+            {
+              "key": "tiles/6/0_0.png",
+              "path": "assets/mapsmith-5789f1bf3c79da40ef62b537479aaf539d990f02e7619683fa0d898fc7832453.png"
+            },
+            {
+              "key": "tiles/7/0_0.png",
+              "path": "assets/mapsmith-31dd5f58a95e1f963d8d6b3ca3b290c83bc89be045acdba61a0e5615fc022ed3.png"
+            },
+            {
+              "key": "tiles/8/0_0.png",
+              "path": "assets/mapsmith-88aea8fe3117543a31c99574cb08ddd8c00bf3534dd1c041ad3313bb5d3a9912.png"
+            },
+            {
+              "key": "tiles/9/0_0.png",
+              "path": "assets/mapsmith-0a725569e7625f49739215ed05ba48f566721f9bfd655a5872660bf09785d121.png"
+            },
+            {
+              "key": "tiles/10/0_0.png",
+              "path": "assets/mapsmith-ce5d934361c284c944196190ef64c2d1363a054c7d89e8d1394bde6aba10914e.png"
+            },
+            {
+              "key": "tiles/10/1_0.png",
+              "path": "assets/mapsmith-b00fcedfbb4f7b24d29e55f67eba26e8c82beb77f25e78f09e95e5073a65e0d1.png"
+            },
+            {
+              "key": "tiles/10/0_1.png",
+              "path": "assets/mapsmith-d13ded5963338b788492b663432f1ccd30f95427db0c2b14391df2f1a9928218.png"
+            },
+            {
+              "key": "tiles/10/1_1.png",
+              "path": "assets/mapsmith-0b7b4087b7b5a3c601cbcb607275f396a9b880ae941bd4ca5ae365959f61c4ef.png"
+            },
+            {
+              "key": "tiles/11/0_0.png",
+              "path": "assets/mapsmith-7deaa10132b5d3a95e78c43d234b857bc2d1a772305411445ca35a529f79f889.png"
+            },
+            {
+              "key": "tiles/11/1_0.png",
+              "path": "assets/mapsmith-6d6bcac8eaaed292d0453cbd7c0923ec36b658377d34bcea8e1e59cb8d0bae69.png"
+            },
+            {
+              "key": "tiles/11/2_0.png",
+              "path": "assets/mapsmith-547d28e60f69aad1bfb49066a9fb59c99281582b585a8d6fa6aab19ccd1ac776.png"
+            },
+            {
+              "key": "tiles/11/3_0.png",
+              "path": "assets/mapsmith-1164c38488bba7d907db14a98966760af592e6bf7187f55385318606b9a1756f.png"
+            },
+            {
+              "key": "tiles/11/0_1.png",
+              "path": "assets/mapsmith-6fa5e3ba00f5051b25c136576994838dbc1a0a89903ecc0b2eeb2b94228aded5.png"
+            },
+            {
+              "key": "tiles/11/1_1.png",
+              "path": "assets/mapsmith-247592a80dd0b781841e85d452f435b1d2fe50427623a754a2235f53624789b4.png"
+            },
+            {
+              "key": "tiles/11/2_1.png",
+              "path": "assets/mapsmith-4ac876fe0410e4dabc9fc3c52462674bc24a6bbadfec10444bc76f06cd7f05be.png"
+            },
+            {
+              "key": "tiles/11/3_1.png",
+              "path": "assets/mapsmith-879df053a68281b45842ca041fdff4a0553fb398037aae9f2e68b7b6a8fd743c.png"
+            },
+            {
+              "key": "tiles/11/0_2.png",
+              "path": "assets/mapsmith-922c4bb012976b3963b1baef336070548d590d4533f8e34d11374ba4686a1ae2.png"
+            },
+            {
+              "key": "tiles/11/1_2.png",
+              "path": "assets/mapsmith-6679186f25e2a1874d4511ac0e6a349436c3f45187d63e716193d992e6ab654d.png"
+            },
+            {
+              "key": "tiles/11/2_2.png",
+              "path": "assets/mapsmith-3f573f8c620506fdbfd0ca2db2027173315325eea671ef1869137d1a4bd2f775.png"
+            },
+            {
+              "key": "tiles/11/3_2.png",
+              "path": "assets/mapsmith-4b920412256ee7d506cb7236bb8deed51d06c25257cdcdeee473ec780287c715.png"
+            },
+            {
+              "key": "tiles/12/0_0.png",
+              "path": "assets/mapsmith-a29a7d1891bb7aff12fed08d8967ede970d00a5d210e92851baadab23aea8e0d.png"
+            },
+            {
+              "key": "tiles/12/1_0.png",
+              "path": "assets/mapsmith-527eae9fc93f916511a8beb7c220e9530605482e95613b07f93cf1872d5e85b5.png"
+            },
+            {
+              "key": "tiles/12/2_0.png",
+              "path": "assets/mapsmith-834d44dea06ec93ee0e18da48a7282aa7bafb2b35ee173345a4f08fd6f1c4402.png"
+            },
+            {
+              "key": "tiles/12/3_0.png",
+              "path": "assets/mapsmith-04f32a086c421ee7f95360ffdadca1b310e71454d9745e97220c85385e8da508.png"
+            },
+            {
+              "key": "tiles/12/4_0.png",
+              "path": "assets/mapsmith-0781da33249220f0483458ed8d5f743551dfc1a0a41667b8968a614a66f1caa4.png"
+            },
+            {
+              "key": "tiles/12/5_0.png",
+              "path": "assets/mapsmith-180679d73ff6c45affed3230f1342dd296a8b79221ec4dd6543475dae5d5eb15.png"
+            },
+            {
+              "key": "tiles/12/6_0.png",
+              "path": "assets/mapsmith-59a8256f6b8a765779877e4b949f90d33db8e907544b54ca983f29436cb76603.png"
+            },
+            {
+              "key": "tiles/12/7_0.png",
+              "path": "assets/mapsmith-ea787e82ff3605dee42005840f57150e3f5ab34a20acd75fe65f82d8b375d578.png"
+            },
+            {
+              "key": "tiles/12/0_1.png",
+              "path": "assets/mapsmith-63c8f6bc296345a194681a889b5d3a27bcfb4c80e46ce00441cf11b9e70f8500.png"
+            },
+            {
+              "key": "tiles/12/1_1.png",
+              "path": "assets/mapsmith-c56764a3f290d8838110af438bfd07d8f130c13b7f150b72777e358ec51fb1a2.png"
+            },
+            {
+              "key": "tiles/12/2_1.png",
+              "path": "assets/mapsmith-50872ff97bf6eae6ee0ad8f9f9bbcf56b0948de4114d2ff8b617fcb8824dd713.png"
+            },
+            {
+              "key": "tiles/12/3_1.png",
+              "path": "assets/mapsmith-eb6fd5e2df67f13d7b376d9eaebeabfca4136e9e62f518e07d6cb574eac70320.png"
+            },
+            {
+              "key": "tiles/12/4_1.png",
+              "path": "assets/mapsmith-783aa474c0a1689956f61777cc08b1d590130015295adc6305f9e66d45503992.png"
+            },
+            {
+              "key": "tiles/12/5_1.png",
+              "path": "assets/mapsmith-0fe2c9aa2c22365789cea81c3097cb9444765b643d4ef1055a5c95ba4dfad501.png"
+            },
+            {
+              "key": "tiles/12/6_1.png",
+              "path": "assets/mapsmith-bdd035866cad2c4a36e5993524aadebbf5796d319d3d785322ef24dfa7fd4f90.png"
+            },
+            {
+              "key": "tiles/12/7_1.png",
+              "path": "assets/mapsmith-68b9cfe67dfb662be2236c83d802a46f375ace3067ca86684a0cc3031a9c5734.png"
+            },
+            {
+              "key": "tiles/12/0_2.png",
+              "path": "assets/mapsmith-4e7c9a5616f26750b6749829767c244510e7f180dbca1ff9c8c553a1875b13a1.png"
+            },
+            {
+              "key": "tiles/12/1_2.png",
+              "path": "assets/mapsmith-b1c8d2776ee84fe5a110c2813d0a9cddaf1a25a8fab30f094dd3d6f0fe1f3a67.png"
+            },
+            {
+              "key": "tiles/12/2_2.png",
+              "path": "assets/mapsmith-e58f6d5453006d64427ffd49aa9b9dd3bbb8e7adb9aa901a53b0f5c2ba81527d.png"
+            },
+            {
+              "key": "tiles/12/3_2.png",
+              "path": "assets/mapsmith-7ced2f7eb685e5eda5598a4e66cb0a2fe5e8691f0fa62da97b912eae8a8fcf38.png"
+            },
+            {
+              "key": "tiles/12/4_2.png",
+              "path": "assets/mapsmith-ba4eec489e743ecb2887be8a1bf5a6ea5460a5557a7d1efa9f2ff754e60916df.png"
+            },
+            {
+              "key": "tiles/12/5_2.png",
+              "path": "assets/mapsmith-6be2bdde5812e8e64bb6a67ee82fe3f1c79938e568461e0cde0fd36d650d48a9.png"
+            },
+            {
+              "key": "tiles/12/6_2.png",
+              "path": "assets/mapsmith-0fd8cc370031fe52ba0dcf5530f28b4630f98d40bcea625965d465f98f5bf958.png"
+            },
+            {
+              "key": "tiles/12/7_2.png",
+              "path": "assets/mapsmith-68b9cfe67dfb662be2236c83d802a46f375ace3067ca86684a0cc3031a9c5734.png"
+            },
+            {
+              "key": "tiles/12/0_3.png",
+              "path": "assets/mapsmith-327a752a6f289b640b4c3523bfef5d7cf8518d41511755beee5a43fe41ca3cb8.png"
+            },
+            {
+              "key": "tiles/12/1_3.png",
+              "path": "assets/mapsmith-6fb943e8f3bac5fd3db28f670467fc621a31005e6f300f735d79ce2a1b78c171.png"
+            },
+            {
+              "key": "tiles/12/2_3.png",
+              "path": "assets/mapsmith-1be946823f2d56ee2e6fb40a8dfef2b8c5a9af02e9eebc3d40847f546b50e57d.png"
+            },
+            {
+              "key": "tiles/12/3_3.png",
+              "path": "assets/mapsmith-2da23372b31b577526686cda954013d471d2804223f58e7aa892dc816eedba97.png"
+            },
+            {
+              "key": "tiles/12/4_3.png",
+              "path": "assets/mapsmith-392a81d94800c6b5aba25e00897a3c490829d63e5581455e27bda76b34a2e784.png"
+            },
+            {
+              "key": "tiles/12/5_3.png",
+              "path": "assets/mapsmith-2ba02539789abdd3a347fe3c0a5100beaf7f4626efbdae5aefc16944418816fa.png"
+            },
+            {
+              "key": "tiles/12/6_3.png",
+              "path": "assets/mapsmith-6b4dc9c1335c1d7284399f16cb921c4060f85958172ea464cbc4512582b179ad.png"
+            },
+            {
+              "key": "tiles/12/7_3.png",
+              "path": "assets/mapsmith-68b9cfe67dfb662be2236c83d802a46f375ace3067ca86684a0cc3031a9c5734.png"
+            },
+            {
+              "key": "tiles/12/0_4.png",
+              "path": "assets/mapsmith-bbea40cc13a932f8a005885988df79ecfabdf08c85fe801196cdb6548e820a03.png"
+            },
+            {
+              "key": "tiles/12/1_4.png",
+              "path": "assets/mapsmith-e19db5084e58c4394c6e759bd9d67dc1306c5eaa9498181272896c4d124f79eb.png"
+            },
+            {
+              "key": "tiles/12/2_4.png",
+              "path": "assets/mapsmith-65e80b3566244872a0e4cd3c51c56f30d3009724ff2a7bceba577ccdbe679cb7.png"
+            },
+            {
+              "key": "tiles/12/3_4.png",
+              "path": "assets/mapsmith-12138e6159340b83afca468596294778899ff149bb8c04df118ecae39c890b63.png"
+            },
+            {
+              "key": "tiles/12/4_4.png",
+              "path": "assets/mapsmith-c88992e5d7cd4e6cefb7cc63f94b9648652ead1d3c19e39cb16e4affdbb9be6f.png"
+            },
+            {
+              "key": "tiles/12/5_4.png",
+              "path": "assets/mapsmith-881e7469cc8ef2a63239f8ab3f49f0efa11fe387bc998fb7071ac88f31a1eaf9.png"
+            },
+            {
+              "key": "tiles/12/6_4.png",
+              "path": "assets/mapsmith-279b7ec6a4658395c580429e2689db76b934dd424b2d7f92ce1d9d1f78fe4874.png"
+            },
+            {
+              "key": "tiles/12/7_4.png",
+              "path": "assets/mapsmith-ac20fcc51b22e603f0f73f4b480d3aca612c3a73603b6ae1f8a02fffb9398a5a.png"
+            },
+            {
+              "key": "logo",
+              "path": "assets/mapsmith-28d68e22cec34b8a898326f7983af93670402bf0f93c21554000b986883007d4.png"
+            },
+            {
+              "key": "background",
+              "path": "assets/mapsmith-c6fafb6dde0f835371ee6d036dfe9767324c5ebb17397e4e669c982ffb7f8083.jpg"
+            }
+          ],
+          "clouds": [],
+          "connections": [
+            {
+              "a": "fe047596-ab61-4bb0-987d-c6cb7881ea34",
+              "b": "947324d3-c100-4982-878c-dfff765ca3a0",
+              "id": "6e21787c-32aa-4cfe-9464-5f3dcf6c66e0",
+              "nodes": [
+                "f0e69c20-77e6-4213-b0e9-3c9930765e9c",
+                "62159fd9-86ff-4136-9805-b5529e72372b",
+                "4d00b16e-a21a-447b-b6f1-da4baac8a2a2",
+                "931e2e06-7caf-40f8-86ec-abdd26330e43",
+                "5fa78208-2b69-4376-8d65-dad81da38980",
+                "049ff487-050f-4ca8-a289-49ec41952973",
+                "b4b9bfab-a79c-43cd-98ec-954c8bcff935",
+                "39a4524f-fa47-4f0c-877d-24163eaa83a6",
+                "8bfb8fa7-0344-4ca1-9d66-33ba8a4ee74b",
+                "5e2860dc-9f54-403b-94d3-8fba1276d3f2",
+                "88db84a1-39e1-418d-b001-f2acf096c26c",
+                "7a2236d5-b131-4659-851f-a445c94eab19",
+                "a6fd68f0-9405-4f74-9303-747feeae89a6",
+                "1e91e32f-d13a-458c-9a3e-df766eb295e9",
+                "1a18de67-5bbf-4281-bfd8-fa5372d05678",
+                "91386ea6-8ae3-4c1c-a119-1f01bb28b338",
+                "376631d4-db4b-4bbf-9e3a-011625d7f990",
+                "462859f2-58bc-4144-b727-90bb61354a6f",
+                "908f6df8-13da-4de4-a644-3293fa2271ec",
+                "e5b1aeef-4415-4a9a-94db-7d704f1fd60a",
+                "cce20ae5-9944-4487-a2e0-29ca7e244acc",
+                "78f36a2d-7234-40f6-85fa-7a02e9bf9607",
+                "518eaf69-e800-47fe-8cfc-48ca5e04a52c",
+                "f955793b-12bf-4928-a119-388fc6777eb2",
+                "0205cbff-4e5b-4063-b8cc-699352963190",
+                "a9cd92b0-9bba-46d9-8287-6194325615e0",
+                "3fb2dafa-526a-48f3-8f30-c238efa82f57",
+                "fb99d8bd-8643-48ec-92b2-1c2d5d755032",
+                "e9f22476-39d2-49f5-b45e-9bb6134aac1f",
+                "159ee803-f554-4726-b714-1034a3249696",
+                "76eb2c42-e44c-49a8-919b-e41813c9d2d5",
+                "b1155267-ae36-4434-ab90-88586a9e0f22",
+                "ceb9f249-b9f1-4498-b04c-9ff25843c550",
+                "5905e2b9-f8e9-4886-8daf-bc17270edbc6",
+                "2d72498b-25e5-4ad8-a70b-403b9779efab",
+                "fd63f8cf-11d4-47c4-b63b-b28725921ef1",
+                "7643f3f3-b03b-4827-8b11-2644f3e75113",
+                "b6b94b2f-0ead-4644-b9f7-16414c10faaa",
+                "69aae7cb-950e-4a65-9102-23e825ccc32b",
+                "28cf8c78-f916-4fbf-982c-b8d5e8c55452",
+                "69aaeeec-10d2-4ab5-8345-1d1f0d59050d",
+                "7a984800-8277-42da-bb42-56a0cb0bd91c",
+                "0ee0320d-fe6d-4623-8976-9ce7b3240b48",
+                "3803f9b2-89aa-416c-954e-bc57a61e147c",
+                "d193941d-3f50-4fbf-a507-2e5866d7d025",
+                "e83f34ba-7305-4137-ba77-661119c18d88",
+                "60728c3f-90ee-43bb-b67f-0038c446e6bc",
+                "5b23f895-519e-4e11-a722-8a8fa5a96f7e",
+                "59f971d0-83b3-4381-9a5a-c69eee0485a8",
+                "548b7ee3-0101-4988-88b3-bbf93d5e595b",
+                "ac31f827-d824-4090-bddf-a1505a917397",
+                "6b867665-1f3e-4598-b4d8-c811f4fd4d28",
+                "0e59a0c2-c610-42a9-9e41-29942794617c",
+                "bd8553e3-3de4-407d-9cb4-42453f9d4e44",
+                "7c6870a9-e542-444e-a41d-e5478b477d97",
+                "6216ad99-d26d-4939-beaf-8ddad4bff704"
+              ],
+              "owner": "947324d3-c100-4982-878c-dfff765ca3a0"
+            }
+          ],
+          "id": "c6ed6b75-c9e5-4164-87fa-17647aa1fd2a",
+          "image": {
+            "format": "png",
+            "height": 2160,
+            "maxLevel": 12,
+            "overlap": 1,
+            "sourceName": "",
+            "tileSize": 512,
+            "version": 1,
+            "width": 3840
+          },
+          "pins": [
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "anchor",
+              "id": "hocku-port",
+              "label": "Hocku Port",
+              "locked": false,
+              "note": "hocku-port",
+              "x": 0.28098956,
+              "y": 0.1189815
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "building-community",
+              "id": "the-megadome",
+              "label": "The Megadome",
+              "locked": false,
+              "note": "the-megadome",
+              "x": 0.18593749,
+              "y": 0.17083335
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "sparkles",
+              "id": "the-silver-city",
+              "label": "The Silver City",
+              "locked": false,
+              "note": "the-silver-city",
+              "x": 0.33489581,
+              "y": 0.20509262
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "building-castle",
+              "id": "eternis",
+              "label": "Eternis",
+              "locked": false,
+              "note": "eternis",
+              "x": 0.56562498,
+              "y": 0.39166669
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "building-community",
+              "id": "the-sunken-city",
+              "label": "The Sunken City",
+              "locked": false,
+              "note": "the-sunken-city-pelotharna",
+              "x": 0.4018229,
+              "y": 0.39953707
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "icon": "campfire",
+              "id": "dryreach",
+              "label": "Dryreach",
+              "locked": false,
+              "note": "dry-reach",
+              "x": 0.34713539,
+              "y": 0.2828704
+            }
+          ],
+          "regions": [
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "closed": true,
+              "color": "#eae6d2",
+              "curved": true,
+              "id": "947324d3-c100-4982-878c-dfff765ca3a0",
+              "label": "Scorchsand Desert",
+              "note": "scorchsand-desert",
+              "points": [
+                {
+                  "x": 0.3224655651881966,
+                  "y": 0.4496752893106703
+                },
+                {
+                  "x": 0.31549892416611286,
+                  "y": 0.46206036164100617
+                },
+                {
+                  "x": 0.31266505061492667,
+                  "y": 0.4878800788218957
+                },
+                {
+                  "x": 0.31101195876107557,
+                  "y": 0.5000552635539799
+                },
+                {
+                  "x": 0.310657722990666,
+                  "y": 0.5141196608852617
+                },
+                {
+                  "x": 0.30593462142550565,
+                  "y": 0.5181080409463883
+                },
+                {
+                  "x": 0.30428152957165455,
+                  "y": 0.541408770625859
+                },
+                {
+                  "x": 0.29637030607280856,
+                  "y": 0.566178937708024
+                },
+                {
+                  "x": 0.29034831058793675,
+                  "y": 0.580663177500289
+                },
+                {
+                  "x": 0.2817286155482718,
+                  "y": 0.5869606350430894
+                },
+                {
+                  "x": 0.27700551398311135,
+                  "y": 0.5838119174824358
+                },
+                {
+                  "x": 0.278540531450856,
+                  "y": 0.5735260126140288
+                },
+                {
+                  "x": 0.27228237458168114,
+                  "y": 0.5689078576506811
+                },
+                {
+                  "x": 0.27003889818520754,
+                  "y": 0.5533740004952118
+                },
+                {
+                  "x": 0.2662249920948291,
+                  "y": 0.5513273396861605
+                },
+                {
+                  "x": 0.2620686324484721,
+                  "y": 0.5627467676297871
+                },
+                {
+                  "x": 0.260651709546178,
+                  "y": 0.5541822056406644
+                },
+                {
+                  "x": 0.25866799932155665,
+                  "y": 0.5489762757162389
+                },
+                {
+                  "x": 0.2547950282915273,
+                  "y": 0.5340301980061459
+                },
+                {
+                  "x": 0.2455377139099611,
+                  "y": 0.5412513538060958
+                },
+                {
+                  "x": 0.23779179202924627,
+                  "y": 0.5278166999869448
+                },
+                {
+                  "x": 0.23458007792010122,
+                  "y": 0.5118630541820761
+                },
+                {
+                  "x": 0.23051818787230138,
+                  "y": 0.5106875221971154
+                },
+                {
+                  "x": 0.22834555862990963,
+                  "y": 0.5024587983023899
+                },
+                {
+                  "x": 0.22305566469758606,
+                  "y": 0.4688721368487205
+                },
+                {
+                  "x": 0.223905820456897,
+                  "y": 0.46316244081410163
+                },
+                {
+                  "x": 0.22116641398185,
+                  "y": 0.447040831119048
+                },
+                {
+                  "x": 0.2166322263896241,
+                  "y": 0.44636910111866956
+                },
+                {
+                  "x": 0.2146485161650028,
+                  "y": 0.4404914411938657
+                },
+                {
+                  "x": 0.21540420737059246,
+                  "y": 0.4325985822993294
+                },
+                {
+                  "x": 0.2148374402276092,
+                  "y": 0.410431420538065
+                },
+                {
+                  "x": 0.2168211504522305,
+                  "y": 0.39800435275088425
+                },
+                {
+                  "x": 0.21398727942346235,
+                  "y": 0.36609706114114715
+                },
+                {
+                  "x": 0.21162571098395622,
+                  "y": 0.3566928007771622
+                },
+                {
+                  "x": 0.20491888910450257,
+                  "y": 0.35081514085235826
+                },
+                {
+                  "x": 0.20151823579824318,
+                  "y": 0.34913581585141235
+                },
+                {
+                  "x": 0.1999123736988347,
+                  "y": 0.34443368791156925
+                },
+                {
+                  "x": 0.19556710512437928,
+                  "y": 0.33670875703282893
+                },
+                {
+                  "x": 0.20312410294248767,
+                  "y": 0.3365408245327343
+                },
+                {
+                  "x": 0.20104252694724373,
+                  "y": 0.3388285812115881
+                },
+                {
+                  "x": 0.20079450937123802,
+                  "y": 0.34129771701405726
+                },
+                {
+                  "x": 0.20491157305252258,
+                  "y": 0.34319366040847094
+                },
+                {
+                  "x": 0.21123597819286954,
+                  "y": 0.34160635898936587
+                },
+                {
+                  "x": 0.21427766513836083,
+                  "y": 0.3376201904193773
+                },
+                {
+                  "x": 0.21702909004699883,
+                  "y": 0.32542608086767677
+                },
+                {
+                  "x": 0.21869545378961533,
+                  "y": 0.3246682556402455
+                },
+                {
+                  "x": 0.21997427972169412,
+                  "y": 0.3305930787477883
+                },
+                {
+                  "x": 0.21788165170628193,
+                  "y": 0.33844691420101014
+                },
+                {
+                  "x": 0.21606027863434651,
+                  "y": 0.3439583790970356
+                },
+                {
+                  "x": 0.2205168144439164,
+                  "y": 0.3451984647694848
+                },
+                {
+                  "x": 0.23260758766212433,
+                  "y": 0.34382059302652984
+                },
+                {
+                  "x": 0.24632596504699883,
+                  "y": 0.32887073998891936
+                },
+                {
+                  "x": 0.25109253193284103,
+                  "y": 0.3253571823134753
+                },
+                {
+                  "x": 0.2552002853686117,
+                  "y": 0.32549496838398106
+                },
+                {
+                  "x": 0.25605283874947193,
+                  "y": 0.3283884869024996
+                },
+                {
+                  "x": 0.26116816731305614,
+                  "y": 0.32859516784790777
+                },
+                {
+                  "x": 0.26504341296366546,
+                  "y": 0.32363485091320465
+                },
+                {
+                  "x": 0.2693449415135221,
+                  "y": 0.32108578837270296
+                },
+                {
+                  "x": 0.27659165145965114,
+                  "y": 0.31750333582235646
+                },
+                {
+                  "x": 0.2836833624244898,
+                  "y": 0.3127497108709585
+                },
+                {
+                  "x": 0.28961249307140735,
+                  "y": 0.30627372876419634
+                },
+                {
+                  "x": 0.2934489874244898,
+                  "y": 0.30682488040481765
+                },
+                {
+                  "x": 0.29612290973807404,
+                  "y": 0.3025534901433441
+                },
+                {
+                  "x": 0.29751799784115646,
+                  "y": 0.30331132272937356
+                },
+                {
+                  "x": 0.29899059267850414,
+                  "y": 0.3015889839705046
+                },
+                {
+                  "x": 0.3005019388133787,
+                  "y": 0.30083115874307326
+                },
+                {
+                  "x": 0.3027495844365328,
+                  "y": 0.29711092012222107
+                },
+                {
+                  "x": 0.3051134839522676,
+                  "y": 0.29724870619272686
+                },
+                {
+                  "x": 0.30674109639735714,
+                  "y": 0.29421740160370247
+                },
+                {
+                  "x": 0.30984129126216003,
+                  "y": 0.288154796104953
+                },
+                {
+                  "x": 0.3105775824720167,
+                  "y": 0.2909794160692701
+                },
+                {
+                  "x": 0.3133290073806547,
+                  "y": 0.2902904893960402
+                },
+                {
+                  "x": 0.31623545403624603,
+                  "y": 0.2850545929617272
+                },
+                {
+                  "x": 0.31805680641212425,
+                  "y": 0.28753475694802744
+                },
+                {
+                  "x": 0.32270710284854004,
+                  "y": 0.2845034450004051
+                },
+                {
+                  "id": "6216ad99-d26d-4939-beaf-8ddad4bff704",
+                  "x": 0.32530352256707046,
+                  "y": 0.28216107812250774
+                },
+                {
+                  "id": "7c6870a9-e542-444e-a41d-e5478b477d97",
+                  "x": 0.32747366145595935,
+                  "y": 0.28278111360013425
+                },
+                {
+                  "id": "bd8553e3-3de4-407d-9cb4-42453f9d4e44",
+                  "x": 0.3332090273368196,
+                  "y": 0.27182707868298567
+                },
+                {
+                  "id": "0e59a0c2-c610-42a9-9e41-29942794617c",
+                  "x": 0.33603797139735714,
+                  "y": 0.2702425333532206
+                },
+                {
+                  "id": "6b867665-1f3e-4598-b4d8-c811f4fd4d28",
+                  "x": 0.33921566057879093,
+                  "y": 0.2737560910286647
+                },
+                {
+                  "id": "ac31f827-d824-4090-bddf-a1505a917397",
+                  "x": 0.3468886658418018,
+                  "y": 0.28092099980865676
+                },
+                {
+                  "id": "548b7ee3-0101-4988-88b3-bbf93d5e595b",
+                  "x": 0.3409207838973573,
+                  "y": 0.2838834058434796
+                },
+                {
+                  "id": "59f971d0-83b3-4381-9a5a-c69eee0485a8",
+                  "x": 0.34002947921897025,
+                  "y": 0.28526127758643455
+                },
+                {
+                  "id": "5b23f895-519e-4e11-a722-8a8fa5a96f7e",
+                  "x": 0.34033949787760825,
+                  "y": 0.2882925784961598
+                },
+                {
+                  "id": "60728c3f-90ee-43bb-b67f-0038c446e6bc",
+                  "x": 0.3442147600850633,
+                  "y": 0.2944240862284099
+                },
+                {
+                  "id": "e83f34ba-7305-4137-ba77-661119c18d88",
+                  "x": 0.347121181905386,
+                  "y": 0.29642199344899123
+                },
+                {
+                  "id": "d193941d-3f50-4fbf-a507-2e5866d7d025",
+                  "x": 0.3450285621683966,
+                  "y": 0.3006933763518666
+                },
+                {
+                  "id": "3803f9b2-89aa-416c-954e-bc57a61e147c",
+                  "x": 0.3410370460683609,
+                  "y": 0.304275821543615
+                },
+                {
+                  "id": "0ee0320d-fe6d-4623-8976-9ce7b3240b48",
+                  "x": 0.3415408377714791,
+                  "y": 0.3120607694805325
+                },
+                {
+                  "id": "7a984800-8277-42da-bb42-56a0cb0bd91c",
+                  "x": 0.34340095800173,
+                  "y": 0.31612548247589684
+                },
+                {
+                  "id": "69aaeeec-10d2-4ab5-8345-1d1f0d59050d",
+                  "x": 0.34394349272395225,
+                  "y": 0.3304552779600865
+                },
+                {
+                  "id": "28cf8c78-f916-4fbf-982c-b8d5e8c55452",
+                  "x": 0.345764840960619,
+                  "y": 0.33500223668327256
+                },
+                {
+                  "id": "69aae7cb-950e-4a65-9102-23e825ccc32b",
+                  "x": 0.3446410243578591,
+                  "y": 0.3362423149971236
+                },
+                {
+                  "id": "b6b94b2f-0ead-4644-b9f7-16414c10faaa",
+                  "x": 0.3449897901748125,
+                  "y": 0.344027255575443
+                },
+                {
+                  "id": "7643f3f3-b03b-4827-8b11-2644f3e75113",
+                  "x": 0.3418120885757444,
+                  "y": 0.3471274550393697
+                },
+                {
+                  "id": "fd63f8cf-11d4-47c4-b63b-b28725921ef1",
+                  "x": 0.3419670979050634,
+                  "y": 0.3553257575085055
+                },
+                {
+                  "id": "2d72498b-25e5-4ad8-a70b-403b9779efab",
+                  "x": 0.3452223062383967,
+                  "y": 0.3558080105949253
+                },
+                {
+                  "id": "5905e2b9-f8e9-4886-8daf-bc17270edbc6",
+                  "x": 0.3487875332303681,
+                  "y": 0.35229444924018216
+                },
+                {
+                  "id": "ceb9f249-b9f1-4498-b04c-9ff25843c550",
+                  "x": 0.3506089063023035,
+                  "y": 0.35539464870410886
+                },
+                {
+                  "id": "b1155267-ae36-4434-ab90-88586a9e0f22",
+                  "x": 0.3552204514411924,
+                  "y": 0.3584259643310304
+                },
+                {
+                  "id": "76eb2c42-e44c-49a8-919b-e41813c9d2d5",
+                  "x": 0.3525852845643465,
+                  "y": 0.3646263632588838
+                },
+                {
+                  "id": "159ee803-f554-4726-b714-1034a3249696",
+                  "x": 0.3484387674134146,
+                  "y": 0.3688288439282586
+                },
+                {
+                  "id": "e9f22476-39d2-49f5-b45e-9bb6134aac1f",
+                  "x": 0.3397582118578591,
+                  "y": 0.36455745734608413
+                },
+                {
+                  "id": "fb99d8bd-8643-48ec-92b2-1c2d5d755032",
+                  "x": 0.3374718107979666,
+                  "y": 0.3644196823134756
+                },
+                {
+                  "id": "3fb2dafa-526a-48f3-8f30-c238efa82f57",
+                  "x": 0.33669676001216026,
+                  "y": 0.36745097586460274
+                },
+                {
+                  "id": "a9cd92b0-9bba-46d9-8287-6194325615e0",
+                  "x": 0.3377430781590777,
+                  "y": 0.37158457269697226
+                },
+                {
+                  "id": "0205cbff-4e5b-4063-b8cc-699352963190",
+                  "x": 0.33882814760352226,
+                  "y": 0.37606264022455493
+                },
+                {
+                  "id": "f955793b-12bf-4928-a119-388fc6777eb2",
+                  "x": 0.33685176934147926,
+                  "y": 0.3771649435057973
+                },
+                {
+                  "id": "518eaf69-e800-47fe-8cfc-48ca5e04a52c",
+                  "x": 0.3341390957303681,
+                  "y": 0.37695826256038917
+                },
+                {
+                  "id": "78f36a2d-7234-40f6-85fa-7a02e9bf9607",
+                  "x": 0.3373555527661745,
+                  "y": 0.3861899550393697
+                },
+                {
+                  "id": "cce20ae5-9944-4487-a2e0-29ca7e244acc",
+                  "x": 0.3376268201272856,
+                  "y": 0.3892901618618946
+                },
+                {
+                  "id": "e5b1aeef-4415-4a9a-94db-7d704f1fd60a",
+                  "x": 0.3385568802424111,
+                  "y": 0.3919081082394015
+                },
+                {
+                  "id": "908f6df8-13da-4de4-a644-3293fa2271ec",
+                  "x": 0.3406495123970347,
+                  "y": 0.3938371205850805
+                },
+                {
+                  "id": "462859f2-58bc-4144-b727-90bb61354a6f",
+                  "x": 0.3428196512859236,
+                  "y": 0.3931481865532526
+                },
+                {
+                  "id": "376631d4-db4b-4bbf-9e3a-011625d7f990",
+                  "x": 0.34735369796897025,
+                  "y": 0.38894568380808336
+                },
+                {
+                  "id": "91386ea6-8ae3-4c1c-a119-1f01bb28b338",
+                  "x": 0.3487100347745257,
+                  "y": 0.38915236475349163
+                },
+                {
+                  "id": "1a18de67-5bbf-4281-bfd8-fa5372d05678",
+                  "x": 0.3492138181992211,
+                  "y": 0.3920458832720101
+                },
+                {
+                  "id": "1e91e32f-d13a-458c-9a3e-df766eb295e9",
+                  "x": 0.3525465249883967,
+                  "y": 0.3941126927260921
+                },
+                {
+                  "id": "a6fd68f0-9405-4f74-9303-747feeae89a6",
+                  "x": 0.3559179913535221,
+                  "y": 0.3952149739315402
+                },
+                {
+                  "id": "7a2236d5-b131-4659-851f-a445c94eab19",
+                  "x": 0.35719682142481246,
+                  "y": 0.3928726144122411
+                },
+                {
+                  "id": "88db84a1-39e1-418d-b001-f2acf096c26c",
+                  "x": 0.35746808878592357,
+                  "y": 0.387085577375204
+                },
+                {
+                  "id": "5e2860dc-9f54-403b-94d3-8fba1276d3f2",
+                  "x": 0.35936696031370136,
+                  "y": 0.38488097817131717
+                },
+                {
+                  "id": "8bfb8fa7-0344-4ca1-9d66-33ba8a4ee74b",
+                  "x": 0.3589794307815867,
+                  "y": 0.3914947463485851
+                },
+                {
+                  "id": "39a4524f-fa47-4f0c-877d-24163eaa83a6",
+                  "x": 0.35959947637728557,
+                  "y": 0.3965928493537942
+                },
+                {
+                  "id": "b4b9bfab-a79c-43cd-98ec-954c8bcff935",
+                  "x": 0.3607620484167838,
+                  "y": 0.39907300598149636
+                },
+                {
+                  "id": "049ff487-050f-4ca8-a289-49ec41952973",
+                  "x": 0.35890193232574436,
+                  "y": 0.4008642212187724
+                },
+                {
+                  "id": "5fa78208-2b69-4376-8d65-dad81da38980",
+                  "x": 0.3596769748331278,
+                  "y": 0.40341328375927415
+                },
+                {
+                  "id": "931e2e06-7caf-40f8-86ec-abdd26330e43",
+                  "x": 0.35824313957173,
+                  "y": 0.40410221043250394
+                },
+                {
+                  "id": "4d00b16e-a21a-447b-b6f1-da4baac8a2a2",
+                  "x": 0.35909297843953325,
+                  "y": 0.4054821533264858
+                },
+                {
+                  "id": "62159fd9-86ff-4136-9805-b5529e72372b",
+                  "x": 0.3597874228839776,
+                  "y": 0.40883311527068905
+                },
+                {
+                  "id": "f0e69c20-77e6-4213-b0e9-3c9930765e9c",
+                  "x": 0.36256520066175546,
+                  "y": 0.41222818641808967
+                },
+                {
+                  "x": 0.3622675853985583,
+                  "y": 0.4165932644375968
+                },
+                {
+                  "x": 0.36229238357988025,
+                  "y": 0.4194151419995663
+                },
+                {
+                  "x": 0.36544218441029747,
+                  "y": 0.42973260298981275
+                },
+                {
+                  "x": 0.3652933714805082,
+                  "y": 0.4325544711327767
+                },
+                {
+                  "x": 0.3638300774512724,
+                  "y": 0.43392131483907254
+                },
+                {
+                  "x": 0.36345805704772827,
+                  "y": 0.4382863881490769
+                },
+                {
+                  "x": 0.3617715502465469,
+                  "y": 0.4396532365648754
+                },
+                {
+                  "x": 0.3598618306734199,
+                  "y": 0.4439742289286992
+                },
+                {
+                  "x": 0.3541326587085626,
+                  "y": 0.45781902274289915
+                },
+                {
+                  "x": 0.3507100407962701,
+                  "y": 0.45764265657265174
+                },
+                {
+                  "x": 0.34894912355655117,
+                  "y": 0.4588772244738863
+                },
+                {
+                  "x": 0.3452040842524537,
+                  "y": 0.4594504180593175
+                },
+                {
+                  "x": 0.34386480232258987,
+                  "y": 0.464168237838325
+                },
+                {
+                  "x": 0.3418062698196737,
+                  "y": 0.46862149187870167
+                },
+                {
+                  "x": 0.33818523466766226,
+                  "y": 0.4685333158578321
+                },
+                {
+                  "x": 0.3335721398080092,
+                  "y": 0.46862149187870167
+                },
+                {
+                  "x": 0.3295046804366544,
+                  "y": 0.47117881312104587
+                },
+                {
+                  "x": 0.32699971841620423,
+                  "y": 0.4713110936356099
+                },
+                {
+                  "x": 0.32501559105363503,
+                  "y": 0.47294247953302265
+                },
+                {
+                  "x": 0.323329082927906,
+                  "y": 0.4718401874368493
+                },
+                {
+                  "x": 0.32439555174953755,
+                  "y": 0.47016470175524483
+                },
+                {
+                  "x": 0.3247179718167949,
+                  "y": 0.466064180055363
+                },
+                {
+                  "x": 0.3234530910536351,
+                  "y": 0.4648296121541284
+                },
+                {
+                  "x": 0.3236019000097813,
+                  "y": 0.4612140844712943
+                },
+                {
+                  "x": 0.32451956119981423,
+                  "y": 0.45958269857388157
+                },
+                {
+                  "x": 0.3264044799425239,
+                  "y": 0.4597149743789427
+                },
+                {
+                  "x": 0.32801658292790603,
+                  "y": 0.45848040647770816
+                },
+                {
+                  "x": 0.3277933688314128,
+                  "y": 0.4493093232393185
+                },
+                {
+                  "x": 0.32603245821443216,
+                  "y": 0.44767793263240296
+                },
+                {
+                  "x": 0.32407313035773255,
+                  "y": 0.448162940777959
+                }
+              ],
+              "tag": "Region",
+              "titleBoxes": [
+                {
+                  "height": 0.020115042956838802,
+                  "id": "002e0af9-5a99-463b-86a6-13bb37353082",
+                  "width": 0.10228039858826529,
+                  "x": 0.23235550718224304,
+                  "y": 0.3980546817931896
+                }
+              ]
+            },
+            {
+              "audience": {
+                "playerIds": [],
+                "public": true
+              },
+              "closed": true,
+              "color": "#699761",
+              "curved": false,
+              "id": "fe047596-ab61-4bb0-987d-c6cb7881ea34",
+              "label": "The Greatmeadow Plains",
+              "note": "greatmeadow-plains",
+              "points": [
+                {
+                  "id": "f0e69c20-77e6-4213-b0e9-3c9930765e9c",
+                  "x": 0.36256520066175546,
+                  "y": 0.41222818641808967
+                },
+                {
+                  "id": "62159fd9-86ff-4136-9805-b5529e72372b",
+                  "x": 0.3597874228839776,
+                  "y": 0.40883311527068905
+                },
+                {
+                  "id": "4d00b16e-a21a-447b-b6f1-da4baac8a2a2",
+                  "x": 0.35909297843953325,
+                  "y": 0.4054821533264858
+                },
+                {
+                  "id": "931e2e06-7caf-40f8-86ec-abdd26330e43",
+                  "x": 0.35824313957173,
+                  "y": 0.40410221043250394
+                },
+                {
+                  "id": "5fa78208-2b69-4376-8d65-dad81da38980",
+                  "x": 0.3596769748331278,
+                  "y": 0.40341328375927415
+                },
+                {
+                  "id": "049ff487-050f-4ca8-a289-49ec41952973",
+                  "x": 0.35890193232574436,
+                  "y": 0.4008642212187724
+                },
+                {
+                  "id": "b4b9bfab-a79c-43cd-98ec-954c8bcff935",
+                  "x": 0.3607620484167838,
+                  "y": 0.39907300598149636
+                },
+                {
+                  "id": "39a4524f-fa47-4f0c-877d-24163eaa83a6",
+                  "x": 0.35959947637728557,
+                  "y": 0.3965928493537942
+                },
+                {
+                  "id": "8bfb8fa7-0344-4ca1-9d66-33ba8a4ee74b",
+                  "x": 0.3589794307815867,
+                  "y": 0.3914947463485851
+                },
+                {
+                  "id": "5e2860dc-9f54-403b-94d3-8fba1276d3f2",
+                  "x": 0.35936696031370136,
+                  "y": 0.38488097817131717
+                },
+                {
+                  "id": "88db84a1-39e1-418d-b001-f2acf096c26c",
+                  "x": 0.35746808878592357,
+                  "y": 0.387085577375204
+                },
+                {
+                  "id": "7a2236d5-b131-4659-851f-a445c94eab19",
+                  "x": 0.35719682142481246,
+                  "y": 0.3928726144122411
+                },
+                {
+                  "id": "a6fd68f0-9405-4f74-9303-747feeae89a6",
+                  "x": 0.3559179913535221,
+                  "y": 0.3952149739315402
+                },
+                {
+                  "id": "1e91e32f-d13a-458c-9a3e-df766eb295e9",
+                  "x": 0.3525465249883967,
+                  "y": 0.3941126927260921
+                },
+                {
+                  "id": "1a18de67-5bbf-4281-bfd8-fa5372d05678",
+                  "x": 0.3492138181992211,
+                  "y": 0.3920458832720101
+                },
+                {
+                  "id": "91386ea6-8ae3-4c1c-a119-1f01bb28b338",
+                  "x": 0.3487100347745257,
+                  "y": 0.38915236475349163
+                },
+                {
+                  "id": "376631d4-db4b-4bbf-9e3a-011625d7f990",
+                  "x": 0.34735369796897025,
+                  "y": 0.38894568380808336
+                },
+                {
+                  "id": "462859f2-58bc-4144-b727-90bb61354a6f",
+                  "x": 0.3428196512859236,
+                  "y": 0.3931481865532526
+                },
+                {
+                  "id": "908f6df8-13da-4de4-a644-3293fa2271ec",
+                  "x": 0.3406495123970347,
+                  "y": 0.3938371205850805
+                },
+                {
+                  "id": "e5b1aeef-4415-4a9a-94db-7d704f1fd60a",
+                  "x": 0.3385568802424111,
+                  "y": 0.3919081082394015
+                },
+                {
+                  "id": "cce20ae5-9944-4487-a2e0-29ca7e244acc",
+                  "x": 0.3376268201272856,
+                  "y": 0.3892901618618946
+                },
+                {
+                  "id": "78f36a2d-7234-40f6-85fa-7a02e9bf9607",
+                  "x": 0.3373555527661745,
+                  "y": 0.3861899550393697
+                },
+                {
+                  "id": "518eaf69-e800-47fe-8cfc-48ca5e04a52c",
+                  "x": 0.3341390957303681,
+                  "y": 0.37695826256038917
+                },
+                {
+                  "id": "f955793b-12bf-4928-a119-388fc6777eb2",
+                  "x": 0.33685176934147926,
+                  "y": 0.3771649435057973
+                },
+                {
+                  "id": "0205cbff-4e5b-4063-b8cc-699352963190",
+                  "x": 0.33882814760352226,
+                  "y": 0.37606264022455493
+                },
+                {
+                  "id": "a9cd92b0-9bba-46d9-8287-6194325615e0",
+                  "x": 0.3377430781590777,
+                  "y": 0.37158457269697226
+                },
+                {
+                  "id": "3fb2dafa-526a-48f3-8f30-c238efa82f57",
+                  "x": 0.33669676001216026,
+                  "y": 0.36745097586460274
+                },
+                {
+                  "id": "fb99d8bd-8643-48ec-92b2-1c2d5d755032",
+                  "x": 0.3374718107979666,
+                  "y": 0.3644196823134756
+                },
+                {
+                  "id": "e9f22476-39d2-49f5-b45e-9bb6134aac1f",
+                  "x": 0.3397582118578591,
+                  "y": 0.36455745734608413
+                },
+                {
+                  "id": "159ee803-f554-4726-b714-1034a3249696",
+                  "x": 0.3484387674134146,
+                  "y": 0.3688288439282586
+                },
+                {
+                  "id": "76eb2c42-e44c-49a8-919b-e41813c9d2d5",
+                  "x": 0.3525852845643465,
+                  "y": 0.3646263632588838
+                },
+                {
+                  "id": "b1155267-ae36-4434-ab90-88586a9e0f22",
+                  "x": 0.3552204514411924,
+                  "y": 0.3584259643310304
+                },
+                {
+                  "id": "ceb9f249-b9f1-4498-b04c-9ff25843c550",
+                  "x": 0.3506089063023035,
+                  "y": 0.35539464870410886
+                },
+                {
+                  "id": "5905e2b9-f8e9-4886-8daf-bc17270edbc6",
+                  "x": 0.3487875332303681,
+                  "y": 0.35229444924018216
+                },
+                {
+                  "id": "2d72498b-25e5-4ad8-a70b-403b9779efab",
+                  "x": 0.3452223062383967,
+                  "y": 0.3558080105949253
+                },
+                {
+                  "id": "fd63f8cf-11d4-47c4-b63b-b28725921ef1",
+                  "x": 0.3419670979050634,
+                  "y": 0.3553257575085055
+                },
+                {
+                  "id": "7643f3f3-b03b-4827-8b11-2644f3e75113",
+                  "x": 0.3418120885757444,
+                  "y": 0.3471274550393697
+                },
+                {
+                  "id": "b6b94b2f-0ead-4644-b9f7-16414c10faaa",
+                  "x": 0.3449897901748125,
+                  "y": 0.344027255575443
+                },
+                {
+                  "id": "69aae7cb-950e-4a65-9102-23e825ccc32b",
+                  "x": 0.3446410243578591,
+                  "y": 0.3362423149971236
+                },
+                {
+                  "id": "28cf8c78-f916-4fbf-982c-b8d5e8c55452",
+                  "x": 0.345764840960619,
+                  "y": 0.33500223668327256
+                },
+                {
+                  "id": "69aaeeec-10d2-4ab5-8345-1d1f0d59050d",
+                  "x": 0.34394349272395225,
+                  "y": 0.3304552779600865
+                },
+                {
+                  "id": "7a984800-8277-42da-bb42-56a0cb0bd91c",
+                  "x": 0.34340095800173,
+                  "y": 0.31612548247589684
+                },
+                {
+                  "id": "0ee0320d-fe6d-4623-8976-9ce7b3240b48",
+                  "x": 0.3415408377714791,
+                  "y": 0.3120607694805325
+                },
+                {
+                  "id": "3803f9b2-89aa-416c-954e-bc57a61e147c",
+                  "x": 0.3410370460683609,
+                  "y": 0.304275821543615
+                },
+                {
+                  "id": "d193941d-3f50-4fbf-a507-2e5866d7d025",
+                  "x": 0.3450285621683966,
+                  "y": 0.3006933763518666
+                },
+                {
+                  "id": "e83f34ba-7305-4137-ba77-661119c18d88",
+                  "x": 0.347121181905386,
+                  "y": 0.29642199344899123
+                },
+                {
+                  "id": "60728c3f-90ee-43bb-b67f-0038c446e6bc",
+                  "x": 0.3442147600850633,
+                  "y": 0.2944240862284099
+                },
+                {
+                  "id": "5b23f895-519e-4e11-a722-8a8fa5a96f7e",
+                  "x": 0.34033949787760825,
+                  "y": 0.2882925784961598
+                },
+                {
+                  "id": "59f971d0-83b3-4381-9a5a-c69eee0485a8",
+                  "x": 0.34002947921897025,
+                  "y": 0.28526127758643455
+                },
+                {
+                  "id": "548b7ee3-0101-4988-88b3-bbf93d5e595b",
+                  "x": 0.3409207838973573,
+                  "y": 0.2838834058434796
+                },
+                {
+                  "id": "ac31f827-d824-4090-bddf-a1505a917397",
+                  "x": 0.3468886658418018,
+                  "y": 0.28092099980865676
+                },
+                {
+                  "id": "6b867665-1f3e-4598-b4d8-c811f4fd4d28",
+                  "x": 0.33921566057879093,
+                  "y": 0.2737560910286647
+                },
+                {
+                  "id": "0e59a0c2-c610-42a9-9e41-29942794617c",
+                  "x": 0.33603797139735714,
+                  "y": 0.2702425333532206
+                },
+                {
+                  "id": "bd8553e3-3de4-407d-9cb4-42453f9d4e44",
+                  "x": 0.3332090273368196,
+                  "y": 0.27182707868298567
+                },
+                {
+                  "id": "7c6870a9-e542-444e-a41d-e5478b477d97",
+                  "x": 0.32747366145595935,
+                  "y": 0.28278111360013425
+                },
+                {
+                  "id": "6216ad99-d26d-4939-beaf-8ddad4bff704",
+                  "x": 0.32530352256707046,
+                  "y": 0.28216107812250774
+                },
+                {
+                  "x": 0.3335653090664422,
+                  "y": 0.24546406786496
+                },
+                {
+                  "x": 0.361148585721836,
+                  "y": 0.2574411907246144
+                },
+                {
+                  "x": 0.40636006019888016,
+                  "y": 0.3526882105540377
+                },
+                {
+                  "x": 0.36778172784762586,
+                  "y": 0.4080117768694418
+                },
+                {
+                  "x": 0.36413157672106994,
+                  "y": 0.40868657221132004
+                }
+              ],
+              "tag": "Region"
+            }
+          ],
+          "version": 1
+        },
+        "schemaVersion": 1
+      },
+      "pageId": "de-drakengardt-world-map",
+      "public": true,
+      "segments": [
+        {
+          "kind": "public",
+          "markdown": "\n<!-- dndwiki:mapsmith de-drakengardt-world-map -->\n\n<!-- Original map reference, preserved from this note:\n# [World Map](www.worldanvil.com/w/de-drakengardt-thatoneguydan/map/c038ed2f-7342-4f4b-a876-027c3d648ff1)\n![De Drakengardt World Map.jpg](assets/0e9002529e565adfb7ed7998.jpg)\n-->\n",
+          "playerIds": []
+        }
+      ],
+      "tags": [
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "Location"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "map"
+        }
+      ],
+      "title": "De Drakengardt World Map",
+      "updatedAt": "2026-11-09T01:04:22.397Z"
     },
     {
       "categories": [
