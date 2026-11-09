@@ -1,3 +1,5 @@
+import { hasReaderChromeMutation } from './reader-ui-contracts.mjs';
+
 const BROWSE_DESKTOP_MIN = 1100;
 const OUTLINE_RAIL_MIN = 1200;
 const READER_V48_STYLE_ID = 'dndwiki-reader-v48-polish';
@@ -900,7 +902,7 @@ export function mountReaderChromeRefresh({ root, window: browserWindow } = {}) {
     updateScrollState();
   };
   const observer = typeof browserWindow.MutationObserver === 'function'
-    ? new browserWindow.MutationObserver(refresh)
+    ? new browserWindow.MutationObserver((records) => { if (hasReaderChromeMutation(records)) refresh(); })
     : null;
   observer?.observe?.(root, { childList: true, subtree: true });
   browserWindow.addEventListener?.('hashchange', onHashChange, true);

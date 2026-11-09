@@ -1,3 +1,5 @@
+import { hasReaderChromeMutation } from './reader-ui-contracts.mjs';
+
 const STYLE_ID = 'dndwiki-tag-taxonomy-styles';
 
 const TAXONOMY_CSS = `
@@ -501,7 +503,7 @@ export async function mountTagTaxonomyChrome({ root, window: browserWindow, fetc
 
   schedule();
   const observer = typeof browserWindow.MutationObserver === 'function'
-    ? new browserWindow.MutationObserver(schedule)
+    ? new browserWindow.MutationObserver((records) => { if (hasReaderChromeMutation(records)) schedule(); })
     : null;
   observer?.observe?.(root, { childList: true, subtree: true });
   browserWindow.addEventListener?.('hashchange', schedule);

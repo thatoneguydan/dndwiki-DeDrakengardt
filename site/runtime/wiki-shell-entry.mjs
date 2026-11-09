@@ -1,5 +1,7 @@
 import { pageForRoute } from './navigation.mjs';
 import { mountNoteLinkPreviews } from './note-link-previews.mjs';
+import { mountMapsmithReader } from './mapsmith-reader.mjs';
+import { hasReaderChromeMutation } from './reader-ui-contracts.mjs';
 import { mountWikiShell, parseWikiRoute } from './wiki-shell.mjs';
 
 const CHROME_STYLE_ID = 'dndwiki-modern-chrome-styles';
@@ -558,6 +560,7 @@ export async function mountModernWikiChrome({root,window:browserWindow,fetchImpl
   const shellFetch=async(url,options)=>url===snapshotUrl?{ok:true,json:async()=>structuredClone(snapshot)}:fetchImpl(url,options);
   const mounted=await mountWikiShell({root,window:browserWindow,fetchImpl:shellFetch,snapshotUrl});
   const previews=mountNoteLinkPreviews({root,window:browserWindow,snapshot,session:mounted.session});
+  const maps=mountMapsmithReader({root,window:browserWindow,snapshot,session:mounted.session});
 
   const resetScroll=()=>{ if(typeof browserWindow.scrollTo==='function') browserWindow.scrollTo({top:0,left:0,behavior:'auto'}); };
   browserWindow.addEventListener?.('hashchange',resetScroll,true);
@@ -566,9 +569,9 @@ export async function mountModernWikiChrome({root,window:browserWindow,fetchImpl
   let enhanceQueued=false;
   const enhance=()=>{ if(enhanceQueued)return; enhanceQueued=true; queueMicrotask(()=>{enhanceQueued=false; enhanceWikiChrome({root,browserWindow,snapshot,session:mounted.session});}); };
   enhance();
-  const observer=typeof browserWindow.MutationObserver==='function'?new browserWindow.MutationObserver(enhance):null;
+  const observer=typeof browserWindow.MutationObserver==='function'?new browserWindow.MutationObserver((records)=>{if(hasReaderChromeMutation(records))enhance();}):null;
   observer?.observe?.(root,{childList:true,subtree:true});
-  return {...mounted,snapshot,destroy(){previews.destroy();observer?.disconnect?.();browserWindow.removeEventListener?.('hashchange',resetScroll,true);mounted.destroy?.();}};
+  return {...mounted,snapshot,destroy(){maps.destroy();previews.destroy();observer?.disconnect?.();browserWindow.removeEventListener?.('hashchange',resetScroll,true);mounted.destroy?.();}};
 }
 
 if(typeof document!=='undefined'&&typeof window!=='undefined'){

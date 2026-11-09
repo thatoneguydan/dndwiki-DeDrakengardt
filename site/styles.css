@@ -57,7 +57,7 @@ body { margin: 0; min-height: 100vh; background: var(--background-primary); colo
 a { color: var(--text-accent); text-underline-offset: .16em; }
 a:hover { color: var(--text-accent-hover); }
 button, input { font: inherit; }
-button, input[type="submit"] { min-height: 32px; }
+button:not(.mapsmith *), input[type="submit"]:not(.mapsmith *) { min-height: 32px; }
 button, .dndwiki-button {
   border: 1px solid var(--background-modifier-border);
   border-radius: var(--radius-s);
@@ -352,7 +352,7 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
 
 /* Compact desktop controls, full touch targets on phones/tablets/touchscreens. */
 @media (pointer: coarse) {
-  button, input[type="submit"], .dndwiki-button, .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
+  button:not(.mapsmith *), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
   [data-dndwiki-search-clear] { min-width: 44px !important; min-height: 44px !important; }
   .dndwiki-search input { padding-right: 3.1rem !important; }
   .dndwiki-link-list a { min-height: 44px; display: flex; align-items: center; }
@@ -382,7 +382,7 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-topbar { gap: .5rem; padding: .45rem .65rem; }
   .dndwiki-brand small { display: none; }
   .dndwiki-access-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  button, input[type="submit"], .dndwiki-button, .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
+  button:not(.mapsmith *), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
   [data-dndwiki-search-clear] { min-width: 44px !important; min-height: 44px !important; }
   .dndwiki-search input { padding-right: 3.1rem !important; }
   .dndwiki-layout { padding: 1rem .9rem 2rem; }

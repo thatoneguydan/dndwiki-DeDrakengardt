@@ -72,6 +72,16 @@ function preprocessAuthoredHtml(markdown) {
       continue;
     }
 
+    const map = /^\s*<!-- dndwiki:mapsmith ([a-z0-9][a-z0-9-]{0,63}) -->\s*$/.exec(line);
+    if (map != null) {
+      const token = placeholder('BLOCK', replacements.length);
+      replacements.push({ token, html: `<div class="dndwiki-mapsmith-host" data-dndwiki-mapsmith-page="${map[1]}"></div>`, block: true });
+      if (output.length > 0 && output.at(-1) !== '') output.push('');
+      output.push(token, '');
+      index += 1;
+      continue;
+    }
+
     if (!DD5E_ROOT_RE.test(line) && authoredHtmlBlockStart(line)) {
       const block = collectAuthoredHtmlBlock(lines, index);
       if (block != null) {
