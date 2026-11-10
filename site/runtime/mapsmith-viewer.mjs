@@ -31,8 +31,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // node_modules/openseadragon/build/openseadragon/openseadragon.js
 var require_openseadragon = __commonJS({
   "node_modules/openseadragon/build/openseadragon/openseadragon.js"(exports, module) {
-    function OpenSeadragon4(options) {
-      return new OpenSeadragon4.Viewer(options);
+    function OpenSeadragon5(options) {
+      return new OpenSeadragon5.Viewer(options);
     }
     (function($) {
       $.version = {
@@ -72,7 +72,7 @@ var require_openseadragon = __commonJS({
         return obj === null || obj === void 0 ? String(obj) : class2type[toString.call(obj)] || "object";
       };
       $.isPlainObject = function(obj) {
-        if (!obj || OpenSeadragon4.type(obj) !== "object" || obj.nodeType || $.isWindow(obj)) {
+        if (!obj || OpenSeadragon5.type(obj) !== "object" || obj.nodeType || $.isWindow(obj)) {
           return false;
         }
         if (obj.constructor && !hasOwn.call(obj, "constructor") && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf")) {
@@ -157,7 +157,7 @@ var require_openseadragon = __commonJS({
         }
       };
       $.pixelDensityRatio = $.getCurrentPixelDensityRatio();
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.extend = function() {
         let options;
@@ -175,7 +175,7 @@ var require_openseadragon = __commonJS({
           target = arguments[1] || {};
           i = 2;
         }
-        if (typeof target !== "object" && !OpenSeadragon4.isFunction(target)) {
+        if (typeof target !== "object" && !OpenSeadragon5.isFunction(target)) {
           target = {};
         }
         if (length === i) {
@@ -200,15 +200,15 @@ var require_openseadragon = __commonJS({
               if (target === copy) {
                 continue;
               }
-              if (deep && copy && (OpenSeadragon4.isPlainObject(copy) || (copyIsArray = OpenSeadragon4.isArray(copy)))) {
+              if (deep && copy && (OpenSeadragon5.isPlainObject(copy) || (copyIsArray = OpenSeadragon5.isArray(copy)))) {
                 src = target[name2];
                 if (copyIsArray) {
                   copyIsArray = false;
-                  clone = src && OpenSeadragon4.isArray(src) ? src : [];
+                  clone = src && OpenSeadragon5.isArray(src) ? src : [];
                 } else {
-                  clone = src && OpenSeadragon4.isPlainObject(src) ? src : {};
+                  clone = src && OpenSeadragon5.isPlainObject(src) ? src : {};
                 }
-                target[name2] = OpenSeadragon4.extend(deep, clone, copy);
+                target[name2] = OpenSeadragon5.extend(deep, clone, copy);
               } else if (copy !== void 0) {
                 target[name2] = copy;
               }
@@ -937,7 +937,7 @@ var require_openseadragon = __commonJS({
                 }
                 return;
               }
-              if (tile2 instanceof OpenSeadragon4.Tile) {
+              if (tile2 instanceof OpenSeadragon5.Tile) {
                 tile2 = tile2.getCache(tile2.originalCacheKey);
               }
               const cacheTile = tile2._tiles[0];
@@ -1726,7 +1726,7 @@ var require_openseadragon = __commonJS({
           });
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function(root, $) {
       if (typeof define === "function" && define.amd) {
         define([], function() {
@@ -1743,7 +1743,7 @@ var require_openseadragon = __commonJS({
         }
         root.OpenSeadragon = $;
       }
-    })(exports, OpenSeadragon4);
+    })(exports, OpenSeadragon5);
     (function($) {
       class Mat3 {
         constructor(values) {
@@ -1971,7 +1971,7 @@ var require_openseadragon = __commonJS({
         }
       }
       $.Mat3 = Mat3;
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       const fullScreenApi = {
         supportsFullScreen: false,
@@ -2068,7 +2068,7 @@ var require_openseadragon = __commonJS({
         fullScreenApi.exitFullScreen();
       };
       $.extend($, fullScreenApi);
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.EventSource = function() {
         this.events = {};
@@ -2300,7 +2300,7 @@ var require_openseadragon = __commonJS({
           delete this._rejectedEventList[eventName];
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       const MOUSETRACKERS = [];
       const THIS = {};
@@ -4875,7 +4875,7 @@ var require_openseadragon = __commonJS({
         }
         return uniqueId;
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ControlAnchor = {
         NONE: 0,
@@ -4967,7 +4967,7 @@ var require_openseadragon = __commonJS({
           $.setElementOpacity(this.wrapper, opacity, true);
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ControlDock = function(options) {
         const layouts = ["topleft", "topright", "bottomright", "bottomleft"];
@@ -5117,7 +5117,7 @@ var require_openseadragon = __commonJS({
         }
         return -1;
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Placement = $.freezeObject({
         CENTER: 0,
@@ -5204,7 +5204,7 @@ var require_openseadragon = __commonJS({
           }
         }
       });
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       const THIS = {};
       let nextHash = 1;
@@ -8248,7 +8248,7 @@ var require_openseadragon = __commonJS({
           return viewer._activeActions[action2] || viewer._navActionVirtuallyHeld[action2];
         }
         const pixels = viewer.pixelsPerArrowPress / 10;
-        const panDelta = viewer.viewport.deltaPointsFromPixels(new OpenSeadragon4.Point(pixels, pixels));
+        const panDelta = viewer.viewport.deltaPointsFromPixels(new OpenSeadragon5.Point(pixels, pixels));
         if (isDown("zoomIn")) {
           viewer.viewport.zoomBy(1.01, null, true);
           viewer.viewport.applyConstraints();
@@ -8278,7 +8278,7 @@ var require_openseadragon = __commonJS({
           }
         }
         if (dx !== 0 || dy !== 0) {
-          viewer.viewport.panBy(new OpenSeadragon4.Point(dx, dy), true);
+          viewer.viewport.panBy(new OpenSeadragon5.Point(dx, dy), true);
           viewer.viewport.applyConstraints();
         }
       }
@@ -8415,7 +8415,7 @@ var require_openseadragon = __commonJS({
           return candidate;
         }
         const proto = candidate && candidate.prototype;
-        if (proto && proto instanceof OpenSeadragon4.DrawerBase && $.isFunction(proto.getType)) {
+        if (proto && proto instanceof OpenSeadragon5.DrawerBase && $.isFunction(proto.getType)) {
           return proto.getType.call(candidate);
         }
         return void 0;
@@ -8429,16 +8429,16 @@ var require_openseadragon = __commonJS({
         if (id === "auto") {
           id = getAutoDrawerCandidates()[0];
         }
-        for (const property in OpenSeadragon4) {
-          const drawer = OpenSeadragon4[property];
+        for (const property in OpenSeadragon5) {
+          const drawer = OpenSeadragon5[property];
           const proto = drawer.prototype;
-          if (proto && proto instanceof OpenSeadragon4.DrawerBase && $.isFunction(proto.getType) && proto.getType.call(drawer) === id) {
+          if (proto && proto instanceof OpenSeadragon5.DrawerBase && $.isFunction(proto.getType) && proto.getType.call(drawer) === id) {
             return drawer;
           }
         }
         return null;
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Navigator = function(options) {
         const viewer = options.viewer;
@@ -8907,7 +8907,7 @@ var require_openseadragon = __commonJS({
         element2.style.oTransform = rule;
         element2.style.transform = rule;
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       const I18N = {
         Errors: {
@@ -8981,7 +8981,7 @@ var require_openseadragon = __commonJS({
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Point = function(x, y) {
         this.x = typeof x === "number" ? x : 0;
@@ -9148,7 +9148,7 @@ var require_openseadragon = __commonJS({
           return "(" + Math.round(this.x * 100) / 100 + "," + Math.round(this.y * 100) / 100 + ")";
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.TileSource = function(options) {
         $.EventSource.apply(this);
@@ -9863,15 +9863,15 @@ var require_openseadragon = __commonJS({
         return data;
       }
       $.TileSource.determineType = function(tileSource, data, url) {
-        for (const property in OpenSeadragon4) {
-          if (property.match(/.+TileSource$/) && $.isFunction(OpenSeadragon4[property]) && $.isFunction(OpenSeadragon4[property].prototype.supports) && OpenSeadragon4[property].prototype.supports.call(tileSource, data, url)) {
-            return OpenSeadragon4[property];
+        for (const property in OpenSeadragon5) {
+          if (property.match(/.+TileSource$/) && $.isFunction(OpenSeadragon5[property]) && $.isFunction(OpenSeadragon5[property].prototype.supports) && OpenSeadragon5[property].prototype.supports.call(tileSource, data, url)) {
+            return OpenSeadragon5[property];
           }
         }
         $.console.error("No TileSource was able to open %s %s", url, data);
         return null;
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.DziTileSource = function(width, height, tileSize, tileOverlap, tilesUrl, fileFormat, displayRects, minLevel, maxLevel) {
         let level;
@@ -10138,7 +10138,7 @@ var require_openseadragon = __commonJS({
           /* displayRects */
         }, configuration);
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.IIIFTileSource = function(options) {
         $.extend(true, this, options);
@@ -10638,7 +10638,7 @@ var require_openseadragon = __commonJS({
           }
         }
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.IIPTileSource = function(options) {
         $.EventSource.call(this);
@@ -10734,7 +10734,7 @@ var require_openseadragon = __commonJS({
               headers: this.ajaxHeaders,
               success: function(xhr) {
                 try {
-                  OpenSeadragon4["IIPTileSource"].prototype.parseIIP.call(_this, xhr.responseText);
+                  OpenSeadragon5["IIPTileSource"].prototype.parseIIP.call(_this, xhr.responseText);
                   _this.ready = true;
                   _this.raiseEvent("ready", { tileSource: _this });
                 } catch (e) {
@@ -10836,7 +10836,7 @@ var require_openseadragon = __commonJS({
         }
       );
       $.extend(true, $.IIPTileSource.prototype, $.EventSource.prototype);
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.IrisTileSource = function(options) {
         $.TileSource.apply(this, [options]);
@@ -10982,7 +10982,7 @@ var require_openseadragon = __commonJS({
         }
       );
       $.extend(true, $.IrisTileSource.prototype, $.EventSource.prototype);
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.OsmTileSource = function(width, height, tileSize, tileOverlap, tilesUrl) {
         let options;
@@ -11055,7 +11055,7 @@ var require_openseadragon = __commonJS({
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.TmsTileSource = function(width, height, tileSize, tileOverlap, tilesUrl) {
         let options;
@@ -11129,7 +11129,7 @@ var require_openseadragon = __commonJS({
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ZoomifyTileSource = function(options) {
         if (typeof options.tileSize === "undefined") {
@@ -11229,7 +11229,7 @@ var require_openseadragon = __commonJS({
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.LegacyTileSource = function(levels) {
         let options;
@@ -11408,7 +11408,7 @@ var require_openseadragon = __commonJS({
       function configureFromObject(tileSource, configuration) {
         return configuration.levels;
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ImageTileSource = class extends $.TileSource {
         constructor(props) {
@@ -11572,15 +11572,15 @@ var require_openseadragon = __commonJS({
           return context;
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.TileSourceCollection = function(tileSize, tileSources, rows, layout) {
         $.console.error("TileSourceCollection is deprecated; use World instead");
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
-      OpenSeadragon5.PriorityQueue = class PriorityQueue {
+      const OpenSeadragon6 = $;
+      OpenSeadragon6.PriorityQueue = class PriorityQueue {
         constructor(optHeap = void 0) {
           this.nodes_ = [];
           if (optHeap) {
@@ -11822,7 +11822,7 @@ var require_openseadragon = __commonJS({
           this.nodes_.length = 0;
         }
       };
-      OpenSeadragon5.PriorityQueue.Node = class Node2 {
+      OpenSeadragon6.PriorityQueue.Node = class Node2 {
         constructor(key, value) {
           this.key = key;
           this.value = value;
@@ -11832,9 +11832,9 @@ var require_openseadragon = __commonJS({
           return new Node2(this.key, this.value);
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
+      const OpenSeadragon6 = $;
       class WeightedGraph {
         constructor() {
           this.adjacencyList = {};
@@ -11881,7 +11881,7 @@ var require_openseadragon = __commonJS({
           if (start === finish) {
             return { path, cost: 0 };
           }
-          const nodes = new OpenSeadragon5.PriorityQueue();
+          const nodes = new OpenSeadragon6.PriorityQueue();
           let smallestNode;
           for (let vertex in this.vertices) {
             vertex = this.vertices[vertex];
@@ -12033,7 +12033,7 @@ self.onmessage = async (e) => {
           worker.postMessage(payload);
         });
       }
-      OpenSeadragon5.DataTypeConverter = class DataTypeConverter {
+      OpenSeadragon6.DataTypeConverter = class DataTypeConverter {
         constructor() {
           this.graph = new WeightedGraph();
           this.destructors = {};
@@ -12406,7 +12406,7 @@ self.onmessage = async (e) => {
         ).then(resolve).catch(reject);
       }), 1, 1);
       $.converter.learn("__private__imageUrl", "__private__imageUrl", (tile, url) => url, 0, 1);
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ButtonState = {
         REST: 0,
@@ -12677,7 +12677,7 @@ self.onmessage = async (e) => {
           button2.currentState = $.ButtonState.REST;
         }
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ButtonGroup = function(options) {
         $.extend(true, this, {
@@ -12760,7 +12760,7 @@ self.onmessage = async (e) => {
           this.element = null;
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Rect = function(x, y, width, height, degrees) {
         this.x = typeof x === "number" ? x : 0;
@@ -13173,7 +13173,7 @@ self.onmessage = async (e) => {
           return "[" + Math.round(this.x * 100) / 100 + ", " + Math.round(this.y * 100) / 100 + ", " + Math.round(this.width * 100) / 100 + "x" + Math.round(this.height * 100) / 100 + ", " + Math.round(this.degrees * 100) / 100 + "deg]";
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       const THIS = {};
       $.ReferenceStrip = function(options) {
@@ -13566,7 +13566,7 @@ self.onmessage = async (e) => {
           event.preventDefault = false;
         }
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.DisplayRect = function(x, y, width, height, minLevel, maxLevel) {
         $.Rect.apply(this, [x, y, width, height]);
@@ -13574,7 +13574,7 @@ self.onmessage = async (e) => {
         this.maxLevel = maxLevel;
       };
       $.extend($.DisplayRect.prototype, $.Rect.prototype);
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Spring = function(options) {
         const args = arguments;
@@ -13737,7 +13737,7 @@ self.onmessage = async (e) => {
       function transform(stiffness, x) {
         return (1 - Math.exp(stiffness * -x)) / (1 - Math.exp(-stiffness));
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.ImageJob = function(options) {
         this.data = null;
@@ -14101,14 +14101,14 @@ self.onmessage = async (e) => {
       function isInvalidData(dataItem) {
         return dataItem === null || dataItem === void 0 || dataItem === false;
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Tile = function(level, x, y, bounds, exists, url, context2D, loadWithAjax, ajaxHeaders, sourceBounds, postData, cacheKey) {
         this.level = level;
         this.x = x;
         this.y = y;
         this.bounds = bounds;
-        this.positionedBounds = new OpenSeadragon4.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
+        this.positionedBounds = new OpenSeadragon5.Rect(bounds.x, bounds.y, bounds.width, bounds.height);
         this.sourceBounds = sourceBounds;
         this.exists = exists;
         this._url = url;
@@ -14224,7 +14224,7 @@ self.onmessage = async (e) => {
           if (!cache2 || !cache2.loaded) {
             return null;
           }
-          if (cache2.type !== OpenSeadragon4.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon4.HTMLDrawer.imageCacheType) {
+          if (cache2.type !== OpenSeadragon5.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon5.HTMLDrawer.imageCacheType) {
             $.console.error("Access to HtmlDrawer property via Tile instance: HTMLDrawer must be used!");
             return null;
           }
@@ -14242,7 +14242,7 @@ self.onmessage = async (e) => {
           if (!cache2 || !cache2.loaded) {
             return null;
           }
-          if (cache2.type !== OpenSeadragon4.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon4.HTMLDrawer.imageCacheType) {
+          if (cache2.type !== OpenSeadragon5.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon5.HTMLDrawer.imageCacheType) {
             $.console.error("Access to HtmlDrawer property via Tile instance: HTMLDrawer must be used!");
             return null;
           }
@@ -14260,7 +14260,7 @@ self.onmessage = async (e) => {
           if (!cache2 || !cache2.loaded) {
             return null;
           }
-          if (cache2.type !== OpenSeadragon4.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon4.HTMLDrawer.imageCacheType) {
+          if (cache2.type !== OpenSeadragon5.HTMLDrawer.canvasCacheType || cache2.type !== OpenSeadragon5.HTMLDrawer.imageCacheType) {
             $.console.error("Access to HtmlDrawer property via Tile instance: HTMLDrawer must be used!");
             return null;
           }
@@ -14620,7 +14620,7 @@ self.onmessage = async (e) => {
           this._cKey = this._ocKey;
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.OverlayPlacement = $.Placement;
       $.OverlayRotationMode = $.freezeObject({
@@ -14964,10 +14964,10 @@ self.onmessage = async (e) => {
           );
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
-      OpenSeadragon5.DrawerBase = class DrawerBase {
+      const OpenSeadragon6 = $;
+      OpenSeadragon6.DrawerBase = class DrawerBase {
         constructor(options) {
           $.console.assert(options.viewer, "[Drawer] options.viewer is required");
           $.console.assert(options.viewport, "[Drawer] options.viewport is required");
@@ -15260,7 +15260,7 @@ self.onmessage = async (e) => {
         _calculateCanvasSize() {
           const pixelDensityRatio = $.pixelDensityRatio;
           const viewportSize = this.viewport.getContainerSize();
-          return new OpenSeadragon5.Point(Math.round(viewportSize.x * pixelDensityRatio), Math.round(viewportSize.y * pixelDensityRatio));
+          return new OpenSeadragon6.Point(Math.round(viewportSize.x * pixelDensityRatio), Math.round(viewportSize.y * pixelDensityRatio));
         }
         /**
          * Called by implementations to fire the tiled-image-drawn event (used by tests)
@@ -15290,10 +15290,10 @@ self.onmessage = async (e) => {
           });
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
-      class HTMLDrawer extends OpenSeadragon5.DrawerBase {
+      const OpenSeadragon6 = $;
+      class HTMLDrawer extends OpenSeadragon6.DrawerBase {
         constructor(options) {
           super(options);
           this.viewer.rejectEventHandler("tile-drawing", "The HTMLDrawer does not raise the tile-drawing event");
@@ -15463,10 +15463,10 @@ self.onmessage = async (e) => {
         }
       }
       $.HTMLDrawer = HTMLDrawer;
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
-      class CanvasDrawer extends OpenSeadragon5.DrawerBase {
+      const OpenSeadragon6 = $;
+      class CanvasDrawer extends OpenSeadragon6.DrawerBase {
         constructor(options) {
           super(options);
           this.context = this.canvas.getContext("2d");
@@ -16249,9 +16249,9 @@ self.onmessage = async (e) => {
         }
         return normalizeSubPixelRoundingRule(subPixelRoundingRule);
       }
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
+      const OpenSeadragon6 = $;
       class WebglContextManager {
         constructor(options) {
           this._renderingCanvas = options.renderingCanvas;
@@ -16714,7 +16714,7 @@ self.onmessage = async (e) => {
           return this._destroyed;
         }
       }
-      OpenSeadragon5.WebGLDrawer = class WebGLDrawer extends OpenSeadragon5.DrawerBase {
+      OpenSeadragon6.WebGLDrawer = class WebGLDrawer extends OpenSeadragon6.DrawerBase {
         constructor(options) {
           super(options);
           this._destroyed = false;
@@ -16979,7 +16979,7 @@ self.onmessage = async (e) => {
           const bounds = this.viewport.getBoundsNoRotateWithMargins(true);
           const view = {
             bounds,
-            center: new OpenSeadragon5.Point(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2),
+            center: new OpenSeadragon6.Point(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2),
             rotation: this.viewport.getRotation(true) * Math.PI / 180
           };
           const flipMultiplier = this.viewport.flipped ? -1 : 1;
@@ -17767,7 +17767,7 @@ self.onmessage = async (e) => {
           return shaderProgram;
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.Viewport = function(options) {
         const args = arguments;
@@ -19222,7 +19222,7 @@ self.onmessage = async (e) => {
           }
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.TiledImage = function(options) {
         this._initialized = false;
@@ -19267,7 +19267,7 @@ self.onmessage = async (e) => {
         }
         const fitBounds = options.fitBounds;
         delete options.fitBounds;
-        const fitBoundsPlacement = options.fitBoundsPlacement || OpenSeadragon4.Placement.CENTER;
+        const fitBoundsPlacement = options.fitBoundsPlacement || OpenSeadragon5.Placement.CENTER;
         delete options.fitBoundsPlacement;
         const degrees = options.degrees || 0;
         delete options.degrees;
@@ -19788,7 +19788,7 @@ self.onmessage = async (e) => {
            */
           windowToImageCoordinates: function(pixel) {
             const viewerCoordinates = pixel.minus(
-              OpenSeadragon4.getElementPosition(this.viewer.element)
+              OpenSeadragon5.getElementPosition(this.viewer.element)
             );
             return this.viewerElementToImageCoordinates(viewerCoordinates);
           },
@@ -19800,7 +19800,7 @@ self.onmessage = async (e) => {
           imageToWindowCoordinates: function(pixel) {
             const viewerCoordinates = this.imageToViewerElementCoordinates(pixel);
             return viewerCoordinates.plus(
-              OpenSeadragon4.getElementPosition(this.viewer.element)
+              OpenSeadragon5.getElementPosition(this.viewer.element)
             );
           },
           // private
@@ -21295,11 +21295,11 @@ self.onmessage = async (e) => {
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
-      const OpenSeadragon5 = $;
+      const OpenSeadragon6 = $;
       const DRAWER_INTERNAL_CACHE = /* @__PURE__ */ Symbol("DRAWER_INTERNAL_CACHE");
-      OpenSeadragon5.CacheRecord = class CacheRecord {
+      OpenSeadragon6.CacheRecord = class CacheRecord {
         constructor() {
           this.revive();
         }
@@ -22033,7 +22033,7 @@ self.onmessage = async (e) => {
           this._ownerTileCache._handleBrokenCacheRecord(this);
         }
       };
-      OpenSeadragon5.InternalCacheRecord = class InternalCacheRecord {
+      OpenSeadragon6.InternalCacheRecord = class InternalCacheRecord {
         constructor(data, type, onDestroy) {
           this.tstamp = $.now();
           this._ondestroy = onDestroy;
@@ -22101,7 +22101,7 @@ self.onmessage = async (e) => {
           }
         }
       };
-      OpenSeadragon5.TileCache = class TileCache {
+      OpenSeadragon6.TileCache = class TileCache {
         constructor(options) {
           options = options || {};
           this._maxCacheItemCount = options.maxImageCacheCount || $.DEFAULT_SETTINGS.maxImageCacheCount;
@@ -22614,7 +22614,7 @@ self.onmessage = async (e) => {
           });
         }
       };
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
     (function($) {
       $.World = function(options) {
         const _this = this;
@@ -23244,12 +23244,12 @@ self.onmessage = async (e) => {
           }
         }
       );
-    })(OpenSeadragon4);
+    })(OpenSeadragon5);
   }
 });
 
 // src/viewer.ts
-var import_openseadragon3 = __toESM(require_openseadragon(), 1);
+var import_openseadragon4 = __toESM(require_openseadragon(), 1);
 
 // node_modules/@tabler/icons/tabler-nodes-outline.json
 var tabler_nodes_outline_default = {
@@ -172207,6 +172207,130 @@ function viewerTileBudget(tileSize, desktop) {
   return { maxImageCacheCount: Math.max(8, Math.floor(cacheBytes / decodedBytes)), imageLoaderLimit: desktop ? 6 : 3, maxTilesPerFrame: desktop ? 2 : 1, minPixelRatio: 1, loadDestinationTilesOnAnimation: false };
 }
 
+// src/canvas-tile-compositing.ts
+var import_openseadragon = __toESM(require_openseadragon(), 1);
+var installed = /* @__PURE__ */ new WeakSet();
+function installCanvasTileCompositing(drawer) {
+  if (drawer.getType() !== "canvas" || installed.has(drawer)) return;
+  const native = drawer, original = native._drawTile;
+  if (typeof original !== "function") return;
+  installed.add(drawer);
+  native._drawTile = function(tile, image, sketch, scale = 1, translate, round, source) {
+    if (!tile.hasTransparency || !source) return original.call(this, tile, image, sketch, scale, translate, round, source);
+    if (!tile.loaded) return;
+    const rendered = this.getDataToDraw(tile);
+    if (!rendered) return;
+    const context = this._getContext(sketch), transform = context.getTransform();
+    if (Math.abs(transform.b) > 1e-8 || Math.abs(transform.c) > 1e-8) return original.call(this, tile, image, sketch, scale, translate, round, source);
+    const density = import_openseadragon.default.pixelDensityRatio, factor = density * scale;
+    const x = tile.position.x * factor + (translate?.x || 0), y = tile.position.y * factor + (translate?.y || 0), width = tile.size.x * factor, height = tile.size.y * factor;
+    const sourceWidth = Math.min(tile.sourceBounds?.width ?? rendered.canvas.width, rendered.canvas.width), sourceHeight = Math.min(tile.sourceBounds?.height ?? rendered.canvas.height, rendered.canvas.height);
+    const count = source.getNumTiles(tile.level), overlap = source.tileOverlap;
+    const first = tile.x === 0 ? 0 : overlap, last = tile.x === count.x - 1 ? 0 : overlap;
+    const left = Math.round(x + (tile.flipped ? last : first) * width / sourceWidth), right = Math.round(x + width - (tile.flipped ? first : last) * width / sourceWidth);
+    const top = Math.round(y + (tile.y === 0 ? 0 : overlap) * height / sourceHeight), bottom = Math.round(y + height - (tile.y === count.y - 1 ? 0 : overlap) * height / sourceHeight);
+    const opacity = Math.min(1, Math.max(0, context.globalAlpha * tile.opacity));
+    if (!opacity || right <= left || bottom <= top) return;
+    context.save();
+    try {
+      context.beginPath();
+      context.rect(left, top, right - left, bottom - top);
+      context.clip();
+      context.globalAlpha = opacity;
+      context.globalCompositeOperation = "destination-out";
+      context.fillStyle = "#000";
+      context.fillRect(left, top, right - left, bottom - top);
+      context.globalCompositeOperation = "lighter";
+      this._raiseTileDrawingEvent(image, context, tile, rendered);
+      context.translate(x + width / 2, 0);
+      if (tile.flipped) context.scale(-1, 1);
+      context.drawImage(rendered.canvas, 0, 0, sourceWidth, sourceHeight, -width / 2, y, width, height);
+    } finally {
+      context.restore();
+    }
+  };
+}
+
+// src/webgl-tile-compositing.ts
+var installed2 = /* @__PURE__ */ new WeakSet();
+var contextLost = () => Error("WebGL context lost during tile compositing.");
+function installWebGLTileCompositing(drawer) {
+  if (drawer.getType() !== "webgl" || installed2.has(drawer)) return;
+  const native = drawer, draw = native._draw, tileData = native._getTileData;
+  if (typeof draw !== "function" || typeof tileData !== "function") throw Error("Unsupported WebGL tile renderer.");
+  let active;
+  native._getTileData = function(...args) {
+    tileData.apply(this, args);
+    if (active) active.batch[args[4]] = { opacity: Math.fround(args[8][args[4]]), transparent: args[0].hasTransparency };
+  };
+  native._draw = function(images, retry) {
+    const gl = this._glContext?.getContext();
+    if (!gl) return draw.call(this, images, retry);
+    if (gl.isContextLost()) throw contextLost();
+    const firstPass = this._glContext.getFirstPass().shaderProgram, previous = active, frame = { batch: [] }, drawArrays = gl.drawArrays;
+    active = frame;
+    gl.drawArrays = function(mode, first, count) {
+      if (gl.isContextLost()) throw contextLost();
+      if (gl.getParameter(gl.CURRENT_PROGRAM) !== firstPass) return drawArrays.call(gl, mode, first, count);
+      const batch = frame.batch;
+      frame.batch = [];
+      if (!batch.some((tile) => tile?.transparent)) return drawArrays.call(gl, mode, first, count);
+      if (mode !== gl.TRIANGLES || first !== 0 || count % 6 !== 0) throw Error("Unsupported WebGL tile batch.");
+      const blend = [gl.getParameter(gl.BLEND_SRC_RGB), gl.getParameter(gl.BLEND_DST_RGB), gl.getParameter(gl.BLEND_SRC_ALPHA), gl.getParameter(gl.BLEND_DST_ALPHA)], color2 = gl.getParameter(gl.BLEND_COLOR);
+      if (gl.isContextLost() || blend.some((value) => typeof value !== "number" || !Number.isFinite(value)) || !color2 || color2.length !== 4 || !Array.from(color2).every(Number.isFinite)) throw contextLost();
+      const restore = () => {
+        if (gl.isContextLost()) return;
+        gl.blendFuncSeparate(...blend);
+        gl.blendColor(color2[0], color2[1], color2[2], color2[3]);
+      };
+      try {
+        for (let index = 0; index < count / 6; ) {
+          const tile = batch[index], transparent = tile?.transparent === true, opacity = tile?.opacity ?? 1;
+          let end = index + 1;
+          while (end < count / 6 && batch[end]?.transparent === true === transparent && (!transparent || batch[end].opacity === opacity)) end++;
+          if (transparent) {
+            if (!Number.isFinite(opacity) || opacity < 0 || opacity > 1) throw Error("Invalid WebGL tile opacity.");
+            gl.blendColor(0, 0, 0, opacity);
+            gl.blendFuncSeparate(gl.ONE, gl.ONE_MINUS_CONSTANT_ALPHA, gl.ONE, gl.ONE_MINUS_CONSTANT_ALPHA);
+          } else restore();
+          drawArrays.call(gl, mode, index * 6, (end - index) * 6);
+          index = end;
+        }
+      } finally {
+        restore();
+      }
+    };
+    try {
+      return draw.call(this, images, retry);
+    } catch (error) {
+      if (gl.isContextLost()) throw contextLost();
+      throw error;
+    } finally {
+      gl.drawArrays = drawArrays;
+      active = previous;
+    }
+  };
+  installed2.add(drawer);
+}
+
+// src/tile-compositing.ts
+function installTileCompositing(viewer) {
+  const install = (drawer) => {
+    installCanvasTileCompositing(drawer);
+    installWebGLTileCompositing(drawer);
+  };
+  install(viewer.drawer);
+  const request = viewer.requestDrawer;
+  viewer.requestDrawer = function(...args) {
+    const drawer = request.apply(this, args);
+    if (drawer && typeof drawer === "object") install(drawer);
+    return drawer;
+  };
+  viewer.addOnceHandler("before-destroy", () => {
+    viewer.requestDrawer = request;
+  });
+}
+
 // src/geometry.ts
 function fitZooms(image, viewport) {
   const heightZoom = viewport.height / viewport.width * image.width / image.height;
@@ -174391,7 +174515,7 @@ var MapHistory = class {
 };
 
 // src/rubber.ts
-var import_openseadragon = __toESM(require_openseadragon(), 1);
+var import_openseadragon2 = __toESM(require_openseadragon(), 1);
 
 // src/drift.ts
 function driftVisibility(zoom, min, max) {
@@ -174433,7 +174557,7 @@ var RubberBand = class {
       event.preventDefaultZoomAction = true;
       const v = viewer.viewport, before = v.getCenter(true), zoom = v.getZoom(true), excess = this.raw?.minus(before);
       this.zoom(event.distance / event.lastDistance, event.center, true);
-      this.raw = v.getCenter(true).plus(excess?.times(zoom / v.getZoom(true)) || new import_openseadragon.default.Point());
+      this.raw = v.getCenter(true).plus(excess?.times(zoom / v.getZoom(true)) || new import_openseadragon2.default.Point());
       if (event.lastCenter) this.pan(event.center.x - event.lastCenter.x, event.center.y - event.lastCenter.y);
     });
     viewer.addHandler("canvas-release", () => {
@@ -174459,10 +174583,10 @@ var RubberBand = class {
     const v = this.viewer.viewport;
     this.syncDrift(true);
     if (!this.raw) this.raw = v.getCenter(true).clone();
-    const delta = v.deltaPointsFromPixels(new import_openseadragon.default.Point(-dx, -dy), true);
+    const delta = v.deltaPointsFromPixels(new import_openseadragon2.default.Point(-dx, -dy), true);
     this.raw = this.raw.plus(delta);
     v.panTo(this.raw, true);
-    const constrained = v.getConstrainedBounds(true).getCenter(), pixels = v.deltaPixelsFromPoints(this.raw.minus(constrained), true), soft = v.deltaPointsFromPixels(new import_openseadragon.default.Point(rubber(pixels.x, 70), rubber(pixels.y, 70)), true);
+    const constrained = v.getConstrainedBounds(true).getCenter(), pixels = v.deltaPixelsFromPoints(this.raw.minus(constrained), true), soft = v.deltaPointsFromPixels(new import_openseadragon2.default.Point(rubber(pixels.x, 70), rubber(pixels.y, 70)), true);
     v.panTo(constrained.plus(soft), true);
   }
   syncDrift(current = false) {
@@ -174874,7 +174998,7 @@ var MapColorSampler = class {
 };
 
 // src/surface.ts
-var import_openseadragon2 = __toESM(require_openseadragon(), 1);
+var import_openseadragon3 = __toESM(require_openseadragon(), 1);
 var MapSurface = class {
   constructor(canvas, bar, rail, changed, backgroundShape = () => void 0) {
     this.canvas = canvas;
@@ -174923,14 +175047,14 @@ var MapSurface = class {
     if (v) {
       const size = v.getContainerSize();
       if (size.x !== width || size.y !== height) {
-        v.resize(new import_openseadragon2.default.Point(width, height), true);
+        v.resize(new import_openseadragon3.default.Point(width, height), true);
         viewer.forceRedraw();
       }
       v.setMargins({ left: area2.left, top: area2.top, right: width - area2.right, bottom: height - area2.bottom });
       if (preserve && anchor && screen && imageZoom) {
         v.zoomTo(v.imageToViewportZoom(imageZoom * scale), void 0, true);
         const now = v.pixelFromPoint(anchor, true);
-        v.panBy(v.deltaPointsFromPixels(new import_openseadragon2.default.Point(now.x - screen.x, now.y - screen.y), true), true);
+        v.panBy(v.deltaPointsFromPixels(new import_openseadragon3.default.Point(now.x - screen.x, now.y - screen.y), true), true);
       }
     }
     return true;
@@ -176438,8 +176562,8 @@ function boundaryPanel(viewer, body, id) {
   } };
 }
 function imageImport(parent, run, replace = false) {
-  const form = new RailForm(parent), controller = new AbortController();
-  let title = "World Map", running = false;
+  const form = new RailForm(parent);
+  let title = "World Map", running = false, disposed = false, operation;
   if (!replace) form.text("Map title", () => title, (value) => title = value);
   const input = element("input", "mapsmith-file-input", parent);
   input.type = "file";
@@ -176452,28 +176576,47 @@ function imageImport(parent, run, replace = false) {
   const choosePrepared = element("button", "mapsmith-button", parent, "Choose prepared map");
   choosePrepared.type = "button";
   choosePrepared.onclick = () => prepared.click();
-  element("p", "mapsmith-form-status", parent).textContent = "Choose a PNG, JPEG, WebP or prepared .mapsmith-tiles map. Prepared maps support up to one billion pixels on computers and mobile devices.";
+  element("p", "mapsmith-form-status", parent).textContent = "Choose a PNG, JPEG, WebP or prepared .mapsmith-tiles map. Windows prepares large images automatically. On Android, prepare originals above 40 million pixels or 100 MB on Windows first.";
   const status = element("p", "mapsmith-form-status", parent), progress = element("progress", "", parent);
   progress.max = 100;
   progress.hidden = true;
+  const cancel = element("button", "mapsmith-button", parent, "Cancel import");
+  cancel.type = "button";
+  cancel.hidden = true;
+  cancel.onclick = () => {
+    cancel.disabled = true;
+    status.textContent = "Cancelling import\u2026";
+    operation?.abort();
+  };
   const submit = async (file) => {
-    if (!file || running) return;
+    if (!file || running || disposed) return;
     running = true;
+    const controller = operation = new AbortController();
     input.disabled = prepared.disabled = choosePrepared.disabled = true;
     progress.value = 0;
     progress.hidden = false;
+    cancel.hidden = false;
+    cancel.disabled = false;
     status.textContent = "Preparing map\u2026";
     try {
-      await run(file, title, controller.signal, (done, total) => {
-        progress.value = done / total * 100;
-        status.textContent = "Preparing map \xB7 " + done + " of " + total + " pieces";
+      await run(file, title, controller.signal, (done, total, phase) => {
+        if (controller.signal.aborted || disposed) return;
+        if (phase === "preparing" || phase === "copying" || phase === "tiling") {
+          progress.removeAttribute("value");
+          status.textContent = "Preparing large image\u2026";
+        } else {
+          progress.value = total ? done / total * 100 : 0;
+          status.textContent = (phase === "archiving" ? "Packing map" : "Importing map") + " \xB7 " + done + " of " + total + " pieces";
+        }
       });
       status.textContent = "Map ready.";
     } catch (error) {
       status.textContent = error instanceof Error ? error.message : String(error);
     } finally {
       running = false;
+      operation = void 0;
       input.disabled = prepared.disabled = choosePrepared.disabled = false;
+      cancel.hidden = true;
     }
   };
   input.onchange = () => void submit(input.files?.[0]);
@@ -176489,7 +176632,8 @@ function imageImport(parent, run, replace = false) {
   form.sync();
   return { sync: () => {
   }, destroy: () => {
-    controller.abort();
+    disposed = true;
+    operation?.abort();
     form.destroy();
   } };
 }
@@ -176597,7 +176741,8 @@ var MapViewer = class {
     this.layers.controls.append(...layerControls.children);
     this.desktopBudget = host.desktop === true || host.desktop === void 0 && !matchMedia("(pointer:coarse)").matches && innerWidth > 760;
     const budget = viewerTileBudget(manifest.tileSize, this.desktopBudget);
-    this.osd = (0, import_openseadragon3.default)({
+    const webgl = { unpackWithPremultipliedAlpha: true };
+    this.osd = (0, import_openseadragon4.default)({
       ...budget,
       element: this.canvas,
       autoResize: false,
@@ -176613,11 +176758,14 @@ var MapViewer = class {
       maxZoomPixelRatio: 3,
       zoomPerScroll: 1.25,
       minScrollDeltaTime: 0,
-      drawer: "canvas",
+      drawer: "auto",
+      drawerOptions: { webgl },
+      subPixelRoundingForTransparency: { "*": import_openseadragon4.default.SUBPIXEL_ROUNDING_OCCURRENCES.ALWAYS },
       crossOriginPolicy: false,
       gestureSettingsMouse: { clickToZoom: false, dblClickToZoom: true, scrollToZoom: true },
       gestureSettingsTouch: { pinchToZoom: true, dragToPan: true, flickEnabled: false, dblClickToZoom: false }
     });
+    installTileCompositing(this.osd);
     this.regions = new RegionEditor(this.root, this.canvas, this.osd.canvas, { map: () => this.map, edit: (update, group) => this.editMap(update, group), select: (b) => this.showBoundary(b.id), open: (b) => void this.showNote(b), hover: (b, e, node) => host.hoverNote?.(b, e, node), admitted: (b) => this.admitted(b), changed: () => this.syncRail(), end: () => this.endGroup(), beginGroup: (group) => this.history?.beginGroup(group), toPixel: (p) => this.toPixel(p), size: () => this.osd.viewport.getContainerSize(), fromClient: (p) => this.fromClient(p), viewRect: () => this.mapArea });
     const overlays = this.osd.overlaysContainer;
     if (overlays) {
@@ -177062,7 +177210,7 @@ var MapViewer = class {
     return p.x >= 0 && p.x <= 1 && p.y >= 0 && p.y <= 1;
   }
   tileSource(manifest) {
-    return { width: manifest.width, height: manifest.height, tileSize: manifest.tileSize, tileOverlap: manifest.overlap, minLevel: 0, maxLevel: manifest.maxLevel, getTileUrl: (level, x, y) => this.host.tileUrl("tiles/" + level + "/" + x + "_" + y + "." + manifest.format) };
+    return { width: manifest.width, height: manifest.height, tileSize: manifest.tileSize, tileOverlap: manifest.overlap, minLevel: 0, maxLevel: manifest.maxLevel, hasTransparency: () => manifest.format === "png", getTileUrl: (level, x, y) => this.host.tileUrl("tiles/" + level + "/" + x + "_" + y + "." + manifest.format) };
   }
   scheduleFit() {
     if (!this.needsFirstFit || this.destroyed) return;
@@ -177115,7 +177263,7 @@ var MapViewer = class {
     this.lastFit = void 0;
     if (last && this.sameCamera(this.camera(), last.camera)) {
       this.osd.viewport.zoomTo(last.previous.zoom);
-      this.osd.viewport.panTo(new import_openseadragon3.default.Point(last.previous.x, last.previous.y));
+      this.osd.viewport.panTo(new import_openseadragon4.default.Point(last.previous.x, last.previous.y));
       return true;
     }
     this.setFit("contain");
@@ -177399,7 +177547,7 @@ var MapViewer = class {
     return this.osd.viewport.pixelFromPoint(this.position(p), true);
   }
   fromClient(p) {
-    const r = this.canvas.getBoundingClientRect(), image = this.osd.viewport.viewportToImageCoordinates(this.osd.viewport.pointFromPixel(new import_openseadragon3.default.Point(p.x - r.x, p.y - r.y), true));
+    const r = this.canvas.getBoundingClientRect(), image = this.osd.viewport.viewportToImageCoordinates(this.osd.viewport.pointFromPixel(new import_openseadragon4.default.Point(p.x - r.x, p.y - r.y), true));
     return { x: image.x / this.manifest.width, y: image.y / this.manifest.height };
   }
   syncPins() {
@@ -177416,7 +177564,7 @@ var MapViewer = class {
         node = this.createPin(pin.id);
         this.stylePin(node, pin);
         this.nodes.set(pin.id, node);
-        this.osd.addOverlay({ element: node, location: this.position(pin), placement: import_openseadragon3.default.Placement.BOTTOM, checkResize: false });
+        this.osd.addOverlay({ element: node, location: this.position(pin), placement: import_openseadragon4.default.Placement.BOTTOM, checkResize: false });
       }
       if (node.dataset.icon !== pin.icon) {
         node.innerHTML = icon(pin.icon);
@@ -177487,7 +177635,7 @@ var MapViewer = class {
       if (!moved && Math.hypot(e.clientX - press.client.x, e.clientY - press.client.y) < 2) return;
       moved = true;
       suppress = true;
-      const r = this.canvas.getBoundingClientRect(), image = this.osd.viewport.viewportToImageCoordinates(this.osd.viewport.pointFromPixel(new import_openseadragon3.default.Point(e.clientX - r.x + press.offset.x, e.clientY - r.y + press.offset.y), true)), point = { x: Math.max(0, Math.min(1, image.x / this.manifest.width)), y: Math.max(0, Math.min(1, image.y / this.manifest.height)) };
+      const r = this.canvas.getBoundingClientRect(), image = this.osd.viewport.viewportToImageCoordinates(this.osd.viewport.pointFromPixel(new import_openseadragon4.default.Point(e.clientX - r.x + press.offset.x, e.clientY - r.y + press.offset.y), true)), point = { x: Math.max(0, Math.min(1, image.x / this.manifest.width)), y: Math.max(0, Math.min(1, image.y / this.manifest.height)) };
       this.osd.updateOverlay(node, this.position(point));
       this.editMap((map) => ({ ...map, pins: map.pins.map((p) => p.id === id ? { ...p, ...point } : p) }), "pin-drag:" + id);
     };
@@ -177522,14 +177670,14 @@ var MapViewer = class {
     if (pin) {
       const v = this.osd.viewport, area2 = this.mapArea, full = this.surface.bounds();
       v.zoomTo(Math.max(v.getHomeZoom() * 2.5, v.getZoom()));
-      v.panTo(this.position(pin).plus(v.deltaPointsFromPixels(new import_openseadragon3.default.Point(full.x + full.width / 2 - area2.x - area2.width / 2, full.y + full.height / 2 - area2.y - area2.height / 2), false)));
+      v.panTo(this.position(pin).plus(v.deltaPointsFromPixels(new import_openseadragon4.default.Point(full.x + full.width / 2 - area2.x - area2.width / 2, full.y + full.height / 2 - area2.y - area2.height / 2), false)));
       v.applyConstraints();
     }
   }
   frameRegion(region) {
     if (!region.points.length) return;
     const xs = region.points.map((p) => p.x), ys = region.points.map((p) => p.y), a = this.position({ x: Math.min(...xs), y: Math.min(...ys) }), b = this.position({ x: Math.max(...xs), y: Math.max(...ys) });
-    this.osd.viewport.fitBounds(new import_openseadragon3.default.Rect(a.x, a.y, Math.max(1e-3, b.x - a.x), Math.max(1e-3, b.y - a.y)));
+    this.osd.viewport.fitBounds(new import_openseadragon4.default.Rect(a.x, a.y, Math.max(1e-3, b.x - a.x), Math.max(1e-3, b.y - a.y)));
     this.osd.viewport.applyConstraints();
   }
   openPanel(kind, key, title, build) {
