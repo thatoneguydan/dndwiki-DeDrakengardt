@@ -172387,9 +172387,9 @@ var Tooltips = class {
   }
   style() {
     if (this.tip) {
-      this.tip.style.background = this.palette.background;
-      this.tip.style.color = this.palette.text;
-      this.tip.style.borderColor = this.palette.border;
+      this.tip.style.setProperty("background", this.palette.background, "important");
+      this.tip.style.setProperty("color", this.palette.text, "important");
+      this.tip.style.setProperty("border-color", this.palette.border, "important");
       this.tip.style.setProperty("--tip-fill", this.palette.background);
       this.tip.style.setProperty("--tip-border", this.palette.border);
       this.tip.style.setProperty("--tip-outline-width", this.outlineWidth + "px");
@@ -172683,6 +172683,7 @@ var MapToolbar = class {
   editorAnimation;
   editorWidth = 0;
   editorEndGap = 5;
+  logoClearance = LOGO_CONTROL_GAP;
   abort = new AbortController();
   setEditor(open) {
     const shell = this.shell, editor = this.editor;
@@ -172715,11 +172716,12 @@ var MapToolbar = class {
     this.backings?.setOpen("editor", open);
     this.sync();
   }
-  setLogo(box, clearance = 0, inHeader = true, compact) {
-    const key = JSON.stringify([box, inHeader, compact]);
+  setLogo(box, clearance = 0, inHeader = true, compact, edgeClearance = LOGO_CONTROL_GAP) {
+    const key = JSON.stringify([box, inHeader, compact, edgeClearance]);
     if (key === this.boxKey) return;
     this.boxKey = key;
     this.compact = compact;
+    this.logoClearance = edgeClearance;
     if (this.queued) return;
     this.queued = true;
     queueMicrotask(() => {
@@ -172783,8 +172785,8 @@ var MapToolbar = class {
     const editorGuide = this.editorOpen || this.editorAnimation ? this.dock : mode;
     const controls = [...editorGuide ? [editorGuide] : [], ...this.content.querySelectorAll(".mapsmith-player-controls .mapsmith-search-toggle,.mapsmith-viewer-controls .mapsmith-search-toggle,.mapsmith-viewer-controls .mapsmith-find-group>button")];
     const edges = controls.filter((node) => node.offsetWidth > 0).map((node) => (node.getBoundingClientRect().left - rootBox.left) / scale - this.root.clientLeft);
-    const right = (edges.length ? Math.min(...edges) : this.content.offsetLeft + width) - LOGO_CONTROL_GAP;
-    this.logoWidth?.(Math.max(LOGO_COMPACT_WIDTH, right - this.content.offsetLeft), right);
+    const right = (edges.length ? Math.min(...edges) : this.root.clientWidth) - this.logoClearance;
+    this.logoWidth?.(Math.max(LOGO_COMPACT_WIDTH, right - this.logoClearance), right);
     for (const search2 of this.content.querySelectorAll(".mapsmith-expanding-search")) {
       const rect = search2.getBoundingClientRect(), x = (rect.left - rootBox.left) / scale - this.root.clientLeft, y = (rect.top - rootBox.top) / scale - this.root.clientTop, left = Math.max(12 - x, Math.min(0, this.root.clientWidth - 12 - x - popoverWidth)), height2 = Math.max(48, Math.min(230, this.root.clientHeight - y - search2.offsetHeight - 60, (innerHeight - rect.bottom) / scale - 60));
       search2.style.setProperty("--search-popover-width", popoverWidth + "px");
@@ -172957,6 +172959,9 @@ var MapLogo = class {
   shadowInsets() {
     return shadowInsets(this.shadowValue);
   }
+  horizontalClearance() {
+    return Math.max(0, this.value.x + this.value.width * this.value.bounds.left);
+  }
   applyShadow(width, height) {
     if (!this.shadowValue?.enabled || !this.effect) {
       this.art.style.filter = "none";
@@ -173007,12 +173012,14 @@ var MapLogo = class {
   }
   draw() {
     const l = this.value, visible = l.bounds.right - l.bounds.left, a = l.anchor ?? { x: 0.5, y: 1, bar: 64 }, pad = this.shadowInsets(), floor = visible > 0 ? Math.min(1, LOGO_COMPACT_WIDTH / (l.width * visible)) : 1;
-    let scale = visible > 0 ? Math.max(floor, Math.min(1, (this.availableWidth - pad.left - pad.right) / (l.width * visible))) : 1;
+    let scale = 1;
     const painted = (s) => ({ left: l.x + l.width * a.x + l.width * s * (l.bounds.left - a.x) - pad.left, right: l.x + l.width * a.x + l.width * s * (l.bounds.right - a.x) + pad.right, top: l.y + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.top - a.y) - pad.top, bottom: l.y + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.bottom - a.y) + pad.bottom }), b = painted(scale);
-    if (!this.gesture && b.top < this.baseline && b.bottom > 0 && b.right > this.availableRight) {
-      const edge = l.width * (l.bounds.right - a.x), rightScale = (this.availableRight - l.x - l.width * a.x - pad.right) / edge;
+    const viewportRight = this.root.clientWidth - this.horizontalClearance(), right = b.top < this.baseline && b.bottom > 0 ? Math.min(this.availableRight, viewportRight) : viewportRight;
+    if (!this.gesture && b.right > right) {
+      const edge = l.width * (l.bounds.right - a.x), rightScale = (right - l.x - l.width * a.x - pad.right) / edge;
       if (edge > 0 && rightScale >= 0) scale = Math.min(scale, rightScale);
       else {
+        scale = floor;
         const rise = l.width / l.aspect * (a.y - l.bounds.top), below = (l.y + l.width / l.aspect * a.y - LOGO_CONTROL_GAP - pad.top) / rise;
         if (rise > 0 && below >= 0) scale = Math.min(scale, below);
       }
@@ -173040,6 +173047,10 @@ var MapLogo = class {
         else if (below + height2 > this.root.clientHeight && avoid.left + LOGO_CONTROL_GAP - width2 >= 0) fallbackX = avoid.left + LOGO_CONTROL_GAP - remaining.right;
         else fallbackY += below - remaining.top;
       }
+    }
+    if (!this.gesture) {
+      const edge = painted(scale).right + fallbackX;
+      if (edge > viewportRight) fallbackX += viewportRight - edge;
     }
     this.fallbackY = this.gesture ? 0 : fallbackY;
     this.fallbackX = this.gesture ? 0 : fallbackX;
@@ -175087,6 +175098,107 @@ var MapSurface = class {
   }
 };
 
+// src/note-card.ts
+var MapNoteCard = class {
+  constructor(rail) {
+    this.rail = rail;
+    this.root = rail.closest(".mapsmith");
+    rail.setAttribute("data-note-card", "");
+    const grabber = this.handle(true), resize = this.handle(false);
+    rail.prepend(grabber);
+    rail.append(resize);
+    this.resize = new ResizeObserver(() => this.sync());
+    this.resize.observe(rail);
+    this.resize.observe(this.root);
+    this.sync();
+  }
+  rail;
+  abort = new AbortController();
+  resize;
+  handles = [];
+  drag;
+  root;
+  limits(vertical) {
+    const height = this.root.clientHeight, logo = Math.max(0, parseFloat(getComputedStyle(this.root).getPropertyValue("--map-logo-bottom")) || 0), start = logo + 12;
+    const maximum = vertical ? Math.max(0, height - start) : Math.max(160, Math.min(840, this.root.clientWidth - 24));
+    return { minimum: Math.min(vertical ? 160 : 320, maximum), maximum };
+  }
+  value(vertical) {
+    return this.rail.getBoundingClientRect()[vertical ? "height" : "width"];
+  }
+  set(vertical, size) {
+    const { minimum, maximum } = this.limits(vertical);
+    this.root.style.setProperty(vertical ? "--mapsmith-note-card-height" : "--mapsmith-note-card-width", Math.min(maximum, Math.max(minimum, size)) + "px");
+  }
+  reset(vertical) {
+    this.root.style.removeProperty(vertical ? "--mapsmith-note-card-height" : "--mapsmith-note-card-width");
+  }
+  handle(vertical) {
+    const handle = document.createElement("button");
+    handle.type = "button";
+    handle.className = vertical ? "mapsmith-note-card-grabber" : "mapsmith-note-card-resize";
+    handle.setAttribute("role", "separator");
+    handle.setAttribute("aria-orientation", vertical ? "horizontal" : "vertical");
+    handle.setAttribute("aria-label", vertical ? "Resize note height" : "Resize note width");
+    const options = { signal: this.abort.signal };
+    handle.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      this.drag = { id: event.pointerId, handle, vertical, start: vertical ? event.clientY : event.clientX, size: this.value(vertical) };
+      handle.setPointerCapture(event.pointerId);
+      event.preventDefault();
+      event.stopPropagation();
+    }, options);
+    handle.addEventListener("pointermove", (event) => {
+      const drag = this.drag;
+      if (!drag || drag.id !== event.pointerId || drag.handle !== handle) return;
+      this.set(vertical, drag.size + drag.start - (vertical ? event.clientY : event.clientX));
+      event.preventDefault();
+      event.stopPropagation();
+    }, options);
+    const finish = (event) => {
+      if (this.drag?.id !== event.pointerId || this.drag.handle !== handle) return;
+      this.drag = void 0;
+      if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
+    };
+    handle.addEventListener("pointerup", finish, options);
+    handle.addEventListener("pointercancel", finish, options);
+    handle.addEventListener("lostpointercapture", () => {
+      if (this.drag?.handle === handle) this.drag = void 0;
+    }, options);
+    handle.addEventListener("keydown", (event) => {
+      const delta = vertical ? { ArrowUp: 32, ArrowDown: -32 } : { ArrowLeft: 24, ArrowRight: -24 };
+      if (event.key in delta) {
+        this.set(vertical, this.value(vertical) + delta[event.key]);
+        event.preventDefault();
+        event.stopPropagation();
+      } else if (event.key === "Home") {
+        this.reset(vertical);
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    }, options);
+    handle.addEventListener("dblclick", () => this.reset(vertical), options);
+    this.handles.push(handle);
+    return handle;
+  }
+  sync() {
+    for (const handle of this.handles) {
+      const vertical = handle.classList.contains("mapsmith-note-card-grabber"), { minimum, maximum } = this.limits(vertical);
+      handle.setAttribute("aria-valuemin", String(Math.round(minimum)));
+      handle.setAttribute("aria-valuemax", String(Math.round(maximum)));
+      handle.setAttribute("aria-valuenow", String(Math.round(this.value(vertical))));
+    }
+  }
+  destroy() {
+    this.abort.abort();
+    this.resize.disconnect();
+    this.drag = void 0;
+    for (const handle of this.handles) handle.remove();
+    this.handles = [];
+    this.rail.removeAttribute("data-note-card");
+  }
+};
+
 // src/rail.ts
 var MapRail = class {
   constructor(rail) {
@@ -175096,6 +175208,7 @@ var MapRail = class {
   rail;
   animation;
   cleanup;
+  card;
   stop() {
     this.animation?.cancel();
     this.animation = void 0;
@@ -175117,14 +175230,17 @@ var MapRail = class {
     }, () => {
     });
   }
-  show(build) {
+  show(build, note = false) {
     const hidden = this.rail.hidden, open = this.rail.dataset.state === "open", from = hidden ? getComputedStyle(this.rail).getPropertyValue("--rail-exit").trim() : getComputedStyle(this.rail).transform;
     this.stop();
+    this.card?.destroy();
+    this.card = void 0;
     this.rail.hidden = false;
     this.rail.inert = false;
     this.rail.removeAttribute("aria-hidden");
     this.rail.dataset.state = "open";
     build();
+    if (note) this.card = new MapNoteCard(this.rail);
     if (!open) this.slide(from || "translateX(100%)", "none");
   }
   hide(cleanup) {
@@ -175136,6 +175252,8 @@ var MapRail = class {
     this.cleanup = cleanup;
     const finish = () => {
       this.rail.hidden = true;
+      this.card?.destroy();
+      this.card = void 0;
       const cleanup2 = this.cleanup;
       this.cleanup = void 0;
       cleanup2?.();
@@ -175145,6 +175263,8 @@ var MapRail = class {
   }
   destroy() {
     this.stop();
+    this.card?.destroy();
+    this.card = void 0;
   }
 };
 
@@ -176878,7 +176998,7 @@ var MapViewer = class {
     } });
     this.vignette = new MapVignette(this.root);
     this.toolbar = new MapToolbar(this.root, bar, toolbarContent, logoSlot, (width, right) => this.logo.setAvailableWidth(width, right), this.backings);
-    this.toolbar.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader());
+    this.toolbar.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader(), void 0, this.logo.horizontalClearance());
     const cameraChanged = () => {
       if (this.lastFit && !this.sameCamera(this.camera(), this.lastFit.camera)) {
         this.lastFit = void 0;
@@ -177401,8 +177521,8 @@ var MapViewer = class {
   positionControls() {
     if (!this.zoomControls) return;
     const root = this.root.getBoundingClientRect(), scale = root.width / this.root.offsetWidth || 1, top = this.bar.getBoundingClientRect().height / scale, area2 = this.mapArea;
-    const left = (area2.left - root.left) / scale - this.root.clientLeft, right = (area2.right - root.left) / scale - this.root.clientLeft, bottom = (area2.bottom - root.top) / scale - this.root.clientTop;
-    const viewportControls = this.host.controlBounds === "viewport", controlRight = viewportControls ? (Math.min(innerWidth, root.right) - root.left) / scale - this.root.clientLeft : right, controlBottom = viewportControls ? (Math.min(innerHeight, root.bottom) - root.top) / scale - this.root.clientTop : bottom;
+    const right = (area2.right - root.left) / scale - this.root.clientLeft, bottom = (area2.bottom - root.top) / scale - this.root.clientTop;
+    const viewportControls = this.host.controlBounds === "viewport" || this.rail.hasAttribute("data-note-card"), controlRight = viewportControls ? (Math.min(innerWidth, root.right) - root.left) / scale - this.root.clientLeft : right, controlBottom = viewportControls ? (Math.min(innerHeight, root.bottom) - root.top) / scale - this.root.clientTop : bottom;
     this.logo?.setBaseline(top);
     this.root.style.setProperty("--map-bar-height", top + "px");
     this.root.style.setProperty("--canvas-width", this.root.clientWidth + "px");
@@ -177418,14 +177538,14 @@ var MapViewer = class {
     this.zoomControls.style.left = dockLeft + "px";
     this.logo?.setAvoidance(forced ? { left: dockLeft - gap, top: dockTop - gap, right: dockLeft + width + gap, bottom: dockTop + height + gap } : void 0);
     this.layers?.updateBounds((viewportControls ? Math.min(innerWidth, root.right) : area2.right) - 8 * scale);
-    const vignetteTop = 0;
-    this.vignette?.setFrame({ left, top: vignetteTop, width: area2.width / scale, height: Math.max(0, bottom - vignetteTop) });
+    this.vignette?.setFrame({ left: 0, top: 0, width: this.root.clientWidth, height: this.root.clientHeight });
+    if (this.logo) this.root.style.setProperty("--map-logo-bottom", Math.max(0, this.logo.visibleBottom()) + "px");
     if (this.find) {
       const searchRight = (this.find.getBoundingClientRect().right - root.left) / scale;
       this.find.style.setProperty("--map-search-width", Math.max(100, Math.min(280, controlRight - searchRight - 16)) + "px");
       this.find.style.setProperty("--map-search-maxheight", Math.max(80, controlBottom - (this.find.getBoundingClientRect().top - root.top) / scale - 48) + "px");
     }
-    if (this.logo) this.toolbar?.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader(), this.logo.compactBounds());
+    if (this.logo) this.toolbar?.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader(), this.logo.compactBounds(), this.logo.horizontalClearance());
     this.backings?.sync();
   }
   applyAppearance(value = appearance(this.map)) {
@@ -177815,11 +177935,11 @@ var MapViewer = class {
       if (kind === "boundary") button(header, "Back to boundaries", "arrow-left", () => this.showBoundaries(), this.tips);
       if (kind === "cloud") button(header, "Back to clouds", "arrow-left", () => this.showClouds(), this.tips);
       element(kind === "note" ? "div" : "h2", kind === "note" ? "inline-title" : "", header, title);
-      const close = button(header, "Close panel", "close", () => this.closeNote(), this.tips);
+      const actions = kind === "note" ? element("div", "mapsmith-note-actions", header) : header, close = button(actions, "Close panel", "close", () => this.closeNote(), this.tips);
       close.classList.add("mapsmith-panel-close");
       body = element("div", kind === "note" ? "mapsmith-note-content" : "mapsmith-editor-content", this.rail);
       if (build) this.panel = build(body);
-    });
+    }, kind === "note");
     if (kind !== "note" && this.history) {
       this.saveStatus = element("div", "mapsmith-autosave-state", this.rail);
       this.saveStatus.setAttribute("aria-live", "polite");
@@ -177922,9 +178042,10 @@ var MapViewer = class {
     const pin = this.map.pins.find((p) => p.id === item.id);
     this.regions.viewed = this.map.regions?.some((b) => b.id === item.id) ? item.id : void 0;
     this.regions.update();
-    if (this.editing) button(header, pin ? "Edit pin" : "Edit boundary", "edit", () => pin ? this.showPinEditor(pin.id) : this.showBoundary(item.id), this.tips);
-    if (this.host.openNote && !this.previewing) button(header, "Open note in a new tab", "external", () => this.host.openNote?.(item), this.tips).dataset.feedback = "Note opened";
-    header.append(header.querySelector(".mapsmith-panel-close"));
+    const actions = header.querySelector(".mapsmith-note-actions");
+    if (this.editing) button(actions, pin ? "Edit pin" : "Edit boundary", "edit", () => pin ? this.showPinEditor(pin.id) : this.showBoundary(item.id), this.tips);
+    if (this.host.openNote && !this.previewing) button(actions, "Open note in a new tab", "external", () => this.host.openNote?.(item), this.tips).dataset.feedback = "Note opened";
+    actions.append(actions.querySelector(".mapsmith-panel-close"));
     body.addEventListener("mouseover", (event) => {
       const target = event.target.closest("a.internal-link");
       if (target && body.contains(target) && target.getAttribute("aria-disabled") !== "true") {

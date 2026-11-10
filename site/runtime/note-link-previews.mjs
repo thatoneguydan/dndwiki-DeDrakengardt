@@ -11,23 +11,24 @@ const CSS = `
   box-shadow: 0 12px 36px rgb(0 0 0 / .16); isolation: isolate;
 }
 .dndwiki-note-preview[hidden] { display: none !important; }
-.dndwiki-note-preview-header {
-  display: flex; align-items: center; gap: .75rem; flex: 0 0 auto;
+.dndwiki-note-preview > .dndwiki-note-preview-header {
+  display: flex; align-items: center; flex-wrap:nowrap; gap: .75rem; flex: 0 0 auto;
   padding: .65rem .85rem .65rem 1.15rem;
   border-bottom: 1px solid var(--background-modifier-border);
   font-family: var(--font-interface); font-size: 15px;
 }
-.dndwiki-note-preview-header > a {
+.dndwiki-note-preview > .dndwiki-note-preview-header > a {
   flex: 1; min-width: 0; color: var(--text-normal); font-weight: 650;
   line-height: 1.4; text-decoration: none; overflow-wrap: anywhere;
 }
 .dndwiki-note-preview-header > a:hover { color: var(--text-accent); }
-.dndwiki-note-preview-close {
+.dndwiki-note-preview-actions { display:flex; align-items:center; flex:0 0 auto; gap:4px; }
+.dndwiki-note-preview .dndwiki-note-preview-close {
   display: grid; place-items: center; width: 32px; height: 32px; min-height: 32px;
   flex: 0 0 auto; padding: 0; border: 0; border-radius: 6px; box-shadow: none;
   background: transparent; color: var(--text-muted); font-size: 22px; cursor: pointer;
 }
-.dndwiki-note-preview-close:hover { background: var(--background-modifier-hover); color: var(--text-normal); }
+.dndwiki-note-preview .dndwiki-note-preview-close:hover { background: var(--background-modifier-hover); color: var(--text-normal); }
 .dndwiki-note-preview > .dndwiki-shell {
   display: block; flex: 1 1 auto; min-height: 0; width: auto; margin: 0; padding: 0;
   overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin;
@@ -71,8 +72,19 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
   let pendingTimer = 0;
   let closeTimer = 0;
   let positionFrame = 0;
-  let dismissedAnchor = null;
+  const dismissedAnchors = new WeakMap();
+  let pointerPosition = null;
+  let pointerVersion = 0;
+  let fullscreenOwner = null;
   let destroyed = false;
+
+  const rememberPointer = (event) => {
+    if(!event.isTrusted || event.pointerType === 'touch') return;
+    if(!pointerPosition || pointerPosition.x !== event.clientX || pointerPosition.y !== event.clientY) {
+      pointerPosition = {x:event.clientX,y:event.clientY};
+      pointerVersion++;
+    }
+  };
 
   const cancelPending = () => {
     browserWindow.clearTimeout(pendingTimer);
@@ -91,6 +103,14 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     cancelClosing();
     cancelPending();
     closeFrom(0);
+    fullscreenOwner = null;
+  };
+  const interactionFloor = () => fullscreenOwner && document.fullscreenElement
+    ? Math.max(0,panels.indexOf(fullscreenOwner)+1) : 0;
+  const closeTransient = () => {
+    const floor=interactionFloor();
+    if(!floor){close();return;}
+    cancelClosing();cancelPending();closeFrom(floor);
   };
 
   const previewHref = (anchor) => anchor?.getAttribute('data-dndwiki-note-preview-href') ?? anchor?.getAttribute('href');
@@ -99,19 +119,19 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     if (!link || link.closest('[data-dndwiki-page-outline]')) return null;
     const href = previewHref(link);
     if (!/^#\/page\/[a-z0-9][a-z0-9-]{0,63}(?:#.*)?$/.test(String(href ?? ''))) return null;
-    if (root.contains(link)) return { link, depth: 0 };
     // Only authored/body links nest. Header title links still navigate.
+    // Check owned panels before the reader root: fullscreen map previews live
+    // inside that root, but must retain their recursive parent depth.
     for (let i = panels.length - 1; i >= 0; i--) {
-      if (panels[i].element.contains(link) && link.closest('[data-dndwiki-note-preview-body]')) {
-        return { link, depth: i + 1 };
-      }
+      if (panels[i].element.contains(link)) return link.closest('[data-dndwiki-note-preview-body]') ? { link, depth: i + 1 } : null;
     }
+    if (root.contains(link)) return { link, depth: 0 };
     // A browser-fullscreen map may be hosted outside the ordinary reader root.
     if (link.closest('.mapsmith[data-dndwiki-mapsmith-viewer-page]')) return { link, depth:0 };
     return null;
   };
   const inInteraction = (target) => target != null && (
-    panels.some(({ element, anchor }) => element.contains(target) || anchor?.contains?.(target))
+    panels.slice(interactionFloor()).some(({ element, anchor }) => element.contains(target) || anchor?.contains?.(target))
     || pending?.link?.contains?.(target) === true
   );
 
@@ -167,7 +187,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     panel.style.zIndex = String(1000 + depth);
     panel.innerHTML = '<header class="dndwiki-note-preview-header"><a href="'
       + escapeHtml(preview.route) + '">' + escapeHtml(preview.title)
-      + '</a><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></header>'
+      + '</a><div class="dndwiki-note-preview-actions"><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></div></header>'
       + '<div class="dndwiki-shell" data-dndwiki-note-preview-scroll tabindex="0" aria-label="Note preview body">'
       + '<article class="dndwiki-page" data-dndwiki-note-preview-body>' + preview.html + '</article></div>';
     // Fullscreen's top layer excludes body siblings; keep recursive cards in
@@ -185,7 +205,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     }
   };
   const showSoon = ({ link, depth }) => {
-    if (link === dismissedAnchor) return;
+    if (dismissedAnchors.has(link)) return;
     cancelClosing();
     if (panels[depth]?.anchor === link && pending == null) return;
     if (pending?.link === link && pending.depth === depth) return;
@@ -204,21 +224,28 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     cancelClosing();
     closeTimer = browserWindow.setTimeout(() => {
       closeTimer = 0;
-      if (panels.some(({ element, anchor }) => element.matches(':hover') || element.contains(document.activeElement) || anchor === document.activeElement)) return;
-      close();
+      if (panels.slice(interactionFloor()).some(({ element, anchor }) => element.matches(':hover') || element.contains(document.activeElement) || anchor === document.activeElement)) return;
+      closeTransient();
     }, 220);
   };
 
   const onPointerOver = (event) => {
     if (event.pointerType === 'touch' || browserWindow.matchMedia?.('(any-hover: hover)').matches === false) return;
+    rememberPointer(event);
     const info = linkInfo(event.target);
-    if (info) showSoon(info);
+    if (info) {
+      // Closing returns keyboard focus to the source. Keep that restoration
+      // and a stationary underlay reveal quiet, but honor the first real new
+      // pointer entry instead of requiring an extra leave/re-enter cycle.
+      if(event.isTrusted && !info.link.contains(event.relatedTarget) && dismissedAnchors.has(info.link) && pointerVersion > dismissedAnchors.get(info.link)) dismissedAnchors.delete(info.link);
+      showSoon(info);
+    }
     else if (inInteraction(event.target)) cancelClosing();
   };
   const onPointerOut = (event) => {
     const info = linkInfo(event.target);
     if (info?.link?.contains?.(event.relatedTarget)) return;
-    if (info?.link === dismissedAnchor) dismissedAnchor = null;
+    if (info?.link) dismissedAnchors.delete(info.link);
     if (inInteraction(event.relatedTarget)) { cancelClosing(); return; }
     if (inInteraction(event.target)) leaveSoon();
   };
@@ -229,15 +256,17 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     else leaveSoon();
   };
   const onFocusOut = (event) => {
+    const info=linkInfo(event.target);
+    if(info?.link && !info.link.contains(event.relatedTarget)) dismissedAnchors.delete(info.link);
     if (inInteraction(event.relatedTarget)) return;
-    dismissedAnchor = null;
     leaveSoon();
   };
   const onKeyDown = (event) => {
-    if (event.key !== 'Escape' || panels.length === 0) return;
+    if (event.key !== 'Escape' || panels.length <= interactionFloor()) return;
     const depth = panels.length - 1;
     const entry = panels[depth];
-    dismissedAnchor = entry.anchor;
+    dismissedAnchors.set(entry.anchor,pointerVersion);
+    cancelClosing();
     const returnFocus = entry.element.contains(document.activeElement);
     closeFrom(depth);
     if (returnFocus && entry.anchor?.isConnected) entry.anchor.focus({ preventScroll: true });
@@ -247,14 +276,31 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
   const onClick = (event) => {
     const closeButton = event.target?.closest?.('.dndwiki-note-preview-close');
     if (closeButton) {
-      const depth = panels.findIndex(({ element }) => element.contains(closeButton));
+      const depth = panels.findLastIndex(({ element }) => element.contains(closeButton));
       if (depth >= 0) {
         const source = panels[depth].anchor;
-        dismissedAnchor = source;
+        dismissedAnchors.set(source,pointerVersion);
+        cancelClosing();
         closeFrom(depth);
         if (source?.isConnected) source.focus({ preventScroll: true });
+        event.preventDefault();
+        event.stopImmediatePropagation();
       }
     } else if (event.target?.closest?.('a[href]')) close();
+  };
+  const onPointerDown = (event) => { rememberPointer(event);if(!inInteraction(event.target)) closeTransient(); };
+  const onFullscreenChange = () => {
+    const fullscreen = document.fullscreenElement;
+    const owner = fullscreen
+      ? panels.findLastIndex(({element}) => element.contains(fullscreen))
+      : panels.indexOf(fullscreenOwner);
+    if(owner < 0) { close(); return; }
+    // A map embedded in a preview needs that ancestor to stay connected.
+    // Remove only newer cards; removing its owner would detach the native
+    // fullscreen element and force the browser to exit fullscreen at once.
+    cancelClosing();cancelPending();
+    fullscreenOwner = fullscreen ? panels[owner] : null;
+    closeFrom(owner + 1);
   };
   const onRootMutation = () => {
     const missingIndex = panels.findIndex(({ anchor }) => anchor?.isConnected !== true);
@@ -267,13 +313,15 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
 
   document.addEventListener('pointerover', onPointerOver);
   document.addEventListener('pointerout', onPointerOut);
+  document.addEventListener('pointermove', rememberPointer, {capture:true,passive:true});
   document.addEventListener('focusin', onFocusIn);
   document.addEventListener('focusout', onFocusOut);
   document.addEventListener('keydown', onKeyDown, true);
-  document.addEventListener('click', onClick);
+  document.addEventListener('pointerdown', onPointerDown, true);
+  document.addEventListener('click', onClick, true);
   document.addEventListener('scroll', schedulePosition, true);
   browserWindow.addEventListener('hashchange', close, true);
-  document.addEventListener('fullscreenchange',close);
+  document.addEventListener('fullscreenchange',onFullscreenChange);
   browserWindow.addEventListener('resize', schedulePosition, { passive: true });
 
   return {
@@ -291,13 +339,15 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
       observer?.disconnect();
       document.removeEventListener('pointerover', onPointerOver);
       document.removeEventListener('pointerout', onPointerOut);
+      document.removeEventListener('pointermove', rememberPointer, true);
       document.removeEventListener('focusin', onFocusIn);
       document.removeEventListener('focusout', onFocusOut);
       document.removeEventListener('keydown', onKeyDown, true);
-      document.removeEventListener('click', onClick);
+      document.removeEventListener('pointerdown', onPointerDown, true);
+      document.removeEventListener('click', onClick, true);
       document.removeEventListener('scroll', schedulePosition, true);
       browserWindow.removeEventListener('hashchange', close, true);
-      document.removeEventListener('fullscreenchange',close);
+      document.removeEventListener('fullscreenchange',onFullscreenChange);
       browserWindow.removeEventListener('resize', schedulePosition);
     },
   };

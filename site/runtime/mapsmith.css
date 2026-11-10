@@ -530,7 +530,7 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-map-search.is-open>.mapsmith-search-clear { top:5px; right:auto; left:calc(42px + var(--map-search-width,260px) - 29px); z-index:2; }
 .mapsmith .mapsmith-map-search>.mapsmith-results { top:44px; left:42px; right:auto; width:var(--map-search-width,260px); min-width:0; max-width:none; max-height:var(--map-search-maxheight,230px); overflow-y:auto; }
 .mapsmith .mapsmith-map-search:not(.is-open)>:is(.mapsmith-search,.mapsmith-search-clear,.mapsmith-results) { visibility:hidden; }
-.mapsmith button.mapsmith-pin-label { display:block; min-width:0; min-height:0; height:auto; margin:0; box-shadow:none; pointer-events:auto; cursor:pointer; font:var(--pin-label-size,12px)/1.35 var(--font-interface,system-ui,sans-serif); color:var(--pin-label-text); }
+.mapsmith button.mapsmith-pin-label { display:block; min-width:0; min-height:0; height:auto; margin:0; box-shadow:none; pointer-events:auto; cursor:pointer; font:var(--pin-label-size,12px)/1.35 var(--font-interface,system-ui,sans-serif); color:var(--pin-label-text); background:var(--pin-label-background); }
 .mapsmith button.mapsmith-pin-label:is(:hover,:focus-visible) { filter:brightness(1.12); }
 .mapsmith-vignette { position:absolute; z-index:15; pointer-events:none; user-select:none; mask-repeat:no-repeat; mask-size:100% 100%; mask-composite:add; -webkit-mask-repeat:no-repeat; -webkit-mask-size:100% 100%; -webkit-mask-composite:source-over; }
 .mapsmith .mapsmith-projected-shadows { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
@@ -555,3 +555,52 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith-angle-needle { position:absolute; left:50%; top:calc(50% - 1px); width:calc(50% - 7px); height:2px; background:var(--ms-ink); transform-origin:0 50%; pointer-events:none; }
 .mapsmith-angle-needle::after { content:''; position:absolute; right:0; top:-3px; width:6px; height:6px; border-top:2px solid var(--ms-ink); border-right:2px solid var(--ms-ink); transform:rotate(45deg); }
 .mapsmith-angle-help { color:var(--ms-muted); font-size:11px; }
+
+/* Native and published notes share one intrinsic card and resize treatment. */
+.mapsmith .mapsmith-rail[data-note-card] {
+  --note-card-background:var(--background-primary,var(--ms-paper));
+  --note-card-text:var(--text-normal,var(--ms-ink));
+  --note-card-border:var(--background-modifier-border,var(--ms-edge));
+  --note-card-start:max(12px,calc(var(--map-logo-bottom,0px) + 12px));
+  position:absolute!important; top:var(--note-card-start)!important; right:0!important; bottom:12px!important;
+  display:flex; flex-direction:column; width:min(var(--mapsmith-note-card-width,440px),calc(100% - 24px)); max-width:none;
+  height:max-content; max-height:max(0px,calc(100% - var(--note-card-start) - 12px)); min-height:0; margin-block:auto;
+  overflow:hidden; z-index:60; border:1px solid var(--note-card-border); border-right:0;
+  border-radius:14px 0 0 14px; background:var(--note-card-background); color:var(--note-card-text);
+  box-shadow:0 10px 32px rgb(0 0 0 / .14); pointer-events:auto;
+}
+.mapsmith .mapsmith-rail[data-note-card] > .mapsmith-note-header {
+  display:flex; align-items:center; flex-wrap:nowrap; flex:none; gap:12px; width:100%; min-width:0; min-height:0;
+  margin:0; padding:14px 16px; border-bottom:1px solid var(--note-card-border); background:transparent;
+}
+.mapsmith .mapsmith-rail[data-note-card] .mapsmith-note-header > :is(.inline-title,.mapsmith-note-title) {
+  flex:1 1 0; min-width:0; max-width:none; overflow:visible; white-space:normal; overflow-wrap:anywhere;
+  margin:0; padding:0;
+}
+.mapsmith-note-actions { display:flex; flex:none; align-items:center; flex-wrap:nowrap; gap:5px; margin:0; padding:0; }
+.mapsmith .mapsmith-rail[data-note-card] > .mapsmith-note-content {
+  flex:0 1 auto; min-height:0; margin:0; padding:20px; overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain;
+  scrollbar-width:thin; scrollbar-gutter:stable; background:transparent; color:var(--note-card-text);
+}
+.mapsmith .mapsmith-note-card-resize {
+  position:absolute; z-index:2; top:0; bottom:0; left:0; width:10px; height:auto; min-width:0; min-height:0;
+  margin:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent; cursor:ew-resize; touch-action:none;
+}
+.mapsmith .mapsmith-note-card-resize:is(:hover,:active) { background:color-mix(in srgb,var(--note-card-text) 15%,transparent); }
+.mapsmith .mapsmith-note-card-grabber { display:none; }
+@container (max-width:700px) {
+  .mapsmith .mapsmith-rail[data-note-card] {
+    --rail-exit:translateY(100%);
+    top:auto!important; right:12px!important; bottom:0!important; left:12px; width:auto; max-width:none;
+    height:var(--mapsmith-note-card-height,max-content); max-height:max(0px,calc(100% - var(--note-card-start))); margin-block:0;
+    border-right:1px solid var(--note-card-border); border-bottom:0; border-radius:14px 14px 0 0;
+  }
+  .mapsmith .mapsmith-rail[data-note-card] > .mapsmith-note-header { padding-top:4px; }
+  .mapsmith .mapsmith-note-card-resize { display:none; }
+  .mapsmith .mapsmith-note-card-grabber {
+    position:relative; display:block; flex:0 0 26px; width:100%; height:26px; min-width:0; min-height:26px;
+    margin:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent; cursor:ns-resize; touch-action:none;
+  }
+  .mapsmith .mapsmith-note-card-grabber::after { content:''; position:absolute; width:38px; height:4px; left:calc(50% - 19px); top:10px; border-radius:99px; background:var(--text-faint); }
+  .mapsmith .mapsmith-note-card-grabber:is(:hover,:active)::after { background:var(--text-muted); }
+}
