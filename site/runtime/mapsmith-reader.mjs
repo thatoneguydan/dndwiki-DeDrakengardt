@@ -1,5 +1,6 @@
 import { pageForRoute } from './navigation.mjs';
 import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
+import { mountMapNoteCard } from './mapsmith-note-card.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
 const HOST_SELECTOR = '[data-dndwiki-mapsmith-page]';
@@ -109,6 +110,7 @@ function installStyles(document) {
 /** MapViewer owns its interaction lifecycle; dndwiki owns all content admission. */
 export function mountMapsmithReader({ root, window: browserWindow, snapshot, session,
   loadViewer = () => import('./mapsmith-viewer.mjs'),
+  notePreviews,
 } = {}) {
   const document = browserWindow?.document;
   if (root == null || document?.body == null || session == null) return { destroy() {} };
@@ -126,8 +128,8 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
     const view = visiblePage(snapshot, session.perspective, item.note);
     element.replaceChildren();
     if (view == null) return;
-    element.classList.add('dndwiki-page', 'markdown-rendered');
-    element.innerHTML = renderMarkdownToHtml(view.markdown);
+    notePreviews?.close();
+    return mountMapNoteCard(element,{title:view.title??'Location',html:renderMarkdownToHtml(view.markdown),window:browserWindow});
   };
   const start = async (owner, entry, projected) => {
     try {
@@ -145,9 +147,24 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
       };
       const viewer = new MapViewer(owner, projected.map, projected.map.image, {
         title: projected.title,
+        controlBounds:'viewport',
         tileUrl: (key) => url(assetsByKey.get(key)),
         resourceUrl: url,
         renderNote,
+        hoverNote: (item, _event, anchor) => {
+          const href = item.note.startsWith('#/page/') ? item.note : `#/page/${item.note}`;
+          notePreviews?.showForAnchor(anchor,href);
+        },
+        fullscreen: {
+          available:document.fullscreenEnabled===true&&typeof owner.requestFullscreen==='function',
+          request: async (element, expanded) => {
+            if (expanded) {
+              if (typeof element.requestFullscreen !== 'function') throw Error('Fullscreen is unavailable in this browser.');
+              await element.requestFullscreen();
+            } else if (document.fullscreenElement === element) await document.exitFullscreen();
+          },
+          active: (element) => document.fullscreenElement === element,
+        },
         noteTitle: (item) => visiblePage(snapshot, session.perspective, item.note)?.title ?? 'Location',
         openNote: (item) => {
           const view = visiblePage(snapshot, session.perspective, item.note);

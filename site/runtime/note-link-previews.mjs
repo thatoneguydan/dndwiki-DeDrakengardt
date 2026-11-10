@@ -93,10 +93,11 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     closeFrom(0);
   };
 
+  const previewHref = (anchor) => anchor?.getAttribute('data-dndwiki-note-preview-href') ?? anchor?.getAttribute('href');
   const linkInfo = (target) => {
-    const link = target?.closest?.('a[href]');
+    const link = target?.closest?.('a[href],[data-dndwiki-note-preview-href]');
     if (!link || link.closest('[data-dndwiki-page-outline]')) return null;
-    const href = link.getAttribute('href');
+    const href = previewHref(link);
     if (!/^#\/page\/[a-z0-9][a-z0-9-]{0,63}(?:#.*)?$/.test(String(href ?? ''))) return null;
     if (root.contains(link)) return { link, depth: 0 };
     // Only authored/body links nest. Header title links still navigate.
@@ -105,6 +106,8 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
         return { link, depth: i + 1 };
       }
     }
+    // A browser-fullscreen map may be hosted outside the ordinary reader root.
+    if (link.closest('.mapsmith[data-dndwiki-mapsmith-viewer-page]')) return { link, depth:0 };
     return null;
   };
   const inInteraction = (target) => target != null && (
@@ -151,7 +154,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
 
   const open = ({ link, depth }) => {
     if (destroyed || link?.isConnected !== true) return;
-    const preview = notePreviewForLink(snapshot, session.perspective, link.getAttribute('href'));
+    const preview = notePreviewForLink(snapshot, session.perspective, previewHref(link));
     if (preview == null) { closeFrom(depth); return; }
     closeFrom(depth);
 
@@ -167,7 +170,9 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
       + '</a><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></header>'
       + '<div class="dndwiki-shell" data-dndwiki-note-preview-scroll tabindex="0" aria-label="Note preview body">'
       + '<article class="dndwiki-page" data-dndwiki-note-preview-body>' + preview.html + '</article></div>';
-    document.body.append(panel);
+    // Fullscreen's top layer excludes body siblings; keep recursive cards in
+    // that same layer when their source is a fullscreen map.
+    (document.fullscreenElement?.contains(link) ? document.fullscreenElement : document.body).append(panel);
     const entry = { anchor: link, element: panel };
     panels.push(entry);
     positionOne(entry);
@@ -237,6 +242,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     closeFrom(depth);
     if (returnFocus && entry.anchor?.isConnected) entry.anchor.focus({ preventScroll: true });
     event.preventDefault();
+    event.stopImmediatePropagation();
   };
   const onClick = (event) => {
     const closeButton = event.target?.closest?.('.dndwiki-note-preview-close');
@@ -263,14 +269,21 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
   document.addEventListener('pointerout', onPointerOut);
   document.addEventListener('focusin', onFocusIn);
   document.addEventListener('focusout', onFocusOut);
-  document.addEventListener('keydown', onKeyDown);
+  document.addEventListener('keydown', onKeyDown, true);
   document.addEventListener('click', onClick);
   document.addEventListener('scroll', schedulePosition, true);
   browserWindow.addEventListener('hashchange', close, true);
+  document.addEventListener('fullscreenchange',close);
   browserWindow.addEventListener('resize', schedulePosition, { passive: true });
 
   return {
     close,
+    showForAnchor(anchor,href) {
+      if (!anchor?.isConnected || notePreviewForLink(snapshot,session.perspective,href) == null) return;
+      anchor.setAttribute('data-dndwiki-note-preview-href',href);
+      const info=linkInfo(anchor);
+      if(info)showSoon(info);
+    },
     destroy() {
       destroyed = true;
       close();
@@ -280,10 +293,11 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
       document.removeEventListener('pointerout', onPointerOut);
       document.removeEventListener('focusin', onFocusIn);
       document.removeEventListener('focusout', onFocusOut);
-      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('keydown', onKeyDown, true);
       document.removeEventListener('click', onClick);
       document.removeEventListener('scroll', schedulePosition, true);
       browserWindow.removeEventListener('hashchange', close, true);
+      document.removeEventListener('fullscreenchange',close);
       browserWindow.removeEventListener('resize', schedulePosition);
     },
   };

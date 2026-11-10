@@ -192,10 +192,10 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith-logo-corner.is-ne { top:-15px; right:-15px; cursor:nesw-resize; }
 .mapsmith-logo-corner.is-se { bottom:-15px; right:-15px; cursor:nwse-resize; }
 .mapsmith-logo-corner.is-sw { bottom:-15px; left:-15px; cursor:nesw-resize; }
-.mapsmith-tooltip { border:1px solid var(--tip-border); border-radius:7px; }
-.mapsmith-tooltip::after { content:""; position:absolute; left:calc(var(--tip-arrow-x,50%) - 4px); width:8px; height:8px; background:var(--tip-fill); border-right:1px solid var(--tip-border); border-bottom:1px solid var(--tip-border); }
-.mapsmith-tooltip[data-side="above"]::after { bottom:-5px; transform:rotate(45deg); }
-.mapsmith-tooltip[data-side="below"]::after { top:-5px; transform:rotate(225deg); }
+.mapsmith-tooltip { border:var(--tip-outline-width,1px) solid var(--tip-border); border-radius:7px; }
+.mapsmith-tooltip::after { content:""; position:absolute; box-sizing:border-box; left:calc(var(--tip-arrow-x,50%) - 4px - var(--tip-outline-width,1px)); width:calc(8px + var(--tip-outline-width,1px) * 2); height:calc(8px + var(--tip-outline-width,1px) * 2); background:var(--tip-fill); border-right:var(--tip-outline-width,1px) solid var(--tip-border); border-bottom:var(--tip-outline-width,1px) solid var(--tip-border); }
+.mapsmith-tooltip[data-side="above"]::after { bottom:calc(-4px - var(--tip-outline-width,1px)); transform:rotate(45deg); }
+.mapsmith-tooltip[data-side="below"]::after { top:calc(-4px - var(--tip-outline-width,1px)); transform:rotate(225deg); }
 .mapsmith-note-content { font-family:var(--font-text,system-ui); font-size:var(--font-text-size,16px); line-height:var(--line-height-normal,1.5); color:var(--text-normal,var(--ms-ink)); }
 .mapsmith-native .mapsmith-bar { -webkit-app-region:drag; }
 .mapsmith-native .mapsmith-bar button,.mapsmith-native .mapsmith-bar input,.mapsmith-native .mapsmith-find,.mapsmith-native .mapsmith-actions,.mapsmith-logo { -webkit-app-region:no-drag; }
@@ -261,8 +261,8 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-find.mapsmith-panel-search { margin-left:0; }
 .mapsmith .mapsmith-pin { box-shadow:none; filter:var(--pin-shadow,none); }
 .mapsmith .mapsmith-pin:hover,.mapsmith .mapsmith-pin.is-selected { filter:var(--pin-shadow,none) brightness(.94); }
-.mapsmith-pin-label { position:absolute; top:calc(100% + 6px); left:50%; transform:translateX(-50%); padding:5px 8px; border:1px solid var(--pin-label-border); border-radius:7px; background:var(--pin-label-background); color:var(--pin-label-text); font:12px/1.35 var(--font-interface,system-ui,sans-serif); white-space:nowrap; max-width:240px; pointer-events:none; user-select:none; visibility:hidden; z-index:5; }
-.mapsmith-pin-label::before { content:""; position:absolute; top:-5px; left:calc(50% - 4px); width:8px; height:8px; transform:rotate(45deg); background:var(--pin-label-background); border-top:1px solid var(--pin-label-border); border-left:1px solid var(--pin-label-border); }
+.mapsmith-pin-label { position:absolute; top:calc(100% + 6px); left:50%; transform:translateX(-50%); width:max-content; max-width:min(360px,calc(var(--canvas-width,100vw) - 32px)); padding:5px 8px; border:var(--pin-label-outline-width,1px) solid var(--pin-label-border); border-radius:7px; background:var(--pin-label-background); color:var(--pin-label-text); font:var(--pin-label-size,12px)/1.35 var(--font-interface,system-ui,sans-serif); white-space:normal; overflow-wrap:anywhere; pointer-events:none; user-select:none; visibility:hidden; z-index:5; }
+.mapsmith-pin-label::before { content:""; position:absolute; top:calc(-4px - var(--pin-label-outline-width,1px)); left:calc(50% - 4px - var(--pin-label-outline-width,1px)); width:calc(8px + var(--pin-label-outline-width,1px) * 2); height:calc(8px + var(--pin-label-outline-width,1px) * 2); transform:rotate(45deg); background:var(--pin-label-background); border-top:var(--pin-label-outline-width,1px) solid var(--pin-label-border); border-left:var(--pin-label-outline-width,1px) solid var(--pin-label-border); }
 .mapsmith.shows-pin-labels .mapsmith-pin-label,.mapsmith-pin.is-selected+.mapsmith-pin-label { visibility:visible; }
 @media (hover:hover) { .mapsmith-pin:hover+.mapsmith-pin-label { visibility:visible; } }
 .mapsmith-pin.is-pressed+.mapsmith-pin-label { visibility:hidden!important; }
@@ -481,10 +481,12 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-layer-controls>.mapsmith-switch { position:relative; flex:none; width:54px; min-width:54px; height:34px; min-height:34px; padding:0; border-radius:8px; background:color-mix(in srgb,var(--ms-edge) 12%,var(--ms-paper)); }
 .mapsmith .mapsmith-layer-controls>.mapsmith-switch[aria-checked="true"] { background:var(--ms-sage); }
 .mapsmith .mapsmith-zoom.is-compact { display:grid; grid-template-columns:repeat(2,34px); width:85px; min-width:85px; }
-.mapsmith .mapsmith-zoom.is-compact>.mapsmith-layers { grid-column:1; grid-row:1; }
-.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(1) { grid-column:1; grid-row:2; }
-.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(2) { grid-column:2; grid-row:2; }
-.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(3) { grid-column:1; grid-row:3; }
+.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(1) { grid-column:1; grid-row:1; }
+.mapsmith .mapsmith-zoom.is-compact>.mapsmith-layers { grid-column:2; grid-row:1; }
+.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(2) { grid-column:1; grid-row:2; }
+.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(3) { grid-column:2; grid-row:2; }
+.mapsmith .mapsmith-zoom.is-compact>button:nth-of-type(4) { grid-column:1; grid-row:3; }
+.mapsmith .mapsmith-zoom.is-compact>.mapsmith-map-search { grid-column:2; grid-row:3; }
 
 /* One row remains stable; only the editor's inner tool strip can scroll. */
 .mapsmith .mapsmith-toolbar-content { display:flex; align-items:center; justify-content:flex-end; flex-wrap:nowrap; gap:8px; height:100%; line-height:0; }
@@ -521,9 +523,30 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-bar .mapsmith-expanding-search:not(.is-open)>.mapsmith-search { visibility:hidden; }
 .mapsmith .mapsmith-bar .mapsmith-expanding-search:not(.is-open)>:is(.mapsmith-results,.mapsmith-choices) { display:none!important; }
 .mapsmith .mapsmith-zoom:has(.mapsmith-layers-frame:is(.is-open,.is-animating)) { z-index:45; }
+.mapsmith .mapsmith-zoom:has(.mapsmith-map-search.is-open) { z-index:50; }
+.mapsmith .mapsmith-zoom>.mapsmith-map-search,.mapsmith .mapsmith-zoom>.mapsmith-map-search.is-open { position:relative; inset:auto; order:0; flex:none; width:34px; min-width:34px; max-width:34px; height:34px; margin:0; pointer-events:none; }
+.mapsmith .mapsmith-map-search :is(button,input),.mapsmith .mapsmith-map-search>.mapsmith-results:not([hidden]) { pointer-events:auto; }
+.mapsmith .mapsmith-map-search.is-open>.mapsmith-search { position:absolute; inset:auto; top:0; left:42px; width:var(--map-search-width,260px); height:36px; padding:5px 34px 5px 10px!important; border:1px solid var(--ms-edge)!important; border-radius:5px; background:var(--ms-paper)!important; box-shadow:0 3px 12px #0003!important; z-index:1; }
+.mapsmith .mapsmith-map-search.is-open>.mapsmith-search-clear { top:5px; right:auto; left:calc(42px + var(--map-search-width,260px) - 29px); z-index:2; }
+.mapsmith .mapsmith-map-search>.mapsmith-results { top:44px; left:42px; right:auto; width:var(--map-search-width,260px); min-width:0; max-width:none; max-height:var(--map-search-maxheight,230px); overflow-y:auto; }
+.mapsmith .mapsmith-map-search:not(.is-open)>:is(.mapsmith-search,.mapsmith-search-clear,.mapsmith-results) { visibility:hidden; }
+.mapsmith button.mapsmith-pin-label { display:block; min-width:0; min-height:0; height:auto; margin:0; box-shadow:none; pointer-events:auto; cursor:pointer; font:var(--pin-label-size,12px)/1.35 var(--font-interface,system-ui,sans-serif); color:var(--pin-label-text); }
+.mapsmith button.mapsmith-pin-label:is(:hover,:focus-visible) { filter:brightness(1.12); }
 .mapsmith-vignette { position:absolute; z-index:15; pointer-events:none; user-select:none; mask-repeat:no-repeat; mask-size:100% 100%; mask-composite:add; -webkit-mask-repeat:no-repeat; -webkit-mask-size:100% 100%; -webkit-mask-composite:source-over; }
-.mapsmith-projected-shadows { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.mapsmith .mapsmith-projected-shadows { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
 .mapsmith-projected-shadows * { pointer-events:none; }
+.mapsmith .mapsmith-combobox.has-options-toggle>input,.mapsmith .mapsmith-field .mapsmith-combobox.has-options-toggle>input { padding-right:34px; }
+.mapsmith .mapsmith-combobox.has-value-icon>input,.mapsmith .mapsmith-field .mapsmith-combobox.has-value-icon>input { padding-left:34px; }
+.mapsmith-field-value-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); display:flex; align-items:center; pointer-events:none; color:var(--ms-ink); }
+.mapsmith-field-value-icon svg { width:18px; height:18px; }
+.mapsmith .mapsmith-combobox-toggle { position:absolute; right:3px; top:3px; bottom:3px; display:grid; place-items:center; width:28px; min-width:0; height:auto; margin:0; padding:3px; border:0; border-radius:4px; background:transparent; color:var(--ms-ink); box-shadow:none; }
+.mapsmith .mapsmith-combobox-toggle svg { width:17px; height:17px; }
+.mapsmith .mapsmith-combobox-toggle:hover,.mapsmith .mapsmith-combobox-toggle[aria-expanded="true"] { background:var(--ms-sage); }
+.mapsmith .mapsmith-combobox-toggle:active { background:var(--ms-edge); color:var(--ms-paper); }
+.mapsmith .mapsmith-sample-area.has-options-toggle>input,.mapsmith .mapsmith-field .mapsmith-combobox.mapsmith-sample-area.has-options-toggle>input { padding-right:19px; }
+.mapsmith .mapsmith-sampled-hex>.mapsmith-sample-area.has-options-toggle { flex-basis:62px; width:62px; }
+.mapsmith .mapsmith-sample-area .mapsmith-combobox-toggle { right:0; width:18px; padding:1px; }
+.mapsmith .mapsmith-sample-area .mapsmith-combobox-toggle svg { width:12px; height:12px; }
 
 .mapsmith-angle-field { display:grid; grid-template-columns:56px 76px; align-items:center; gap:12px; }
 .mapsmith-angle-dial { position:relative; width:52px; height:52px; border:1px solid var(--ms-edge); border-radius:50%; background:transparent; cursor:crosshair; touch-action:none; user-select:none; }

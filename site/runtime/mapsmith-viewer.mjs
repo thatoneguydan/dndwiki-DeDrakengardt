@@ -171855,6 +171855,10 @@ function icon(name2) {
   return svg3;
 }
 function controlIcon(name2) {
+  if (name2 === "corners-in" || name2 === "corners-out") {
+    const paths = name2 === "corners-in" ? "M152,96V48a8,8,0,0,1,13.66-5.66l48,48A8,8,0,0,1,208,104H160A8,8,0,0,1,152,96ZM96,152H48a8,8,0,0,0-5.66,13.66l48,48A8,8,0,0,0,104,208V160A8,8,0,0,0,96,152ZM99.06,40.61a8,8,0,0,0-8.72,1.73l-48,48A8,8,0,0,0,48,104H96a8,8,0,0,0,8-8V48A8,8,0,0,0,99.06,40.61ZM208,152H160a8,8,0,0,0-8,8v48a8,8,0,0,0,13.66,5.66l48-48A8,8,0,0,0,208,152Z" : "M93.66,202.34A8,8,0,0,1,88,216H48a8,8,0,0,1-8-8V168a8,8,0,0,1,13.66-5.66ZM88,40H48a8,8,0,0,0-8,8V88a8,8,0,0,0,13.66,5.66l40-40A8,8,0,0,0,88,40ZM211.06,160.61a8,8,0,0,0-8.72,1.73l-40,40A8,8,0,0,0,168,216h40a8,8,0,0,0,8-8V168A8,8,0,0,0,211.06,160.61ZM208,40H168a8,8,0,0,0-5.66,13.66l40,40A8,8,0,0,0,216,88V48A8,8,0,0,0,208,40Z";
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256" fill="currentColor" stroke="none" aria-hidden="true" focusable="false" class="icon icon-phosphor icon-phosphor-' + name2 + '-fill"><path d="' + paths + '"/></svg>';
+  }
   if (name2 === "pen-add" || name2 === "pen-delete") {
     const marks = outline[name2 === "pen-add" ? "pencil-plus" : "pencil-minus"].slice(2).map(([tag2, attrs]) => "<" + tag2 + " " + Object.entries(attrs).map(([key, value]) => key + '="' + escape(value) + '"').join(" ") + "/>").join("");
     return icon("filled/pencil").replace("</svg>", '<g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">' + marks + "</g></svg>");
@@ -171937,8 +171941,9 @@ function validateAppearance(value) {
     if (typeof c.enabled !== "boolean") throw Error("Invalid cloud visibility.");
     artwork.clouds = { enabled: c.enabled, width: number(c.width, 1, 200, "cloud width"), opacity: number(c.opacity, 0, 1, "cloud opacity") };
   }
+  const labelStyle = { ...value.labelSize !== void 0 ? { labelSize: number(value.labelSize, 8, 64, "label size") } : {}, ...value.labelOutlineWidth !== void 0 ? { labelOutlineWidth: number(value.labelOutlineWidth, 0, 12, "label outline") } : {}, ...value.tooltipOutlineWidth !== void 0 ? { tooltipOutlineWidth: number(value.tooltipOutlineWidth, 0, 12, "tooltip outline") } : {} };
   const palette = (fallback, input) => Object.fromEntries(Object.keys(fallback).map((key) => [key, color(input?.[key] ?? fallback[key])]));
-  return { background: color(value.background), ...artwork, pinColor: color(value.pinColor), pinOutlineColor: color(value.pinOutlineColor ?? d.pinOutlineColor), pinOutlineWidth: number(value.pinOutlineWidth ?? d.pinOutlineWidth, 0, 12, "pin outline"), pinSize: number(value.pinSize ?? d.pinSize, 12, 128, "pin size"), tabIcon: hasIcon(value.tabIcon) ? value.tabIcon : d.tabIcon, shadow: validateShadow(s), pinShadow: validatePinShadow(value.pinShadow ?? d.pinShadow), logo: { ...l.path ? { path: vaultPath(l.path) } : {}, aspect: number(l.aspect, 0.02, 50, "logo shape"), bounds: { left: number(b.left, 0, 1, "logo bounds"), top: number(b.top, 0, 1, "logo bounds"), right: number(b.right, 0, 1, "logo bounds"), bottom: number(b.bottom, 0, 1, "logo bounds") }, x: number(l.x, -2e3, 2e3, "logo position"), y: number(l.y, -2e3, 2e3, "logo position"), width: number(l.width, 40, 1e3, "logo size"), locked: l.locked, ...l.anchor ? { anchor: { x: number(l.anchor.x, 0, 1, "logo anchor"), y: number(l.anchor.y, 0, 1, "logo anchor"), bar: number(l.anchor.bar, 0, 2e3, "logo baseline") } } : {} }, tooltip: palette(d.tooltip, value.tooltip), toast: palette({ background: value.interface?.ink ?? d.toast.background, text: value.interface?.paper ?? d.toast.text, border: value.interface?.edge ?? d.toast.border }, value.toast), interface: palette(d.interface, value.interface), pinTooltips: value.pinTooltips ?? true, boundariesVisible: value.boundariesVisible ?? true };
+  return { background: color(value.background), ...artwork, ...labelStyle, pinColor: color(value.pinColor), pinOutlineColor: color(value.pinOutlineColor ?? d.pinOutlineColor), pinOutlineWidth: number(value.pinOutlineWidth ?? d.pinOutlineWidth, 0, 12, "pin outline"), pinSize: number(value.pinSize ?? d.pinSize, 12, 128, "pin size"), tabIcon: hasIcon(value.tabIcon) ? value.tabIcon : d.tabIcon, shadow: validateShadow(s), pinShadow: validatePinShadow(value.pinShadow ?? d.pinShadow), logo: { ...l.path ? { path: vaultPath(l.path) } : {}, aspect: number(l.aspect, 0.02, 50, "logo shape"), bounds: { left: number(b.left, 0, 1, "logo bounds"), top: number(b.top, 0, 1, "logo bounds"), right: number(b.right, 0, 1, "logo bounds"), bottom: number(b.bottom, 0, 1, "logo bounds") }, x: number(l.x, -2e3, 2e3, "logo position"), y: number(l.y, -2e3, 2e3, "logo position"), width: number(l.width, 40, 1e3, "logo size"), locked: l.locked, ...l.anchor ? { anchor: { x: number(l.anchor.x, 0, 1, "logo anchor"), y: number(l.anchor.y, 0, 1, "logo anchor"), bar: number(l.anchor.bar, 0, 2e3, "logo baseline") } } : {} }, tooltip: palette(d.tooltip, value.tooltip), toast: palette({ background: value.interface?.ink ?? d.toast.background, text: value.interface?.paper ?? d.toast.text, border: value.interface?.edge ?? d.toast.border }, value.toast), interface: palette(d.interface, value.interface), pinTooltips: value.pinTooltips ?? true, boundariesVisible: value.boundariesVisible ?? true };
 }
 function validateRegion(value) {
   if (value.curved !== void 0 && typeof value.curved !== "boolean" || value.closed !== void 0 && typeof value.closed !== "boolean") throw Error("Invalid boundary curve or drawing state.");
@@ -171988,7 +171993,7 @@ function validatePin(value) {
   const note = vaultPath(text(value.note, "note link", 1024));
   if (![value.x, value.y].every((n) => typeof n === "number" && Number.isFinite(n) && n >= 0 && n <= 1)) throw Error("Pins must be inside the image.");
   if (typeof value.locked !== "boolean") throw Error("Invalid pin lock.");
-  return { id: value.id, note, label: text(value.label, "location label"), icon: hasIcon(value.icon) ? value.icon : "map-pin", x: value.x, y: value.y, locked: value.locked, ...value.color ? { color: color(value.color) } : {}, ...value.outlineColor ? { outlineColor: color(value.outlineColor) } : {}, ...value.outlineWidth !== void 0 ? { outlineWidth: number(value.outlineWidth, 0, 12, "pin outline") } : {}, ...value.size !== void 0 ? { size: number(value.size, 12, 128, "pin size") } : {} };
+  return { id: value.id, note, label: text(value.label, "location label"), icon: hasIcon(value.icon) ? value.icon : "map-pin", x: value.x, y: value.y, locked: value.locked, ...value.color ? { color: color(value.color) } : {}, ...value.outlineColor ? { outlineColor: color(value.outlineColor) } : {}, ...value.outlineWidth !== void 0 ? { outlineWidth: number(value.outlineWidth, 0, 12, "pin outline") } : {}, ...value.size !== void 0 ? { size: number(value.size, 12, 128, "pin size") } : {}, ...value.labelSize !== void 0 ? { labelSize: number(value.labelSize, 8, 64, "label size") } : {} };
 }
 function tileKeys(image) {
   validateManifest(image);
@@ -172085,7 +172090,7 @@ function parseMap(source) {
       continue;
     }
     if (![7, 8].includes(f.length) || !/^\[\[[^\]]+\]\]$/.test(f[1]) || !f[4] || !f[5] || !["true", "false"].includes(f[6])) throw Error("A pin row is malformed.");
-    pins.push(validatePin({ id: f[0], note: f[1].slice(2, -2), label: f[2], icon: f[3], x: Number(f[4]), y: Number(f[5]), locked: f[6] === "true", ...f[7] ? { color: plainColor(f[7]) } : {}, ...header.pinStyles?.[f[0]]?.outlineColor ? { outlineColor: header.pinStyles[f[0]].outlineColor } : {}, ...header.pinStyles?.[f[0]]?.outlineWidth !== void 0 ? { outlineWidth: header.pinStyles[f[0]].outlineWidth } : {}, ...header.pinStyles?.[f[0]]?.size !== void 0 ? { size: header.pinStyles[f[0]].size } : {} }));
+    pins.push(validatePin({ id: f[0], note: f[1].slice(2, -2), label: f[2], icon: f[3], x: Number(f[4]), y: Number(f[5]), locked: f[6] === "true", ...f[7] ? { color: plainColor(f[7]) } : {}, ...header.pinStyles?.[f[0]]?.outlineColor ? { outlineColor: header.pinStyles[f[0]].outlineColor } : {}, ...header.pinStyles?.[f[0]]?.outlineWidth !== void 0 ? { outlineWidth: header.pinStyles[f[0]].outlineWidth } : {}, ...header.pinStyles?.[f[0]]?.size !== void 0 ? { size: header.pinStyles[f[0]].size } : {}, ...header.pinStyles?.[f[0]]?.labelSize !== void 0 ? { labelSize: header.pinStyles[f[0]].labelSize } : {} }));
   }
   if (header.image) {
     const expected = tileKeys(header.image), tileAssets = assets.filter((a) => a.key.startsWith("tiles/"));
@@ -172181,7 +172186,7 @@ function serializeMap(map) {
   const assets = (map.assets || []).filter((a) => !["logo", "background", "compass"].includes(a.key) && !a.key.startsWith("cloud:")).map((a) => ({ key: a.key, path: vaultPath(a.path) }));
   for (const [key, path] of [["logo", map.appearance?.logo.path], ["background", map.appearance?.backgroundImage?.path], ["compass", map.appearance?.compass?.path]]) if (path) assets.push({ key, path: vaultPath(path) });
   for (const cloud of clouds) if (cloud.path) assets.push({ key: "cloud:" + cloud.id, path: cloud.path });
-  const styles = Object.fromEntries(pins.filter((p) => p.outlineColor || p.outlineWidth !== void 0 || p.size !== void 0).map((p) => [p.id, { ...p.outlineColor ? { outlineColor: p.outlineColor } : {}, ...p.outlineWidth !== void 0 ? { outlineWidth: p.outlineWidth } : {}, ...p.size !== void 0 ? { size: p.size } : {} }]));
+  const styles = Object.fromEntries(pins.filter((p) => p.outlineColor || p.outlineWidth !== void 0 || p.size !== void 0 || p.labelSize !== void 0).map((p) => [p.id, { ...p.outlineColor ? { outlineColor: p.outlineColor } : {}, ...p.outlineWidth !== void 0 ? { outlineWidth: p.outlineWidth } : {}, ...p.size !== void 0 ? { size: p.size } : {}, ...p.labelSize !== void 0 ? { labelSize: p.labelSize } : {} }]));
   const boundaryOptions = Object.fromEntries(regions.filter((r) => r.curved !== void 0 || r.closed !== void 0 || r.titleBoxes?.length).map((r) => [r.id, { ...r.curved !== void 0 ? { curved: r.curved } : {}, ...r.closed !== void 0 ? { closed: r.closed } : {}, ...r.titleBoxes?.length ? { titleBoxes: r.titleBoxes } : {} }]));
   const header = { version: 1, id: map.id, ...map.manifest ? { manifest: map.manifest } : {}, ...map.image ? { image: map.image } : {}, ...clouds.length ? { clouds } : {}, ...map.appearance ? { appearance: validateAppearance(map.appearance) } : {}, ...Object.keys(styles).length ? { pinStyles: styles } : {}, ...Object.keys(boundaryOptions).length ? { boundaryOptions } : {}, ...map.connections?.length ? { connections: map.connections } : {}, ...map.boundaryTags ? { boundaryTags: map.boundaryTags.map(tag) } : {} };
   const row = (cells) => "| " + cells.join(" | ") + " |", table = (headers, rows) => [row(headers), row(headers.map(() => "---")), ...rows.map(row)].join("\n");
@@ -172367,10 +172372,18 @@ var Tooltips = class {
   abort = new AbortController();
   anchor;
   above = false;
+  outlineWidth = 1;
   palette = { background: "#303d35", text: "#fffef6", border: "#303d35" };
   colors(value) {
     this.palette = value;
     if (this.tip) this.style();
+  }
+  outline(width) {
+    this.outlineWidth = width;
+    if (this.tip) {
+      this.style();
+      this.update();
+    }
   }
   style() {
     if (this.tip) {
@@ -172379,13 +172392,14 @@ var Tooltips = class {
       this.tip.style.borderColor = this.palette.border;
       this.tip.style.setProperty("--tip-fill", this.palette.background);
       this.tip.style.setProperty("--tip-border", this.palette.border);
+      this.tip.style.setProperty("--tip-outline-width", this.outlineWidth + "px");
     }
   }
   show(target, text2, point, above = false) {
     if (!text2) return;
     this.hide();
     this.target = target;
-    const tip = this.tip = element("div", "mapsmith-tooltip", document.body, text2);
+    const fullscreen = document.fullscreenElement, parent = fullscreen?.contains(target) ? fullscreen : document.body, tip = this.tip = element("div", "mapsmith-tooltip", parent, text2);
     tip.setAttribute("role", "tooltip");
     this.anchor = typeof point === "function" ? point : point ? () => point : void 0;
     this.above = above;
@@ -172453,7 +172467,9 @@ var ActionToast = class {
     if (!text2) return;
     activeToast.get(this.root.ownerDocument)?.hide();
     activeToast.set(this.root.ownerDocument, this);
-    const node = this.node ??= element("div", "mapsmith-action-toast", document.body);
+    const fullscreen = this.root.ownerDocument.fullscreenElement, parent = fullscreen?.contains(this.root) ? fullscreen : this.root.ownerDocument.body;
+    const node = this.node ??= element("div", "mapsmith-action-toast", parent);
+    if (node.parentElement !== parent) parent.append(node);
     node.setAttribute("role", "status");
     node.setAttribute("aria-live", "polite");
     node.setAttribute("aria-atomic", "true");
@@ -172717,11 +172733,13 @@ var MapToolbar = class {
     const width = this.content.clientWidth, viewer = this.content.querySelector(".mapsmith-viewer-controls"), viewerWidth = viewer?.offsetWidth || 0, contentStyle = getComputedStyle(this.content), gap = parseFloat(contentStyle.columnGap) || 0, endGap = parseFloat(contentStyle.getPropertyValue("--editor-end-gap"));
     let viewerMargin = viewer ? parseFloat(getComputedStyle(viewer).marginLeft) || 0 : 0;
     const mode = this.dock?.querySelector(":scope>.mapsmith-switch"), search = viewer?.querySelector(".mapsmith-find-group>.mapsmith-expanding-search"), fullscreen = viewer?.querySelector(".mapsmith-find-group>button");
-    if (viewer && mode && search && fullscreen) {
-      const dockStyle = getComputedStyle(this.dock), findStyle = getComputedStyle(search.parentElement), viewerStyle = getComputedStyle(viewer), sum = (style, ...keys) => keys.reduce((total, key) => total + (parseFloat(style.getPropertyValue(key)) || 0), 0), desired = parseFloat(findStyle.columnGap) || 5;
-      const next = desired - gap - sum(dockStyle, "padding-right", "border-right-width") - sum(findStyle, "padding-left", "border-left-width") - sum(viewerStyle, "padding-left", "border-left-width");
-      if (Math.abs(next - viewerMargin) > 0.02) viewer.style.marginLeft = next + "px";
-      viewerMargin = next;
+    if (mode && this.dock) {
+      const dockStyle = getComputedStyle(this.dock), sum = (style, ...keys) => keys.reduce((total, key) => total + (parseFloat(style.getPropertyValue(key)) || 0), 0), desired = 5;
+      if (viewer && search && fullscreen) {
+        const findStyle = getComputedStyle(search.parentElement), viewerStyle = getComputedStyle(viewer), next = desired - gap - sum(dockStyle, "padding-right", "border-right-width") - sum(findStyle, "padding-left", "border-left-width") - sum(viewerStyle, "padding-left", "border-left-width");
+        if (Math.abs(next - viewerMargin) > 0.02) viewer.style.marginLeft = next + "px";
+        viewerMargin = next;
+      }
       const player = this.author?.querySelector(".mapsmith-player-controls");
       if (player) {
         const playerStyle = getComputedStyle(player), authorGap = parseFloat(getComputedStyle(this.author).columnGap) || 0;
@@ -172846,7 +172864,7 @@ var MapLogo = class {
         const sx = g.corner.includes("w") ? -1 : 1, sy = g.corner.includes("n") ? -1 : 1, h = b.width / b.aspect, factor = (dx * sx * b.width + dy * sy * h) / (g.scale * (b.width * b.width + h * h)), width = Math.max(40, Math.min(1e3, b.width * (1 + factor))), shown = width * g.scale, a = b.anchor ?? { x: 0.5, y: 1, bar: 64 }, reference = width;
         this.value.width = width;
         this.value.x = g.rendered.left + (sx < 0 ? g.rendered.width - shown : 0) - (reference - shown) * a.x;
-        this.value.y = g.rendered.top + (sy < 0 ? g.rendered.height - shown / b.aspect : 0) - (g.baseline - a.bar + (reference - shown) / b.aspect * a.y);
+        this.value.y = g.rendered.top + (sy < 0 ? g.rendered.height - shown / b.aspect : 0) - (reference - shown) / b.aspect * a.y;
       }
       this.draw();
       void this.save(structuredClone(this.value)).catch(this.report);
@@ -172906,7 +172924,7 @@ var MapLogo = class {
       if (g.corner && g.corner !== "anchor") {
         const west = g.corner.includes("w"), north = g.corner.includes("n"), r = this.rendered;
         this.value.x += g.rendered.left + (west ? g.rendered.width - r.width : 0) - r.left;
-        this.value.y += g.rendered.top + (north ? g.rendered.height - r.height : 0) - r.top + (this.baseline - g.baseline);
+        this.value.y += g.rendered.top + (north ? g.rendered.height - r.height : 0) - r.top;
         this.draw();
         void this.save(structuredClone(this.value)).catch(this.report);
       }
@@ -172971,10 +172989,9 @@ var MapLogo = class {
   }
   withAnchor(x, y) {
     const value = structuredClone(this.value), r = this.rendered;
-    const bar = this.value.anchor?.bar ?? 64;
-    value.anchor = { x, y, bar };
+    value.anchor = { x, y, bar: 0 };
     value.x = r.left - (value.width - r.width) * x;
-    value.y = r.top - (this.baseline - bar) - (value.width / value.aspect - r.height) * y;
+    value.y = r.top - (value.width / value.aspect - r.height) * y;
     return value;
   }
   withWidth(width) {
@@ -172986,17 +173003,17 @@ var MapLogo = class {
   }
   compactBounds() {
     const l = this.value, visible = l.bounds.right - l.bounds.left, a = l.anchor ?? { x: 0.5, y: 1, bar: 64 }, pad = this.shadowInsets(), scale = visible > 0 ? Math.min(1, LOGO_COMPACT_WIDTH / (l.width * visible)) : 1;
-    return { left: l.x + l.width * a.x + l.width * scale * (l.bounds.left - a.x) - pad.left, right: l.x + l.width * a.x + l.width * scale * (l.bounds.right - a.x) + pad.right, top: l.y + this.baseline - a.bar + l.width / l.aspect * a.y + l.width / l.aspect * scale * (l.bounds.top - a.y) - pad.top, bottom: l.y + this.baseline - a.bar + l.width / l.aspect * a.y + l.width / l.aspect * scale * (l.bounds.bottom - a.y) + pad.bottom };
+    return { left: l.x + l.width * a.x + l.width * scale * (l.bounds.left - a.x) - pad.left, right: l.x + l.width * a.x + l.width * scale * (l.bounds.right - a.x) + pad.right, top: l.y + l.width / l.aspect * a.y + l.width / l.aspect * scale * (l.bounds.top - a.y) - pad.top, bottom: l.y + l.width / l.aspect * a.y + l.width / l.aspect * scale * (l.bounds.bottom - a.y) + pad.bottom };
   }
   draw() {
     const l = this.value, visible = l.bounds.right - l.bounds.left, a = l.anchor ?? { x: 0.5, y: 1, bar: 64 }, pad = this.shadowInsets(), floor = visible > 0 ? Math.min(1, LOGO_COMPACT_WIDTH / (l.width * visible)) : 1;
     let scale = visible > 0 ? Math.max(floor, Math.min(1, (this.availableWidth - pad.left - pad.right) / (l.width * visible))) : 1;
-    const painted = (s) => ({ left: l.x + l.width * a.x + l.width * s * (l.bounds.left - a.x) - pad.left, right: l.x + l.width * a.x + l.width * s * (l.bounds.right - a.x) + pad.right, top: l.y + this.baseline - a.bar + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.top - a.y) - pad.top, bottom: l.y + this.baseline - a.bar + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.bottom - a.y) + pad.bottom }), b = painted(scale);
+    const painted = (s) => ({ left: l.x + l.width * a.x + l.width * s * (l.bounds.left - a.x) - pad.left, right: l.x + l.width * a.x + l.width * s * (l.bounds.right - a.x) + pad.right, top: l.y + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.top - a.y) - pad.top, bottom: l.y + l.width / l.aspect * a.y + l.width / l.aspect * s * (l.bounds.bottom - a.y) + pad.bottom }), b = painted(scale);
     if (!this.gesture && b.top < this.baseline && b.bottom > 0 && b.right > this.availableRight) {
       const edge = l.width * (l.bounds.right - a.x), rightScale = (this.availableRight - l.x - l.width * a.x - pad.right) / edge;
       if (edge > 0 && rightScale >= 0) scale = Math.min(scale, rightScale);
       else {
-        const rise = l.width / l.aspect * (a.y - l.bounds.top), below = (l.y - a.bar + l.width / l.aspect * a.y - LOGO_CONTROL_GAP - pad.top) / rise;
+        const rise = l.width / l.aspect * (a.y - l.bounds.top), below = (l.y + l.width / l.aspect * a.y - LOGO_CONTROL_GAP - pad.top) / rise;
         if (rise > 0 && below >= 0) scale = Math.min(scale, below);
       }
     }
@@ -173011,7 +173028,7 @@ var MapLogo = class {
     this.preferred = shifted(this.gesture?.scale ?? scale);
     const avoid = this.avoidance, at = shifted(scale);
     if (!this.gesture && avoid && at.left < avoid.right && at.right > avoid.left && at.top < avoid.bottom && at.bottom > avoid.top) {
-      const x = l.x + l.width * a.x, y = l.y + this.baseline - a.bar + l.width / l.aspect * a.y + fallbackY, candidates = [];
+      const x = l.x + l.width * a.x, y = l.y + l.width / l.aspect * a.y + fallbackY, candidates = [];
       for (const [origin, edge, coefficient, less] of [[x - pad.left, avoid.right, l.width * (l.bounds.left - a.x), false], [x + pad.right, avoid.left, l.width * (l.bounds.right - a.x), true], [y - pad.top, avoid.bottom, l.width / l.aspect * (l.bounds.top - a.y), false], [y + pad.bottom, avoid.top, l.width / l.aspect * (l.bounds.bottom - a.y), true]]) {
         if (less ? coefficient > 0 && origin <= edge : coefficient < 0 && origin >= edge) candidates.push(Math.max(0, Math.min(scale, (edge - origin) / coefficient)));
       }
@@ -173029,7 +173046,7 @@ var MapLogo = class {
     this.node.classList.toggle("has-responsive-offset", !!(this.fallbackY || this.fallbackX));
     this.scale = this.gesture?.scale ?? Math.max(floor, scale);
     const width = l.width * this.scale, height = width / l.aspect, reference = l.width;
-    this.rendered = { left: l.x + (reference - width) * a.x + this.fallbackX, top: l.y + (this.gesture?.baseline ?? this.baseline) - a.bar + (reference / l.aspect - height) * a.y + this.fallbackY, width, height };
+    this.rendered = { left: l.x + (reference - width) * a.x + this.fallbackX, top: l.y + (reference / l.aspect - height) * a.y + this.fallbackY, width, height };
     Object.assign(this.node.style, { left: this.rendered.left + "px", top: this.rendered.top + "px", width: width + "px", height: height + "px" });
     this.anchor.style.left = a.x * 100 + "%";
     this.anchor.style.top = a.y * 100 + "%";
@@ -173075,8 +173092,7 @@ var MapLogo = class {
     return b.top < this.baseline && b.bottom > 0;
   }
   layoutBounds() {
-    const b = this.visualBounds(), shift = (this.gesture?.baseline ?? this.baseline) - (this.value.anchor?.bar ?? 64);
-    return { ...b, top: b.top - shift, bottom: b.bottom - shift };
+    return this.visualBounds();
   }
   destroy() {
     this.cancelDrag();
@@ -174656,11 +174672,16 @@ function pinTipOffset(layout, rotation = 0, flipped = false) {
   return { x: u * c - y * s, y: u * s + y * c };
 }
 function pinProjection(size, value, rotation = 0, flipped = false) {
-  const angle = value.direction * Math.PI / 180, turn = rotation * Math.PI / 180, u = Math.cos(angle) * (flipped ? -1 : 1), v = Math.sin(angle);
-  const dx = u * Math.cos(turn) - v * Math.sin(turn), dy = u * Math.sin(turn) + v * Math.cos(turn), nx = dy, ny = -dx;
+  const angle = value.direction * Math.PI / 180, turn = rotation * Math.PI / 180, u = Math.cos(angle), v = Math.sin(angle);
+  const rotate = (x2, y2) => {
+    if (flipped) x2 = -x2;
+    return { x: x2 * Math.cos(turn) - y2 * Math.sin(turn), y: x2 * Math.sin(turn) + y2 * Math.cos(turn) };
+  }, direction = rotate(u, v);
+  const dx = direction.x, dy = direction.y;
   const length = value.length * size / 34, softness = value.softness * size / 34;
-  const height = 0.5 + 1 / root2 - corner * (root2 - 1), wide = size * 0.72 / root2, long = length / (root2 * height);
-  const a = nx * wide - dx * long, b = ny * wide - dy * long, c = -nx * wide - dx * long, d = -ny * wide - dy * long;
+  const height = 0.5 + 1 / root2 - corner * (root2 - 1), width = size * 0.72, depth = size * 0.16;
+  const along = u * width, across = Math.hypot(v * width, u * depth), lateral = rotate(u * along + v * across, v * along - u * across), long = length / (root2 * height);
+  const a = lateral.x / root2 - dx * long, b = lateral.y / root2 - dy * long, c = -lateral.x / root2 - dx * long, d = -lateral.y / root2 - dy * long;
   const matrix = [a, b, c, d, -(a + c) * PIN_TIP.x, -(b + d) * PIN_TIP.y];
   const points = [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 0 }, { x: 1, y: 1 }].map((p) => mapMatrix(matrix, p)), pad = Math.max(1, softness * 4);
   const x = Math.min(...points.map((p) => p.x)) - pad, y = Math.min(...points.map((p) => p.y)) - pad;
@@ -174697,7 +174718,6 @@ var ProjectedPinShadows = class {
   id = "mapsmith-projected-" + ++sequence;
   value;
   active = false;
-  geometry = "";
   set(value, visible) {
     this.value = value;
     this.active = visible && value.enabled && value.mode === "projected";
@@ -174715,6 +174735,10 @@ var ProjectedPinShadows = class {
     for (const [id, node] of nodes) {
       const item = this.items.get(id);
       if (item) {
+        if (item.node !== node) {
+          item.layout = void 0;
+          item.geometry = void 0;
+        }
         item.node = node;
         continue;
       }
@@ -174731,12 +174755,10 @@ var ProjectedPinShadows = class {
     const size = parseFloat(getComputedStyle(node).width);
     if (!size || !width || !height) return;
     item.layout = { size, width, height, left: node.offsetLeft, top: node.offsetTop };
-    this.geometry = "";
   }
   transform(rotation = 0, flipped = false) {
     if (!this.active || !this.value) return;
-    const projection = { ...DEFAULT_PIN_PROJECTION, ...this.value.projection }, angle = flipped ? -rotation : rotation, key = JSON.stringify([projection, angle, flipped]), changed = key !== this.geometry;
-    if (changed) this.geometry = key;
+    const projection = { ...DEFAULT_PIN_PROJECTION, ...this.value.projection }, angle = flipped ? -rotation : rotation;
     const sizes = /* @__PURE__ */ new Set();
     for (const item of this.items.values()) {
       const layout = item.layout, wrapper = item.node.parentElement;
@@ -174752,7 +174774,9 @@ var ProjectedPinShadows = class {
         continue;
       }
       attribute2(item.group, "transform", `translate(${x} ${y})`);
-      if (changed || !item.path.hasAttribute("transform")) {
+      const key = JSON.stringify([projection, angle, flipped, layout.size]);
+      if (item.geometry !== key) {
+        item.geometry = key;
         const geometry = pinProjection(layout.size, projection, angle, flipped);
         attribute2(item.path, "transform", `matrix(${geometry.matrix.join(" ")})`);
         let effect = this.filters.get(layout.size);
@@ -174792,7 +174816,6 @@ var ExpandingSearch = class {
     this.root = element("div", "mapsmith-find mapsmith-expanding-search", parent);
     this.toggle = button(this.root, label, glyph, () => this.expand(), tips);
     this.toggle.classList.add("mapsmith-search-toggle");
-    this.toggle.dataset.feedback = "Search opened";
     this.input = element("input", "mapsmith-search", this.root);
     this.input.type = "search";
     this.input.placeholder = placeholder;
@@ -174809,7 +174832,6 @@ var ExpandingSearch = class {
     }, tips);
     this.clear.classList.add("mapsmith-search-clear");
     this.clear.hidden = true;
-    this.clear.dataset.feedback = "Search cleared";
     this.input.addEventListener("input", () => {
       this.sync();
       this.change();
@@ -174845,7 +174867,7 @@ var ExpandingSearch = class {
   expand(focus = true) {
     this.layout();
     if (this.floating) {
-      const owner = this.root.closest(".mapsmith-bar");
+      const owner = this.root.closest(".mapsmith");
       if (owner) {
         const previous = floatingSearches.get(owner);
         if (previous && previous !== this) previous.collapse();
@@ -174873,7 +174895,7 @@ var ExpandingSearch = class {
     this.clear.hidden = true;
     if (this.floating) for (const panel of this.root.querySelectorAll(":scope>.mapsmith-results,:scope>.mapsmith-choices")) panel.hidden = true;
     this.input.blur();
-    const owner = this.root.closest(".mapsmith-bar");
+    const owner = this.root.closest(".mapsmith");
     if (owner && floatingSearches.get(owner) === this) floatingSearches.delete(owner);
   }
   sync() {
@@ -174888,7 +174910,7 @@ var ExpandingSearch = class {
     this.collapse();
   }
   destroy() {
-    const owner = this.root.closest(".mapsmith-bar");
+    const owner = this.root.closest(".mapsmith");
     if (owner && floatingSearches.get(owner) === this) floatingSearches.delete(owner);
     this.abort.abort();
     this.root.remove();
@@ -175187,7 +175209,6 @@ var MapLayers = class {
   constructor(parent, tips, backings) {
     this.backings = backings;
     this.root = element("div", "mapsmith-layers", parent);
-    parent.prepend(this.root);
     this.frame = element("div", "mapsmith-layers-frame", this.root);
     this.backings?.track("layers", this.frame);
     this.button = button(this.frame, "Map layers", "stack-2", () => this.setOpen(!this.open), tips);
@@ -175212,12 +175233,19 @@ var MapLayers = class {
       const next = event.relatedTarget;
       if (next && !this.root.contains(next)) this.close();
       else if (!next) queueMicrotask(() => {
-        if (this.open && !this.root.contains(document.activeElement)) this.close();
+        if (this.open && !this.pointerInside && !this.root.contains(document.activeElement)) this.close();
       });
     }, { signal: this.abort.signal });
     document.addEventListener("pointerdown", (event) => {
-      if (this.open && !event.composedPath().includes(this.root)) this.close();
+      this.pointerInside = event.composedPath().includes(this.root);
+      if (this.open && !this.pointerInside) this.close();
     }, { capture: true, signal: this.abort.signal });
+    document.addEventListener("focusin", (event) => {
+      if (this.open && !this.root.contains(event.target)) this.close();
+    }, { signal: this.abort.signal });
+    for (const type of ["pointerup", "pointercancel"]) document.addEventListener(type, () => {
+      this.pointerInside = false;
+    }, { signal: this.abort.signal });
     document.addEventListener("keydown", (event) => {
       if (this.open && event.key === "Escape") {
         event.preventDefault();
@@ -175239,6 +175267,7 @@ var MapLayers = class {
   animation;
   abort = new AbortController();
   disposed = false;
+  pointerInside = false;
   get isOpen() {
     return this.open;
   }
@@ -175404,6 +175433,31 @@ var SearchField = class {
     this.list.id = this.input.id + "-list";
     this.list.setAttribute("role", "listbox");
     this.input.setAttribute("aria-controls", this.list.id);
+    if (!control) {
+      this.valueIcon = element("span", "mapsmith-field-value-icon", this.root);
+      this.valueIcon.setAttribute("aria-hidden", "true");
+      if (!custom) {
+        const toggle2 = this.toggle = element("button", "mapsmith-combobox-toggle", this.root);
+        toggle2.type = "button";
+        toggle2.innerHTML = icon("chevron-down");
+        name(toggle2, "Show options for " + label, this.root);
+        toggle2.setAttribute("aria-controls", this.list.id);
+        toggle2.onpointerdown = (event) => event.preventDefault();
+        toggle2.onclick = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (this.open) this.hide();
+          else {
+            this.query = "";
+            this.active = 0;
+            this.input.focus({ preventScroll: true });
+            this.open = true;
+            this.draw();
+          }
+        };
+        this.root.classList.add("has-options-toggle");
+      }
+    }
     this.sync();
     this.input.onfocus = () => {
       this.query = "";
@@ -175473,6 +175527,8 @@ var SearchField = class {
   root;
   input;
   list;
+  valueIcon;
+  toggle;
   options = [];
   active = 0;
   open = false;
@@ -175482,13 +175538,25 @@ var SearchField = class {
     this.open = false;
     this.list.hidden = true;
     this.input.setAttribute("aria-expanded", "false");
+    this.toggle?.setAttribute("aria-expanded", "false");
     this.input.removeAttribute("aria-activedescendant");
   }
   pick(value) {
     this.choose(value);
     this.hide();
     this.input.value = this.choices().find((c) => c.value === value)?.label || value;
+    this.syncValueIcon(value);
     this.control?.sync?.();
+  }
+  syncValueIcon(value = this.value()) {
+    if (!this.valueIcon) return;
+    const glyph = this.choices().find((choice) => choice.value === value)?.icon;
+    this.root.classList.toggle("has-value-icon", !!glyph);
+    this.valueIcon.hidden = !glyph;
+    if (glyph && this.valueIcon.dataset.icon !== glyph) {
+      this.valueIcon.innerHTML = icon(glyph);
+      this.valueIcon.dataset.icon = glyph;
+    }
   }
   draw() {
     const needle = this.query.toLocaleLowerCase().trim();
@@ -175499,6 +175567,7 @@ var SearchField = class {
     this.list.replaceChildren();
     this.list.hidden = !this.open;
     this.input.setAttribute("aria-expanded", String(this.open));
+    this.toggle?.setAttribute("aria-expanded", String(this.open));
     for (const [i, choice] of this.options.entries()) {
       const row = element("button", "mapsmith-choice", this.list);
       row.type = "button";
@@ -175547,6 +175616,7 @@ var SearchField = class {
   }
   sync(force = false) {
     if (force || !this.control && document.activeElement !== this.input) this.input.value = this.choices().find((c) => c.value === this.value())?.label || this.value();
+    this.syncValueIcon();
     this.control?.sync?.();
     if (!this.open) this.hide();
   }
@@ -175996,7 +176066,6 @@ var SettingsFilter = class _SettingsFilter {
       this.input.focus({ preventScroll: true });
     }, tips);
     this.clear.classList.add("mapsmith-search-clear");
-    this.clear.dataset.feedback = "Search cleared";
     this.clear.hidden = true;
     this.empty = element("p", "mapsmith-settings-empty", this.root, "No matching settings.");
     this.empty.setAttribute("role", "status");
@@ -176205,6 +176274,8 @@ function mapSettings(viewer, body) {
   form.number("Default cloud opacity (%)", () => 100 * (get().clouds?.opacity ?? DEFAULT_CLOUDS.opacity), (v) => change("cloud-opacity", (a) => a.clouds = { ...DEFAULT_CLOUDS, ...a.clouds, opacity: v / 100 }), 0, 100, 1);
   form.heading("Pins");
   form.number("Default pin size", () => get().pinSize, (v) => change("pin-size", (a) => a.pinSize = v), 12, 128, 1);
+  form.number("Default map label size", () => get().labelSize ?? 12, (v) => change("label-size", (a) => a.labelSize = v), 8, 64, 1);
+  form.number("Label outline thickness", () => get().labelOutlineWidth ?? 1, (v) => change("label-outline-width", (a) => a.labelOutlineWidth = v), 0, 12, 0.1);
   form.color("Default pin color", () => get().pinColor, (v) => change("pin-color", (a) => a.pinColor = v));
   form.color("Pin outline color", () => get().pinOutlineColor, (v) => change("outline-color", (a) => a.pinOutlineColor = v));
   form.number("Pin outline thickness", () => get().pinOutlineWidth, (v) => change("outline-width", (a) => a.pinOutlineWidth = v), 0, 12, 0.1);
@@ -176250,6 +176321,7 @@ function mapSettings(viewer, body) {
   }));
   form.search("Map tab icon", () => get().tabIcon, () => PIN_ICONS, (v) => change("tab-icon", (a) => a.tabIcon = v));
   form.heading("Tooltip colors");
+  form.number("Tooltip outline thickness", () => get().tooltipOutlineWidth ?? 1, (v) => change("tooltip-outline-width", (a) => a.tooltipOutlineWidth = v), 0, 12, 0.1);
   for (const [key, label] of Object.entries({ background: "Tooltip background", text: "Tooltip text", border: "Tooltip border" })) form.color(label, () => get().tooltip[key], (v) => change("tooltip-" + key, (a) => {
     a.tooltip[key] = v;
   }));
@@ -176419,6 +176491,11 @@ function pinPanel(viewer, body, id, draft) {
     else pin.size = appearance(viewer.map).pinSize;
   }));
   form.number("Pin size", () => get().size ?? appearance(viewer.map).pinSize, (value) => update("size", (pin) => pin.size = value), 12, 128, 1);
+  form.toggle("Use map label size", () => get().labelSize === void 0, (inherit) => update("label-size", (pin) => {
+    if (inherit) delete pin.labelSize;
+    else pin.labelSize = appearance(viewer.map).labelSize ?? 12;
+  }));
+  form.number("Label size", () => get().labelSize ?? appearance(viewer.map).labelSize ?? 12, (value) => update("label-size", (pin) => pin.labelSize = value), 8, 64, 1);
   form.toggle("Lock pin position", () => get().locked, (value) => update("locked", (pin) => pin.locked = value));
   action(viewer, body, "Remove pin", "minus", () => {
     viewer.editMap((map) => ({ ...map, pins: map.pins.filter((p) => p.id !== id) }));
@@ -176699,8 +176776,6 @@ var MapViewer = class {
         this.publishButton.setAttribute("aria-busy", "false");
       }
     }
-    const viewing = element("nav", "mapsmith-viewer-controls", actions);
-    name(viewing, "Map viewer controls");
     const layerControls = element("div", "");
     this.pinsButton = toggle(layerControls, "Pins", "map-pin", () => this.togglePins(), this.tips);
     this.tooltipButton = toggle(layerControls, "Location labels", "message-2-off", () => this.togglePinTooltips(), this.tips);
@@ -176710,11 +176785,7 @@ var MapViewer = class {
       this.cloudsVisible = !(this.cloudsVisible ?? appearance(this.map).clouds?.enabled ?? DEFAULT_CLOUDS.enabled);
       this.applyAppearance();
     }, this.tips);
-    const findGroup = element("div", "mapsmith-find-group", viewing);
-    findGroup.append(this.find);
-    this.fullscreenButton = button(findGroup, "Expand map", "maximize", () => this.setExpanded(!this.expanded), this.tips);
-    setPressed(this.fullscreenButton, false, "Expand map", "maximize", "Enter fullscreen");
-    this.fullscreenButton.dataset.feedback = "Fullscreen disabled";
+    this.find.classList.add("mapsmith-map-search");
     const main = element("div", "mapsmith-main", this.root);
     this.canvas = element("div", "mapsmith-canvas", main);
     this.canvas.tabIndex = 0;
@@ -176730,15 +176801,20 @@ var MapViewer = class {
     }, { signal: this.abort.signal });
     this.surface = new MapSurface(this.canvas, bar, this.rail, () => this.syncSurface(), () => this.artwork?.backgroundShape() || { width: this.manifest.width, height: this.manifest.height });
     this.zoomControls = element("nav", "mapsmith-zoom", this.root);
-    name(this.zoomControls, "Map zoom");
-    button(this.zoomControls, "Zoom in", "plus", () => this.rubber.zoom(1.5), this.tips).dataset.feedback = "Zoomed in";
-    button(this.zoomControls, "Zoom out", "minus", () => this.rubber.zoom(1 / 1.5), this.tips).dataset.feedback = "Zoomed out";
-    const fit = button(this.zoomControls, "Fit map", "focus", () => {
-      fit.dataset.feedback = this.fitMap() ? "Previous view restored" : "Map fitted";
-    }, this.tips);
-    fit.dataset.feedback = "Map fitted";
+    name(this.zoomControls, "Map controls");
+    this.fullscreenButton = button(this.zoomControls, "Expand map", "maximize", () => void this.setExpanded(!this.expanded), this.tips);
+    setPressed(this.fullscreenButton, false, "Expand map", "maximize", "Enter fullscreen");
+    this.fullscreenButton.disabled = host.fullscreen?.available === false;
     this.layers = new MapLayers(this.zoomControls, this.tips, this.backings);
     this.layers.controls.append(...layerControls.children);
+    button(this.zoomControls, "Zoom in", "plus", () => this.rubber.zoom(1.5), this.tips);
+    button(this.zoomControls, "Zoom out", "minus", () => this.rubber.zoom(1 / 1.5), this.tips);
+    this.fitButton = button(this.zoomControls, "Fit map", "corners-in", () => this.fitMap(), this.tips);
+    this.syncFitButton();
+    this.zoomControls.append(this.find);
+    if (host.fullscreen) document.addEventListener("fullscreenchange", () => {
+      if (!this.destroyed) this.applyExpanded(host.fullscreen.active(this.root));
+    }, { signal: this.abort.signal });
     this.desktopBudget = host.desktop === true || host.desktop === void 0 && !matchMedia("(pointer:coarse)").matches && innerWidth > 760;
     const budget = viewerTileBudget(manifest.tileSize, this.desktopBudget);
     const webgl = { unpackWithPremultipliedAlpha: true };
@@ -176804,7 +176880,10 @@ var MapViewer = class {
     this.toolbar = new MapToolbar(this.root, bar, toolbarContent, logoSlot, (width, right) => this.logo.setAvailableWidth(width, right), this.backings);
     this.toolbar.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader());
     const cameraChanged = () => {
-      if (this.lastFit && !this.sameCamera(this.camera(), this.lastFit.camera)) this.lastFit = void 0;
+      if (this.lastFit && !this.sameCamera(this.camera(), this.lastFit.camera)) {
+        this.lastFit = void 0;
+        this.syncFitButton();
+      }
     };
     this.osd.addHandler("pan", cameraChanged);
     this.osd.addHandler("zoom", cameraChanged);
@@ -176939,7 +177018,7 @@ var MapViewer = class {
     });
   }
   prepareHover(node) {
-    this.hoverAnchor = node.closest(".mapsmith-pin,.mapsmith-title-box") || void 0;
+    this.hoverAnchor = node.closest(".mapsmith-pin,.mapsmith-pin-label,.mapsmith-title-box") || void 0;
   }
   pendingHover(popover, target) {
     this.pendingPopover = popover;
@@ -176961,6 +177040,7 @@ var MapViewer = class {
   results;
   zoomControls;
   fullscreenButton;
+  fitButton;
   lockButton;
   boundaryButton;
   settingsButton;
@@ -177264,14 +177344,23 @@ var MapViewer = class {
     if (last && this.sameCamera(this.camera(), last.camera)) {
       this.osd.viewport.zoomTo(last.previous.zoom);
       this.osd.viewport.panTo(new import_openseadragon4.default.Point(last.previous.x, last.previous.y));
+      this.syncFitButton();
       return true;
     }
     this.setFit("contain");
     this.lastFit = { camera: this.camera(), previous };
+    this.syncFitButton();
     return false;
+  }
+  syncFitButton() {
+    if (!this.fitButton) return;
+    const restore = !!this.lastFit;
+    setPressed(this.fitButton, restore, "Fit map", restore ? "corners-out" : "corners-in", restore ? "Restore previous view" : "Fit entire map");
+    this.fitButton.dataset.fitAction = restore ? "restore" : "fit";
   }
   setFit(mode, immediate = false) {
     this.lastFit = void 0;
+    this.syncFitButton();
     const zoom = fitZooms(this.manifest, this.surface.bounds())[mode];
     this.osd.viewport.panTo(this.osd.viewport.imageToViewportCoordinates(this.manifest.width / 2, this.manifest.height / 2), immediate);
     this.osd.viewport.zoomTo(zoom, void 0, immediate);
@@ -177313,22 +177402,29 @@ var MapViewer = class {
     if (!this.zoomControls) return;
     const root = this.root.getBoundingClientRect(), scale = root.width / this.root.offsetWidth || 1, top = this.bar.getBoundingClientRect().height / scale, area2 = this.mapArea;
     const left = (area2.left - root.left) / scale - this.root.clientLeft, right = (area2.right - root.left) / scale - this.root.clientLeft, bottom = (area2.bottom - root.top) / scale - this.root.clientTop;
+    const viewportControls = this.host.controlBounds === "viewport", controlRight = viewportControls ? (Math.min(innerWidth, root.right) - root.left) / scale - this.root.clientLeft : right, controlBottom = viewportControls ? (Math.min(innerHeight, root.bottom) - root.top) / scale - this.root.clientTop : bottom;
     this.logo?.setBaseline(top);
     this.root.style.setProperty("--map-bar-height", top + "px");
     this.root.style.setProperty("--canvas-width", this.root.clientWidth + "px");
-    this.zoomControls.classList.toggle("is-compact", bottom - top < 195);
-    const gap = LOGO_CONTROL_GAP, height = this.zoomControls.offsetHeight || 163, width = this.zoomControls.offsetWidth || 46, logo = this.logo?.preferredBounds(), logoBottom = logo && logo.left < 16 + width + gap && logo.right > 16 - gap ? Math.max(0, logo.bottom) : 0, limit = bottom - height - 8, desired = Math.max(top, logoBottom) + gap, ceiling = Math.max(top + 8, limit), dockTop = Math.min(desired, ceiling), forced = desired > ceiling;
+    this.zoomControls.classList.toggle("is-compact", controlBottom - top < 275);
+    const gap = LOGO_CONTROL_GAP, height = this.zoomControls.offsetHeight || 163, width = this.zoomControls.offsetWidth || 46, logo = this.logo?.preferredBounds(), logoBottom = logo && logo.left < 16 + width + gap && logo.right > 16 - gap ? Math.max(0, logo.bottom) : 0, limit = controlBottom - height - 8, desired = Math.max(top, logoBottom) + gap, ceiling = Math.max(top + 8, limit), dockTop = Math.min(desired, ceiling), forced = desired > ceiling;
     let dockLeft = forced && this.root.clientWidth < 240 ? 8 : 16;
     if (forced && logo && logo.left < dockLeft + width + gap && logo.right > dockLeft - gap && logo.top < dockTop + height + gap && logo.bottom > dockTop - gap) {
-      const after = logo.right + gap, before = logo.left - gap - width, maximum = right - Math.max(width, 105) - 8;
+      const after = logo.right + gap, before = logo.left - gap - width, maximum = controlRight - Math.max(width, 105) - 8;
       if (after <= maximum) dockLeft = Math.max(dockLeft, after);
       else if (before >= dockLeft) dockLeft = before;
     }
     this.zoomControls.style.top = dockTop + "px";
     this.zoomControls.style.left = dockLeft + "px";
     this.logo?.setAvoidance(forced ? { left: dockLeft - gap, top: dockTop - gap, right: dockLeft + width + gap, bottom: dockTop + height + gap } : void 0);
-    this.layers?.updateBounds(area2.right - 8 * scale);
-    this.vignette?.setFrame({ left, top: (area2.top - root.top) / scale - this.root.clientTop, width: area2.width / scale, height: area2.height / scale });
+    this.layers?.updateBounds((viewportControls ? Math.min(innerWidth, root.right) : area2.right) - 8 * scale);
+    const vignetteTop = 0;
+    this.vignette?.setFrame({ left, top: vignetteTop, width: area2.width / scale, height: Math.max(0, bottom - vignetteTop) });
+    if (this.find) {
+      const searchRight = (this.find.getBoundingClientRect().right - root.left) / scale;
+      this.find.style.setProperty("--map-search-width", Math.max(100, Math.min(280, controlRight - searchRight - 16)) + "px");
+      this.find.style.setProperty("--map-search-maxheight", Math.max(80, controlBottom - (this.find.getBoundingClientRect().top - root.top) / scale - 48) + "px");
+    }
     if (this.logo) this.toolbar?.setLogo(this.logo.layoutBounds(), this.logo.bottomClearance(), this.logo.overlapsHeader(), this.logo.compactBounds());
     this.backings?.sync();
   }
@@ -177355,6 +177451,8 @@ var MapViewer = class {
       this.tips.colors(value.tooltip);
       for (const [key, color2] of Object.entries(value.tooltip)) this.root.style.setProperty("--pin-label-" + key, color2);
     }
+    if (before?.tooltipOutlineWidth !== value.tooltipOutlineWidth || !before) this.tips.outline(value.tooltipOutlineWidth ?? 1);
+    if (before?.labelOutlineWidth !== value.labelOutlineWidth || !before) this.root.style.setProperty("--pin-label-outline-width", (value.labelOutlineWidth ?? 1) + "px");
     if (!same(before?.toast, value.toast)) this.toast.colors(value.toast);
     this.logo?.set(value.logo);
     this.logo?.setShadow(value.logoShadow);
@@ -177424,6 +177522,7 @@ var MapViewer = class {
     node.style.setProperty("--pin-ink", luma > 135 ? "#243d2a" : "#ffffff");
     node.style.setProperty("--pin-outline", pin.outlineColor || a.pinOutlineColor);
     node.style.setProperty("--pin-outline-width", (pin.outlineWidth ?? a.pinOutlineWidth) + "px");
+    node.parentElement?.style.setProperty("--pin-label-size", (pin.labelSize ?? a.labelSize ?? 12) + "px");
   }
   searchResults() {
     this.results.replaceChildren();
@@ -177437,7 +177536,6 @@ var MapViewer = class {
         if (this.selected === item.id) isBoundary ? this.frameRegion(item) : this.framePin(item.id);
       }, this.tips, true);
       row.classList.add("mapsmith-result");
-      row.dataset.feedback = "Location opened";
     }
     if (!items.length) element("p", "mapsmith-no-results", this.results, "No places found.");
     this.results.hidden = false;
@@ -177485,7 +177583,7 @@ var MapViewer = class {
       this.syncHistory();
       return;
     }
-    const before = this.map, skin = this.appliedAppearance, value = appearance(map), changed = this.imageToken !== imageIdentity(map), pins = JSON.stringify(before.pins) !== JSON.stringify(map.pins) || skin?.pinColor !== value.pinColor || skin?.pinOutlineColor !== value.pinOutlineColor || skin?.pinOutlineWidth !== value.pinOutlineWidth || skin?.pinSize !== value.pinSize, boundaries = JSON.stringify([before.regions, before.connections]) !== JSON.stringify([map.regions, map.connections]);
+    const before = this.map, skin = this.appliedAppearance, value = appearance(map), changed = this.imageToken !== imageIdentity(map), pins = JSON.stringify(before.pins) !== JSON.stringify(map.pins) || skin?.pinColor !== value.pinColor || skin?.pinOutlineColor !== value.pinOutlineColor || skin?.pinOutlineWidth !== value.pinOutlineWidth || skin?.pinSize !== value.pinSize || skin?.labelSize !== value.labelSize, boundaries = JSON.stringify([before.regions, before.connections]) !== JSON.stringify([map.regions, map.connections]);
     this.map = map;
     if (changed && map.image) {
       this.setManifest(map, map.image);
@@ -177581,10 +177679,27 @@ var MapViewer = class {
       this.stylePin(node, pin);
       let label = node.parentElement.querySelector(":scope>.mapsmith-pin-label");
       if (!label) {
-        label = element("div", "mapsmith-pin-label", node.parentElement);
-        label.setAttribute("role", "tooltip");
+        label = element("button", "mapsmith-pin-label", node.parentElement);
+        label.type = "button";
+        label.dataset.labelPinId = pin.id;
+        label.onclick = (event) => {
+          event.stopPropagation();
+          node.click();
+        };
+        label.oncontextmenu = (event) => {
+          if (!this.editing) return;
+          event.preventDefault();
+          event.stopPropagation();
+          this.showPinEditor(pin.id);
+        };
+        label.onpointerdown = (event) => event.stopPropagation();
+        label.onpointerenter = (event) => {
+          const current = this.map.pins.find((p) => p.id === pin.id);
+          if (current && event.pointerType !== "touch" && !this.regions.editing && !this.sampler.active && (current.locked || !this.editing) && !this.dragging) this.host.hoverNote?.(current, event, label);
+        };
       }
       if (label.textContent !== pin.label) label.textContent = pin.label;
+      label.setAttribute("aria-label", "Open " + pin.label);
       if (this.dragging !== pin.id) this.osd.updateOverlay(node, this.position(pin));
     }
     this.projectedPins.sync(this.nodes);
@@ -177595,7 +177710,6 @@ var MapViewer = class {
     const node = element("button", "mapsmith-pin");
     node.type = "button";
     node.dataset.pinId = id;
-    node.dataset.feedback = "Location opened";
     const current = () => this.map.pins.find((p) => p.id === id);
     let press, moved = false, suppress = false;
     node.onpointerenter = (e) => {
@@ -177703,7 +177817,6 @@ var MapViewer = class {
       element(kind === "note" ? "div" : "h2", kind === "note" ? "inline-title" : "", header, title);
       const close = button(header, "Close panel", "close", () => this.closeNote(), this.tips);
       close.classList.add("mapsmith-panel-close");
-      close.dataset.feedback = "Panel closed";
       body = element("div", kind === "note" ? "mapsmith-note-content" : "mapsmith-editor-content", this.rail);
       if (build) this.panel = build(body);
     });
@@ -177892,18 +178005,31 @@ var MapViewer = class {
       if (this.expanded) activeViewer.set(document, this);
     }
   }
-  setExpanded(expanded) {
+  async setExpanded(expanded) {
+    if (this.host.fullscreen) {
+      try {
+        await this.host.fullscreen.request(this.root, expanded);
+        if (!this.destroyed) this.applyExpanded(this.host.fullscreen.active(this.root));
+      } catch (error) {
+        this.report(error);
+      }
+      return;
+    }
+    this.applyExpanded(expanded);
+  }
+  applyExpanded(expanded) {
     if (expanded !== this.expanded) this.preserveLayout();
     if (expanded === this.expanded) return;
     this.tips.hide();
+    this.toast.hide();
     this.expanded = expanded;
-    if (expanded) {
+    if (expanded && !this.host.fullscreen) {
       const placeholder = element("div", "mapsmith-expanded-placeholder");
       placeholder.style.height = this.root.getBoundingClientRect().height + "px";
       this.root.before(placeholder);
       this.home = { parent: this.root.parentNode, placeholder };
       document.body.append(this.root);
-    } else if (this.home) {
+    } else if (!expanded && this.home) {
       const { parent, placeholder } = this.home;
       parent.insertBefore(this.root, placeholder.parentNode === parent ? placeholder : null);
       placeholder.remove();
@@ -177911,7 +178037,6 @@ var MapViewer = class {
     }
     this.root.classList.toggle("mapsmith-expanded", expanded);
     setPressed(this.fullscreenButton, expanded, expanded ? "Return to note" : "Expand map", "maximize", expanded ? "Exit fullscreen" : "Enter fullscreen");
-    this.fullscreenButton.dataset.feedback = expanded ? "Fullscreen enabled" : "Fullscreen disabled";
     this.syncSurface(true);
     this.setActive(this.active);
     this.host.onExpansionChange?.();

@@ -73,6 +73,7 @@
     "site/dndwiki.generated.json",
     "site/dndwiki.snapshot.json",
     "site/index.html",
+    "site/runtime/mapsmith-note-card.mjs",
     "site/runtime/mapsmith-notices.txt",
     "site/runtime/mapsmith-provenance.json",
     "site/runtime/mapsmith-reader.mjs",

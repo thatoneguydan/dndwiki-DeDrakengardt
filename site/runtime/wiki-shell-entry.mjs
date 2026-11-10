@@ -560,7 +560,7 @@ export async function mountModernWikiChrome({root,window:browserWindow,fetchImpl
   const shellFetch=async(url,options)=>url===snapshotUrl?{ok:true,json:async()=>structuredClone(snapshot)}:fetchImpl(url,options);
   const mounted=await mountWikiShell({root,window:browserWindow,fetchImpl:shellFetch,snapshotUrl});
   const previews=mountNoteLinkPreviews({root,window:browserWindow,snapshot,session:mounted.session});
-  const maps=mountMapsmithReader({root,window:browserWindow,snapshot,session:mounted.session});
+  const maps=mountMapsmithReader({root,window:browserWindow,snapshot,session:mounted.session,notePreviews:previews});
 
   const resetScroll=()=>{ if(typeof browserWindow.scrollTo==='function') browserWindow.scrollTo({top:0,left:0,behavior:'auto'}); };
   browserWindow.addEventListener?.('hashchange',resetScroll,true);
