@@ -9922,16 +9922,16 @@ var require_openseadragon = __commonJS({
            * @param {String} [url]
            */
           supports: function(data, url) {
-            let ns3;
+            let ns2;
             if (data.Image) {
-              ns3 = data.Image.xmlns;
+              ns2 = data.Image.xmlns;
             } else if (data.documentElement) {
               if ("Image" === data.documentElement.localName || "Image" === data.documentElement.tagName) {
-                ns3 = data.documentElement.namespaceURI;
+                ns2 = data.documentElement.namespaceURI;
               }
             }
-            ns3 = (ns3 || "").toLowerCase();
-            return ns3.indexOf("schemas.microsoft.com/deepzoom/2008") !== -1 || ns3.indexOf("schemas.microsoft.com/deepzoom/2009") !== -1;
+            ns2 = (ns2 || "").toLowerCase();
+            return ns2.indexOf("schemas.microsoft.com/deepzoom/2008") !== -1 || ns2.indexOf("schemas.microsoft.com/deepzoom/2009") !== -1;
           },
           /**
            *
@@ -10024,7 +10024,7 @@ var require_openseadragon = __commonJS({
         }
         const root = xmlDoc.documentElement;
         const rootName = root.localName || root.tagName;
-        const ns3 = xmlDoc.documentElement.namespaceURI;
+        const ns2 = xmlDoc.documentElement.namespaceURI;
         let configuration = null;
         const displayRects = [];
         let dispRectNodes;
@@ -10036,7 +10036,7 @@ var require_openseadragon = __commonJS({
           try {
             sizeNode = root.getElementsByTagName("Size")[0];
             if (sizeNode === void 0) {
-              sizeNode = root.getElementsByTagNameNS(ns3, "Size")[0];
+              sizeNode = root.getElementsByTagNameNS(ns2, "Size")[0];
             }
             configuration = {
               Image: {
@@ -10059,13 +10059,13 @@ var require_openseadragon = __commonJS({
             }
             dispRectNodes = root.getElementsByTagName("DisplayRect");
             if (dispRectNodes === void 0) {
-              dispRectNodes = root.getElementsByTagNameNS(ns3, "DisplayRect")[0];
+              dispRectNodes = root.getElementsByTagNameNS(ns2, "DisplayRect")[0];
             }
             for (i = 0; i < dispRectNodes.length; i++) {
               dispRectNode = dispRectNodes[i];
               rectNode = dispRectNode.getElementsByTagName("Rect")[0];
               if (rectNode === void 0) {
-                rectNode = dispRectNode.getElementsByTagNameNS(ns3, "Rect")[0];
+                rectNode = dispRectNode.getElementsByTagNameNS(ns2, "Rect")[0];
               }
               displayRects.push({
                 Rect: {
@@ -171862,6 +171862,22 @@ function controlIcon(name2) {
   return icon(Object.hasOwn(aliases, name2) ? aliases[name2] : name2);
 }
 
+// src/limits.ts
+var MAX_MAP_PIXELS = 1e9;
+var MAX_MAP_EDGE = 131072;
+var MAX_MAP_TILES = 8192;
+var MAX_MAP_ASSETS = MAX_MAP_TILES + 35;
+function pyramidTileCount(width, height, tileSize = 512) {
+  if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height) || width < 1 || height < 1 || width > MAX_MAP_EDGE || height > MAX_MAP_EDGE || ![512, 1024].includes(tileSize)) return Infinity;
+  const maxLevel = Math.ceil(Math.log2(Math.max(width, height)));
+  let count = 0;
+  for (let level = 0; level <= maxLevel; level++) {
+    const factor = 2 ** (maxLevel - level);
+    count += Math.ceil(Math.ceil(width / factor) / tileSize) * Math.ceil(Math.ceil(height / factor) / tileSize);
+  }
+  return count;
+}
+
 // src/model.ts
 var DEFAULT_CLOUDS = { enabled: true, width: 30, opacity: 1 };
 var DEFAULT_COMPASS = { aspect: 1, corner: "top-right", width: 12, margin: 16 };
@@ -171975,6 +171991,7 @@ function validatePin(value) {
   return { id: value.id, note, label: text(value.label, "location label"), icon: hasIcon(value.icon) ? value.icon : "map-pin", x: value.x, y: value.y, locked: value.locked, ...value.color ? { color: color(value.color) } : {}, ...value.outlineColor ? { outlineColor: color(value.outlineColor) } : {}, ...value.outlineWidth !== void 0 ? { outlineWidth: number(value.outlineWidth, 0, 12, "pin outline") } : {}, ...value.size !== void 0 ? { size: number(value.size, 12, 128, "pin size") } : {} };
 }
 function tileKeys(image) {
+  validateManifest(image);
   const keys = [];
   for (let level = 0; level <= image.maxLevel; level++) {
     const size = levelSize(image.width, image.height, level, image.maxLevel);
@@ -171982,8 +171999,15 @@ function tileKeys(image) {
   }
   return keys;
 }
+var imageIdentities = /* @__PURE__ */ new WeakMap();
 function imageIdentity(map) {
-  return map.image ? JSON.stringify([map.image, map.assets?.filter((a) => a.key.startsWith("tiles/"))]) : map.manifest || "";
+  if (!map.image) return map.manifest || "";
+  const image = JSON.stringify(map.image), assets = map.assets;
+  const cached = assets && Object.isFrozen(assets) ? imageIdentities.get(assets) : void 0;
+  if (cached?.image === image) return cached.value;
+  const value = JSON.stringify([map.image, assets?.filter((a) => a.key.startsWith("tiles/"))]);
+  if (assets && Object.isFrozen(assets)) imageIdentities.set(assets, { image, value });
+  return value;
 }
 function validateTopology(regions, connections) {
   const nodes = /* @__PURE__ */ new Map();
@@ -172022,7 +172046,7 @@ function parseMap(source) {
   if (header.version !== 1 || !idPattern.test(header.id) || !header.image && typeof header.manifest !== "string") throw Error("Unsupported map definition.");
   if (header.manifest) vaultPath(header.manifest);
   if (header.image) validateManifest(header.image);
-  const pins = [], regions = [], assets = [], ids = /* @__PURE__ */ new Set();
+  const pins = [], regions = [], assets = [], ids = /* @__PURE__ */ new Set(), assetKeys = /* @__PURE__ */ new Set();
   let kind = "pins";
   for (const line of managed.replace(code[0], "").split(/\r?\n/)) {
     if (/^\| (Region|Boundary) ID /.test(line)) {
@@ -172041,7 +172065,9 @@ function parseMap(source) {
     const f = line.split("|").slice(1, -1).map((v) => v.trim());
     if (kind === "assets") {
       if (f.length !== 2 || !/^!\[\[[^\]]+\]\]$/.test(f[1]) || !(["logo", "background", "compass"].includes(f[0]) || /^cloud:[a-zA-Z0-9_-]{1,96}$/.test(f[0]) || /^tiles\/\d+\/\d+_\d+\.(png|jpg)$/.test(f[0]))) throw Error("A map image reference is malformed.");
-      if (assets.some((a) => a.key === f[0])) throw Error("Duplicate map image reference.");
+      if (assetKeys.has(f[0])) throw Error("Duplicate map image reference.");
+      assetKeys.add(f[0]);
+      if (assetKeys.size > MAX_MAP_ASSETS) throw Error("Too many map image pieces.");
       assets.push({ key: f[0], path: vaultPath(f[1].slice(3, -2)) });
       continue;
     }
@@ -172063,7 +172089,7 @@ function parseMap(source) {
   }
   if (header.image) {
     const expected = tileKeys(header.image), tileAssets = assets.filter((a) => a.key.startsWith("tiles/"));
-    if (tileAssets.length !== expected.length || expected.some((key) => !tileAssets.some((a) => a.key === key))) throw Error("The map note is missing image pieces.");
+    if (tileAssets.length !== expected.length || expected.some((key) => !assetKeys.has(key))) throw Error("The map note is missing image pieces.");
   }
   if (assets.some((a) => ["logo", "background", "compass"].includes(a.key))) header.appearance ??= structuredClone(DEFAULT_APPEARANCE);
   const logo = assets.find((a) => a.key === "logo");
@@ -172086,6 +172112,65 @@ function parseMap(source) {
   validateTopology(regions, connections);
   return { version: 1, id: header.id, ...header.manifest ? { manifest: header.manifest } : {}, ...header.image ? { image: validateManifest(header.image) } : {}, pins, ...header.clouds?.length ? { clouds: validateClouds(header.clouds) } : {}, ...regions.length ? { regions } : {}, ...assets.length ? { assets } : {}, ...connections.length ? { connections } : {}, ...header.boundaryTags ? { boundaryTags: header.boundaryTags.map(tag) } : {}, ...header.appearance ? { appearance: validateAppearance(header.appearance) } : {} };
 }
+var resourceTables = /* @__PURE__ */ new WeakMap();
+var frozenImages = /* @__PURE__ */ new WeakMap();
+var resourceKeys = /* @__PURE__ */ new WeakMap();
+var auxiliaryKey = (key) => ["logo", "background", "compass"].includes(key) || key.startsWith("cloud:");
+function normalizeMap(value) {
+  if (!value.image && !value.manifest) throw Error("Invalid map identity or image.");
+  const image = value.image && validateManifest(value.image), input = value.assets || [];
+  if (input.length > MAX_MAP_ASSETS) throw Error("Too many map image pieces.");
+  const metadata = { ...value, image: void 0, manifest: value.manifest || "Maps/mapsmith-inline-image", assets: [] };
+  const normalized = parseMap(serializeMap(metadata));
+  if (!value.manifest) delete normalized.manifest;
+  if (image) {
+    let frozen = Object.isFrozen(image) ? frozenImages.get(image) : void 0;
+    if (!frozen) {
+      frozen = Object.freeze(structuredClone(image));
+      frozenImages.set(frozen, frozen);
+    }
+    normalized.image = frozen;
+  }
+  const auxiliary = normalized.assets || [], auxiliaryText = JSON.stringify(auxiliary), imageText = image ? JSON.stringify(image) : "";
+  let table = resourceTables.get(input);
+  if (!table || table.image !== imageText) {
+    const keys = /* @__PURE__ */ new Set(), tiles = [];
+    for (const asset of input) {
+      if (!asset || typeof asset.key !== "string" || !(["logo", "background", "compass"].includes(asset.key) || /^cloud:[a-zA-Z0-9_-]{1,96}$/.test(asset.key) || /^tiles\/\d+\/\d+_\d+\.(png|jpg)$/.test(asset.key))) throw Error("A map image reference is malformed.");
+      if (keys.has(asset.key)) throw Error("Duplicate map image reference.");
+      keys.add(asset.key);
+      const path = vaultPath(asset.path);
+      if (!auxiliaryKey(asset.key)) tiles.push(Object.freeze({ key: asset.key, path }));
+    }
+    if (image) {
+      const expected = tileKeys(image);
+      if (tiles.length !== expected.length || expected.some((key) => !keys.has(key))) throw Error("The map note is missing image pieces.");
+    }
+    table = { tiles: Object.freeze(tiles), image: imageText, auxiliary: "", assets: [] };
+  }
+  if (table.auxiliary !== auxiliaryText || !table.assets.length && input.length) {
+    const assets = Object.freeze([...table.tiles, ...auxiliary.map((asset) => Object.freeze(asset))]);
+    table = { ...table, auxiliary: auxiliaryText, assets };
+  }
+  resourceTables.set(table.assets, table);
+  if (table.assets.length) normalized.assets = table.assets;
+  else delete normalized.assets;
+  return normalized;
+}
+function cloneMap(value) {
+  const { assets, image, ...editable } = value;
+  return { ...structuredClone(editable), ...assets ? { assets: Object.isFrozen(assets) ? assets : structuredClone(assets) } : {}, ...image ? { image: Object.isFrozen(image) ? image : structuredClone(image) } : {} };
+}
+function mapHistoryKey(value) {
+  const { assets, image, ...editable } = value;
+  let resources = assets && Object.isFrozen(assets) ? resourceKeys.get(assets) : void 0;
+  if (resources === void 0) {
+    resources = JSON.stringify(assets);
+    if (assets && Object.isFrozen(assets)) resourceKeys.set(assets, resources);
+  }
+  return JSON.stringify(editable) + "\n" + JSON.stringify(image) + "\n" + resources;
+}
+var MAP_HISTORY_STRATEGY = { clone: cloneMap, key: mapHistoryKey };
 function serializeMap(map) {
   if (!idPattern.test(map.id) || !map.image && !map.manifest) throw Error("Invalid map identity or image.");
   if (map.manifest) vaultPath(map.manifest);
@@ -172108,12 +172193,18 @@ function serializeMap(map) {
   return sections.join("\n");
 }
 function validateManifest(value) {
-  if (value.version !== 1 || !Number.isInteger(value.width) || !Number.isInteger(value.height) || value.width < 1 || value.height < 1 || value.width * value.height > 1e8 || value.tileSize !== 512 || value.overlap !== 1 || !["jpg", "png"].includes(value.format) || value.maxLevel !== Math.ceil(Math.log2(Math.max(value.width, value.height)))) throw Error("Invalid tile manifest.");
+  if (value.version !== 1 || !Number.isSafeInteger(value.width) || !Number.isSafeInteger(value.height) || value.width < 1 || value.height < 1 || value.width > MAX_MAP_EDGE || value.height > MAX_MAP_EDGE || value.width * value.height > MAX_MAP_PIXELS || ![512, 1024].includes(value.tileSize) || value.overlap !== 1 || !["jpg", "png"].includes(value.format) || value.maxLevel !== Math.ceil(Math.log2(Math.max(value.width, value.height))) || pyramidTileCount(value.width, value.height, value.tileSize) > MAX_MAP_TILES) throw Error("Invalid tile manifest.");
   return value;
 }
 function levelSize(width, height, level, maxLevel = Math.ceil(Math.log2(Math.max(width, height)))) {
   const factor = 2 ** (maxLevel - level);
   return { width: Math.ceil(width / factor), height: Math.ceil(height / factor) };
+}
+
+// src/viewer-budget.ts
+function viewerTileBudget(tileSize, desktop) {
+  const decodedBytes = (tileSize + 2) ** 2 * 4, cacheBytes = (desktop ? 128 : 48) * 1024 * 1024;
+  return { maxImageCacheCount: Math.max(8, Math.floor(cacheBytes / decodedBytes)), imageLoaderLimit: desktop ? 6 : 3, maxTilesPerFrame: desktop ? 2 : 1, minPixelRatio: 1, loadDestinationTilesOnAnimation: false };
 }
 
 // src/geometry.ts
@@ -172507,12 +172598,18 @@ var MapToolbar = class {
       const next = desired - gap - sum(dockStyle, "padding-right", "border-right-width") - sum(findStyle, "padding-left", "border-left-width") - sum(viewerStyle, "padding-left", "border-left-width");
       if (Math.abs(next - viewerMargin) > 0.02) viewer.style.marginLeft = next + "px";
       viewerMargin = next;
+      const player = this.author?.querySelector(".mapsmith-player-controls");
+      if (player) {
+        const playerStyle = getComputedStyle(player), authorGap = parseFloat(getComputedStyle(this.author).columnGap) || 0;
+        const closedMargin = desired - authorGap - sum(playerStyle, "padding-right", "border-right-width") - sum(dockStyle, "padding-left", "border-left-width"), value = closedMargin + "px";
+        if (player.style.getPropertyValue("--player-closed-margin") !== value) player.style.setProperty("--player-closed-margin", value);
+      }
     }
     const viewerFootprint = viewerWidth + viewerMargin;
     this.editorEndGap = Number.isFinite(endGap) ? endGap : 5;
     let intrinsic = 0, fixed = viewerFootprint + (this.author ? gap : 0), editorHeight = 0, firstTool = 0, modeAdjustment = 0;
     if (this.shell && this.editor && this.dock && this.author) {
-      const player = this.author.querySelector(".mapsmith-player-controls"), playerWidth = player?.offsetWidth || 0, style = getComputedStyle(this.dock), sum = (...keys) => keys.reduce((total, key) => total + (parseFloat(style.getPropertyValue(key)) || 0), 0), modeWidth = parseFloat(style.getPropertyValue("--mode-open-width")) || 54, modeHeight = parseFloat(style.getPropertyValue("--mode-open-height")) || 34;
+      const player = this.author.querySelector(".mapsmith-player-controls"), playerStyle = player ? getComputedStyle(player) : void 0, playerWidth = (player?.offsetWidth || 0) + (parseFloat(playerStyle?.marginLeft || "") || 0) + (parseFloat(playerStyle?.marginRight || "") || 0), style = getComputedStyle(this.dock), sum = (...keys) => keys.reduce((total, key) => total + (parseFloat(style.getPropertyValue(key)) || 0), 0), modeWidth = parseFloat(style.getPropertyValue("--mode-open-width")) || 54, modeHeight = parseFloat(style.getPropertyValue("--mode-open-height")) || 34;
       const mode2 = this.dock.querySelector(":scope>.mapsmith-switch");
       modeAdjustment = mode2 ? (parseFloat(getComputedStyle(mode2).width) || modeWidth) - modeWidth : 0;
       const tools = [...this.editor.children].filter((node) => getComputedStyle(node).position !== "absolute" && node.offsetWidth > 0), toolsStyle = getComputedStyle(this.editor), toolsGap = parseFloat(toolsStyle.columnGap) || 0;
@@ -172541,7 +172638,7 @@ var MapToolbar = class {
       this.author.style.width = Math.max(0, shown + fixed + modeAdjustment - viewerFootprint - gap - this.editorEndGap) + "px";
     }
     const popoverWidth = Math.max(120, Math.min(280, this.root.clientWidth - 24));
-    const editorGuide = this.dock;
+    const editorGuide = this.editorOpen || this.editorAnimation ? this.dock : mode;
     const controls = [...editorGuide ? [editorGuide] : [], ...this.content.querySelectorAll(".mapsmith-player-controls .mapsmith-search-toggle,.mapsmith-viewer-controls .mapsmith-search-toggle,.mapsmith-viewer-controls .mapsmith-find-group>button")];
     const edges = controls.filter((node) => node.offsetWidth > 0).map((node) => (node.getBoundingClientRect().left - rootBox.left) / scale - this.root.clientLeft);
     const right = (edges.length ? Math.min(...edges) : this.content.offsetLeft + width) - LOGO_CONTROL_GAP;
@@ -174146,16 +174243,17 @@ var MapHistory = class {
   normalize;
   report;
   error;
+  clone;
+  key;
   constructor(value, persist, normalize2 = (v) => structuredClone(v), report = () => {
-  }, saved = value) {
+  }, saved = value, strategy) {
     this.persist = persist;
     this.normalize = normalize2;
     this.report = report;
+    this.clone = strategy?.clone ?? ((v) => structuredClone(v));
+    this.key = strategy?.key ?? ((v) => JSON.stringify(v));
     this.value = this.normalize(value);
     this.saved = this.normalize(saved);
-  }
-  key(value) {
-    return JSON.stringify(value);
   }
   get canUndo() {
     return !!this.past.length;
@@ -174187,14 +174285,14 @@ var MapHistory = class {
     }
   }
   edit(update, group) {
-    const next = this.normalize(update(structuredClone(this.value)));
+    const next = this.normalize(update(this.clone(this.value)));
     if (this.key(next) === this.key(this.value)) return;
     const now = Date.now(), last = this.past.at(-1);
     if (group && this.group === group && last?.group === group && (this.heldGroup === group || now - last.at < 1500)) {
-      last.after = structuredClone(next);
+      last.after = this.clone(next);
       last.at = now;
     } else {
-      this.past.push({ before: structuredClone(this.value), after: structuredClone(next), group, at: now });
+      this.past.push({ before: this.clone(this.value), after: this.clone(next), group, at: now });
       if (this.past.length > 150) this.past.shift();
     }
     this.group = group;
@@ -174207,7 +174305,7 @@ var MapHistory = class {
     if (!item) return;
     this.endGroup();
     this.future.push(item);
-    this.value = structuredClone(item.before);
+    this.value = this.clone(item.before);
     this.changed();
   }
   redo() {
@@ -174215,7 +174313,7 @@ var MapHistory = class {
     if (!item) return;
     this.endGroup();
     this.past.push(item);
-    this.value = structuredClone(item.after);
+    this.value = this.clone(item.after);
     this.changed();
   }
   changed() {
@@ -174238,7 +174336,7 @@ var MapHistory = class {
       return;
     }
     this.value = next;
-    this.saved = structuredClone(next);
+    this.saved = this.clone(next);
     this.past = [];
     this.future = [];
     this.error = void 0;
@@ -174247,7 +174345,7 @@ var MapHistory = class {
   reload() {
     if (!this.external) return;
     this.value = this.external;
-    this.saved = structuredClone(this.external);
+    this.saved = this.clone(this.external);
     this.external = void 0;
     this.error = void 0;
     this.past = [];
@@ -174268,7 +174366,7 @@ var MapHistory = class {
     if (!this.dirty) return;
     this.writing = (async () => {
       while (this.dirty) {
-        const next = structuredClone(this.value), before = structuredClone(this.saved);
+        const next = this.clone(this.value), before = this.clone(this.saved);
         this.inFlight = this.key(next);
         try {
           await this.persist(next, before);
@@ -174905,8 +175003,6 @@ var MapRail = class {
 };
 
 // src/control-backings.ts
-var ns2 = "http://www.w3.org/2000/svg";
-var sequence2 = 0;
 var MapControlBackings = class {
   constructor(root) {
     this.root = root;
@@ -174926,28 +175022,6 @@ var MapControlBackings = class {
     surface.dataset.kind = kind;
     surface.classList.toggle("is-open", open);
     const item = { frame, surface };
-    if (kind === "editor") {
-      const svg3 = document.createElementNS(ns2, "svg");
-      svg3.style.cssText = "position:absolute;width:0;height:0;pointer-events:none";
-      svg3.setAttribute("aria-hidden", "true");
-      surface.append(svg3);
-      const defs = document.createElementNS(ns2, "defs");
-      svg3.append(defs);
-      const mask = item.mask = document.createElementNS(ns2, "mask");
-      mask.id = "mapsmith-editor-mask-" + ++sequence2;
-      mask.setAttribute("maskUnits", "userSpaceOnUse");
-      mask.setAttribute("maskContentUnits", "userSpaceOnUse");
-      mask.style.maskType = "alpha";
-      defs.append(mask);
-      const extension = item.extension = document.createElementNS(ns2, "rect"), mode = item.mode = document.createElementNS(ns2, "rect");
-      extension.classList.add("mapsmith-backing-extension");
-      mode.classList.add("mapsmith-backing-mode");
-      for (const rect of [extension, mode]) {
-        rect.setAttribute("fill", "white");
-        mask.append(rect);
-      }
-      surface.style.mask = "url(#" + mask.id + ")";
-    }
     this.items.set(kind, item);
     this.resize.observe(frame);
     this.sync();
@@ -174963,22 +175037,13 @@ var MapControlBackings = class {
     if (this.disposed) return;
     if (this.root.firstElementChild !== this.node) this.root.prepend(this.node);
     const root = this.root.getBoundingClientRect(), origin = this.node.getBoundingClientRect(), width = parseFloat(getComputedStyle(this.root).width), scale = root.width / (width || this.root.offsetWidth) || 1;
-    for (const { frame, surface, mask, extension, mode } of this.items.values()) {
+    for (const { frame, surface } of this.items.values()) {
       const box = frame.getBoundingClientRect();
       surface.hidden = !box.width || !box.height;
       const next = { left: (box.left - origin.left) / scale, top: (box.top - origin.top) / scale, width: box.width / scale, height: box.height / scale };
       for (const [key, value] of Object.entries(next)) {
         const property = key, css = value + "px";
         if (surface.style[property] !== css) surface.style[property] = css;
-      }
-      if (mask && extension && mode) {
-        const face = frame.querySelector(":scope>.mapsmith-switch"), style = getComputedStyle(frame), modeWidth = Math.min(next.width, (face ? parseFloat(getComputedStyle(face).width) : 54) + ["padding-left", "padding-right", "border-left-width", "border-right-width"].reduce((sum, key) => sum + (parseFloat(style.getPropertyValue(key)) || 0), 0)), start = next.width - modeWidth;
-        const attributes = (node, values) => {
-          for (const [key, value] of Object.entries(values)) if (node.getAttribute(key) !== String(value)) node.setAttribute(key, String(value));
-        };
-        attributes(mask, { x: 0, y: 0, width: next.width, height: next.height });
-        attributes(mode, { x: start, y: 0, width: modeWidth, height: next.height });
-        attributes(extension, { x: 0, y: 0, width: Math.max(0, start + 1), height: next.height });
       }
     }
   }
@@ -176380,14 +176445,22 @@ function imageImport(parent, run, replace = false) {
   input.type = "file";
   input.accept = "image/png,image/jpeg,image/webp";
   input.setAttribute("aria-label", "Map image");
+  const prepared = element("input", "mapsmith-file-input", parent);
+  prepared.type = "file";
+  prepared.hidden = true;
+  prepared.setAttribute("aria-label", "Prepared map");
+  const choosePrepared = element("button", "mapsmith-button", parent, "Choose prepared map");
+  choosePrepared.type = "button";
+  choosePrepared.onclick = () => prepared.click();
+  element("p", "mapsmith-form-status", parent).textContent = "Choose a PNG, JPEG, WebP or prepared .mapsmith-tiles map. Prepared maps support up to one billion pixels on computers and mobile devices.";
   const status = element("p", "mapsmith-form-status", parent), progress = element("progress", "", parent);
   progress.max = 100;
   progress.hidden = true;
-  input.onchange = async () => {
-    const file = input.files?.[0];
+  const submit = async (file) => {
     if (!file || running) return;
     running = true;
-    input.disabled = true;
+    input.disabled = prepared.disabled = choosePrepared.disabled = true;
+    progress.value = 0;
     progress.hidden = false;
     status.textContent = "Preparing map\u2026";
     try {
@@ -176400,8 +176473,18 @@ function imageImport(parent, run, replace = false) {
       status.textContent = error instanceof Error ? error.message : String(error);
     } finally {
       running = false;
-      input.disabled = false;
+      input.disabled = prepared.disabled = choosePrepared.disabled = false;
     }
+  };
+  input.onchange = () => void submit(input.files?.[0]);
+  prepared.onchange = () => {
+    const file = prepared.files?.[0];
+    if (file && !file.name.toLowerCase().endsWith(".mapsmith-tiles")) {
+      status.textContent = "Choose a prepared .mapsmith-tiles map.";
+      prepared.value = "";
+      return;
+    }
+    void submit(file);
   };
   form.sync();
   return { sync: () => {
@@ -176420,7 +176503,7 @@ var MapViewer = class {
     this.host = host;
     validateManifest(manifest);
     this.owner = parent;
-    this.history = host.history || (host.saveMap ? new MapHistory(map, host.saveMap, (v) => parseMap(serializeMap(v)), (message) => host.report?.(message)) : void 0);
+    this.history = host.history || (host.saveMap ? new MapHistory(map, host.saveMap, normalizeMap, (message) => host.report?.(message), map, MAP_HISTORY_STRATEGY) : void 0);
     if (this.history) this.map = this.history.value;
     this.imageToken = imageIdentity(this.map);
     this.root = element("section", "mapsmith" + (embedded ? " mapsmith-embedded" : "") + (host.desktop ? " mapsmith-native" : ""), parent);
@@ -176512,7 +176595,10 @@ var MapViewer = class {
     fit.dataset.feedback = "Map fitted";
     this.layers = new MapLayers(this.zoomControls, this.tips, this.backings);
     this.layers.controls.append(...layerControls.children);
+    this.desktopBudget = host.desktop === true || host.desktop === void 0 && !matchMedia("(pointer:coarse)").matches && innerWidth > 760;
+    const budget = viewerTileBudget(manifest.tileSize, this.desktopBudget);
     this.osd = (0, import_openseadragon3.default)({
+      ...budget,
       element: this.canvas,
       autoResize: false,
       preserveImageSizeOnResize: true,
@@ -176774,6 +176860,7 @@ var MapViewer = class {
   needsFirstFit = true;
   lastFit;
   imageToken;
+  desktopBudget;
   appliedAppearance;
   report(error) {
     this.host.report?.(error instanceof Error ? error.message : String(error));
@@ -177265,6 +177352,9 @@ var MapViewer = class {
   setManifest(map, manifest) {
     if (this.destroyed) return;
     validateManifest(manifest);
+    const budget = viewerTileBudget(manifest.tileSize, this.desktopBudget);
+    Object.assign(this.osd, { maxImageCacheCount: budget.maxImageCacheCount });
+    Object.assign(this.osd.tileCache, { _maxCacheItemCount: budget.maxImageCacheCount });
     this.map = map;
     const token = this.imageToken = imageIdentity(map);
     const open = () => {

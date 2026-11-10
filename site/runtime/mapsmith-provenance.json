@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "sourceRepository": "thatoneguydan/obsidian",
   "sourceDirectory": "plugins/mapsmith",
-  "sourceCommit": "585304299721c45f7461b6a3135e74ec76f52407",
-  "version": "0.7.0",
+  "sourceCommit": "b54297b1603de67867cbff90298fa39baf4b5df1",
+  "version": "0.8.0",
   "build": {
     "entry": "src/viewer.ts",
     "format": "esm",
@@ -12,8 +12,8 @@
   },
   "textNormalization": "LF",
   "files": {
-    "mapsmith-viewer.mjs": "0ff421e08e05c396e1ab3020b9c0ff2c4ca4912bf4a0cc551781f15fd6b3599c",
-    "mapsmith.css": "f69232b91c0685bcb390840379a43bf216ed2a500a512d71a5af6412e03fdab0",
+    "mapsmith-viewer.mjs": "b53dabbfd319d65df83589de2a88a1ea16bc3fab0e17d97a986f81489f9c4712",
+    "mapsmith.css": "35f841421243a95f4b8db86c7940e2c07ca51eb3eea4704a80181c05bafdd700",
     "mapsmith-notices.txt": "b4c37e1be050b9bb530c9c99db13fda4052b7a6efd6a449c6cf66b64a3a7237e"
   }
 }

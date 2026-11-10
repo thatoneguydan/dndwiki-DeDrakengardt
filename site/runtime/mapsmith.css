@@ -491,6 +491,9 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-toolbar-content>.mapsmith-logo-slot { float:none; flex:none; width:0; height:0; margin:0; }
 .mapsmith .mapsmith-author-controls,.mapsmith .mapsmith-viewer-controls { display:flex; align-items:center; flex:none; flex-wrap:nowrap; max-width:none; margin:0; }
 .mapsmith .mapsmith-author-controls { margin-left:auto; }
+.mapsmith .mapsmith-author-controls>.mapsmith-player-controls { transition:margin-right 240ms cubic-bezier(.2,.7,.2,1); }
+.mapsmith .mapsmith-author-controls:has(>.mapsmith-editor-dock:not(.is-open))>.mapsmith-player-controls { margin-right:var(--player-closed-margin,0px); }
+@media (prefers-reduced-motion:reduce) { .mapsmith .mapsmith-author-controls>.mapsmith-player-controls { transition:none!important; } }
 .mapsmith .mapsmith-find-group>button { width:34px; min-width:34px; height:34px; min-height:34px; }
 .mapsmith .mapsmith-editor-controls { flex-wrap:nowrap; width:max-content; min-width:0; padding:2px 0; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; overscroll-behavior-x:contain; touch-action:pan-x; }
 .mapsmith-editor-controls::-webkit-scrollbar { display:none; width:0; height:0; }
@@ -500,18 +503,14 @@ body:has(.workspace-leaf.mod-active .workspace-leaf-content:is([data-type="mapsm
 .mapsmith .mapsmith-bar .mapsmith-expanding-search.is-open>.mapsmith-search-clear { top:calc(100% + 13px); right:auto; left:calc(var(--search-popover-left,0px) + var(--search-popover-width,260px) - 29px); z-index:2; }
 .mapsmith .mapsmith-bar .mapsmith-expanding-search>.mapsmith-choices,.mapsmith .mapsmith-bar .mapsmith-expanding-search>.mapsmith-results { top:calc(100% + 48px); left:var(--search-popover-left,0px); right:auto; width:var(--search-popover-width,260px); min-width:0; max-width:none; max-height:var(--search-popover-maxheight,230px); overflow-y:auto; }
 
-/* Mode and expanded groups paint backing on a shared plane beneath controls. */
+/* Expanded groups fade one backing surface on a shared plane beneath controls. */
 .mapsmith { --ms-controls-bg:rgba(22,25,24,.64); --ms-controls-edge:rgba(255,255,255,.22); }
 .mapsmith .mapsmith-bar { padding:8px 12px; background:transparent; border-bottom:0; }
 .mapsmith .mapsmith-player-controls,.mapsmith .mapsmith-find-group { padding:5px; border:1px solid transparent; border-radius:9px; background:transparent; box-shadow:none; }
 .mapsmith-control-backings { position:absolute; inset:0; z-index:16; pointer-events:none; }
 .mapsmith-control-backing { position:absolute; border:1px solid var(--ms-controls-edge); border-radius:9px; background:var(--ms-controls-bg); opacity:0; pointer-events:none; transition:opacity 240ms cubic-bezier(.2,.7,.2,1); }
 .mapsmith-control-backing.is-open { opacity:1; }
-.mapsmith-control-backing[data-kind="editor"] { opacity:1; transition:none; }
-.mapsmith-backing-extension { opacity:0; transition:opacity 240ms cubic-bezier(.2,.7,.2,1); }
-.mapsmith-control-backing.is-open .mapsmith-backing-extension { opacity:1; }
 @media (prefers-reduced-motion:reduce) { .mapsmith-control-backing { transition:none!important; } }
-@media (prefers-reduced-motion:reduce) { .mapsmith-backing-extension { transition:none!important; } }
 .mapsmith .mapsmith-bar,.mapsmith-toolbar-content,.mapsmith-actions,.mapsmith-author-controls,.mapsmith-viewer-controls,.mapsmith-player-controls,.mapsmith-find-group,.mapsmith-bar .mapsmith-find,.mapsmith-editor-dock,.mapsmith-editor-shell,.mapsmith-editor-controls,.mapsmith-layers-frame,.mapsmith-layers-shell,.mapsmith-layer-controls { pointer-events:none; }
 .mapsmith .mapsmith-zoom { pointer-events:none; }
 .mapsmith .mapsmith-zoom>.mapsmith-button { pointer-events:auto; }
