@@ -172204,7 +172204,7 @@ function levelSize(width, height, level, maxLevel = Math.ceil(Math.log2(Math.max
 // src/viewer-budget.ts
 function viewerTileBudget(tileSize, desktop) {
   const decodedBytes = (tileSize + 2) ** 2 * 4, cacheBytes = (desktop ? 128 : 48) * 1024 * 1024;
-  return { maxImageCacheCount: Math.max(8, Math.floor(cacheBytes / decodedBytes)), imageLoaderLimit: desktop ? 6 : 3, maxTilesPerFrame: desktop ? 2 : 1, minPixelRatio: 1, loadDestinationTilesOnAnimation: false };
+  return { maxImageCacheCount: Math.max(8, Math.floor(cacheBytes / decodedBytes)), imageLoaderLimit: desktop ? 6 : 3, maxTilesPerFrame: desktop ? 2 : 1, minPixelRatio: 0.5, loadDestinationTilesOnAnimation: false };
 }
 
 // src/canvas-tile-compositing.ts
