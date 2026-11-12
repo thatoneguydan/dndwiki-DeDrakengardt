@@ -16,15 +16,14 @@ const CSS = `
 html:has(#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone]),
 body:has(#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone]) { overflow:hidden!important; }
 html:has(#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone]) .dndwiki-viewport-scrollbar { display:none!important; }
-#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] { padding-right:0!important; }
-#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-layout.dndwiki-modern-layout { display:block!important; width:100%!important; max-width:none!important; margin:0!important; padding:0!important; }
+#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] { padding-right:var(--reader-right-space,0px)!important; }
+#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-layout { display:block!important; width:100%!important; max-width:none!important; margin:0!important; padding:0!important; }
 #dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-main { width:100%; margin:0!important; padding:0!important; }
 #dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-main > [data-dndwiki-page] { width:100%!important; max-width:none!important; margin:0!important; padding:0!important; }
 #dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-main > :not([data-dndwiki-page]),
 #dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-main > [data-dndwiki-page] > :not([data-dndwiki-mapsmith-primary]),
-#dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-outline-rail,
 #dndwiki-app .dndwiki-shell[data-dndwiki-mapsmith-standalone] .dndwiki-reading-progress { display:none!important; }
-.dndwiki-mapsmith-host[data-dndwiki-mapsmith-mode="standalone"] { position:fixed; z-index:1; top:var(--dndwiki-mapsmith-header-height,78px); bottom:0; left:var(--dndwiki-mapsmith-pane-left,0px); right:0; width:auto; height:auto; margin:0!important; }
+.dndwiki-mapsmith-host[data-dndwiki-mapsmith-mode="standalone"] { position:fixed; z-index:1; top:var(--dndwiki-mapsmith-header-height,0px); bottom:var(--reader-bottom-space,0px); left:var(--dndwiki-mapsmith-pane-left,var(--reader-left-space,0px)); right:var(--reader-right-space,0px); width:auto; height:auto; margin:0!important; }
 .dndwiki-mapsmith-host[data-dndwiki-mapsmith-mode="standalone"] > .mapsmith { height:100%; min-height:0; aspect-ratio:auto; border:0; border-radius:0; }
 `;
 
@@ -199,8 +198,8 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
     const primary = mapsmithForPerspective(snapshot, perspective, ownPageId) == null ? null
       : [...(article?.querySelectorAll(HOST_SELECTOR) ?? [])].find((owner) => owner.getAttribute('data-dndwiki-mapsmith-page') === ownPageId && owner.closest('.mapsmith') == null);
     shell?.toggleAttribute('data-dndwiki-mapsmith-standalone', primary != null);
-    if (primary && header) {
-      const height = `${header.getBoundingClientRect().height}px`;
+    if (primary) {
+      const height = `${header?.getBoundingClientRect().height ?? 0}px`;
       if (shell.style.getPropertyValue('--dndwiki-mapsmith-header-height') !== height) shell.style.setProperty('--dndwiki-mapsmith-header-height', height);
       const left = browserWindow.getComputedStyle(shell).paddingLeft;
       if (shell.style.getPropertyValue('--dndwiki-mapsmith-pane-left') !== left) shell.style.setProperty('--dndwiki-mapsmith-pane-left', left);

@@ -464,7 +464,7 @@ function outlineRecords(root, browserWindow) {
   const rail = root?.querySelector?.('[data-dndwiki-page-outline]');
   const article = root?.querySelector?.('[data-dndwiki-page]');
   if (rail == null || article == null) return [];
-  const headings = [...(article.querySelectorAll?.('h1,h2,h3,h4,h5,h6') ?? [])];
+  const headings = [...(article.querySelectorAll?.('h1,h2,h3,h4,h5,h6') ?? [])].filter(heading => heading.closest?.('.mapsmith') == null);
   const scrollY = Math.max(0, Number(browserWindow?.scrollY ?? browserWindow?.pageYOffset ?? 0));
   const related = root?.querySelector?.('#dndwiki-related') ?? null;
   const records = [];

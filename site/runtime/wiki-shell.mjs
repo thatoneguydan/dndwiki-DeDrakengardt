@@ -324,7 +324,7 @@ const SEARCH_UI_CSS = `
 /* The mount owns clipping only; the child owns the single scroll surface. */
 #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search > [data-dndwiki-search-results] {position:absolute;inset:calc(100% + .4rem) 0 auto;z-index:120;max-height:none;overflow:hidden;border-radius:14px;background:transparent;box-shadow:var(--dndwiki-panel-shadow);}
 #dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [data-dndwiki-search-results] > .dndwiki-search-results {position:static !important;max-height:min(65dvh,34rem) !important;overflow-y:auto !important;overflow-x:hidden !important;scrollbar-width:thin;border-radius:14px;background:var(--background-primary);box-shadow:none;transform:none !important;}
-#dndwiki-app .dndwiki-shell .dndwiki-topbar .dndwiki-search [hidden] {display:none !important;}
+#dndwiki-app .dndwiki-shell .dndwiki-search [hidden] {display:none !important;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-filters {position:absolute;top:calc(100% + .4rem);right:0;z-index:125;width:min(100%,24rem);padding:1rem;border:1px solid var(--background-modifier-border);border-radius:14px;background:var(--background-primary);box-shadow:var(--dndwiki-panel-shadow);color:var(--text-normal);font-size:14px;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-filter-heading {display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-filter-heading button {min-height:32px;padding:.3rem .6rem;font-size:12px;}
@@ -1313,6 +1313,7 @@ export async function mountWikiShell({
     if (event.key !== 'Escape') return;
     const panel = root.querySelector?.('[data-dndwiki-search-filters]');
     if (panel?.hidden === false) {
+      event.preventDefault?.();
       panel.hidden = true;
       const button = root.querySelector?.('[data-dndwiki-search-filter-toggle]');
       button?.setAttribute('aria-expanded', 'false'); button?.focus();
@@ -1348,6 +1349,10 @@ export async function mountWikiShell({
       return model;
     },
     session,
+    refresh() {
+      model = session.currentModel;
+      render();
+    },
     destroy() {
       accessObserver?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange);

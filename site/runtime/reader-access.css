@@ -1,0 +1,26 @@
+.reader-burn-stage { position:fixed; z-index:500; inset:0; width:100%; height:100dvh; overflow:clip; isolation:isolate; pointer-events:none; }
+.reader-burn-stage canvas { position:absolute; pointer-events:none; image-rendering:pixelated; }
+.reader-burn-stage .dndwiki-burn-fill { z-index:2; }
+.reader-burn-stage .dndwiki-burn-border { z-index:4; }
+.reader-key-panel { position:absolute; z-index:3; padding:0; border:0; background:transparent; box-shadow:none; color:#edf0f4; pointer-events:auto; overflow:auto; scrollbar-width:thin; mask-repeat:no-repeat; -webkit-mask-repeat:no-repeat; }
+.reader-key-panel[hidden] { display:none; }
+.reader-burn-stage[data-burn-available="false"] .reader-key-panel { background:#262a31; padding:20px; }
+.reader-key-eyebrow { color:#acb6c2; font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:9px; }
+.reader-key-panel h2 { margin:0 0 10px; font:24px/1.25 Georgia,serif; color:#f3f4f6; }
+.reader-key-panel p { margin:0 0 17px; color:#bec6d0; font-size:13px; line-height:1.5; }
+.reader-key-panel label { display:block; margin:13px 0 6px; color:#d5dce6; font-size:12px; }
+.reader-key-panel input { width:100%; min-height:44px; border:1px solid #6d7683; border-radius:0; background:#30353d; color:#f4f6f9; padding:10px 12px; font-size:16px; }
+.reader-key-panel button[type="submit"] { width:100%; min-height:44px; padding:10px 14px; border:0; border-radius:0; color:#262d35; background:#e6ebf1; font-size:13px; }
+.reader-key-panel .reader-key-error { min-height:18px; margin:5px 0 8px; color:#ffbaa9; font-size:12px; }
+.reader-player-heading { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin:4px 0 22px; }
+.reader-player-heading h2 { margin:0; overflow-wrap:anywhere; }
+.reader-key-action { width:100%; min-height:47px; display:block; padding:13px 0; text-align:left; border:0; border-top:1px solid #535d69; border-radius:0; background:transparent; color:#d5dfeb; font-size:13px; }
+.reader-key-action:hover { background:#30363e; border-color:#728090; }
+.reader-key-action[data-dndwiki-clear-key] { color:#e6b4a5; }
+.reader-player-art { width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; color:inherit; font-size:23px; line-height:1; flex:none; }
+.reader-player-art img { display:block; width:100%; height:100%; object-fit:contain; }
+.reader-player-art svg { width:100%; height:100%; }
+.reader-player-tabler { background:currentColor; mask-size:contain; mask-position:center; mask-repeat:no-repeat; -webkit-mask-size:contain; -webkit-mask-position:center; -webkit-mask-repeat:no-repeat; }
+.reader-burn-snapshot { position:absolute; z-index:1; inset:0; pointer-events:none; overflow:clip; background:#fff; mask-repeat:no-repeat; -webkit-mask-repeat:no-repeat; }
+.reader-burn-snapshot .reader-navigation { pointer-events:none; }
+.reader-key-panel :focus-visible { outline:2px solid #9eb7d3; outline-offset:3px; }

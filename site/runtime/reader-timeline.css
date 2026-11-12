@@ -1,0 +1,55 @@
+html:has(.reader-timeline) { scrollbar-width:none; }
+html:has(.reader-timeline)::-webkit-scrollbar { width:0; }
+.reader-timeline { position:fixed; z-index:70; inset:0 0 0 auto; width:56px; background:#fff; border-left:1px solid #e1e3e5; color:#393d42; transition:width 180ms ease; overflow:visible; }
+.reader-timeline.is-open { width:310px; }
+.reader-timeline-head { position:absolute; inset:0 0 auto; height:180px; }
+.reader-timeline-head button { position:absolute; right:.5px; top:20px; display:grid; place-items:center; width:44px; height:44px; min-height:44px; padding:0; background:transparent; border:0; border-radius:0; color:#555b62; }
+.reader-timeline-head button:hover { background:#f0f1f3; }
+.reader-timeline-category { position:absolute; top:83px; right:17px; max-height:100px; writing-mode:vertical-rl; color:#656b72; font:11px/1.4 Georgia,serif; text-transform:uppercase; letter-spacing:.13em; overflow:hidden; text-overflow:ellipsis; text-decoration:none; }
+.reader-timeline.is-open .reader-timeline-category { top:32px; left:24px; right:55px; max-height:none; writing-mode:horizontal-tb; font-size:12px; }
+.reader-timeline-category:hover { color:#23272b; text-decoration:underline; }
+.reader-timeline-track { position:absolute; z-index:1; right:18px; top:198px; bottom:28px; width:8px; touch-action:none; cursor:default; outline-offset:8px; }
+.reader-timeline-track::before { content:''; position:absolute; top:0; bottom:0; left:3px; width:1px; background:#d7dade; }
+.reader-scroll-thumb { position:absolute; z-index:1; left:1px; top:0; width:5px; min-height:28px; background:#555d66; border-radius:0; will-change:transform; }
+.reader-scroll-thumb[hidden] { display:none; }
+.reader-timeline.is-open .reader-timeline-track { top:102px; }
+.reader-timeline [data-dndwiki-page-outline] { position:absolute; inset:0; pointer-events:none; margin:0; padding:0; border:0; }
+.reader-timeline .dndwiki-toc-list { list-style:none; margin:0; padding:0; }
+.reader-timeline .reader-toc-link { position:absolute; z-index:2; left:0; right:0; height:28px; margin:0; padding:0; border:0; background:transparent; box-shadow:none; color:#8b929a; pointer-events:none; text-decoration:none; }
+.reader-toc-dot { position:absolute; right:18.5px; top:var(--reader-dot-shift); display:block; width:8px; height:8px; box-sizing:border-box; border:1px solid currentColor; border-radius:50%; background:#fff; pointer-events:auto; }
+.reader-toc-dot::before { content:''; position:absolute; inset:-8px; }
+.reader-timeline .reader-toc-link[aria-current="location"] { color:#30273f; background:transparent; box-shadow:none; }
+.reader-timeline .reader-toc-link[aria-current="location"] .reader-toc-dot { background:currentColor; }
+.reader-toc-label { display:none; }
+.reader-timeline.is-open .reader-toc-label { position:absolute; left:24px; right:71px; display:block; min-height:28px; color:#747b84; font-size:12px; line-height:1.4; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; pointer-events:auto; }
+.reader-timeline.is-open .reader-toc-link[aria-current="location"] .reader-toc-label { color:#30273f; }
+.reader-timeline:not(.is-open) .reader-toc-link:is(:hover,:focus-within) .reader-toc-label { position:absolute; display:block; right:44px; top:calc(var(--reader-dot-shift) - 10px); min-width:max-content; max-width:260px; padding:7px 11px; font-size:12px; line-height:1.4; color:#30353c; background:#fff; border:1px solid #d9dde2; pointer-events:auto; }
+.reader-timeline-leaders { display:none; position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.reader-timeline.is-open .reader-timeline-leaders { display:block; }
+.reader-timeline-leaders polyline { fill:none; stroke:#c6cbd1; stroke-width:1; }
+@media(min-width:761px) {
+ .reader-timeline.is-open[data-reader-labels-scroll] [data-dndwiki-page-outline] { inset:102px 55px 20px 24px; overflow-y:auto; pointer-events:auto; scrollbar-width:thin; }
+ .reader-timeline.is-open[data-reader-labels-scroll] .reader-toc-link { position:relative; display:block; min-height:32px; height:auto; top:auto!important; pointer-events:auto; }
+ .reader-timeline.is-open[data-reader-labels-scroll] .reader-toc-label { position:relative; display:block; left:auto; right:auto; padding:7px 0; min-height:32px; font-size:12px; line-height:18px; }
+ .reader-timeline.is-open[data-reader-labels-scroll] .reader-toc-dot { position:fixed; top:var(--reader-dot-screen-y); right:18.5px; }
+}
+@media(max-width:760px) {
+ .reader-timeline { width:28px; bottom:var(--reader-bottom-space,64px); }
+ .reader-timeline-head button { right:.5px; width:44px; min-width:44px; top:12px; }
+ .reader-timeline-head button svg { width:16px; height:16px; transform:translateX(10px); }
+ .reader-timeline-category { right:6px; top:73px; font-size:10px; max-height:90px; }
+ .reader-timeline-track { right:8px; top:178px; bottom:20px; }
+ .reader-toc-dot { right:8.5px; }
+ .reader-timeline.is-open { width:100%; }
+ .reader-timeline.is-open .reader-toc-dot { right:18.5px; }
+ .reader-timeline.is-open .reader-timeline-track { right:18px; }
+ .reader-timeline.is-open .reader-timeline-head button { width:44px; right:.5px; }
+ .reader-timeline.is-open .reader-timeline-head button svg { transform:none; }
+ .reader-timeline.is-open .reader-timeline-category { top:30px; right:58px; left:24px; max-height:none; }
+ .reader-timeline.is-open [data-dndwiki-page-outline] { inset:102px 55px 20px 24px; overflow-y:auto; pointer-events:auto; scrollbar-width:thin; }
+ .reader-timeline.is-open .reader-toc-link { position:relative; display:block; min-height:44px; height:auto; top:auto!important; pointer-events:auto; }
+ .reader-timeline.is-open .reader-toc-label { position:relative; display:block; left:auto; right:auto; padding:13px 0; min-height:44px; font-size:13px; line-height:18px; }
+ .reader-timeline.is-open .reader-toc-dot { position:fixed; top:var(--reader-dot-screen-y); right:18.5px; }
+ .reader-timeline[data-reader-mobile-panel="sheet"].is-open { top:35dvh; }
+}
+@media(prefers-reduced-motion:reduce) { .reader-timeline { transition:none; } }

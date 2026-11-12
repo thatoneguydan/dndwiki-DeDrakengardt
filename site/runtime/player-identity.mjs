@@ -50,7 +50,16 @@ export function validatePublicRegistry(registry) {
     }
   }
 
-  return { schemaVersion: 1, keyLookup: lookup, ...(rawNames === undefined ? {} : { displayNames }) };
+  const icons = {};
+  const safeSource = (src) => typeof src === 'string' && /^assets\/[0-9a-f]{24}\.(?:png|svg)$/.test(src);
+  for (const [id, icon] of Object.entries(registry.icons && typeof registry.icons === 'object' && !Array.isArray(registry.icons) ? registry.icons : {})) {
+    if (!playerIds.has(id) || !icon || typeof icon !== 'object') continue;
+    if (icon.kind === 'tabler' && typeof icon.name === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(icon.name) && ['filled', 'outline'].includes(icon.variant)) {
+      icons[id] = { kind: 'tabler', name: icon.name, variant: icon.variant, ...(safeSource(icon.src) ? { src: icon.src } : {}) };
+    } else if (icon.kind === 'image' && safeSource(icon.src)) icons[id] = { kind: 'image', src: icon.src };
+    else if (icon.kind === 'text' && typeof icon.text === 'string' && icon.text.trim().length > 0 && [...icon.text].length <= 24 && !/[<>\r\n\0]/.test(icon.text)) icons[id] = { kind: 'text', text: icon.text };
+  }
+  return { schemaVersion: 1, keyLookup: lookup, ...(rawNames === undefined ? {} : { displayNames }), ...(Object.keys(icons).length ? { icons } : {}) };
 }
 
 function webCrypto(cryptoImpl) {
