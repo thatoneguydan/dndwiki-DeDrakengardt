@@ -2,6 +2,7 @@
   "source": "2b2dc9b3e6e2f7714084d979c7a0ce7515ab060d",
   "approvedLab": "c4d7ae5cee42d6ec90dfa1cfdf0a3c387bfd8c21",
   "snapshotSchema": 1,
+  "tomatoNotificationsEndpoint": "https://dndwiki-tomato-notifications.thatoneguydan.workers.dev/api/tomato",
   "appearanceRevisions": {
     "gallery": 248,
     "emptyNote": 13

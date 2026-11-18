@@ -11,6 +11,15 @@ const release = JSON.parse(await readFile(join(directory, 'release.json'), 'utf8
 const fingerprint = (content) => createHash('sha256').update(content).digest('hex');
 const readText = async (path) => (await readFile(path, 'utf8')).replaceAll('\r\n', '\n');
 
+const tomatoEndpoint = release.tomatoNotificationsEndpoint ? new URL(release.tomatoNotificationsEndpoint) : null;
+let tomatoAttribute = '';
+if (tomatoEndpoint) {
+  assert.ok(tomatoEndpoint.protocol === 'https:' && !tomatoEndpoint.username && !tomatoEndpoint.password && !tomatoEndpoint.hash,
+    'Tomato notifications require an HTTPS endpoint without embedded credentials or a fragment');
+  const url = tomatoEndpoint.href.replaceAll('&', '&amp;').replaceAll('"', '&quot;');
+  tomatoAttribute = ` data-tomato-notifications-endpoint="${url}"`;
+}
+
 const snapshotBytes = await readFile(join(site, 'dndwiki.snapshot.json'));
 const snapshot = JSON.parse(snapshotBytes);
 assert.equal(snapshot.campaign?.id, 'de-drakengardt', 'Unexpected campaign');
@@ -37,7 +46,7 @@ for (const { path, content } of files) {
   const output = join(site, path);
   await mkdir(dirname(output), { recursive: true });
   const assembled = path === 'index.html' ? content
-    .replace('<html ', `<html data-reader-snapshot-revision="${revision}" `)
+    .replace('<html ', `<html data-reader-snapshot-revision="${revision}"${tomatoAttribute} `)
     .replace('</head>', `<link rel="preload" as="fetch" crossorigin="anonymous" href="./dndwiki.snapshot.json?v=${revision}">\n</head>`) : content;
   await writeFile(output, assembled, 'utf8');
 }
