@@ -1,16 +1,11 @@
-# Reader interface for the legacy publisher
+# Approved De Drakengardt reader
 
-The publisher owns generated `site/` content. Its currently installed runtime republishes older interface assets. The existing Pages workflow recognizes that exact legacy bundle by the Git blob hashes of the three original core UI files, then stages these accepted core replacements over `site/runtime/` before uploading the site artifact. This step never commits back to `site/`, changes notes, or accesses the authoring device.
+GitHub Pages stages the approved Browser Lab v77 reader over a disposable copy of the publisher’s `site/` output. `release.json` identifies the source, approved appearance revisions and staged files. The live entry enables the campaign’s approved collection cards and reader appearance. The bundle excludes Admin and loads the approved appearance locally.
 
-All three core legacy hashes must match before any replacement happens. Three additional modules (player identity, shell UI, and preview cards) are overlaid only if they all match the separately observed legacy hashes. A new publisher version of any of those modules is left intact. A publisher with a different UI bundle passes through unchanged, so a future publisher update can supply its own interface without being masked by older copies here. Files already containing the accepted polish also pass through unchanged.
+The Obsidian publisher continues to own the campaign snapshot, notes, assets and tracked `site/` tree. The Pages build fingerprints the current snapshot for the reader cache and derives lossless map tiles from the current published assets. It serves the original assets at their existing URLs.
 
-The runtime files are exact copies of canonical `dndwiki/runtime/` files at source commit `ef5a867d94c17ad40ba59bfe8bdc081add7bcd55` ([source PR #250](https://github.com/thatoneguydan/dndwiki/pull/250)).
+## Updating and rolling back
 
-## Updates
+Build the next approved reader with `scripts/prepare-published-reader.mjs` in the canonical engine repository. Update the release manifest and validate the assembled site against the current publisher snapshot before deploying. The stage checks the known publisher entry files and snapshot schema. An incompatible publisher change stops deployment while the previous Pages artifact continues to serve.
 
-For a reader-interface change, update the canonical source first and copy the accepted versions of the core files and any dependent runtime modules here. Validate the assembled site against the current campaign snapshot and preserve authored-note formatting. Keep the legacy hash guard tied to the observed publisher bundle; do not broaden it to arbitrary or partially matching runtimes. The existing deployment also runs when `reader-ui/` changes.
-
-When upgrading the publisher runtime, verify its own UI and remove this compatibility step once the legacy bundle is no longer in use. Publishing alone does not update this folder.
-
-This folder intentionally excludes the snapshot, note assets, renderers, `styles.css`, and `index.html`. Deployment requires only this campaign repository and its existing Pages permissions.
-
+Revert the campaign reader release commit to restore the previous Pages build. The earlier compatibility files remain available to that build.
