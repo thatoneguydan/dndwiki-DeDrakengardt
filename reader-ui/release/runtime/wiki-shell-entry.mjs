@@ -1,1 +1,1 @@
-import './reader-client-X6QGCG32.mjs';
+import './reader-client-2CFTAULK.mjs';

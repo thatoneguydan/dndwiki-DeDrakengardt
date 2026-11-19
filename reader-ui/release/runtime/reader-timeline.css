@@ -14,8 +14,8 @@ html:has(.reader-timeline:not([hidden]))::-webkit-scrollbar { width:0; }
  --reader-outline-motion:var(--reader-rail-duration,180ms) var(--reader-rail-easing,ease);
  --reader-track-top:calc(var(--reader-category-top) + var(--reader-category-span) + clamp(18px,3dvh,32px));
  --reader-track-above:3px;
- --reader-compact-bottom:0px;
- --reader-compact-available:max(0px,calc(100dvh - var(--reader-category-top) - var(--reader-compact-bottom) - 12px));
+ --reader-timeline-bottom-inset:0px;
+ --reader-compact-available:max(0px,calc(100dvh - var(--reader-category-top) - var(--reader-timeline-bottom-inset) - 12px));
  --reader-compact-rail-limit:max(0px,calc(var(--reader-compact-available) - var(--reader-compact-gap) - var(--reader-track-above) - 60px));
  --reader-compact-rest:min(var(--reader-compact-prefix,0px),var(--reader-compact-rail-limit));
  --reader-compact-reveal:min(var(--reader-compact-full,0px),var(--reader-compact-rail-limit));
@@ -73,7 +73,7 @@ html[data-reader-outline-title="ellipsis"] .reader-timeline[data-reader-compact-
 .reader-timeline.is-open .reader-timeline-category-expanded { opacity:1; transform:translateX(0); pointer-events:auto; }
 .reader-timeline-category:hover { color:var(--reader-timeline-active); text-decoration:underline; }
 .reader-timeline.is-open:has(.reader-timeline-category-expanded[aria-expanded="true"]) { --reader-title-target-height:var(--reader-title-full-height,var(--reader-title-line-height)); }
-.reader-timeline-track { position:absolute; z-index:1; right:var(--reader-track-right); top:var(--reader-track-top); bottom:48px; width:24px; touch-action:none; cursor:default; outline-offset:8px; transition:right var(--reader-outline-motion),bottom var(--reader-outline-motion); }
+.reader-timeline-track { position:absolute; z-index:1; right:var(--reader-track-right); top:var(--reader-track-top); bottom:calc(48px + var(--reader-timeline-bottom-inset)); width:24px; touch-action:none; cursor:default; outline-offset:8px; transition:right var(--reader-outline-motion); }
 #dndwiki-app .reader-timeline .reader-track-cap { position:absolute; z-index:2; left:calc(12px - var(--reader-dot-size,6px)/2); width:var(--reader-dot-size,6px); height:var(--reader-dot-size,6px); min-height:0!important; min-width:0; padding:0; margin:0; appearance:none; border:0; border-radius:50%; background:var(--reader-timeline-inactive); box-shadow:0 0 0 var(--reader-dot-halo,4px) var(--reader-page-paper,#fff); cursor:pointer; touch-action:none; }
 #dndwiki-app .reader-timeline .reader-track-cap:is(:hover,:focus-visible) { background:#626e7c; }
 .reader-track-start { top:calc(var(--reader-dot-size,6px)/-2); }
@@ -158,13 +158,16 @@ html[data-reader-outline-headings="ellipsis"] .reader-timeline[data-reader-expan
 .reader-timeline-leaders { position:absolute; z-index:1; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; opacity:0; transition:opacity var(--reader-outline-motion); }
 .reader-timeline.is-open .reader-timeline-leaders { opacity:1; }
 .reader-timeline-leaders line { fill:none; stroke:var(--reader-timeline-line); stroke-width:1; }
-.reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] [data-reader-heading-outline] { inset:var(--reader-labels-top) calc(var(--reader-axis-right) + 23px) 24px 24px; overflow-y:auto; pointer-events:auto; scrollbar-width:thin; }
+.reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] [data-reader-heading-outline] { inset:var(--reader-labels-top) calc(var(--reader-axis-right) + 23px) calc(24px + var(--reader-timeline-bottom-inset)) 24px; overflow-y:auto; pointer-events:auto; scrollbar-width:thin; }
 .reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] .dndwiki-toc-list { position:relative; }
 .reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] .reader-toc-link { pointer-events:auto; }
 .reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] .reader-toc-label { right:0; max-width:100%; }
 .reader-timeline[data-reader-expanded-content][data-reader-labels-scroll] .reader-toc-dot { position:fixed; top:var(--reader-dot-screen-y); }
 @media(max-width:760px) {
- .reader-timeline { --reader-label-height:44px; --reader-label-line-height:44px; --reader-axis-right:14px; --reader-outline-control-size:28px; --reader-outline-top:24px; --reader-category-span:90px; --reader-toggle-ring-inset:10px; --reader-compact-bottom:var(--reader-bottom-space,64px); width:28px; bottom:var(--reader-compact-bottom); }
+ .reader-timeline { --reader-label-height:44px; --reader-label-line-height:44px; --reader-axis-right:14px; --reader-outline-control-size:28px; --reader-outline-top:24px; --reader-category-span:90px; --reader-toggle-ring-inset:10px; width:28px;
+   /* The rail paints behind the bar. Only its controls clear the visible bar. */
+   --reader-timeline-bottom-inset:max(0px,calc(var(--reader-bottom-space,64px) - var(--reader-mobile-nav-offset,0px)));
+ }
  .reader-timeline-head button { --reader-control-glyph-size:16px; }
  .reader-timeline-head button::before { inset:10px 2px; }
  .reader-timeline-head button::after { content:''; position:absolute; inset:0 0 0 -16px; }
