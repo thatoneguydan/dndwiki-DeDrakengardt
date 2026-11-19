@@ -24,6 +24,7 @@
   --reader-control-glyph-size:18px;
   --reader-icon-in-speed:80ms; --reader-icon-out-speed:160ms;
   --reader-title-motion:220ms cubic-bezier(.13,.095,.2,.915); --reader-title-indent:8px;
+  --reader-directory-number-width:34px; --reader-directory-column-gap:20px;
   --reader-search-route-duration:140ms; --reader-search-route-easing:cubic-bezier(.13,.095,.2,.915);
   --reader-rail-duration:180ms; --reader-rail-easing:ease;
   transition:--reader-right-space var(--reader-rail-duration) var(--reader-rail-easing);
@@ -212,10 +213,13 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-panel .reader-panel-collection-pages .reader-directory-row { grid-template-columns:minmax(0,1fr);min-height:50px;padding:13px 0;border-bottom:1px solid var(--reader-collection-rule);color:var(--reader-collection-muted); }
 .reader-panel-collection-pages .reader-row-title { font:17px/1.45 var(--reader-font-serif,Georgia,serif); }
 .reader-panel-collection-pages li:last-child .reader-directory-row { border-bottom:0; }
-.reader-panel .reader-panel-collection-pages .reader-directory-row:is(:hover,:focus-visible),.reader-panel .reader-panel-subcategory-link:is(:hover,:focus-visible) { color:#fff; }
+.reader-panel .reader-panel-collection-pages a.reader-directory-row:is(:hover,:focus-visible),.reader-panel .reader-panel-subcategory-link:is(:hover,:focus-visible) { color:#fff; }
 .reader-panel-collection-pages a[aria-current="page"] .reader-row-title { color:#fff; }
 .reader-panel .reader-panel-collection-pages li:last-child .reader-empty-collection-row { border-bottom:1px solid var(--reader-collection-rule); }
-.reader-empty-collection-row > .reader-row-title { opacity:var(--reader-empty-collection-opacity,1); }
+.reader-empty-collection-row { cursor:default; }
+/* Reserve the usual title line while the empty message uses smaller type. */
+.reader-empty-collection-row > .reader-row-title { display:grid; align-items:center; min-block-size:1lh; }
+.reader-empty-collection-row [data-reader-empty-collection] { font-size:50%; opacity:var(--reader-empty-collection-opacity,1); }
 .reader-panel-branch-thread { color:var(--reader-collection-rule);position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 140ms ease; }
 [data-expanded="true"] > .reader-panel-branch-thread { opacity:1; }
 .reader-panel-branch-thread :is(.reader-panel-thread-start,.reader-panel-thread-end) { position:absolute;z-index:1;left:var(--reader-panel-thread-x,9px);width:var(--reader-thread-cap-size,3px);height:var(--reader-thread-cap-size,3px);translate:-50% -50%;border-radius:50%;background:currentColor; }
@@ -265,10 +269,10 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-count:focus-visible { outline:1px solid currentColor; outline-offset:4px; border-radius:3px; }
 .reader-directory-list { border-top: 1px solid #aeb3b7; }
 .reader-directory-list li { margin: 0; }
-.reader-directory-row { display:grid; grid-template-columns:34px minmax(0,1fr) 22px; align-items:center; gap:20px; min-height:67px; padding:20px 0; border-bottom:1px solid #b7bcc0; }
-.reader-directory-row > :is(.reader-row-number,.reader-row-title,.reader-row-arrow) { transition:transform var(--reader-title-motion); }
-.reader-directory-row:is(:hover,:focus-visible) > :is(.reader-row-number,.reader-row-title) { transform:translateX(var(--reader-title-indent)); }
-.reader-directory-row:hover { color: #05090d; }
+.reader-directory-row { display:grid; grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) 22px; align-items:center; gap:var(--reader-directory-column-gap); min-height:67px; padding:20px 0; border-bottom:1px solid #b7bcc0; }
+:where(a,button).reader-directory-row > :is(.reader-row-number,.reader-row-title,.reader-row-arrow) { transition:transform var(--reader-title-motion); }
+:where(a,button).reader-directory-row:is(:hover,:focus-visible) > :is(.reader-row-number,.reader-row-title) { transform:translateX(var(--reader-title-indent)); }
+:where(a,button).reader-directory-row:hover { color: #05090d; }
 .reader-row-number { color: #81888f; font: 10px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: .05em; }
 .reader-row-title { font: 22px/1.35 Georgia, "Times New Roman", serif; overflow-wrap: anywhere; }
 .reader-category-list .reader-row-title { font-size: 29px; }
@@ -340,8 +344,9 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  [data-panel-content-scrolled] .reader-panel-grabber::after { opacity:1; }
  .reader-panel-grabber span { width:36px; height:4px; border-radius:999px; background:color-mix(in srgb,var(--reader-rail-paper,#222222),white 40%); transition:scale 160ms ease,background-color 160ms ease; }
  :is(.reader-panel-grabber:is(:hover,:active),[data-panel-dragging] .reader-panel-grabber) span { scale:1.24 1.45; background:color-mix(in srgb,var(--reader-rail-paper,#222222),white 73%); }
- .reader-panel-home { display:block; align-self:center; margin-bottom:24px; font-size:min(var(--reader-panel-home-icon-size),5vw); line-height:1.12; text-align:center; letter-spacing:.08em; }
- .reader-panel-home > .reader-icon { display:inline-block; vertical-align:.06em; margin-inline-end:.28em; }
+ /* Center the book with the title as in the collection rows. The book path is shorter within its viewBox. */
+ .reader-panel-home { --reader-panel-home-icon-size:1.1em; align-self:center; gap:10px; margin-bottom:24px; font-size:min(24px,5vw); line-height:1.12; text-align:center; letter-spacing:.08em; }
+ .reader-panel-home > span { min-width:0; overflow-wrap:anywhere; }
  .reader-panel-home:is(:hover,:focus-visible) { transform:none; }
  .reader-panel-search { margin-bottom:28px; }
  .reader-panel .reader-panel-category-link { font-size:clamp(18px,5vw,24px); letter-spacing:.12em; gap:10px; grid-template-columns:14px 22px minmax(0,1fr); }
@@ -360,7 +365,8 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  .reader-directory-heading h1 { font-size:clamp(32px,8.8vw,44px); }
  .reader-directory-heading h1 .reader-count { top:-.35em; margin-left:10px; font-size:10px; }
  .reader-directory-section + .reader-directory-section { margin-top:44px; }
- .reader-directory-row { grid-template-columns:23px minmax(0,1fr) 18px; gap:12px; min-height:64px; padding-block:18px; }
+ :root { --reader-directory-number-width:23px; --reader-directory-column-gap:12px; }
+ .reader-directory-row { grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) 18px; min-height:64px; padding-block:18px; }
  .reader-row-title { font-size:21px; }
  .reader-category-list .reader-row-title { font-size:26px; }
  .reader-category-list .reader-directory-row { min-height:72px; padding-block:21px; }

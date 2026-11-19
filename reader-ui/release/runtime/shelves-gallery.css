@@ -237,9 +237,10 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
 #dedrak-accordion-shelves .sg-subcategory-pages[aria-hidden="false"] { grid-template-rows:1fr; }
 #dedrak-accordion-shelves .sg-subcategory-pages-inner { min-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:opacity 140ms ease,transform var(--reader-rail-duration) var(--reader-rail-easing); }
 #dedrak-accordion-shelves .sg-subcategory-pages[aria-hidden="false"] .sg-subcategory-pages-inner { opacity:1;transform:none; }
-#dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { position:relative;margin:0 0 0 54px;border-top:0; }
+#dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { --sg-child-list-indent:54px; position:relative;margin:0;margin-inline-start:var(--sg-child-list-indent);border-top:0; }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list::before { content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--reader-rule);pointer-events:none; }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-row { grid-template-columns:minmax(0,1fr) 22px; }
+#dedrak-accordion-shelves .sg-subcategory-pages .reader-empty-collection-row > .reader-row-title { padding-inline-start:calc(var(--reader-directory-number-width) + var(--reader-directory-column-gap) - var(--sg-child-list-indent)); }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list > li:last-child > .reader-directory-row { border-bottom:0; }
 /* Geometry comes from the actual expanding rows. Progress controls visibility,
    not the already-measured line length, so the thread stays on its anchors. */
@@ -252,7 +253,7 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
  #dedrak-accordion-shelves .sg-card-back { width:44px;height:44px;padding:6px; }
  #dedrak-accordion-shelves .sg-card-back .reader-icon { width:22px;height:22px; }
  #dedrak-accordion-shelves .sg-page-content .reader-row-title { font-size:22px; }
- #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { margin-left:24px; }
+ #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { --sg-child-list-indent:24px; }
  #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-row { grid-template-columns:minmax(0,1fr) 18px; }
 }
 @media(prefers-reduced-motion:reduce) {
