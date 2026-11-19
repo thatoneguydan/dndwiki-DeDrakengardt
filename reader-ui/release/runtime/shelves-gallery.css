@@ -10,7 +10,7 @@
 #dedrak-accordion-shelves .sg-eyebrow { display:block;font:10px/1.5 var(--reader-font-sans,system-ui,sans-serif);letter-spacing:.17em;text-transform:uppercase;color:var(--sg-muted);margin:0 0 9px; }
 #dedrak-accordion-shelves h2 { margin:0;font:400 21px/1.25 var(--reader-font-serif,Georgia,serif);letter-spacing:-.02em;color:inherit; }
 #dedrak-accordion-shelves .sg-gallery { display:flow-root;position:relative;min-width:0; }
-#dedrak-accordion-shelves .sg-gallery-viewport { height:372px;margin-top:-8px;margin-bottom:-34px;padding-top:8px;overflow:clip;clip-path:inset(0);mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 26px),transparent 100%);touch-action:pan-y; }
+#dedrak-accordion-shelves .sg-gallery-viewport { height:372px;margin-top:-8px;margin-bottom:-34px;padding-top:8px;overflow:clip;clip-path:inset(0);mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 26px),transparent 100%);touch-action:pan-y pinch-zoom; }
 #dedrak-accordion-shelves .sg-gallery-viewport::-webkit-scrollbar { display:none; }
 #dedrak-accordion-shelves .sg-gallery-track { position:relative;height:330px;width:100%; }
 #dedrak-accordion-shelves .sg-gallery.is-transitioning .sg-gallery-viewport,#dedrak-accordion-shelves .sg-gallery.is-open .sg-gallery-viewport { scroll-snap-type:none; }
@@ -47,6 +47,11 @@
 }
 #dedrak-accordion-shelves .sg-card-vertical { position:absolute;inset:0;display:flex;justify-content:center;align-items:center;pointer-events:none;opacity:1;transform:translateY(0);transition:opacity 165ms ease,transform var(--sg-title-travel-duration,400ms) cubic-bezier(.25,.1,.25,1);transition-delay:var(--sg-incoming-delay,0ms); }
 #dedrak-accordion-shelves .sg-card-vertical>span { display:block;white-space:nowrap;transform:rotate(-90deg);font:400 24px/1.15 var(--reader-font-serif,Georgia,serif); }
+/* Lay the lettering out sideways so the moving card does not have to sample
+   a separately rotated text layer. Older browsers keep the rotated layout. */
+@supports (writing-mode:sideways-lr) {
+ #dedrak-accordion-shelves .sg-card-vertical>span { writing-mode:sideways-lr;transform:none; }
+}
 #dedrak-accordion-shelves .sg-card-copy:is(.is-active,.is-full) .sg-card-vertical { opacity:0;transform:translateY(-32px);transition-delay:var(--sg-outgoing-hold,165ms),var(--sg-outgoing-travel-hold,0ms); }
 #dedrak-accordion-shelves .sg-card-copy.is-active .sg-card-title { transform:translateX(0); }
 #dedrak-accordion-shelves .sg-card-copy .sg-card-title,
@@ -64,6 +69,8 @@
 #dedrak-accordion-shelves .sg-card-copy.is-full .sg-card-open-icon { display:none; }
 #dedrak-accordion-shelves .sg-card-details { position:absolute;z-index:4;inset:0;pointer-events:none;opacity:0;transition:opacity 200ms ease; }
 #dedrak-accordion-shelves .sg-card-copy.is-full .sg-card-details { pointer-events:auto;opacity:1;transition-delay:180ms; }
+#dedrak-accordion-shelves .sg-gallery.is-collection-swipe .sg-card-copy,
+#dedrak-accordion-shelves .sg-gallery.is-collection-swipe .sg-card-copy :is(.sg-card-vertical,.sg-card-name,.sg-card-summary,.sg-card-details) { transition:none; }
 /* Horizontal sibling of the reader's collapsed heading timeline. */
 #dedrak-accordion-shelves .sg-gallery-index { touch-action:pan-y;user-select:none;cursor:grab;position:relative;width:100%;height:44px;margin:12px 0 0;padding:0; }
 #dedrak-accordion-shelves .sg-gallery-index button { position:absolute;z-index:2;top:0;display:flex;align-items:center;justify-content:center;width:44px;min-width:28px;height:44px;padding:0;transform:translateX(-50%); }
@@ -111,6 +118,16 @@
 #dedrak-accordion-shelves .sg-check { display:flex;align-items:center;gap:8px;margin-top:14px;cursor:pointer; }
 #dedrak-accordion-shelves .sg-check input { accent-color:#627a87; }
 #dedrak-accordion-shelves .sg-control-hint { margin:5px 0 0;color:var(--sg-muted);font:12px/1.5 var(--reader-font-serif,Georgia,serif); }
+.sg-mobile-nav-list { display:grid; gap:4px; margin:12px 0 0; padding:0; list-style:none; }
+.sg-mobile-nav-list > li { display:grid; grid-template-columns:minmax(0,1fr) auto auto; align-items:center; gap:6px; }
+.sg-mobile-nav-list label { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.sg-mobile-nav-list [data-mobile-nav-move] {
+ display:grid; place-items:center; width:36px; min-height:36px; padding:0;
+ border:1px solid var(--reader-rule); border-radius:50%; background:transparent;
+}
+.sg-mobile-nav-list [data-mobile-nav-move] svg { width:16px; height:16px; }
+.sg-mobile-nav-list [data-mobile-nav-move]:not(:disabled):hover { background:var(--reader-search-hover,#e5e9ec); }
+.sg-mobile-nav-list [data-mobile-nav-move]:disabled { opacity:.35; cursor:default; }
 #dedrak-accordion-shelves .sg-config-actions { display:flex;gap:9px;flex-wrap:wrap;margin-top:17px; }
 #dedrak-accordion-shelves .sg-config-actions button { padding:8px 12px;border:1px solid var(--sg-line);border-radius:22px;background:transparent;font:14px/1.3 var(--reader-font-serif,Georgia,serif); }
 #dedrak-accordion-shelves .sg-config-actions button:hover { background:var(--sg-control-hover); }
@@ -137,6 +154,7 @@
 #dedrak-accordion-shelves .sg-circle:hover { border-color:var(--sg-ink); }
 .reader-shell[data-reader-shelves-demo] .reader-home-directory { max-width:none;width:100%; }
 .reader-shell[data-reader-shelves-demo] .dndwiki-main { overflow-anchor:none; }
+.reader-shell:has(#dedrak-accordion-shelves[data-open="true"]) { touch-action:pan-y pinch-zoom; }
 /* Existing DM tools retain their own bottom row. An explicitly dragged
    launcher uses inline top/left/bottom:auto and keeps the owner's position. */
 body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-floating-tools { bottom:calc(var(--reader-bottom-space,0px) + 76px); }
@@ -222,14 +240,14 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
 #dedrak-accordion-shelves .sg-collection-deck { display:flow-root;position:relative;width:100%; }
 #dedrak-accordion-shelves .sg-collection-panel { display:flow-root;position:absolute;top:0;width:100%;overflow-anchor:none; }
 #dedrak-accordion-shelves [data-content-exit] { pointer-events:none!important; }
-#dedrak-accordion-shelves .sg-subcategory { position:relative;border:0; }
+#dedrak-accordion-shelves .sg-subcategory { --sg-subcategory-title-size:29px; position:relative;border:0; }
 #dedrak-accordion-shelves .sg-subcategory:first-child::before { content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--reader-rule);pointer-events:none; }
 #dedrak-accordion-shelves .sg-subcategory::after { content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--reader-rule);pointer-events:none; }
 #dedrak-accordion-shelves .sg-page-content button.reader-directory-row { width:100%;border-top:0;border-left:0;border-right:0;border-radius:0;background:transparent;text-align:left;cursor:pointer; }
 #dedrak-accordion-shelves .sg-subcategory > .sg-subcategory-toggle { border-bottom:0; }
 #dedrak-accordion-shelves .sg-subcategory-toggle > .reader-row-number { width:max-content;opacity:1;scale:1;transform-origin:center;transition:opacity 140ms ease,scale var(--reader-rail-duration) var(--reader-rail-easing),transform var(--reader-title-motion); }
 #dedrak-accordion-shelves .sg-subcategory[data-expanded="true"] > .sg-subcategory-toggle > .reader-row-number { opacity:0;scale:.35;transform:none; }
-#dedrak-accordion-shelves .sg-subcategory-toggle .reader-row-title { font-size:29px; }
+#dedrak-accordion-shelves .sg-subcategory-toggle .reader-row-title { font-size:var(--sg-subcategory-title-size); }
 #dedrak-accordion-shelves .sg-subcategory-toggle .reader-count { margin-left:12px;font-size:11px;vertical-align:super; }
 #dedrak-accordion-shelves .sg-subcategory-toggle .reader-row-arrow { transition:transform var(--reader-rail-duration) var(--reader-rail-easing),stroke-width var(--reader-icon-out-speed) ease; }
 #dedrak-accordion-shelves .sg-subcategory-toggle[aria-expanded="true"] .reader-row-arrow { transform:rotate(90deg); }
@@ -237,10 +255,10 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
 #dedrak-accordion-shelves .sg-subcategory-pages[aria-hidden="false"] { grid-template-rows:1fr; }
 #dedrak-accordion-shelves .sg-subcategory-pages-inner { min-height:0;overflow:hidden;opacity:0;transform:translateY(-8px);transition:opacity 140ms ease,transform var(--reader-rail-duration) var(--reader-rail-easing); }
 #dedrak-accordion-shelves .sg-subcategory-pages[aria-hidden="false"] .sg-subcategory-pages-inner { opacity:1;transform:none; }
-#dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { --sg-child-list-indent:54px; position:relative;margin:0;margin-inline-start:var(--sg-child-list-indent);border-top:0; }
+#dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { position:relative;margin:0;margin-inline-start:calc(var(--reader-directory-number-width) + var(--reader-directory-column-gap));border-top:0; }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list::before { content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--reader-rule);pointer-events:none; }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-row { grid-template-columns:minmax(0,1fr) 22px; }
-#dedrak-accordion-shelves .sg-subcategory-pages .reader-empty-collection-row > .reader-row-title { padding-inline-start:calc(var(--reader-directory-number-width) + var(--reader-directory-column-gap) - var(--sg-child-list-indent)); }
+#dedrak-accordion-shelves .sg-subcategory-pages a.reader-directory-row > .reader-row-title { font-size:calc(var(--sg-subcategory-title-size) * .85); }
 #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list > li:last-child > .reader-directory-row { border-bottom:0; }
 /* Geometry comes from the actual expanding rows. Progress controls visibility,
    not the already-measured line length, so the thread stays on its anchors. */
@@ -253,7 +271,7 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
  #dedrak-accordion-shelves .sg-card-back { width:44px;height:44px;padding:6px; }
  #dedrak-accordion-shelves .sg-card-back .reader-icon { width:22px;height:22px; }
  #dedrak-accordion-shelves .sg-page-content .reader-row-title { font-size:22px; }
- #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-list { --sg-child-list-indent:24px; }
+ #dedrak-accordion-shelves .sg-subcategory { --sg-subcategory-title-size:22px; }
  #dedrak-accordion-shelves .sg-subcategory-pages .reader-directory-row { grid-template-columns:minmax(0,1fr) 18px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -261,7 +279,10 @@ body:has(.reader-tomato-tools:not([hidden])) #dedrak-accordion-shelves .sg-float
 }
 
 /* Activity uses the same title rows and hover behavior as every directory. */
-#dedrak-accordion-shelves .sg-library-activity { margin-top:8px; }
+#dedrak-accordion-shelves .sg-library-activity { margin-top:8px;touch-action:pan-y pinch-zoom; }
+#dedrak-accordion-shelves .sg-activity-deck { position:relative;display:flow-root; }
+#dedrak-accordion-shelves .sg-activity-deck > [role="tabpanel"] { position:absolute;top:0;left:calc(var(--sg-activity-index) * 100%);width:100%; }
+#dedrak-accordion-shelves .sg-activity-deck > [aria-hidden="false"] { position:relative; }
 #dedrak-accordion-shelves .sg-activity-header { display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px 32px;padding-bottom:16px; }
 #dedrak-accordion-shelves .sg-activity-header h2 { margin:0;font:400 14px/1.4 var(--reader-font-sans);letter-spacing:.07em;color:var(--reader-muted); }
 #dedrak-accordion-shelves .sg-activity-tabs { display:flex;gap:24px; }

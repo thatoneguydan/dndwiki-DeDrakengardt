@@ -104,7 +104,9 @@
 .reader-tomato-hit path { pointer-events:fill; cursor:default; }
 .reader-tomato-impact-message { position:absolute; z-index:1; display:flex; flex-direction:column; align-items:center; gap:12px; transform:translate(-50%,-50%); margin:0; color:#db9592; font:14px/1.55 var(--font-text,Arial,sans-serif); text-align:center; text-wrap:balance; pointer-events:none; }
 .reader-tomato-wait-spinner { --reader-dot-size:32px; display:flex; flex:0 0 auto; align-items:center; gap:calc(var(--reader-dot-size)*.2); height:20px; }
-.reader-tomato-wait-dot { width:calc(var(--reader-dot-size)*.25); height:calc(var(--reader-dot-size)*.25); border-radius:50%; background:currentColor; animation:reader-tomato-dot-bounce 500ms ease-in-out infinite alternate; animation-delay:calc(500ms*(var(--reader-dot-step) - 3)/3); }
+.reader-tomato-wait-dot { width:calc(var(--reader-dot-size)*.25); height:calc(var(--reader-dot-size)*.25); border-radius:50%; background:currentColor; animation:reader-tomato-dot-bounce 500ms ease-in-out infinite alternate; animation-delay:-500ms; }
+.reader-tomato-wait-dot:nth-child(2) { animation-delay:calc(-500ms * 2 / 3); }
+.reader-tomato-wait-dot:nth-child(3) { animation-delay:calc(-500ms / 3); }
 @keyframes reader-tomato-dot-bounce { from { transform:translateY(28%); } to { transform:translateY(-72%); } }
 .reader-tomato-layer[data-reader-motion-paused] .reader-tomato-wait-dot { animation-play-state:paused; }
 .reader-tomato-impact-message.is-canvas-unavailable { padding:24px; background:#b62b24; border-radius:24px; }

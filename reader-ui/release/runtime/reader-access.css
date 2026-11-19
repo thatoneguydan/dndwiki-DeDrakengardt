@@ -18,11 +18,11 @@
 .reader-key-entry input::placeholder { color:var(--reader-key-muted); font-size:14px; opacity:1; }
 .reader-key-panel :is(.reader-key-close,.reader-key-submit) { display:grid; place-items:center; flex:0 0 44px; width:44px; height:44px; min-height:44px; margin:0; padding:0; border:0; border-radius:50%; box-shadow:inset 0 0 0 1px var(--reader-key-line); background:transparent; color:var(--reader-key-muted); cursor:pointer; transition:box-shadow var(--reader-icon-out-speed,160ms) ease,color var(--reader-icon-out-speed,160ms) ease; }
 .reader-key-panel :is(.reader-key-close,.reader-key-submit) .reader-icon { width:18px; height:18px; stroke-width:var(--reader-icon-stroke,1.5); }
-.reader-key-panel :is(.reader-key-close,.reader-key-submit):is(:hover,:focus-visible):enabled { color:var(--reader-key-ink); box-shadow:inset 0 0 0 calc(18px * var(--reader-icon-hover-stroke,3) / 24) var(--reader-key-ink); transition-duration:var(--reader-icon-in-speed,80ms); }
-.reader-key-panel button:is(:hover,:focus-visible):enabled .reader-icon { stroke-width:var(--reader-icon-hover-stroke,3); transition-duration:var(--reader-icon-in-speed,80ms); }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-panel :is(.reader-key-close,.reader-key-submit):is(:hover,:focus-visible):enabled { color:var(--reader-key-ink); box-shadow:inset 0 0 0 calc(18px * var(--reader-icon-hover-stroke,3) / 24) var(--reader-key-ink); transition-duration:var(--reader-icon-in-speed,80ms); }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-panel button:is(:hover,:focus-visible):enabled .reader-icon { stroke-width:var(--reader-icon-hover-stroke,3); transition-duration:var(--reader-icon-in-speed,80ms); }
 .reader-key-panel button:disabled { opacity:.6; cursor:default; }
 .reader-keyhole path { stroke-width:calc(var(--reader-icon-stroke,1.5) * 128 / 24); stroke-linejoin:round; transition:stroke-width var(--reader-icon-out-speed,160ms) ease; }
-.reader-key-submit:is(:hover,:focus-visible):enabled .reader-keyhole path { stroke-width:calc(var(--reader-icon-hover-stroke,3) * 128 / 24); transition-duration:var(--reader-icon-in-speed,80ms); }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-submit:is(:hover,:focus-visible):enabled .reader-keyhole path { stroke-width:calc(var(--reader-icon-hover-stroke,3) * 128 / 24); transition-duration:var(--reader-icon-in-speed,80ms); }
 .reader-key-panel .reader-key-error { margin:12px 0 0; color:#ffb4ae; font-size:12px; line-height:1.6; }
 .reader-key-panel .reader-key-error[hidden] { display:none; }
 .reader-player-heading { display:flex; align-items:center; gap:12px; margin:0; min-width:0; }
@@ -31,13 +31,13 @@
 .reader-key-action > .reader-icon { width:20px; height:20px; }
 .reader-key-action > span { transition:transform var(--reader-title-motion,220ms ease); }
 .reader-key-action::after { content:''; position:absolute; inset:auto 0 6px; height:1px; background:var(--reader-key-muted); transform:scaleX(0); transform-origin:100% 50%; transition:transform var(--reader-title-motion,220ms ease); }
-.reader-key-action:is(:hover,:focus-visible) > span { transform:translateX(var(--reader-title-indent,8px)); }
-.reader-key-action:is(:hover,:focus-visible)::after { transform:scaleX(1); transform-origin:0 50%; }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-action:is(:hover,:focus-visible) > span { transform:translateX(var(--reader-title-indent,8px)); }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-action:is(:hover,:focus-visible)::after { transform:scaleX(1); transform-origin:0 50%; }
 .reader-player-art { width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; color:inherit; font-size:23px; line-height:1; flex:none; }
 .reader-player-art img { display:block; width:100%; height:100%; object-fit:contain; }
 .reader-player-art svg { width:100%; height:100%; }
 .reader-player-tabler { background:currentColor; mask-size:contain; mask-position:center; mask-repeat:no-repeat; -webkit-mask-size:contain; -webkit-mask-position:center; -webkit-mask-repeat:no-repeat; }
-.reader-key-panel :focus-visible { outline:1px solid var(--reader-key-ink); outline-offset:4px; }
-.reader-key-panel :is(input,.reader-key-close,.reader-key-submit):focus-visible { outline:0; }
+:root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-panel .reader-key-action:focus-visible { outline:1px solid var(--reader-key-ink); outline-offset:4px; }
+.reader-key-panel :focus-visible:not(.reader-key-action) { outline:0; }
 @media(max-width:760px) { .reader-key-panel { padding:16px; } .reader-key-panel h2 { font-size:22px; } }
 @media(prefers-reduced-motion:reduce) { .reader-key-panel *,.reader-key-action::after { transition:none!important; } }

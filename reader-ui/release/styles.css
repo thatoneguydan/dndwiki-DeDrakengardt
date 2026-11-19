@@ -69,11 +69,41 @@ button, .dndwiki-button {
 button:hover, .dndwiki-button:hover { background: var(--background-modifier-hover); border-color: var(--background-modifier-border-hover); }
 :focus-visible { outline: 2px solid var(--interactive-accent); outline-offset: 2px; }
 ::selection { background: var(--text-selection); }
+@media (any-pointer: coarse) {
+  :is(a, button, summary, label, [role="button"], [role="link"]) { -webkit-tap-highlight-color: transparent; }
+}
 
 .dndwiki-loading, .dndwiki-error { max-width: 48rem; margin: 4rem auto; padding: 1rem 1.25rem; }
 .dndwiki-error { color: var(--danger); }
 /* The loading marker remains on the mount node after boot; never let it constrain the real shell. */
 .dndwiki-loading:has(.dndwiki-shell) { max-width: none; margin: 0; padding: 0; }
+.dndwiki-loading:has(> .reader-wiki-loading) { max-width: none; margin: 0; padding: 0; }
+.reader-wiki-loading {
+  min-block-size: 100dvh;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(24px, 5vh, 40px);
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  color: var(--reader-muted, #617284);
+  text-align: center;
+}
+.reader-wiki-loading h1 {
+  margin: 0;
+  color: var(--reader-ink, #2b3541);
+  font: var(--reader-page-title-weight) var(--reader-page-title-size)/var(--reader-page-title-line-height) var(--reader-font-serif);
+  letter-spacing: var(--reader-page-title-tracking);
+  text-wrap: balance;
+}
+.reader-wiki-loading-label {
+  display: block;
+  margin-block-end: 12px;
+  color: var(--reader-muted, #617284);
+  font: 500 12px/1.4 var(--reader-font-sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
 
 .dndwiki-shell { min-height: 100vh; display: grid; grid-template-rows: auto 1fr; background: var(--background-primary); }
 .dndwiki-topbar {
@@ -352,7 +382,7 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
 
 /* Compact desktop controls, full touch targets on phones/tablets/touchscreens. */
 @media (pointer: coarse) {
-  button:not(.mapsmith *):not(.dndwiki-search-selected-remove):not(.dndwiki-search-selected-name), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
+  button:not(.mapsmith *):not(.dndwiki-search-selected-remove):not(.dndwiki-search-selected-name):not(.reader-panel-grabber), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
   [data-dndwiki-search-clear] { min-width: 44px !important; min-height: 44px !important; }
   .dndwiki-search input { padding-right: 3.1rem !important; }
   .dndwiki-link-list a { min-height: 44px; display: flex; align-items: center; }
@@ -382,7 +412,7 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-topbar { gap: .5rem; padding: .45rem .65rem; }
   .dndwiki-brand small { display: none; }
   .dndwiki-access-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  button:not(.mapsmith *):not(.dndwiki-search-selected-remove):not(.dndwiki-search-selected-name), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
+  button:not(.mapsmith *):not(.dndwiki-search-selected-remove):not(.dndwiki-search-selected-name):not(.reader-panel-grabber), input[type="submit"]:not(.mapsmith *), .dndwiki-button:not(.mapsmith *), .dndwiki-search input, .dndwiki-key-form input { min-height: 44px !important; }
   [data-dndwiki-search-clear] { min-width: 44px !important; min-height: 44px !important; }
   .dndwiki-search input { padding-right: 3.1rem !important; }
   .dndwiki-layout { padding: 1rem .9rem 2rem; }
