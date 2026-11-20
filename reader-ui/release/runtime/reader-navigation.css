@@ -49,6 +49,7 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
   font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:#fff;
 }
 .reader-navigation *,.reader-directory * { box-sizing:border-box; }
+.reader-search-backdrop { display:none; }
 /* Clip a longer shadow caster to the edge's length. This keeps the native
    blur/offset across the edge without the usual drop in density at its ends. */
 .reader-edge-shadow {
@@ -231,8 +232,7 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-tab-boundary { position:fixed; top:0; left:0; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; outline:0; }
 .reader-navigation :focus-visible { outline:0; }
 #dndwiki-app[data-reader-touch] :focus:not(.dndwiki-search *) { outline:none; }
-/* Search-only is the same panel/form, with its other contents inert. No clone,
-   relocation, recreated inputs or overlay that can steal a category click. */
+/* Search-only retains the panel and its form while making Browse content inert. */
 .reader-navigation[data-search-only] .reader-panel { pointer-events:none; opacity:0; transform:translateX(-20px); visibility:hidden; overflow:visible; border-color:transparent; background:transparent; transition:transform 220ms cubic-bezier(.13,.095,.2,.915),opacity 140ms linear,visibility 0s linear 220ms; }
 .reader-navigation[data-search-preparing] .reader-panel { transition:none; }
 .reader-navigation[data-search-only][data-search-visible] .reader-panel { opacity:1; transform:none; visibility:visible; transition-delay:0s; }
@@ -328,9 +328,11 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  }
  :root[data-reader-mobile-nav-empty] { --reader-mobile-nav-height:0px; --reader-mobile-nav-clearance:0px; }
  #dndwiki-app {
+   --reader-docked-nav-clearance:var(--reader-mobile-nav-clearance);
    --reader-mobile-nav-shift:calc(var(--reader-mobile-nav-progress,0) * var(--reader-mobile-nav-hide-distance));
-   --reader-mobile-nav-cover:max(0px,calc(var(--reader-mobile-nav-clearance) - var(--reader-mobile-nav-shift)));
+   --reader-mobile-nav-cover:max(0px,calc(var(--reader-docked-nav-clearance) - var(--reader-mobile-nav-shift)));
  }
+ #dndwiki-app:has(.reader-navigation[data-mobile-keyboard]) { --reader-docked-nav-clearance:0px; }
  /* Keep the document padding stable. One scroll offset moves both the visible
     strip and the controls, while the menu ends at its own viewport-relative pose. */
  :root:not([data-reader-mobile-nav-hide]) #dndwiki-app {
@@ -343,6 +345,13 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  }
  :root:not([data-reader-mobile-nav-hide]) .reader-mobile-nav-extent { height:var(--reader-mobile-nav-compact-distance); }
  .reader-navigation { inset:auto 0 0; width:100%; }
+ /* The exiting search presentation keeps its backdrop above the page and nav
+    until the panel is gone. An outside click reaches only the dismiss path. */
+ .reader-navigation[data-search-only] { z-index:1100; }
+ .reader-navigation[data-search-only] .reader-search-backdrop {
+   display:block; position:fixed; inset:0; z-index:253; pointer-events:auto; touch-action:none;
+ }
+ .reader-navigation[data-search-only] .reader-panel { z-index:254; }
  :root[data-reader-mobile-nav-empty] .reader-rail { display:none; }
  /* Chrome moves this safe-area bottom expression with its browser controls.
     Keep the full background below the controls with a stable padding size. */
@@ -360,7 +369,8 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  .reader-rail [data-reader-divider-hidden] { visibility:hidden; }
  .reader-rail > :is(.reader-rail-button:not(.reader-rail-menu),[data-reader-map-slot]) { transform:translateY(var(--reader-mobile-buttons-shift,0px)); }
  #dndwiki-app[data-mobile-rail-collapsed] .reader-rail > :is(.reader-rail-button:not(.reader-rail-menu),[data-reader-map-slot]) { visibility:hidden; }
- .reader-navigation[data-mobile-keyboard] .reader-rail { bottom:calc(var(--reader-keyboard-viewport-bottom) + var(--reader-nav-safe-bottom) - var(--reader-nav-safe-max-bottom)); }
+ /* Leave the rail at its normal bottom anchor while the keyboard covers it. */
+ .reader-navigation[data-mobile-keyboard] .reader-rail { visibility:hidden; }
  #dndwiki-app[data-mobile-rail-hidden] .reader-rail { visibility:hidden; }
  .reader-mobile-nav-extent {
    position:absolute; bottom:0; left:50%; transform:translateX(-50%);
@@ -425,19 +435,36 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  .reader-panel {
    --reader-panel-grabber-height:28px;
    --reader-panel-safe-top:env(safe-area-inset-top,0px);
-   --reader-panel-available-height:calc(var(--reader-keyboard-viewport-height,100dvh) - var(--reader-mobile-nav-clearance) - var(--reader-panel-safe-top));
-   --reader-search-available-height:max(100px,calc(min(var(--reader-panel-height,80dvh),var(--reader-panel-available-height)) - 142px));
-   inset:auto 0 calc(var(--reader-keyboard-viewport-bottom,0px) + var(--reader-mobile-nav-clearance)); width:100%;
+   --reader-panel-open-duration:420ms;
+   --reader-panel-open-easing:cubic-bezier(.17,.72,.32,1.04);
+   --reader-panel-slide-duration:var(--reader-panel-close-duration,260ms);
+   --reader-panel-slide-easing:var(--reader-panel-close-easing,cubic-bezier(.13,.095,.2,.915));
+   --reader-panel-available-height:calc(var(--reader-keyboard-viewport-height,100dvh) - var(--reader-docked-nav-clearance) - var(--reader-panel-safe-top));
+   /* The panel scrolls its content as one surface. Capping the form again
+      hides otherwise reachable filters when the keyboard takes space. */
+   --reader-search-available-height:none;
+   inset:auto 0 calc(var(--reader-keyboard-viewport-bottom,0px) + var(--reader-docked-nav-clearance)); width:100%;
    height:min(var(--reader-panel-height,80dvh),var(--reader-panel-available-height));
    border-right:0; border-bottom:1px solid var(--reader-rail-line,#474747); border-radius:var(--reader-mobile-browse-radius,62px) var(--reader-mobile-browse-radius,62px) 0 0; opacity:1;
-   transform:translateY(calc(100% + var(--reader-mobile-nav-clearance)));
-   transition:transform var(--reader-panel-close-duration,260ms) var(--reader-panel-close-easing,cubic-bezier(.13,.095,.2,.915)),
+   transform:translateY(calc(100% + var(--reader-docked-nav-clearance)));
+   transition:transform var(--reader-panel-slide-duration) var(--reader-panel-slide-easing),
      height var(--reader-panel-resize-duration,240ms) var(--reader-panel-resize-easing,ease-in-out),
      visibility 0s linear var(--reader-panel-close-duration,260ms),box-shadow var(--reader-rail-duration) var(--reader-rail-easing);
+ }
+ @supports (transition-timing-function:linear(0,1)) {
+   .reader-panel {
+     /* Accelerate into the rise, then gently overshoot and settle. */
+     --reader-panel-open-easing:linear(0,.045 4%,.17 10%,.37 19%,.59 30%,.77 42%,.91 54%,.98 63%,1.013 72%,1.018 77%,1.013 85%,1.004 94%,1);
+   }
+ }
+ .reader-navigation:where([data-open]:not([data-search-only])) .reader-panel {
+   --reader-panel-slide-duration:var(--reader-panel-open-duration);
+   --reader-panel-slide-easing:var(--reader-panel-open-easing);
  }
  .reader-panel > .reader-edge-shadow { display:none; }
  .reader-panel-frame { right:0; }
  .reader-navigation[data-open] .reader-panel { transform:none; }
+ .reader-navigation[data-browse-preparing] .reader-panel { transform:translateY(calc(100% + var(--reader-docked-nav-clearance))); transition:none; }
  .reader-navigation:not([data-search-only]) .reader-panel-frame::after {
    inset:auto -128px -32px; width:auto; height:32px; transform:none;
    /* The rail's combined caster paints this seam, including the menu. */
@@ -449,6 +476,8 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
    box-shadow:0 calc(-1 * var(--reader-cast-offset,4px)) var(--reader-cast-blur,12px) rgb(0 0 0 / var(--reader-cast-opacity,0)),
      inset 0 calc(var(--reader-open-edge-width,4px) * var(--reader-left-panel-line,1) / 4) var(--reader-rail-line,#474747);
  }
+ /* Keep the paper connected to the rail during the opening overshoot. */
+ .reader-navigation:not([data-search-only]) .reader-panel::after { content:''; position:absolute; inset:100% 0 auto; height:2dvh; background:inherit; pointer-events:none; }
  .reader-navigation[data-panel-dragging] .reader-panel { transition:none; }
  .reader-navigation:not([data-search-only]) .reader-panel-frame { display:grid; grid-template-rows:var(--reader-panel-grabber-height) minmax(0,1fr); }
  .reader-panel-scroll { width:100%; min-height:0; }
@@ -466,14 +495,19 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  .reader-panel-category-row { gap:8px; }
  .reader-panel-footer { --reader-footer-top-space:88px; }
  .reader-navigation[data-search-only] .reader-panel {
-   --reader-search-available-height:calc(var(--reader-panel-available-height) - 60px);
-   --reader-mobile-search-top:calc(var(--reader-keyboard-viewport-top,0px) + max(24px,env(safe-area-inset-top,0px)));
-   inset:var(--reader-mobile-search-top) max(12px,env(safe-area-inset-right,0px)) auto max(12px,env(safe-area-inset-left,0px));
+   --reader-mobile-search-gutter:12px;
+   --reader-mobile-search-top-gap:max(var(--reader-mobile-search-gutter),var(--reader-panel-safe-top));
+   --reader-mobile-search-menu-clearance:calc(var(--reader-mobile-menu-rise) + var(--reader-mobile-has-menu,1) * var(--reader-mobile-menu-ring-gap));
+   --reader-mobile-search-top:calc(var(--reader-keyboard-viewport-top,0px) + var(--reader-mobile-search-top-gap));
+   --reader-search-available-height:max(0px,calc(var(--reader-keyboard-viewport-height,100dvh) - var(--reader-mobile-search-top-gap) -
+     var(--reader-docked-nav-clearance) - var(--reader-mobile-search-menu-clearance) - var(--reader-mobile-search-gutter)));
+   inset:var(--reader-mobile-search-top) max(var(--reader-mobile-search-gutter),env(safe-area-inset-right,0px)) auto max(var(--reader-mobile-search-gutter),env(safe-area-inset-left,0px));
    width:auto; height:auto; border:0; border-radius:var(--reader-search-control-radius);
-   transform:translateY(calc(-100% - var(--reader-mobile-search-top))); max-height:var(--reader-search-available-height);
+   transform:translateY(calc(-100% - var(--reader-mobile-search-top)));
  }
+ .reader-navigation[data-mobile-keyboard][data-search-only] .reader-panel { --reader-mobile-search-menu-clearance:0px; }
  .reader-navigation[data-search-only] :is(.reader-panel-grabber,.reader-panel-section,.reader-panel-footer) { display:none; }
- .reader-navigation[data-search-only] .reader-panel-scroll { height:auto; margin-top:0; }
+ .reader-navigation[data-search-only] .reader-panel-scroll { height:auto; }
  .reader-navigation[data-search-only] .reader-panel-body { width:100%; min-height:0; padding:0; }
  .reader-navigation[data-search-only] .reader-panel-search { margin:0; }
  .reader-directory { padding:36px 8px calc(44px + var(--reader-bottom-space)); }

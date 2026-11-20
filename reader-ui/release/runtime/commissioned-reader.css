@@ -259,6 +259,27 @@ html,body { background:var(--reader-page-paper); }
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search .dndwiki-search-tag-row button[aria-pressed="true"]:is(:hover,:focus-visible) { background:var(--reader-search-selected-hover,rgba(217,217,217,.22)); }
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search [data-dndwiki-search-results] { position:relative; flex:0 1 auto; min-height:0; max-height:min(46dvh,30rem); overflow-y:auto; overflow-x:hidden; border-radius:0 0 20px 20px; scrollbar-width:thin; scrollbar-color:var(--reader-rail-line,#474747) transparent; }
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search [data-dndwiki-search-results] > .dndwiki-search-results { position:static; width:100%; max-width:none; max-height:none; margin:0; padding:0; overflow:visible; border:0; border-top:1px solid color-mix(in srgb,var(--reader-rail-line,#474747) 40%,transparent); border-radius:0; background:var(--reader-search-paper); color:var(--reader-rail-ink,#fff); box-shadow:none; transform:none; }
+@media (max-width:760px) {
+ #dndwiki-app .reader-navigation[data-search-only] .dndwiki-search { min-height:0; }
+ /* Keep the floating form's input and outline in the stationary frame. */
+ #dndwiki-app .reader-navigation[data-search-only] .dndwiki-search-body {
+  display:block; min-height:0; flex:0 1 auto; overflow:hidden auto; overscroll-behavior:contain;
+  scrollbar-width:thin; scrollbar-color:var(--reader-rail-line,#474747) transparent;
+ }
+ /* Use the body scrollport for results throughout the keyboard transition. */
+ #dndwiki-app .reader-navigation[data-search-only] .dndwiki-search [data-dndwiki-search-results] {
+  max-height:none; overflow:visible;
+ }
+ #dndwiki-app .reader-navigation[data-search-only][data-search-keyboard-expanded]:not([data-mobile-keyboard]) .dndwiki-search {
+  min-height:var(--reader-search-available-height);
+ }
+}
+@media (max-width:760px) and (prefers-reduced-motion:no-preference) {
+ #dndwiki-app .reader-navigation[data-search-visible][data-search-keyboard-expanded]:not([data-mobile-keyboard]) .dndwiki-search {
+  transition:border-radius 160ms cubic-bezier(.13,.095,.2,.915),
+    min-height 240ms var(--reader-rail-easing),max-height 240ms var(--reader-rail-easing);
+ }
+}
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search-results ul { padding:0 10px; }
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search-results h2 { position:relative; padding-bottom:14px; border-bottom:0; }
 #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search-results h2::after { content:''; position:absolute; left:22px; right:22px; bottom:0; height:1px; background:var(--reader-rail-line,#474747); }
@@ -270,7 +291,7 @@ html,body { background:var(--reader-page-paper); }
 @media(prefers-reduced-motion:reduce) { #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search,#dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search::before,#dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search::after,#dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search .reader-search-tag-field::after,#dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search .dndwiki-search-icon-button,#dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search-clear-slot { transition:none; } }
 @media(max-width:760px) {
  :root { --reader-right-space:28px; --reader-page-top-space:36px; --reader-page-title-size:clamp(32px,8.8vw,44px); }
- #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search .dndwiki-search-tag-viewport { --reader-tag-control-scale:2; }
+ #dndwiki-app :is(.reader-navigation,.reader-search-controls) .dndwiki-search .dndwiki-search-tag-viewport { --reader-tag-control-scale:1.5; }
  #dndwiki-app .dndwiki-shell.reader-shell :is(.reader-home-directory,.reader-pages-directory,.reader-category-directory,.dndwiki-search-page) { padding:var(--reader-page-top-space) 8px calc(44px + var(--reader-bottom-space)); }
  #dndwiki-app .dndwiki-shell.reader-shell :is(.reader-home-directory,.reader-pages-directory,.reader-category-directory) > .reader-home-search-controls { margin-bottom:32px; }
  #dndwiki-app .dndwiki-shell.reader-shell .dndwiki-search-page > header { margin-bottom:32px; }
