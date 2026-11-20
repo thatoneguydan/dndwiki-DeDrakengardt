@@ -2004,17 +2004,6 @@
     "search": [
       {
         "audience": {
-          "playerIds": [
-            "celeste"
-          ],
-          "public": false
-        },
-        "markdown": "\nYou walk forward, but the space beyond the edge of the pauldron rejects you, and you remain. \n\n",
-        "pageId": "the-monster-in-the-lava-purify-pauldron",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
           "playerIds": [],
           "public": true
         },
@@ -2760,22 +2749,6 @@
     ]
   },
   "pages": [
-    {
-      "createdAt": "2026-10-24T21:28:03.584Z",
-      "pageId": "the-monster-in-the-lava-purify-pauldron",
-      "public": false,
-      "segments": [
-        {
-          "kind": "keyed",
-          "markdown": "\nYou walk forward, but the space beyond the edge of the pauldron rejects you, and you remain. \n\n",
-          "playerIds": [
-            "celeste"
-          ]
-        }
-      ],
-      "title": "The Monster in the Lava - Purify Pauldron",
-      "updatedAt": "2026-11-20T22:10:16.409Z"
-    },
     {
       "categories": [
         {
