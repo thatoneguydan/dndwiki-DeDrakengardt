@@ -2004,17 +2004,6 @@
     "search": [
       {
         "audience": {
-          "playerIds": [
-            "dm"
-          ],
-          "public": false
-        },
-        "markdown": "The constellations are a tangled overgrowth of thorny stars. Everything sounds hollow. Or maybe you need to remember how to hear.\n",
-        "pageId": "the-monster-in-the-lava-purify-pauldron",
-        "segmentIndex": 0
-      },
-      {
-        "audience": {
           "playerIds": [],
           "public": true
         },
@@ -2761,22 +2750,6 @@
   },
   "pages": [
     {
-      "createdAt": "2026-10-24T21:28:03.584Z",
-      "pageId": "the-monster-in-the-lava-purify-pauldron",
-      "public": false,
-      "segments": [
-        {
-          "kind": "keyed",
-          "markdown": "The constellations are a tangled overgrowth of thorny stars. Everything sounds hollow. Or maybe you need to remember how to hear.\n",
-          "playerIds": [
-            "dm"
-          ]
-        }
-      ],
-      "title": "The Monster in the Lava - Purify Pauldron",
-      "updatedAt": "2026-11-19T16:43:00.513Z"
-    },
-    {
       "categories": [
         {
           "backgroundColor": "lch(58.738 24.09 125.61)",
@@ -3364,9 +3337,9 @@
           "name": "Location"
         },
         {
-          "backgroundColor": "lch(55.393 89.584 31.136)",
+          "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 92.584 31.136)",
+          "color": "lch(100 61.002 43.568)",
           "name": "GreatmeadowPlains"
         }
       ],
