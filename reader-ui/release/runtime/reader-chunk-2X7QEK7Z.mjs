@@ -342,7 +342,7 @@ var Qi=Object.defineProperty;var s=(e,t)=>Qi(e,"name",{value:t,configurable:!0})
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading,#dndwiki-app .dndwiki-shell .dndwiki-search-tag-row {display:grid;grid-template-columns:minmax(0,1fr) 54px 54px;align-items:center;gap:4px;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading {margin:.85rem 0 .35rem;color:var(--text-muted);font-size:11px;text-align:center;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-heading > :first-child {text-align:left;}
-#dndwiki-app .dndwiki-shell .dndwiki-search-tag-list {max-height:min(38dvh,20rem);overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain;}
+#dndwiki-app .dndwiki-shell .dndwiki-search-tag-list {max-height:min(38svh,20rem);overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-row > span {min-width:0;overflow-wrap:anywhere;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-row small {margin-left:.45rem;color:var(--text-faint);font-size:11px;}
 #dndwiki-app .dndwiki-shell .dndwiki-search-tag-row button {justify-self:center;width:36px;height:36px;min-height:36px;padding:0;margin:2px 0;border-color:transparent;border-radius:7px;background:transparent;color:var(--text-muted);font-size:20px;box-shadow:none;}
