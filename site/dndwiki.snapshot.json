@@ -2808,12 +2808,6 @@
       "segments": [],
       "tags": [
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "EastClawTradingCompany"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
@@ -2823,11 +2817,17 @@
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
+          "name": "EastClawTradingCompany"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
           "name": "TheBlackFleet"
         }
       ],
       "title": "East Claw Trading Company",
-      "updatedAt": "2026-11-21T15:09:55.341Z"
+      "updatedAt": "2026-11-21T17:25:19.041Z"
     },
     {
       "categories": [
