@@ -15,7 +15,7 @@
       },
       {
         "label": "Locales",
-        "tag": "Location"
+        "tag": "Locale"
       },
       {
         "label": "Items",
@@ -70,7 +70,7 @@
         {
           "id": "locales",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ]
     },
@@ -3125,7 +3125,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-21T20:15:49.330Z",
@@ -3143,11 +3143,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Blaze Headquarters",
-      "updatedAt": "2026-11-21T18:22:11.614Z"
+      "updatedAt": "2026-11-21T21:42:20.663Z"
     },
     {
       "categories": [
@@ -3156,7 +3156,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-06-02T20:28:51.519Z",
@@ -3174,11 +3174,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Dry Reach",
-      "updatedAt": "2026-11-21T18:22:11.563Z"
+      "updatedAt": "2026-11-21T21:42:20.642Z"
     },
     {
       "categories": [
@@ -3187,7 +3187,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-26T15:15:52.911Z",
@@ -3205,11 +3205,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Eternis",
-      "updatedAt": "2026-11-21T20:52:07.010Z"
+      "updatedAt": "2026-11-21T21:42:20.636Z"
     },
     {
       "categories": [
@@ -3218,7 +3218,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-21T20:47:37.546Z",
@@ -3236,11 +3236,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Ex Hoc Mundo Academy of Arcane Learning",
-      "updatedAt": "2026-11-21T18:22:11.546Z"
+      "updatedAt": "2026-11-21T21:42:20.629Z"
     },
     {
       "categories": [
@@ -3249,7 +3249,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-06-02T20:33:36.479Z",
@@ -3267,11 +3267,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Glillind North",
-      "updatedAt": "2026-11-21T18:22:11.449Z"
+      "updatedAt": "2026-11-21T21:42:20.616Z"
     },
     {
       "categories": [
@@ -3287,7 +3287,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-06-02T23:10:48.225Z",
@@ -3311,11 +3311,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Greatmeadow Plains",
-      "updatedAt": "2026-11-21T18:22:11.532Z"
+      "updatedAt": "2026-11-21T21:42:20.611Z"
     },
     {
       "categories": [
@@ -3324,7 +3324,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-20T17:58:04.919Z",
@@ -3342,11 +3342,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Hocku Port",
-      "updatedAt": "2026-11-21T18:22:11.463Z"
+      "updatedAt": "2026-11-21T21:42:20.605Z"
     },
     {
       "categories": [
@@ -3355,7 +3355,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-24T13:10:32.959Z",
@@ -3373,11 +3373,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Nox Observatory",
-      "updatedAt": "2026-11-21T18:22:11.429Z"
+      "updatedAt": "2026-11-21T21:42:20.574Z"
     },
     {
       "categories": [
@@ -3393,7 +3393,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-22T23:06:30.399Z",
@@ -3417,11 +3417,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Scorchsand Desert",
-      "updatedAt": "2026-11-21T18:22:11.442Z"
+      "updatedAt": "2026-11-21T21:42:20.599Z"
     },
     {
       "categories": [
@@ -3430,7 +3430,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-26T15:17:46.325Z",
@@ -3448,11 +3448,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Shroudgully",
-      "updatedAt": "2026-11-21T18:22:11.286Z"
+      "updatedAt": "2026-11-21T21:42:20.581Z"
     },
     {
       "categories": [
@@ -3461,7 +3461,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-06-02T22:40:48.606Z",
@@ -3479,11 +3479,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Subspace",
-      "updatedAt": "2026-11-21T18:22:11.413Z"
+      "updatedAt": "2026-11-21T21:42:20.568Z"
     },
     {
       "categories": [
@@ -3492,7 +3492,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-11-05T18:38:04.292Z",
@@ -3510,11 +3510,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Suffield Harbor",
-      "updatedAt": "2026-11-21T18:22:11.396Z"
+      "updatedAt": "2026-11-21T21:42:20.552Z"
     },
     {
       "categories": [
@@ -3523,7 +3523,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-26T15:12:02.555Z",
@@ -3541,11 +3541,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Chamber of Tomorrows",
-      "updatedAt": "2026-11-21T20:52:01.829Z"
+      "updatedAt": "2026-11-21T21:42:20.545Z"
     },
     {
       "categories": [
@@ -3554,7 +3554,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-21T19:55:41.598Z",
@@ -3572,11 +3572,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Grand Library",
-      "updatedAt": "2026-11-21T18:22:11.363Z"
+      "updatedAt": "2026-11-21T21:42:20.538Z"
     },
     {
       "categories": [
@@ -3585,7 +3585,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-21T20:21:11.154Z",
@@ -3603,11 +3603,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Megadome",
-      "updatedAt": "2026-11-21T18:22:11.348Z"
+      "updatedAt": "2026-11-21T21:42:20.532Z"
     },
     {
       "categories": [
@@ -3616,7 +3616,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-14T23:07:16.517Z",
@@ -3634,11 +3634,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Silver City",
-      "updatedAt": "2026-11-21T18:22:11.329Z"
+      "updatedAt": "2026-11-21T21:42:20.522Z"
     },
     {
       "categories": [
@@ -3647,7 +3647,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-26T15:18:42.604Z",
@@ -3665,11 +3665,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Sunken City - Pelotharna",
-      "updatedAt": "2026-11-21T18:22:11.313Z"
+      "updatedAt": "2026-11-21T21:42:20.516Z"
     },
     {
       "categories": [
@@ -3678,7 +3678,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-14T22:34:15.847Z",
@@ -3696,11 +3696,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Vulk Ildstad",
-      "updatedAt": "2026-11-21T18:22:11.267Z"
+      "updatedAt": "2026-11-21T21:42:20.505Z"
     },
     {
       "categories": [
@@ -3709,7 +3709,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-22T23:05:11.999Z",
@@ -3727,11 +3727,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Zul'Kar",
-      "updatedAt": "2026-11-21T18:22:11.300Z"
+      "updatedAt": "2026-11-21T21:42:20.511Z"
     },
     {
       "categories": [
@@ -5236,7 +5236,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-19T15:02:48.587Z",
@@ -5254,11 +5254,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Mitsurin",
-      "updatedAt": "2026-11-21T18:22:11.213Z"
+      "updatedAt": "2026-11-21T21:42:20.500Z"
     },
     {
       "categories": [
@@ -5267,7 +5267,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-19T14:35:38.355Z",
@@ -5285,11 +5285,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Mount Vulk",
-      "updatedAt": "2026-11-21T20:52:00.021Z"
+      "updatedAt": "2026-11-21T21:42:20.493Z"
     },
     {
       "categories": [
@@ -5436,7 +5436,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-23T16:39:45.570Z",
@@ -5448,11 +5448,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Arena",
-      "updatedAt": "2026-11-21T18:22:11.180Z"
+      "updatedAt": "2026-11-21T21:42:20.488Z"
     },
     {
       "createdAt": "2026-09-13T19:13:11.710Z",
@@ -5563,7 +5563,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-05-23T17:45:50.550Z",
@@ -5587,11 +5587,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "Ulakiruto",
-      "updatedAt": "2026-11-21T18:22:11.150Z"
+      "updatedAt": "2026-11-21T21:42:20.481Z"
     },
     {
       "categories": [
@@ -5638,7 +5638,7 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ],
       "createdAt": "2026-06-03T16:59:09.533Z",
@@ -5656,11 +5656,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "Location"
+          "name": "Locale"
         }
       ],
       "title": "The Dread Wastes",
-      "updatedAt": "2026-11-21T18:22:11.130Z"
+      "updatedAt": "2026-11-21T21:42:20.474Z"
     },
     {
       "categories": [

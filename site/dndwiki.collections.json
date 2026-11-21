@@ -33,7 +33,7 @@
         {
           "id": "locales",
           "label": "Locales",
-          "tag": "Location"
+          "tag": "Locale"
         }
       ]
     },
