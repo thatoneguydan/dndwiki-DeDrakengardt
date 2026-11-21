@@ -6354,20 +6354,20 @@
           "name": "Magic"
         },
         {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "PrimeRelic"
-        },
-        {
           "backgroundColor": "lch(73.967 27.503 126.29)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(13.967 47.503 126.29)",
           "name": "Cemus"
+        },
+        {
+          "backgroundColor": "lch(79.164 54.184 79.457)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(26.164 74.184 79.457)",
+          "name": "PrimeRelic"
         }
       ],
       "title": "The Sword of Binding",
-      "updatedAt": "2026-10-06T15:04:59.101Z"
+      "updatedAt": "2026-11-21T15:54:51.842Z"
     },
     {
       "categories": [
