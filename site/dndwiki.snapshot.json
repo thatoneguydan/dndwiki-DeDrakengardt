@@ -2808,6 +2808,12 @@
       "segments": [],
       "tags": [
         {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "EastClawTradingCompany"
+        },
+        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
@@ -2817,17 +2823,11 @@
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
-          "name": "EastClawTradingCompany"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
           "name": "TheBlackFleet"
         }
       ],
       "title": "East Claw Trading Company",
-      "updatedAt": "2026-10-01T16:25:52.186Z"
+      "updatedAt": "2026-11-21T15:09:55.341Z"
     },
     {
       "categories": [
@@ -2851,16 +2851,16 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "TheMegadome"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
         },
         {
           "backgroundColor": "lch(64.372 58.002 43.568)",
@@ -2870,7 +2870,7 @@
         }
       ],
       "title": "Forgecreed",
-      "updatedAt": "2026-11-21T15:08:04.682Z"
+      "updatedAt": "2026-11-21T15:09:55.184Z"
     },
     {
       "categories": [
@@ -2888,16 +2888,16 @@
       "segments": [],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "ZulKar"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
         },
         {
           "backgroundColor": "lch(64.372 58.002 43.568)",
@@ -2907,7 +2907,7 @@
         }
       ],
       "title": "Red Claw",
-      "updatedAt": "2026-11-21T15:08:32.792Z"
+      "updatedAt": "2026-11-21T15:09:55.035Z"
     },
     {
       "categories": [
@@ -2938,7 +2938,7 @@
         }
       ],
       "title": "The Black Fleet",
-      "updatedAt": "2026-10-01T18:45:17.074Z"
+      "updatedAt": "2026-11-21T15:09:55.146Z"
     },
     {
       "categories": [
@@ -2962,16 +2962,16 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "TheMegadome"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
         },
         {
           "backgroundColor": "lch(64.372 58.002 43.568)",
@@ -2981,7 +2981,7 @@
         }
       ],
       "title": "The Blaze",
-      "updatedAt": "2026-10-03T02:39:30.730Z"
+      "updatedAt": "2026-11-21T15:09:54.994Z"
     },
     {
       "categories": [
@@ -3005,12 +3005,6 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
@@ -3029,6 +3023,12 @@
           "name": "TheSunkenCity"
         },
         {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
+        },
+        {
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
@@ -3036,7 +3036,7 @@
         }
       ],
       "title": "The Broken Wing",
-      "updatedAt": "2026-11-21T15:08:12.112Z"
+      "updatedAt": "2026-11-21T15:09:54.894Z"
     },
     {
       "categories": [
@@ -3060,16 +3060,16 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "VulkIldstad"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
         },
         {
           "backgroundColor": "lch(64.372 58.002 43.568)",
@@ -3079,7 +3079,7 @@
         }
       ],
       "title": "The Nameless",
-      "updatedAt": "2026-11-18T12:43:05.189Z"
+      "updatedAt": "2026-11-21T15:09:54.812Z"
     },
     {
       "categories": [
@@ -4080,16 +4080,16 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(63.905 35.927 42.596)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 38.927 42.596)",
-          "name": "Faction"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "TheMegadome"
+        },
+        {
+          "backgroundColor": "lch(63.905 35.927 42.596)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 38.927 42.596)",
+          "name": "Faction"
         },
         {
           "backgroundColor": "lch(64.372 58.002 43.568)",
@@ -4099,7 +4099,7 @@
         }
       ],
       "title": "Miracle Tech",
-      "updatedAt": "2026-11-21T15:08:04.547Z"
+      "updatedAt": "2026-11-21T15:09:54.759Z"
     },
     {
       "categories": [
