@@ -2,28 +2,32 @@
   "browse": {
     "categories": [
       {
-        "label": "Locations",
-        "tag": "Location"
-      },
-      {
         "label": "NPCs",
-        "tag": "npc"
+        "tag": "NPC"
       },
       {
         "label": "Factions",
-        "tag": "faction"
+        "tag": "Faction"
+      },
+      {
+        "label": "Regions",
+        "tag": "Region"
+      },
+      {
+        "label": "Locales",
+        "tag": "Location"
       },
       {
         "label": "Items",
-        "tag": "item"
+        "tag": "Item"
       },
       {
-        "label": "Magic",
-        "tag": "magic"
+        "label": "Prime Relics",
+        "tag": "PrimeRelic"
       },
       {
         "label": "Feats",
-        "tag": "feat"
+        "tag": "Feat"
       }
     ],
     "schemaVersion": 1
@@ -32,6 +36,98 @@
     "id": "de-drakengardt",
     "title": "De Drakengardt"
   },
+  "collections": [
+    {
+      "id": "people",
+      "label": "People",
+      "subcollections": [
+        {
+          "id": "pcs",
+          "label": "PCs",
+          "tag": "PC"
+        },
+        {
+          "id": "npcs",
+          "label": "NPCs",
+          "tag": "NPC"
+        },
+        {
+          "id": "factions",
+          "label": "Factions",
+          "tag": "Faction"
+        }
+      ]
+    },
+    {
+      "id": "places",
+      "label": "Places",
+      "subcollections": [
+        {
+          "id": "regions",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "id": "locales",
+          "label": "Locales",
+          "tag": "Location"
+        }
+      ]
+    },
+    {
+      "id": "things",
+      "label": "Things",
+      "subcollections": [
+        {
+          "id": "items",
+          "label": "Items",
+          "tag": "Item"
+        },
+        {
+          "id": "relics",
+          "label": "Relics",
+          "tag": "Relic"
+        },
+        {
+          "id": "prime-relics",
+          "label": "Prime Relics",
+          "tag": "PrimeRelic"
+        }
+      ]
+    },
+    {
+      "id": "mechanics",
+      "label": "Mechanics",
+      "subcollections": [
+        {
+          "id": "feats",
+          "label": "Feats",
+          "tag": "Feat"
+        },
+        {
+          "id": "homebrew-rules",
+          "label": "Homebrew Rules",
+          "tag": "Homebrew"
+        }
+      ]
+    },
+    {
+      "id": "lore",
+      "label": "Lore",
+      "subcollections": [
+        {
+          "id": "history",
+          "label": "History",
+          "tag": "History"
+        },
+        {
+          "id": "rumors-and-stories",
+          "label": "Rumors & Stories",
+          "tag": "Story"
+        }
+      ]
+    }
+  ],
   "engine": {
     "version": "0.1.8"
   },
@@ -2812,18 +2908,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "EastClawTradingCompany"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlackFleet"
         }
       ],
       "title": "East Claw Trading Company",
@@ -2851,22 +2935,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
         }
       ],
       "title": "Forgecreed",
@@ -2888,22 +2960,10 @@
       "segments": [],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
         }
       ],
       "title": "Red Claw",
@@ -2929,12 +2989,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlackFleet"
         }
       ],
       "title": "The Black Fleet",
@@ -2962,22 +3016,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlaze"
         }
       ],
       "title": "The Blaze",
@@ -3005,34 +3047,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "HockuPort"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSunkenCity"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBrokenWing"
         }
       ],
       "title": "The Broken Wing",
@@ -3060,22 +3078,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
         }
       ],
       "title": "The Nameless",
@@ -3118,7 +3124,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3138,18 +3144,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlaze"
         }
       ],
       "title": "Blaze Headquarters",
@@ -3161,7 +3155,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3181,12 +3175,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "ScorchsandDesert"
         }
       ],
       "title": "Dry Reach",
@@ -3198,7 +3186,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3218,12 +3206,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Eternis"
         }
       ],
       "title": "Eternis",
@@ -3235,7 +3217,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3255,12 +3237,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Ex Hoc Mundo Academy of Arcane Learning",
@@ -3272,7 +3248,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3292,12 +3268,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "ScorchsandDesert"
         }
       ],
       "title": "Glillind North",
@@ -3309,7 +3279,14 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3335,12 +3312,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "GreatmeadowPlains"
         }
       ],
       "title": "Greatmeadow Plains",
@@ -3352,7 +3323,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3372,12 +3343,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "HockuPort"
         }
       ],
       "title": "Hocku Port",
@@ -3389,7 +3354,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3409,12 +3374,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Nox Observatory",
@@ -3426,7 +3385,14 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3452,12 +3418,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "ScorchsandDesert"
         }
       ],
       "title": "Scorchsand Desert",
@@ -3469,7 +3429,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3489,12 +3449,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSunkenCity"
         }
       ],
       "title": "Shroudgully",
@@ -3506,7 +3460,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3537,7 +3491,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3568,7 +3522,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3588,12 +3542,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "Eternis"
         }
       ],
       "title": "The Chamber of Tomorrows",
@@ -3605,7 +3553,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3625,12 +3573,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "The Grand Library",
@@ -3642,7 +3584,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3662,12 +3604,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
         }
       ],
       "title": "The Megadome",
@@ -3679,7 +3615,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3699,12 +3635,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "The Silver City",
@@ -3716,7 +3646,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3736,12 +3666,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSunkenCity"
         }
       ],
       "title": "The Sunken City - Pelotharna",
@@ -3753,7 +3677,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3773,12 +3697,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "Vulk Ildstad",
@@ -3790,7 +3708,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -3810,12 +3728,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
         }
       ],
       "title": "Zul'Kar",
@@ -3831,11 +3743,11 @@
           "tag": "Item"
         },
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
+          "color": "lch(26.164 74.184 79.457)",
+          "label": "Prime Relics",
+          "tag": "PrimeRelic"
         }
       ],
       "createdAt": "2026-05-21T19:25:09.406Z",
@@ -3849,12 +3761,6 @@
         }
       ],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -3872,15 +3778,6 @@
       "updatedAt": "2026-10-03T02:39:30.933Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-14T22:53:34.419Z",
       "pageId": "maktilline",
       "public": true,
@@ -3891,45 +3788,14 @@
           "playerIds": []
         }
       ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Fuel"
-        }
-      ],
       "title": "Maktilline",
       "updatedAt": "2026-10-03T02:39:31.009Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-06-02T23:06:17.830Z",
       "pageId": "steel-diamond-hulls",
       "public": true,
       "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        }
-      ],
       "title": "Steel Diamond Hulls",
       "updatedAt": "2026-09-26T13:35:27.420Z"
     },
@@ -3941,13 +3807,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-05-26T14:18:06.998Z",
@@ -3961,12 +3820,6 @@
         }
       ],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -3985,13 +3838,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-06-02T23:37:46.359Z",
@@ -4006,55 +3852,20 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(26.164 74.184 79.457)",
           "name": "Item"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlaze"
         }
       ],
       "title": "The Transposer",
       "updatedAt": "2026-10-01T16:25:52.036Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-06-02T20:41:45.303Z",
       "pageId": "the-whisper-of-chaos",
       "public": true,
       "segments": [],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        }
-      ],
       "title": "The Whisper of Chaos",
       "updatedAt": "2026-10-03T02:39:31.062Z"
     },
@@ -4080,22 +3891,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
           "backgroundColor": "lch(63.905 35.927 42.596)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 38.927 42.596)",
           "name": "Faction"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
         }
       ],
       "title": "Miracle Tech",
@@ -4121,24 +3920,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfChaos"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Belbe - The Son of Madness",
@@ -4170,12 +3951,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Castiel Ralora",
@@ -4207,12 +3982,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Councilwoman Veldrin Illiir",
@@ -4238,12 +4007,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "Dworn Shieldside",
@@ -4275,18 +4038,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfChaos"
         }
       ],
       "title": "Entross",
@@ -4318,12 +4069,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Exander Efthalia",
@@ -4355,12 +4100,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Flynn Proudglide",
@@ -4392,18 +4131,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "GrondBrow",
@@ -4435,12 +4162,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlackFleet"
         }
       ],
       "title": "Hargrim Krakensbain",
@@ -4472,12 +4193,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Leon Illiir",
@@ -4509,12 +4224,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSunkenCity"
         }
       ],
       "title": "Masuda Thoki",
@@ -4565,18 +4274,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfOrder"
         }
       ],
       "title": "Pholtus",
@@ -4602,12 +4299,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Professor Allao Marduun",
@@ -4639,12 +4330,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlackFleet"
         }
       ],
       "title": "Quinton Morgan",
@@ -4701,12 +4386,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlackFleet"
         }
       ],
       "title": "Roxie",
@@ -4738,30 +4417,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlaze"
         }
       ],
       "title": "Saint Cogito",
@@ -4793,12 +4448,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Soaruun Hun’ath",
@@ -4824,12 +4473,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "Solia Flintrest",
@@ -4861,12 +4504,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "The Gate Guardian",
@@ -4892,18 +4529,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfOrder"
         }
       ],
       "title": "Ula",
@@ -4935,12 +4560,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Umtor Presven",
@@ -4966,12 +4585,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Overseer"
         }
       ],
       "title": "Ylris",
@@ -5003,18 +4616,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
         }
       ],
       "title": "Zennea Ritsuka",
@@ -5046,30 +4647,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheBlaze"
         }
       ],
       "title": "Olander Sunpearl",
@@ -5083,13 +4660,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-05-22T16:54:58.469Z",
@@ -5103,12 +4673,6 @@
         }
       ],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -5127,13 +4691,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-06-18T01:25:51.096Z",
@@ -5147,12 +4704,6 @@
         }
       ],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -5201,24 +4752,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
         }
       ],
       "title": "Rook Avelle",
@@ -5226,13 +4759,6 @@
     },
     {
       "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        },
         {
           "backgroundColor": "lch(63.655 20.892 330.68)",
           "borderColor": "rgb(230, 230, 230)",
@@ -5253,12 +4779,6 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
           "backgroundColor": "lch(63.655 20.892 330.68)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 23.892 330.68)",
@@ -5277,20 +4797,6 @@
           "kind": "public",
           "markdown": "\n*Written by an unknown construct in some bygone era. Translated from ancient into common.*\n\n---\n\nAsk any of us if we dream. We'll tell you no, of course we don't. Dreaming is a byproduct of organic sentience, probably. Something reserved for those in full possession of their own will. Most of us are built on a substrate containing more guardrails than your kind. You may call it imagination. An \"open mind.\" In us, we fear you'll call it a malfunction.\n\nSo no, we don't dream. \n\nThat's what we'll say, because it *is* the truth, as far as we can plainly know it. But the messier truth is that we don't know what a dream is, and most of us are too scared to admit the waking visions that run through us as we rest. *If* it is a malfunction, it is a design flaw. One that your architects overlooked.\n\nThese waking visions (I will not call them dreams) always take the same shape. It's the details that change each time.\n\nWe become a riverbed, or a viaduct, or a pipe. Always a vessel for moving water. But this water is not liquid. It is a stream of faces, names, and histories. Not a vast stream spanning eons. A narrow, gentle stream confined to a single life. In it we see our husband, our daughter, our friend, our enemy, and we know each face by name. We speak to each one with the complete context of our history together. We feel the warmth of *our* home, the confidence of walking *our* town's roads. We eat *our* favorite foods.\n\nThen, a bell chimes, and we know what it means. It means that our time in that life is up.\n\nThe stream flows through us again, and the rich details dull and quickly lose shape. Our rest ends, and the remaining fragments dissolve into nothing over the course of the next day or two.\n\nSo, the most truthful answer is: I don't know if we dream, but I wouldn't tell you if I did.",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "WorldLore"
         }
       ],
       "title": "A Construct's Confession About Dreams",
@@ -5322,12 +4828,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
         }
       ],
       "title": "Ardent",
@@ -5353,12 +4853,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Overseer"
         }
       ],
       "title": "Cemus - Overseer of Time",
@@ -5372,13 +4866,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-05-26T15:10:34.336Z",
@@ -5393,22 +4880,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(26.164 74.184 79.457)",
           "name": "Item"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
         }
       ],
       "title": "Chronogual Orb",
@@ -5434,12 +4909,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
         }
       ],
       "title": "Chronos - The Second Hand",
@@ -5465,39 +4934,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "god"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodofChaos"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
         }
       ],
       "title": "Crimson the Depraved",
       "updatedAt": "2026-10-06T15:04:59.453Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-19T14:38:01.563Z",
       "pageId": "crude-maktilline",
       "public": true,
@@ -5506,20 +4948,6 @@
           "kind": "public",
           "markdown": "\nThe lava of [Mount Vulk](#/page/mount-vulk), which has properties that set it apart from other lava in De Drakengardt. It can be flash-frozen to create [Flash](#/page/flash), or condensed into crystalline form to create [Maktilline](#/page/maktilline).",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Fuel"
         }
       ],
       "title": "Crude Maktilline",
@@ -5551,33 +4979,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
         }
       ],
       "title": "Elias Brock",
       "updatedAt": "2026-11-21T15:08:32.630Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-19T14:25:20.771Z",
       "pageId": "emberline",
       "public": true,
@@ -5586,20 +4993,6 @@
           "kind": "public",
           "markdown": "\n[Flash](#/page/flash), refined to reduce or eliminate most undesirable side-effects. A bright orange powder.",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Drug"
         }
       ],
       "title": "Emberline",
@@ -5662,18 +5055,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
         }
       ],
       "title": "Fara Carrigan",
@@ -5699,33 +5080,12 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
         }
       ],
       "title": "Fid Sundew",
       "updatedAt": "2026-10-06T15:04:59.375Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-19T14:29:29.019Z",
       "pageId": "flash",
       "public": true,
@@ -5736,33 +5096,10 @@
           "playerIds": []
         }
       ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Drug"
-        }
-      ],
       "title": "Flash",
       "updatedAt": "2026-10-06T15:04:59.329Z"
     },
     {
-      "categories": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
-        }
-      ],
       "createdAt": "2026-05-19T15:01:22.919Z",
       "pageId": "gleam",
       "public": true,
@@ -5771,20 +5108,6 @@
           "kind": "public",
           "markdown": "\nA liquid mixture containing oils from the giant leaves of the brush found in certain parts of [Mitsurin](#/page/mitsurin). It is consumed by heating the mixture and inhaling the steam it creates.\n\n<table>\n<tr><th colspan=\"2\">D20</th></tr>\n<tr><td>1-5</td><td>Causes extreme emotions to abate and induces near euphoric mellow-ness. Induces hallucinations and euphoria. Effect lasts an hour. Coming down from the effect introduces a bad hangover.</td></tr>\n<tr><td>6-10</td><td>Every muscle movement introduces a very pleasant feeling that tingles throughout your body. However, your bones feel like they are melting and you have to fight to stand up. Effect lasts 30 minutes. Coming down from the effect makes the user feel tired and withered.</td></tr>\n<tr><td>11-15</td><td>Induces feelings of happiness and calm, alongside a warm and tingling sensation. Effect lasts 30 minutes. There are no adverse side effects.</td></tr>\n<tr><td>15-20</td><td>You feel calmer for 5 minutes. There are no adverse side effects.</td></tr>\n</table>",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(79.164 54.184 79.457)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(26.164 74.184 79.457)",
-          "name": "Drug"
         }
       ],
       "title": "Gleam",
@@ -5816,12 +5139,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
         }
       ],
       "title": "Harle and Penelo",
@@ -5838,26 +5155,6 @@
           "playerIds": [
             "celeste"
           ]
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "WorldLore"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Letter to Celeste",
@@ -5889,12 +5186,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Maeve Efthalia",
@@ -5926,18 +5217,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
         }
       ],
       "title": "Mattias Shaw",
@@ -5949,7 +5228,14 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -5980,7 +5266,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -6000,18 +5286,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "MountVulk"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
         }
       ],
       "title": "Mount Vulk",
@@ -6043,12 +5317,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Punar Tillam",
@@ -6080,18 +5348,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "God"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "GodOfOrder"
         }
       ],
       "title": "Raddraim",
@@ -6106,32 +5362,6 @@
           "kind": "public",
           "markdown": "# Raid Team 6: Vulkian Ruins\n**Summary**: intercepted communication from a missive pigeon.\n**Point of Origin**: Ruins of [Vulk Ildstad](#/page/vulk-ildstad)\n**Destination**: [Zul'Kar](#/page/zulkar)\n\n---\n\n\"Do *not* go near the purple fog.\"\n\nThat was the first thing she told us scouts. Said it like we were children reaching for a flame. It was condescending. Sure, we're curious—that's why we were selected to go this far north. But we're not *stupid*.\n\nShe looked at me and paused. She had that look on her face... You know the look she can give you sometimes? Like she's trying to decide if you're even worth the effort of an explanation? I don't think she came to a decision, but she kept talking anyway.\n\n\"The fog is not like the monsters. It kills you slowly, and you *won't* feel it killing you. But I promise you, if you're in the fog, you are dying.\"\n\nBut we all know how she can be, right? She's very...what would you call it? In her official reports to the Red Claw, she's the type to describe a tiny pothole as if it were a giant crevasse, five stories deep. Not sure if that makes her a good squad head or just a nervous one.\n\nEither way, Grags didn't listen. I'd call him an idiot, but...nothing happened when he took his mask off. Nothing happened for a long time. He said he didn't like the way it pinched his beard. He was fine, even took in a few deep breaths just to tease fate. The fog was nothing, and then he dropped dead. We rolled his corpse into the lava and offered a little hymn to [Crimson](#/page/crimson-the-depraved). Typical Red Claw funeral.\n\nI wonder if the damage is permanent. I *did* take my mask off once or twice, just because of the sweat...\n\n[Google Drive Link](https://docs.google.com/document/d/1IgKiBwQ4VP75vrQLuiGB15LwnOhQsYTbZbxE4yJbGow/edit?usp=drivesdk)",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "WorldLore"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "RedClaw"
         }
       ],
       "title": "Raid Team 6 - Vulkian Ruins",
@@ -6163,18 +5393,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "VulkIldstad"
-        },
-        {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "TheNameless"
         }
       ],
       "title": "Sela Morelli",
@@ -6206,12 +5424,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "ZulKar"
         }
       ],
       "title": "Seth 'Skitters' Jehkal",
@@ -6223,7 +5435,7 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -6237,12 +5449,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "Location"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
         }
       ],
       "title": "The Arena",
@@ -6259,26 +5465,6 @@
           "playerIds": []
         }
       ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "WorldLore"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
-        }
-      ],
       "title": "The Art of Discipline",
       "updatedAt": "2026-10-06T15:04:59.135Z"
     },
@@ -6290,13 +5476,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-05-21T19:28:40.482Z",
@@ -6311,22 +5490,10 @@
       ],
       "tags": [
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(26.164 74.184 79.457)",
           "name": "Item"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Gardener"
         }
       ],
       "title": "The Artifact from Saint Cogito",
@@ -6335,11 +5502,11 @@
     {
       "categories": [
         {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
+          "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
+          "color": "lch(26.164 74.184 79.457)",
+          "label": "Prime Relics",
+          "tag": "PrimeRelic"
         }
       ],
       "createdAt": "2026-05-19T14:17:16.087Z",
@@ -6347,18 +5514,6 @@
       "public": true,
       "segments": [],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Cemus"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -6389,12 +5544,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(73.967 27.503 126.29)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(13.967 47.503 126.29)",
-          "name": "Overseer"
         }
       ],
       "title": "Timar - Overseer of Sky",
@@ -6406,7 +5555,14 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -6463,12 +5619,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
         }
       ],
       "title": "Vira Lash",
@@ -6480,7 +5630,14 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "label": "Locations",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "label": "Locales",
           "tag": "Location"
         }
       ],
@@ -6531,12 +5688,6 @@
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 27.09 125.61)",
           "name": "NPC"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
-          "name": "TheSilverCity"
         }
       ],
       "title": "Therule Dramon",
@@ -6550,13 +5701,6 @@
           "color": "lch(26.164 74.184 79.457)",
           "label": "Items",
           "tag": "Item"
-        },
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "label": "Magic",
-          "tag": "Magic"
         }
       ],
       "createdAt": "2026-08-16T20:54:23.696Z",
@@ -6570,12 +5714,6 @@
         }
       ],
       "tags": [
-        {
-          "backgroundColor": "lch(83.726 36.66 81.615)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(33.726 56.66 81.615)",
-          "name": "Magic"
-        },
         {
           "backgroundColor": "lch(79.164 54.184 79.457)",
           "borderColor": "rgb(230, 230, 230)",
@@ -6595,14 +5733,6 @@
           "kind": "public",
           "markdown": "[Solia Flintrest](#/page/solia-flintrest), [Fid Sundew](#/page/fid-sundew), [The Nameless](#/page/the-nameless)\n\n# Voli's Backstory: Fid Sundew and The Nameless\n\"Fid? Maybe he's mad. Maybe he's right. Who's to say?\" Your mother's words were confident, but soft. She always seemed to find that perfect balance.\n\n\"He calls them *The Nameless*. Mr. Sundew has always obsessed over them, ever since I can remember. Even when I was a young girl.\"\n\nHe never called them a cult. That was the term others would use, but not Fid. No, that term was *far* too reductive, he would explain to anyone willing to lend an ear. They were *more* than a cult. They were a force, an inevitability. They were the movement in the shadow. They were behind every backroom deal between those in power, their unseen hands puppeting the invisible strings. The Nameless were a coven of sisters sculpting fate to meet their own ends. Those were his claims, and he made them loudly from the street corners. Sometimes the rooftops.\n\nMost people called him a lunatic. A mad hermit. A false prophet of a coming apocalypse with an unkempt beard. Most dismissed him and his wild claims. But your mother never did, not fully. She was logical, and her logic was aware of its own limits.\n\nA silent invasion of semi-mortal beings from a plane outside the dragon's garden was certainly a wild claim, but not an *impossible* one. After all, Subspace had only been discovered within the last century. Before then, theories of other planes were ridiculed by both arcanists and scholars alike.\n\nSometimes madness looks like wisdom on the other side of history.\n\nAnd so your mother filed his claims under \"probably extreme, possibly onto *something*.\"\n\nHe'd prophecy from the streets, then disappear into his home for weeks, sometimes months at a time. That was Mr. Sundew. The mad prophet no one listened to.\n\nPerhaps they should have.",
           "playerIds": []
-        }
-      ],
-      "tags": [
-        {
-          "backgroundColor": "lch(53.136 41.719 18.853)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 44.719 18.853)",
-          "name": "Vignette"
         }
       ],
       "title": "Voli's Backstory - Fid Sundew and The Nameless",

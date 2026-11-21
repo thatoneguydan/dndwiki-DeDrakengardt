@@ -1,0 +1,95 @@
+{
+  "collections": [
+    {
+      "id": "people",
+      "label": "People",
+      "subcollections": [
+        {
+          "id": "pcs",
+          "label": "PCs",
+          "tag": "PC"
+        },
+        {
+          "id": "npcs",
+          "label": "NPCs",
+          "tag": "NPC"
+        },
+        {
+          "id": "factions",
+          "label": "Factions",
+          "tag": "Faction"
+        }
+      ]
+    },
+    {
+      "id": "places",
+      "label": "Places",
+      "subcollections": [
+        {
+          "id": "regions",
+          "label": "Regions",
+          "tag": "Region"
+        },
+        {
+          "id": "locales",
+          "label": "Locales",
+          "tag": "Location"
+        }
+      ]
+    },
+    {
+      "id": "things",
+      "label": "Things",
+      "subcollections": [
+        {
+          "id": "items",
+          "label": "Items",
+          "tag": "Item"
+        },
+        {
+          "id": "relics",
+          "label": "Relics",
+          "tag": "Relic"
+        },
+        {
+          "id": "prime-relics",
+          "label": "Prime Relics",
+          "tag": "PrimeRelic"
+        }
+      ]
+    },
+    {
+      "id": "mechanics",
+      "label": "Mechanics",
+      "subcollections": [
+        {
+          "id": "feats",
+          "label": "Feats",
+          "tag": "Feat"
+        },
+        {
+          "id": "homebrew-rules",
+          "label": "Homebrew Rules",
+          "tag": "Homebrew"
+        }
+      ]
+    },
+    {
+      "id": "lore",
+      "label": "Lore",
+      "subcollections": [
+        {
+          "id": "history",
+          "label": "History",
+          "tag": "History"
+        },
+        {
+          "id": "rumors-and-stories",
+          "label": "Rumors & Stories",
+          "tag": "Story"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 1
+}
