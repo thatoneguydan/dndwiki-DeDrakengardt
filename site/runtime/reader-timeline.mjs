@@ -56,7 +56,7 @@ export function mountReaderTimeline({ root, window: browserWindow, snapshot, ses
     if (!article || !heading) return [];
     const route = pageRoute(), title = heading.textContent.trim();
     const result = [{ title, level: 1, target: heading, titleLink: true, href: route }];
-    const headings = [...article.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter(target => !target.closest('.mapsmith'));
+    const headings = [...article.querySelectorAll('h1,h2,h3,h4,h5,h6')].filter(target => !target.closest('.mapsmith,.dndwiki-note-embed'));
     headings.forEach((target, index) => {
       if (target.hasAttribute('data-dndwiki-outline-contract-sentinel')) return;
       const text = target.textContent.trim();

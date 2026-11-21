@@ -1,4 +1,5 @@
 import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
+import { mountNoteEmbeds, renderNoteMarkdown } from './note-embeds.mjs';
 import {
   backlinkNavigationForPage,
   forwardNavigationForPage,
@@ -900,7 +901,7 @@ function searchResults(model, expandedPageIds = new Set(), fullPage = false) {
   </section>`;
 }
 
-function pageBody(model) {
+function pageBody(model, renderNote) {
   const page = model.page;
   if (model.route.kind === 'search') {
     return `<section class="dndwiki-search-page" data-dndwiki-search-page><header><p class="dndwiki-meta">Search</p><h1>${model.query ? `Results for “${escapeHtml(model.query)}”` : 'All pages'}</h1><div data-dndwiki-search-selected>${searchSelectedFilters(model)}</div></header><div data-dndwiki-search-page-results>${searchResults(model, new Set(), true)}</div></section>`;
@@ -920,7 +921,7 @@ function pageBody(model) {
   if (page.status === 'empty') {
     return '<section class="dndwiki-empty"><h1>Nothing to show</h1><p>This page has no content available in the current view.</p></section>';
   }
-  return `<article class="dndwiki-page" data-dndwiki-page>${renderMarkdownToHtml(page.markdown)}</article>`;
+  return `<article class="dndwiki-page" data-dndwiki-page data-dndwiki-embed-root="${escapeHtml(page.route)}">${renderNote(page)}</article>`;
 }
 
 function searchSelectedFilters(model) {
@@ -956,7 +957,7 @@ function contextSidebar(model) {
   return sections.join('');
 }
 
-export function renderWikiShellHtml(model) {
+export function renderWikiShellHtml(model, renderNote = (page) => renderMarkdownToHtml(page.markdown)) {
   if (model == null || model.schemaVersion !== 1) throw new WikiShellError('Shell model schemaVersion must be 1.');
   return `<div class="dndwiki-shell" data-dndwiki-campaign-id="${escapeHtml(model.campaign.id)}">
     <style id="dndwiki-reader-v47-polish">${READER_V47_POLISH_CSS}</style>
@@ -983,7 +984,7 @@ export function renderWikiShellHtml(model) {
     </header>
     <div class="dndwiki-layout">
       <main class="dndwiki-main" id="main-content">
-        ${pageBody(model)}
+        ${pageBody(model, renderNote)}
       </main>
       <aside class="dndwiki-sidebar" aria-label="Wiki navigation">
         ${contextSidebar(model)}
@@ -1096,6 +1097,7 @@ export async function mountWikiShell({
   let pendingSearchTarget = null;
   let searchResultsOpen = model.route.kind !== 'search' && model.query.length > 0;
   const expandedSearchPages = new Set();
+  const unmountNoteEmbeds = mountNoteEmbeds(browserWindow.document, snapshot, () => session.perspective);
 
   const setSearchResultsOpen = (open) => {
     searchResultsOpen = open === true && model.route.kind !== 'search' && (model.query.length > 0 || hasSearchFilters(model));
@@ -1104,7 +1106,7 @@ export async function mountWikiShell({
   };
 
   const render = () => {
-    root.innerHTML = renderWikiShellHtml(model);
+    root.innerHTML = renderWikiShellHtml(model, (page) => renderNoteMarkdown(snapshot, session.perspective, page));
     if (browserWindow.document != null) {
       const pageTitle = model.page?.title;
       browserWindow.document.title = pageTitle ? `${pageTitle} · ${snapshot.campaign.title}` : snapshot.campaign.title;
@@ -1354,6 +1356,7 @@ export async function mountWikiShell({
       render();
     },
     destroy() {
+      unmountNoteEmbeds();
       accessObserver?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange);
       browserWindow.document?.removeEventListener?.('pointerdown', onDocumentPointerDown);

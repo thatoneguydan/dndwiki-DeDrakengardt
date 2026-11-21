@@ -1,5 +1,5 @@
 {
-  "engineVersion": "0.1.2",
+  "engineVersion": "0.1.4",
   "generatedPaths": [
     "site/assets/0dbdd264d7589f3f31909a15.jpeg",
     "site/assets/108ca7a7efad122594f2c34e.svg",
@@ -19,6 +19,7 @@
     "site/runtime/markdown-renderer-v2.mjs",
     "site/runtime/markdown-renderer.mjs",
     "site/runtime/navigation.mjs",
+    "site/runtime/note-embeds.mjs",
     "site/runtime/note-link-previews.mjs",
     "site/runtime/obsidian-html.mjs",
     "site/runtime/page-visibility.mjs",

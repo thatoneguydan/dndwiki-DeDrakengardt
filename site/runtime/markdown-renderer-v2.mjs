@@ -9,6 +9,7 @@ import {
 
 const DD5E_ROOT_RE = /^\s*<div class="dd5e-sheet">\s*$/;
 const MAPSMITH_MARKER_RE = /^\s*<!-- dndwiki:mapsmith ([a-z0-9][a-z0-9-]{0,63}) -->\s*$/;
+const NOTE_EMBED_MARKER = /<!-- dndwiki:note-embed ([a-z0-9][a-z0-9-]{0,63}) ([^\s<>]*) ([^\s<>]*) -->/g;
 
 function fenceMarker(line) {
   const match = /^ {0,3}(`{3,}|~{3,})/.exec(String(line ?? ''));
@@ -61,6 +62,11 @@ function stripOrdinaryHtmlComments(markdown) {
     }
     if (source.startsWith('<!--', cursor)) {
       const close = source.indexOf('-->', cursor + 4);
+      if (close >= 0) {
+        const comment = source.slice(cursor, close + 3);
+        NOTE_EMBED_MARKER.lastIndex = 0;
+        if (NOTE_EMBED_MARKER.exec(comment)?.[0] === comment) output += comment;
+      }
       cursor = close < 0 ? source.length : close + 3;
       continue;
     }
@@ -109,7 +115,7 @@ function replaceInlineHtml(line, replacements) {
   return output;
 }
 
-function preprocessAuthoredHtml(markdown) {
+function preprocessAuthoredHtml(markdown, renderNoteEmbed) {
   const lines = String(markdown ?? '').replace(/\r\n?/g, '\n').split('\n');
   const output = [];
   const replacements = [];
@@ -155,15 +161,31 @@ function preprocessAuthoredHtml(markdown) {
       }
     }
 
-    output.push(replaceInlineHtml(line, replacements));
+    NOTE_EMBED_MARKER.lastIndex = 0;
+    let cursor = 0;
+    let remainder = '';
+    for (const marker of line.matchAll(NOTE_EMBED_MARKER)) {
+      remainder += line.slice(cursor, marker.index);
+      cursor = marker.index + marker[0].length;
+      const html = renderNoteEmbed?.(marker[1], marker[2], marker[3]);
+      if (!html) continue;
+      if (remainder.trim()) output.push(replaceInlineHtml(remainder, replacements));
+      const token = placeholder('BLOCK', replacements.length);
+      replacements.push({ token, html, block: true });
+      if (output.length && output.at(-1) !== '') output.push('');
+      output.push(token, '');
+      remainder = '';
+    }
+    remainder += line.slice(cursor);
+    if (!cursor || remainder.trim()) output.push(replaceInlineHtml(remainder, replacements));
     index += 1;
   }
 
   return { markdown: output.join('\n'), replacements };
 }
 
-export function renderMarkdownToHtml(markdown) {
-  const prepared = preprocessAuthoredHtml(stripOrdinaryHtmlComments(markdown));
+export function renderMarkdownToHtml(markdown, { renderNoteEmbed } = {}) {
+  const prepared = preprocessAuthoredHtml(stripOrdinaryHtmlComments(markdown), renderNoteEmbed);
   let html = renderLegacyMarkdownToHtml(prepared.markdown);
   for (const replacement of prepared.replacements) {
     if (replacement.block) html = html.replace(`<p>${replacement.token}</p>`, replacement.html);

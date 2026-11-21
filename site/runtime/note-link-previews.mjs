@@ -1,5 +1,6 @@
 import { pageForRoute } from './navigation.mjs';
-import { renderMarkdownToHtml, escapeHtml } from './markdown-renderer-v2.mjs';
+import { escapeHtml } from './markdown-renderer-v2.mjs';
+import { renderNoteMarkdown } from './note-embeds.mjs';
 
 const STYLE_ID = 'dndwiki-note-link-preview-styles';
 const CSS = `
@@ -48,7 +49,7 @@ export function notePreviewForLink(snapshot, perspective, href) {
   if (view.status !== 'visible') return null;
   let heading = null;
   try { heading = match[2] == null ? null : decodeURIComponent(match[2]); } catch { /* Start at the title for malformed fragments. */ }
-  return { title: view.title ?? 'Page', route: view.route, heading, html: renderMarkdownToHtml(view.markdown) };
+  return { title: view.title ?? 'Page', route: view.route, heading, html: renderNoteMarkdown(snapshot, perspective, view) };
 }
 
 
@@ -189,7 +190,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
       + escapeHtml(preview.route) + '">' + escapeHtml(preview.title)
       + '</a><div class="dndwiki-note-preview-actions"><button type="button" class="dndwiki-note-preview-close" aria-label="Close preview">×</button></div></header>'
       + '<div class="dndwiki-shell" data-dndwiki-note-preview-scroll tabindex="0" aria-label="Note preview body">'
-      + '<article class="dndwiki-page" data-dndwiki-note-preview-body>' + preview.html + '</article></div>';
+      + '<article class="dndwiki-page" data-dndwiki-note-preview-body data-dndwiki-embed-root="' + escapeHtml(preview.route) + '">' + preview.html + '</article></div>';
     // Fullscreen's top layer excludes body siblings; keep recursive cards in
     // that same layer when their source is a fullscreen map.
     (document.fullscreenElement?.contains(link) ? document.fullscreenElement : document.body).append(panel);
