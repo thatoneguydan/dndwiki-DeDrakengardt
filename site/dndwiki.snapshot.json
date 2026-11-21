@@ -2857,20 +2857,20 @@
           "name": "Faction"
         },
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "TheMegadome"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "Forgecreed"
         }
       ],
       "title": "Forgecreed",
-      "updatedAt": "2026-10-03T02:39:30.736Z"
+      "updatedAt": "2026-11-21T15:08:04.682Z"
     },
     {
       "categories": [
@@ -3017,6 +3017,12 @@
           "name": "HockuPort"
         },
         {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        },
+        {
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
@@ -3026,17 +3032,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
           "name": "TheSunkenCity"
         }
       ],
       "title": "The Broken Wing",
-      "updatedAt": "2026-10-01T16:25:52.041Z"
+      "updatedAt": "2026-11-21T15:08:04.570Z"
     },
     {
       "categories": [
@@ -4086,20 +4086,20 @@
           "name": "Faction"
         },
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
           "name": "TheMegadome"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
+          "name": "Forgecreed"
         }
       ],
       "title": "Miracle Tech",
-      "updatedAt": "2026-10-03T02:39:30.361Z"
+      "updatedAt": "2026-11-21T15:08:04.547Z"
     },
     {
       "categories": [
@@ -4746,12 +4746,6 @@
           "name": "Gardener"
         },
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
@@ -4761,11 +4755,17 @@
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
+          "name": "Forgecreed"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
           "name": "TheBlaze"
         }
       ],
       "title": "Saint Cogito",
-      "updatedAt": "2026-10-06T15:04:59.729Z"
+      "updatedAt": "2026-11-21T15:08:04.507Z"
     },
     {
       "categories": [
@@ -5054,12 +5054,6 @@
           "name": "Gardener"
         },
         {
-          "backgroundColor": "lch(64.372 58.002 43.568)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 61.002 43.568)",
-          "name": "Forgecreed"
-        },
-        {
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
@@ -5069,11 +5063,17 @@
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
+          "name": "Forgecreed"
+        },
+        {
+          "backgroundColor": "lch(64.372 58.002 43.568)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 61.002 43.568)",
           "name": "TheBlaze"
         }
       ],
       "title": "Olander Sunpearl",
-      "updatedAt": "2026-10-03T02:39:30.339Z"
+      "updatedAt": "2026-11-21T15:08:04.434Z"
     },
     {
       "categories": [
@@ -5203,6 +5203,12 @@
           "name": "NPC"
         },
         {
+          "backgroundColor": "lch(52.137 19.696 331.49)",
+          "borderColor": "rgb(230, 230, 230)",
+          "color": "lch(100 22.696 331.49)",
+          "name": "TheMegadome"
+        },
+        {
           "backgroundColor": "lch(64.372 58.002 43.568)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 61.002 43.568)",
@@ -5212,17 +5218,11 @@
           "backgroundColor": "lch(52.137 19.696 331.49)",
           "borderColor": "rgb(230, 230, 230)",
           "color": "lch(100 22.696 331.49)",
-          "name": "TheMegadome"
-        },
-        {
-          "backgroundColor": "lch(52.137 19.696 331.49)",
-          "borderColor": "rgb(230, 230, 230)",
-          "color": "lch(100 22.696 331.49)",
           "name": "ZulKar"
         }
       ],
       "title": "Rook Avelle",
-      "updatedAt": "2026-10-03T02:39:30.375Z"
+      "updatedAt": "2026-11-21T15:08:04.379Z"
     },
     {
       "categories": [
