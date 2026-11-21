@@ -11,3 +11,5 @@ The live reader uses the existing tomato notification service configured in `rel
 Build the next approved reader with `scripts/prepare-published-reader.mjs` in the canonical engine repository. Update the release manifest and validate the assembled site against the current publisher snapshot before deploying. The stage checks the known publisher entry files and snapshot schema. An incompatible publisher change stops deployment while the previous Pages artifact continues to serve.
 
 Revert the campaign reader release commit to restore the previous Pages build. The earlier compatibility files remain available to that build.
+
+The released navigation and home gallery use the collection order, labels, and published subcollections in the snapshot’s `collections` field. Subcollection links use `subcollection=`. The reader continues to display the existing default collections for earlier snapshots that do not include the field.
