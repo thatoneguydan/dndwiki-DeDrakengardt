@@ -1,3 +1,4 @@
+import './reader-ui-contracts.mjs';
 import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import { mountNoteEmbeds, renderNoteMarkdown } from './note-embeds.mjs';
 import {
@@ -9,7 +10,10 @@ import {
   visibleSearchTags,
 } from './navigation.mjs';
 import { buildPageView } from './page-visibility.mjs';
-import { createPlayerIdentitySession } from './player-identity.mjs';
+import { createPlayerIdentitySession, playerKeyStorageKey } from './player-identity.mjs';
+import { openSealedPlayerView } from './sealed-player-view.mjs';
+import { createPrivateAssetReader, guardPrivateAssetMarkup } from './private-asset-reader.mjs';
+import { validatePrivateAssetDescriptor } from './private-asset-format.mjs';
 import { buildViewerGraph } from './viewer-graph.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
@@ -700,22 +704,41 @@ export function buildWikiShellModel(snapshotInput, perspective, {
   };
 }
 
-export function createWikiShellSession({ snapshot: snapshotInput, storage, crypto = null }) {
+export function createWikiShellSession({ snapshot: snapshotInput, storage, crypto = null, onPrivateAccess }) {
   const snapshot = validateSnapshot(snapshotInput);
+  let currentSnapshot = snapshot;
+  let currentPlayerId = null;
+  const viewListeners = new Set();
   const identity = createPlayerIdentitySession({
     campaignId: snapshot.campaign.id,
     publicRegistry: snapshot.players,
     storage,
     crypto,
+    openPlayer: snapshot.playerViews === undefined ? undefined : async ({ playerId, rawKey }) => {
+      const view = validateSnapshot(await openSealedPlayerView({ snapshot, playerId, rawKey, crypto }));
+      for (const [path, descriptor] of Object.entries(view.privateAssets ?? {})) {
+        validatePrivateAssetDescriptor(path, descriptor);
+      }
+      return view;
+    },
+    onAccessChange({ perspective, view, rawKey }) {
+      const nextSnapshot = view ?? snapshot;
+      if (nextSnapshot === currentSnapshot && perspective.playerId === currentPlayerId) return;
+      currentSnapshot = nextSnapshot;
+      currentPlayerId = perspective.playerId;
+      onPrivateAccess?.(view === null ? null : {
+        campaignId: snapshot.campaign.id, playerId: perspective.playerId, rawKey, privateAssets: view.privateAssets,
+      });
+      for (const listener of viewListeners) listener();
+    },
   });
-  let perspective = { kind: 'anonymous', playerId: null, playerIds: [], reason: 'not-loaded' };
   let hash = '';
   let query = '';
   let searchOptions = normalizeSearchOptions();
   let accessMessage = null;
 
   const model = () => {
-    const next = buildWikiShellModel(snapshot, perspective, { hash, query, searchOptions, accessMessage });
+    const next = buildWikiShellModel(currentSnapshot, identity.perspective, { hash, query, searchOptions, accessMessage });
     searchOptions = next.searchOptions;
     return next;
   };
@@ -723,13 +746,14 @@ export function createWikiShellSession({ snapshot: snapshotInput, storage, crypt
     const route = parseWikiRoute(hash);
     if (route.kind === 'search') { query = route.query; searchOptions = route.searchOptions; }
   };
+  const missingView = 'Your key matched, but the protected content could not be opened. Try reloading the wiki.';
 
   return {
     async load({ routeHash = '' } = {}) {
       hash = String(routeHash ?? '');
       readSearchRoute();
-      perspective = await identity.load();
-      accessMessage = null;
+      const perspective = await identity.load();
+      accessMessage = perspective.reason === 'view-unavailable' ? missingView : null;
       return model();
     },
 
@@ -750,21 +774,41 @@ export function createWikiShellSession({ snapshot: snapshotInput, storage, crypt
     },
 
     async enterKey(rawKey) {
-      perspective = await identity.enterKey(rawKey);
-      accessMessage = perspective.kind === 'player'
-        ? null
-        : 'That key did not match this campaign.';
+      const perspective = await identity.enterKey(rawKey);
+      accessMessage = perspective.reason === 'view-unavailable' ? missingView
+        : perspective.reason === 'wrong-key' || perspective.reason === 'no-key' || perspective.reason === 'registry-invalid'
+          ? 'That key did not match this campaign.' : null;
       return model();
     },
 
     clearKey() {
-      perspective = identity.clear();
+      identity.clear();
+      accessMessage = null;
+      return model();
+    },
+
+    suspend() {
+      identity.suspend();
       accessMessage = null;
       return model();
     },
 
     get perspective() {
-      return structuredClone(perspective);
+      return identity.perspective;
+    },
+
+    get currentSnapshot() {
+      return currentSnapshot;
+    },
+
+    onViewChange(listener) {
+      viewListeners.add(listener);
+      return () => viewListeners.delete(listener);
+    },
+
+    dispose() {
+      identity.suspend();
+      viewListeners.clear();
     },
 
     get currentModel() {
@@ -779,6 +823,7 @@ export async function bootWikiShell({
   storage,
   crypto = null,
   routeHash = '',
+  onPrivateAccess,
 }) {
   if (typeof fetchImpl !== 'function') throw new WikiShellError('fetchImpl is required.');
   const response = await fetchImpl(snapshotUrl, { cache: 'no-store' });
@@ -786,7 +831,7 @@ export async function bootWikiShell({
     throw new WikiShellError('Could not load campaign snapshot.');
   }
   const snapshot = validateSnapshot(await response.json());
-  const session = createWikiShellSession({ snapshot, storage, crypto });
+  const session = createWikiShellSession({ snapshot, storage, crypto, onPrivateAccess });
   const model = await session.load({ routeHash });
   return { snapshot, session, model };
 }
@@ -1085,19 +1130,31 @@ export async function mountWikiShell({
   if (root == null || typeof root !== 'object') throw new WikiShellError('A root element is required.');
   if (browserWindow == null) throw new WikiShellError('A browser window is required.');
 
+  let privateAssetReader = null;
   const { snapshot, session } = await bootWikiShell({
     fetchImpl,
     snapshotUrl,
     storage: browserWindow.localStorage,
     crypto: browserWindow.crypto,
     routeHash: browserWindow.location?.hash ?? '',
+    onPrivateAccess(access) {
+      const hasPrivateAssets = access && Object.keys(access.privateAssets ?? {}).length > 0;
+      if (hasPrivateAssets && privateAssetReader === null) {
+        privateAssetReader = createPrivateAssetReader({ document: browserWindow.document, fetchImpl });
+      }
+      privateAssetReader?.setAccess(hasPrivateAssets ? access : null);
+    },
+  }).catch((error) => {
+    privateAssetReader?.destroy();
+    throw error;
   });
 
   let model = session.currentModel;
+  let destroyed = false;
   let pendingSearchTarget = null;
   let searchResultsOpen = model.route.kind !== 'search' && model.query.length > 0;
   const expandedSearchPages = new Set();
-  const unmountNoteEmbeds = mountNoteEmbeds(browserWindow.document, snapshot, () => session.perspective);
+  const unmountNoteEmbeds = mountNoteEmbeds(browserWindow.document, session);
 
   const setSearchResultsOpen = (open) => {
     searchResultsOpen = open === true && model.route.kind !== 'search' && (model.query.length > 0 || hasSearchFilters(model));
@@ -1106,7 +1163,10 @@ export async function mountWikiShell({
   };
 
   const render = () => {
-    root.innerHTML = renderWikiShellHtml(model, (page) => renderNoteMarkdown(snapshot, session.perspective, page));
+    if (destroyed) return;
+    const view = session.currentSnapshot;
+    const html = renderWikiShellHtml(model, (page) => renderNoteMarkdown(view, session.perspective, page));
+    root.innerHTML = guardPrivateAssetMarkup(html, view.privateAssets);
     if (browserWindow.document != null) {
       const pageTitle = model.page?.title;
       browserWindow.document.title = pageTitle ? `${pageTitle} · ${snapshot.campaign.title}` : snapshot.campaign.title;
@@ -1303,6 +1363,29 @@ export async function mountWikiShell({
     searchResultsOpen = false;
     render();
   };
+  const suspendPrivateView = () => {
+    model = session.suspend();
+  };
+  const reloadAccess = () => {
+    suspendPrivateView();
+    void session.load({ routeHash: browserWindow.location?.hash ?? '' }).then((next) => {
+      model = next;
+      render();
+    });
+  };
+  const storageKey = playerKeyStorageKey(snapshot.campaign.id);
+  const onStorage = (event) => { if (event.key === null || event.key === storageKey) reloadAccess(); };
+  const onPageHide = (event) => {
+    if (event.persisted && session.perspective.kind === 'player') suspendPrivateView();
+  };
+  const onPageShow = (event) => { if (event.persisted) reloadAccess(); };
+  const unsubscribeView = session.onViewChange(() => {
+    // A retained reader may be relocked through its session API. Replace the
+    // old private DOM immediately, including during a player change.
+    if (!model.access.active) return;
+    model = session.currentModel;
+    render();
+  });
   const onDocumentPointerDown = (event) => {
     const searchForm = root.querySelector?.('[data-dndwiki-search-form]');
     if (searchForm?.contains?.(event.target)) return;
@@ -1341,6 +1424,9 @@ export async function mountWikiShell({
   accessObserver?.observe?.(root, { childList: true, subtree: true });
 
   browserWindow.addEventListener?.('hashchange', onHashChange);
+  browserWindow.addEventListener?.('storage', onStorage);
+  browserWindow.addEventListener?.('pagehide', onPageHide);
+  browserWindow.addEventListener?.('pageshow', onPageShow);
   browserWindow.document?.addEventListener?.('pointerdown', onDocumentPointerDown);
   browserWindow.document?.addEventListener?.('keydown', onDocumentKeyDown);
   root.addEventListener?.('click', onPlayerAccessClick);
@@ -1356,9 +1442,18 @@ export async function mountWikiShell({
       render();
     },
     destroy() {
+      destroyed = true;
       unmountNoteEmbeds();
+      unsubscribeView();
+      session.dispose();
+      privateAssetReader?.destroy();
+      model = session.currentModel;
+      root.innerHTML = '';
       accessObserver?.disconnect?.();
       browserWindow.removeEventListener?.('hashchange', onHashChange);
+      browserWindow.removeEventListener?.('storage', onStorage);
+      browserWindow.removeEventListener?.('pagehide', onPageHide);
+      browserWindow.removeEventListener?.('pageshow', onPageShow);
       browserWindow.document?.removeEventListener?.('pointerdown', onDocumentPointerDown);
       browserWindow.document?.removeEventListener?.('keydown', onDocumentKeyDown);
       root.removeEventListener?.('click', onPlayerAccessClick);

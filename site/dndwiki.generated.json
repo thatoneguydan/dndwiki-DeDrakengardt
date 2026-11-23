@@ -1,5 +1,5 @@
 {
-  "engineVersion": "0.2.7",
+  "engineVersion": "0.2.8",
   "generatedPaths": [
     "site/assets/0dbdd264d7589f3f31909a15.jpeg",
     "site/assets/108ca7a7efad122594f2c34e.svg",
@@ -92,6 +92,8 @@
     "site/runtime/page-visibility.mjs",
     "site/runtime/pixel-burn.mjs",
     "site/runtime/player-identity.mjs",
+    "site/runtime/private-asset-format.mjs",
+    "site/runtime/private-asset-reader.mjs",
     "site/runtime/reader-access.css",
     "site/runtime/reader-access.mjs",
     "site/runtime/reader-navigation.css",
@@ -99,6 +101,7 @@
     "site/runtime/reader-timeline.css",
     "site/runtime/reader-timeline.mjs",
     "site/runtime/reader-ui-contracts.mjs",
+    "site/runtime/sealed-player-view.mjs",
     "site/runtime/tabler-icons.mjs",
     "site/runtime/viewer-graph.mjs",
     "site/runtime/wiki-shell-entry.mjs",

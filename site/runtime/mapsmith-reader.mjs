@@ -1,6 +1,7 @@
 import { pageForRoute } from './navigation.mjs';
 import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import { mountMapNoteCard } from './mapsmith-note-card.mjs';
+import { guardPrivateAssetMarkup } from './private-asset-reader.mjs';
 
 const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
 const HOST_SELECTOR = '[data-dndwiki-mapsmith-page]';
@@ -119,16 +120,19 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
   const headerObserver = typeof browserWindow.ResizeObserver === 'function' ? new browserWindow.ResizeObserver(() => schedule()) : null;
   const settledLayout = () => new Promise((resolve) => browserWindow.requestAnimationFrame(() => browserWindow.requestAnimationFrame(resolve)));
   const perspectiveKey = () => JSON.stringify(session.perspective);
+  const currentSnapshot = () => session.currentSnapshot ?? snapshot;
   const remove = (owner, entry) => {
     entries.delete(owner);
     entry.viewer?.destroy();
   };
   const renderNote = async (item, element) => {
-    const view = visiblePage(snapshot, session.perspective, item.note);
+    const activeSnapshot = currentSnapshot();
+    const view = visiblePage(activeSnapshot, session.perspective, item.note);
     element.replaceChildren();
     if (view == null) return;
     notePreviews?.close();
-    return mountMapNoteCard(element,{title:view.title??'Location',html:renderMarkdownToHtml(view.markdown),window:browserWindow});
+    const html = guardPrivateAssetMarkup(renderMarkdownToHtml(view.markdown), activeSnapshot.privateAssets);
+    return mountMapNoteCard(element, { title: view.title ?? 'Location', html, window: browserWindow });
   };
   const start = async (owner, entry, projected) => {
     try {
@@ -164,9 +168,9 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
           },
           active: (element) => document.fullscreenElement === element,
         },
-        noteTitle: (item) => visiblePage(snapshot, session.perspective, item.note)?.title ?? 'Location',
+        noteTitle: (item) => visiblePage(currentSnapshot(), session.perspective, item.note)?.title ?? 'Location',
         openNote: (item) => {
-          const view = visiblePage(snapshot, session.perspective, item.note);
+          const view = visiblePage(currentSnapshot(), session.perspective, item.note);
           if (view != null) browserWindow.open(new URL(view.route, document.baseURI).href, '_blank', 'noopener');
         },
       }, !entry.standalone);
@@ -189,13 +193,14 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
     frame = 0; queued = false;
     if (destroyed) return;
     const perspective = session.perspective, key = perspectiveKey();
+    const activeSnapshot = currentSnapshot();
     const shell = root.querySelector('.dndwiki-shell');
     const header = shell?.querySelector('.dndwiki-topbar');
     if (header !== measuredHeader) { headerObserver?.disconnect(); measuredHeader = header; if (header) headerObserver?.observe(header); }
     const current = session.currentModel;
     const article = shell?.querySelector('.dndwiki-main > [data-dndwiki-page]');
     const ownPageId = current?.route?.kind === 'page' && current.page?.status === 'visible' ? current.page.pageId : null;
-    const primary = mapsmithForPerspective(snapshot, perspective, ownPageId) == null ? null
+    const primary = mapsmithForPerspective(activeSnapshot, perspective, ownPageId) == null ? null
       : [...(article?.querySelectorAll(HOST_SELECTOR) ?? [])].find((owner) => owner.getAttribute('data-dndwiki-mapsmith-page') === ownPageId && owner.closest('.mapsmith') == null);
     shell?.toggleAttribute('data-dndwiki-mapsmith-standalone', primary != null);
     if (primary) {
@@ -214,7 +219,7 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
       owner.setAttribute('data-dndwiki-mapsmith-mode', standalone ? 'standalone' : 'embedded');
       if (entries.has(owner)) continue;
       const pageId = owner.getAttribute('data-dndwiki-mapsmith-page');
-      const projected = mapsmithForPerspective(snapshot, perspective, pageId);
+      const projected = mapsmithForPerspective(activeSnapshot, perspective, pageId);
       owner.hidden = projected == null;
       if (projected == null) continue;
       // A circular authored embed remains an ordinary navigable page link.
@@ -241,6 +246,10 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
     queued = true;
     frame = browserWindow.requestAnimationFrame(sync);
   };
+  const unsubscribe = session.onViewChange?.(() => {
+    for (const [owner, entry] of entries) remove(owner, entry);
+    schedule();
+  });
   const observer = new browserWindow.MutationObserver(schedule);
   // Includes note-preview cards and expanded maps, both hosted outside root.
   observer.observe(document.body, { childList: true, subtree: true });
@@ -249,6 +258,7 @@ export function mountMapsmithReader({ root, window: browserWindow, snapshot, ses
   sync();
   return { destroy() {
     destroyed = true; observer.disconnect(); headerObserver?.disconnect();
+    unsubscribe?.();
     browserWindow.removeEventListener('hashchange', schedule);
     browserWindow.removeEventListener('resize', schedule);
     if (frame) browserWindow.cancelAnimationFrame(frame);

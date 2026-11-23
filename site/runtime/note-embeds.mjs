@@ -1,5 +1,6 @@
 import { escapeHtml, renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import { pageForRoute, routeForPage } from './navigation.mjs';
+import { guardPrivateAssetMarkup } from './private-asset-reader.mjs';
 import { tablerIcon } from './tabler-icons.mjs';
 
 const DETAILS = 'details[data-dndwiki-note-embed]';
@@ -52,7 +53,7 @@ function visibleNoteSection(snapshot, perspective, pageId, selector) {
 }
 
 function renderWithEmbeds(snapshot, perspective, markdown, ancestors) {
-  return renderMarkdownToHtml(markdown, {
+  const html = renderMarkdownToHtml(markdown, {
     renderNoteEmbed(pageId, encodedSelector, encodedAlias) {
       let selector, alias;
       try {
@@ -71,13 +72,14 @@ function renderWithEmbeds(snapshot, perspective, markdown, ancestors) {
       return `<details class="dndwiki-note-embed" data-dndwiki-note-embed="${pageId}" data-dndwiki-note-selector="${escapeHtml(selector)}"><summary>${icon}<span>${title}</span></summary><div class="dndwiki-note-embed-body"></div></details>`;
     },
   });
+  return guardPrivateAssetMarkup(html, snapshot.privateAssets);
 }
 
 export function renderNoteMarkdown(snapshot, perspective, page) {
   return renderWithEmbeds(snapshot, perspective, page.markdown, new Set([page.route]));
 }
 
-export function mountNoteEmbeds(document, snapshot, getPerspective) {
+export function mountNoteEmbeds(document, session) {
   const loaded = new WeakSet();
   const openEmbed = (event) => {
     const details = event.target;
@@ -90,7 +92,8 @@ export function mountNoteEmbeds(document, snapshot, getPerspective) {
       if (!PAGE_ID.test(node.dataset.dndwikiNoteEmbed)) return;
       ancestors.add(routeForPage(node.dataset.dndwikiNoteEmbed, node.dataset.dndwikiNoteSelector));
     }
-    const perspective = getPerspective(), { dndwikiNoteEmbed: pageId, dndwikiNoteSelector: selector } = details.dataset;
+    const { currentSnapshot: snapshot, perspective } = session;
+    const { dndwikiNoteEmbed: pageId, dndwikiNoteSelector: selector } = details.dataset;
     const target = visibleNoteSection(snapshot, perspective, pageId, selector);
     if (!target) return;
     body.innerHTML = renderWithEmbeds(snapshot, perspective, target.markdown, ancestors);

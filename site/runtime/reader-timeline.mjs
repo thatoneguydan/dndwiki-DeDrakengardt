@@ -31,9 +31,9 @@ function remember(window, key, value) {
   return null;
 }
 
-export function mountReaderTimeline({ root, window: browserWindow, snapshot, session, mobilePanel = 'full', onOpenChange = () => {} }) {
+export function mountReaderTimeline({ root, window: browserWindow, snapshot: initialSnapshot, session, mobilePanel = 'full', onOpenChange = () => {} }) {
   const document = browserWindow.document;
-  const preference = `dndwiki:${snapshot.campaign.id}:outline-open`;
+  const preference = `dndwiki:${initialSnapshot.campaign.id}:outline-open`;
   let rail = null, signature = '', open = remember(browserWindow, preference) === 'open';
   let records = [], frame = 0, dragging = null, destroyed = false, resizeObserver = null;
   const pageRoute = () => /^(#\/page\/[^#]+)/.exec(browserWindow.location.hash)?.[1] ?? '#/';
@@ -68,6 +68,7 @@ export function mountReaderTimeline({ root, window: browserWindow, snapshot, ses
     return result;
   }
   function category() {
+    const snapshot = session.currentSnapshot ?? initialSnapshot;
     const model = session.currentModel;
     const page = visibleReaderDirectory(snapshot, session.perspective).find(record => record.pageId === model.page?.pageId);
     const current = page?.categories?.[0];

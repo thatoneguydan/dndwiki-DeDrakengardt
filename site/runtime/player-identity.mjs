@@ -153,40 +153,62 @@ export function clearRememberedPlayerKey({ campaignId, storage }) {
   }
 }
 
-export function createPlayerIdentitySession({ campaignId, publicRegistry, storage, crypto = null }) {
+export function createPlayerIdentitySession({ campaignId, publicRegistry, storage, crypto = null, openPlayer, onAccessChange }) {
   const normalizedId = normalizedCampaignId(campaignId);
   const targetStorage = requireStorage(storage);
   let perspective = anonymous('not-loaded');
+  let revision = 0;
+
+  const clearStored = () => clearRememberedPlayerKey({ campaignId: normalizedId, storage: targetStorage });
+  const select = async (rawKey, remembered) => {
+    const attempt = ++revision;
+    const key = typeof rawKey === 'string' ? rawKey.trim() : null;
+    let resolved = await resolvePlayerPerspective(publicRegistry, key, { crypto });
+    if (attempt !== revision) return structuredClone(perspective);
+
+    let view = null;
+    if (resolved.kind === 'player' && openPlayer) {
+      try { view = await openPlayer({ playerId: resolved.playerId, rawKey: key }); }
+      catch { resolved = anonymous('view-unavailable'); }
+    }
+    if (attempt !== revision) return structuredClone(perspective);
+
+    perspective = resolved;
+    if (resolved.kind === 'player' && !remembered) {
+      // A valid key still works in a browsing session with storage disabled.
+      try { rememberPlayerKey({ campaignId: normalizedId, storage: targetStorage, rawKey: key }); }
+      catch { /* storage is optional after authentication */ }
+    } else if (resolved.kind !== 'player' && (!remembered || (key !== null && resolved.reason !== 'view-unavailable'))) {
+      clearStored();
+    }
+    onAccessChange?.({ perspective, view, rawKey: view === null ? null : key });
+    return structuredClone(perspective);
+  };
 
   return {
     get perspective() {
       return structuredClone(perspective);
     },
 
-    async load() {
+    load() {
       const remembered = readRememberedPlayerKey({ campaignId: normalizedId, storage: targetStorage });
-      perspective = await resolvePlayerPerspective(publicRegistry, remembered, { crypto });
-      if (remembered !== null && perspective.kind !== 'player') {
-        clearRememberedPlayerKey({ campaignId: normalizedId, storage: targetStorage });
-      }
-      return structuredClone(perspective);
+      return select(remembered, true);
     },
 
-    async enterKey(rawKey) {
-      const resolved = await resolvePlayerPerspective(publicRegistry, rawKey, { crypto });
-      if (resolved.kind === 'player') {
-        rememberPlayerKey({ campaignId: normalizedId, storage: targetStorage, rawKey: rawKey.trim() });
-      } else {
-        clearRememberedPlayerKey({ campaignId: normalizedId, storage: targetStorage });
-      }
-      perspective = resolved;
-      return structuredClone(perspective);
-    },
+    enterKey: (rawKey) => select(rawKey, false),
 
     clear() {
-      clearRememberedPlayerKey({ campaignId: normalizedId, storage: targetStorage });
+      revision += 1;
+      clearStored();
       perspective = anonymous('cleared');
+      onAccessChange?.({ perspective, view: null, rawKey: null });
       return structuredClone(perspective);
+    },
+
+    suspend() {
+      revision += 1;
+      perspective = anonymous('suspended');
+      onAccessChange?.({ perspective, view: null, rawKey: null });
     },
   };
 }

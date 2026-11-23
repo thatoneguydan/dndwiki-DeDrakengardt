@@ -6,11 +6,12 @@ import { tablerIcon } from './tabler-icons.mjs';
 
 const escapeHtml = value => String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 
-export function mountCommissionedReader({ root, window: browserWindow, snapshot, mounted, mobilePanel = 'full' }) {
+export function mountCommissionedReader({ root, window: browserWindow, snapshot: initialSnapshot, mounted, mobilePanel = 'full' }) {
   const { session } = mounted;
   let navigation = null, access = null, timeline = null, queued = false, destroyed = false;
   const enhance = () => {
     if (destroyed) return;
+    const snapshot = session.currentSnapshot ?? initialSnapshot;
     const shell = root.querySelector('.dndwiki-shell'), main = root.querySelector('.dndwiki-main');
     if (!shell || !main) return;
     shell.classList.add('reader-shell');
@@ -62,9 +63,9 @@ export function mountCommissionedReader({ root, window: browserWindow, snapshot,
   };
   const refreshReader = () => { mounted.refresh(); enhance(); };
   enhance();
-  navigation = mountReaderNavigation({ root, window: browserWindow, snapshot, session, mobilePanel, onKey: () => access?.toggle() });
-  access = mountReaderAccess({ root, window: browserWindow, snapshot, session, navigation, refreshReader, isOtherInteractionActive: () => timeline?.open === true });
-  timeline = mountReaderTimeline({ root, window: browserWindow, snapshot, session, mobilePanel, onOpenChange: open => navigation.setInteractionActive(open || access.phase !== 'closed') });
+  navigation = mountReaderNavigation({ root, window: browserWindow, snapshot: initialSnapshot, session, mobilePanel, onKey: () => access?.toggle() });
+  access = mountReaderAccess({ root, window: browserWindow, snapshot: initialSnapshot, session, navigation, refreshReader, isOtherInteractionActive: () => timeline?.open === true });
+  timeline = mountReaderTimeline({ root, window: browserWindow, snapshot: initialSnapshot, session, mobilePanel, onOpenChange: open => navigation.setInteractionActive(open || access.phase !== 'closed') });
   enhance();
   const observer = typeof browserWindow.MutationObserver === 'function' ? new browserWindow.MutationObserver(records => {
     if (records.every(record => (record.target.nodeType === 1 ? record.target : record.target.parentElement)?.closest?.('.reader-navigation,.reader-timeline,.mapsmith'))) return;

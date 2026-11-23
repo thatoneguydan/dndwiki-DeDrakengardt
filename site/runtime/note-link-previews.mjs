@@ -106,6 +106,8 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     closeFrom(0);
     fullscreenOwner = null;
   };
+  const unsubscribe = session.onViewChange?.(close);
+  const currentSnapshot = () => session.currentSnapshot ?? snapshot;
   const interactionFloor = () => fullscreenOwner && document.fullscreenElement
     ? Math.max(0,panels.indexOf(fullscreenOwner)+1) : 0;
   const closeTransient = () => {
@@ -175,7 +177,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
 
   const open = ({ link, depth }) => {
     if (destroyed || link?.isConnected !== true) return;
-    const preview = notePreviewForLink(snapshot, session.perspective, previewHref(link));
+    const preview = notePreviewForLink(currentSnapshot(), session.perspective, previewHref(link));
     if (preview == null) { closeFrom(depth); return; }
     closeFrom(depth);
 
@@ -328,7 +330,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
   return {
     close,
     showForAnchor(anchor,href) {
-      if (!anchor?.isConnected || notePreviewForLink(snapshot,session.perspective,href) == null) return;
+      if (!anchor?.isConnected || notePreviewForLink(currentSnapshot(),session.perspective,href) == null) return;
       anchor.setAttribute('data-dndwiki-note-preview-href',href);
       const info=linkInfo(anchor);
       if(info)showSoon(info);
@@ -336,6 +338,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     destroy() {
       destroyed = true;
       close();
+      unsubscribe?.();
       if (positionFrame) browserWindow.cancelAnimationFrame(positionFrame);
       observer?.disconnect();
       document.removeEventListener('pointerover', onPointerOver);

@@ -159,7 +159,7 @@ export function mountReaderNavigation({ root, window: browserWindow, snapshot, s
   const refresh = () => {
     const shell = root.querySelector('.dndwiki-shell') ?? root;
     if (host.parentElement !== shell) shell.append(host);
-    const model = readerDirectoryModel({ snapshot, perspective: session?.perspective, hash: browserWindow.location?.hash ?? '#/' });
+    const model = readerDirectoryModel({ snapshot: session?.currentSnapshot ?? snapshot, perspective: session?.perspective, hash: browserWindow.location?.hash ?? '#/' });
     const hash = String(browserWindow.location?.hash ?? '#/');
     const next = JSON.stringify([model.title, model.total, model.directory.map((page) => [page.pageId, page.title, page.isMap]), model.categories.map((category) => [category.tag, category.label, category.pages.length]), routeState(hash)]);
     const incoming = root.querySelector('[data-dndwiki-search-form]');

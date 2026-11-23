@@ -102,6 +102,7 @@ export function mountReaderAccess({ root, window: browserWindow, snapshot, sessi
   }
   async function enterKey(rawKey) {
     if (submitting) return; submitting = true;
+    const capturePublicView = !player().active && !reduced.matches;
     const submit = panel.querySelector('button[type="submit"]'); if (submit) submit.disabled = true;
     try {
       session.setRoute(browserWindow.location.hash);
@@ -111,7 +112,7 @@ export function mountReaderAccess({ root, window: browserWindow, snapshot, sessi
         if (burn.phase === 'closed') void burn.open(layout()); else burn.refresh(layout());
         panel.querySelector('input')?.focus({ preventScroll: true }); return;
       }
-      const old = reduced.matches ? null : captureView();
+      const old = capturePublicView ? captureView() : null;
       editing = false; revealing = true;
       const completed = burn.reveal({ snapshot: old, update() { refreshReader(); updateIdentity(); } });
       revealing = false; panelSignature = ''; renderPanel(); await completed;
@@ -136,9 +137,8 @@ export function mountReaderAccess({ root, window: browserWindow, snapshot, sessi
   const onKey = event => { if (event.key === 'Escape' && burn.phase !== 'closed' && burn.phase !== 'full') { event.preventDefault(); void close({ focus: true }); } };
   const onResize = () => { if (['opening', 'open', 'closing'].includes(burn.phase)) burn.refresh(layout()); };
   const onMotion = () => burn.refreshMotion();
-  const onStorage = event => { if (event.key === `dndwiki:${snapshot.campaign.id}:player-key` || event.key == null) void session.load({ routeHash: browserWindow.location.hash }).then(() => { refreshReader(); refresh(); }); };
   document.addEventListener('submit', onSubmit, true); document.addEventListener('pointerdown', onPointer); document.addEventListener('click', onClick); document.addEventListener('keydown', onKey);
-  browserWindow.addEventListener('resize', onResize, { passive: true }); browserWindow.addEventListener('storage', onStorage); reduced.addEventListener?.('change', onMotion);
+  browserWindow.addEventListener('resize', onResize, { passive: true }); reduced.addEventListener?.('change', onMotion);
   refresh();
-  return { toggle, refresh, close, get phase() { return burn.phase; }, destroy() { destroyed = true; burn.dispose(); stage.remove(); document.removeEventListener('submit', onSubmit, true); document.removeEventListener('pointerdown', onPointer); document.removeEventListener('click', onClick); document.removeEventListener('keydown', onKey); browserWindow.removeEventListener('resize', onResize); browserWindow.removeEventListener('storage', onStorage); reduced.removeEventListener?.('change', onMotion); } };
+  return { toggle, refresh, close, get phase() { return burn.phase; }, destroy() { destroyed = true; burn.dispose(); stage.remove(); document.removeEventListener('submit', onSubmit, true); document.removeEventListener('pointerdown', onPointer); document.removeEventListener('click', onClick); document.removeEventListener('keydown', onKey); browserWindow.removeEventListener('resize', onResize); reduced.removeEventListener?.('change', onMotion); } };
 }

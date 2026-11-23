@@ -1,5 +1,4 @@
-import './reader-ui-contracts.mjs';
-import { renderMarkdownToHtml as renderLegacyMarkdownToHtml } from './markdown-renderer.mjs';
+import { escapeHtml, safeUrl, renderMarkdownToHtml as renderLegacyMarkdownToHtml } from './markdown-renderer.mjs';
 import {
   authoredHtmlBlockStart,
   collectAuthoredHtmlBlock,
@@ -194,4 +193,4 @@ export function renderMarkdownToHtml(markdown, { renderNoteEmbed } = {}) {
   return html;
 }
 
-export { escapeHtml, safeUrl } from './markdown-renderer.mjs';
+export { escapeHtml, safeUrl };
