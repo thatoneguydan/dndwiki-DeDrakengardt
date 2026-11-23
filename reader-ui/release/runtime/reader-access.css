@@ -40,4 +40,3 @@
 :root:not(:has(#dndwiki-app[data-reader-touch])) .reader-key-panel .reader-key-action:focus-visible { outline:1px solid var(--reader-key-ink); outline-offset:4px; }
 .reader-key-panel :focus-visible:not(.reader-key-action) { outline:0; }
 @media(max-width:760px) { .reader-key-panel { padding:16px; } .reader-key-panel h2 { font-size:22px; } }
-@media(prefers-reduced-motion:reduce) { .reader-key-panel *,.reader-key-action::after { transition:none!important; } }

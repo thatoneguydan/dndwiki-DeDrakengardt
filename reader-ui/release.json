@@ -1,6 +1,6 @@
 {
-  "source": "e6016e7b80cc606b4b19e3323d9a40a72787b2fa",
-  "approvedLab": "fc80ea418c7cd252814eb403ca80bb934d3e7b2f",
+  "source": "944a7411306e74541a55d1c553f0c2d945c71098",
+  "approvedLab": "944a7411306e74541a55d1c553f0c2d945c71098",
   "snapshotSchema": 1,
   "tomatoNotificationsEndpoint": "https://dndwiki-tomato-notifications.thatoneguydan.workers.dev/api/tomato",
   "appearanceRevisions": {
@@ -13,22 +13,22 @@
     "runtime/wiki-shell-entry.mjs": "830552ca49f8e92687b20a1bf1c29dc4fe921260fbddddba00c0540df1a17275"
   },
   "files": {
-    "index.html": "a84222fefc3e2185b533fc98a214ce7837ffd277a8480c19790ff270930371ae",
-    "runtime/commissioned-reader.css": "80626478bcca66bb48cf63ce4bfabbf8faf2e57bceaa63ff7a57cf9f00ab9c50",
+    "index.html": "04f0b4876359c75c91978c6535162b1d6d2678737ae5f1a65d93f0ce15cbbd93",
+    "runtime/commissioned-reader.css": "02d3e65155f000cba09c711a6914effd918ec49fdde324d7a270de40b10b181d",
     "runtime/map-viewer-BVQ6LGKO.mjs": "6d71a216f28e4439e2c48b78ef1155207d44962afcdafa0596ccc24b9244dce5",
     "runtime/mapsmith-notices.txt": "6a2ffc0d0acb7e17e61ac8d1ab6265df51c8ee3606885146359b3eb4df4b4fbb",
     "runtime/mapsmith-provenance.json": "3ca968c7e37ac68ead7e50ae49afbc382b73bbc01bc6ad731a60193b6a1ecc89",
     "runtime/mapsmith.css": "e5ce0d5233f627163af57542f5d5bfbc157b7ac9728db61b03060fef700f5be2",
-    "runtime/reader-access.css": "fe65e386c4f2a04549a4d5049e30cce27cbbd8f5ee82adefd3b96164cd793346",
-    "runtime/reader-chunk-6ICXWKRF.mjs": "a26dfa88806f05f5e2e3556555872b256002540478816942d486356ad968161e",
-    "runtime/reader-chunk-KVNBOTVK.mjs": "be5b2533cfc76c27b008c6548c3042805391082f41b8879c713bd331d066a8e0",
-    "runtime/reader-client-HB5HXQK7.mjs": "dbbd0b190573b38afe2af57bf5a0917643e06de9091d7e608ffcf2e97945822c",
-    "runtime/reader-navigation.css": "a8cbd8ddcd48d01db1f699712c186360c3662d670917846386bfed3b488d6f44",
-    "runtime/reader-timeline.css": "4b11c43872d6644d64e4dec3fbad12065467b387eea382a585cb11594d7b1cd6",
-    "runtime/reader-tomatoes.css": "ed01f69857bfdffada96de7fb621a1a525ba8a63d034a209bd374f5005d1dc45",
-    "runtime/shelves-gallery.css": "7240996cf8f2f59f62dfc6ac05a291cbf4da7953d7cd5973e98ef39c95eea6ab",
-    "runtime/wiki-shell-entry.mjs": "1573ea13bc693f444d1a31ad17dcf8d370d6f495de41994bd126b77ca22d5781",
-    "styles.css": "97a345300a338f7a0bf2ecb505f79d6364a5650001ad923a8ae39f102ed3826f"
+    "runtime/reader-access.css": "57fade7a378419834ffcce798b1b68ed85b2a10c1979146bb02aa11246e96f43",
+    "runtime/reader-chunk-65QCGYUW.mjs": "4bb236d4365d0e371c00ade1992587150a15245599b8d624cc56cb80ae9bd2f2",
+    "runtime/reader-chunk-QW3MD4QO.mjs": "e9b36606678d36d14bda9fcc15f1bfb4f7861466644898713828b2f7fde688f0",
+    "runtime/reader-client-2EHETNIR.mjs": "76886c70fccc8fd7f73737861c57ef7a1a9d8b51c27a1e478d42d20bb00fae17",
+    "runtime/reader-navigation.css": "ab6b3bcf6eb06cfd8de7e042b535d6b148d6ce405677d7545b2e2fe3222e5aa2",
+    "runtime/reader-timeline.css": "15bd47ebdb59c14ff613ce5e7988cb5686b6d441c41ba315dff3e5a4fed451c0",
+    "runtime/reader-tomatoes.css": "70218ad0dfc00e140b47c6650a4e7635108a5b6fa6a9252eb8b6fbdf4f2e2ab8",
+    "runtime/shelves-gallery.css": "e5fe7b290cca9f3e5fee306e3679780bcd125c98c3b095880d962c215deee402",
+    "runtime/wiki-shell-entry.mjs": "b688d55080200b822a952eaf70737a8f66121bc06d9e1aa678940047a99686fb",
+    "styles.css": "e7498cb16517d1ea665c702c9b6eb7a4e3cea71111f2c88f170e5a13099c0b5a"
   },
   "protectedPublisher": {
     "playerViewsSchema": 1,

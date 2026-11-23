@@ -106,6 +106,7 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-rail-divider { flex:0 0 auto; width:73%; height:var(--reader-divider-thickness); margin-bottom:14px; background:var(--reader-divider-ink); }
 .reader-rail-key-divider { margin-block:var(--reader-key-divider-gap); }
 .reader-rail-caption { display:block; width:100%; padding-inline:1px; overflow:hidden; color:inherit; font:10px/1.2 Georgia,"Times New Roman",serif; text-overflow:ellipsis; text-transform:uppercase; letter-spacing:.15em; white-space:nowrap; text-align:center; }
+[data-reader-key-caption] { line-height:12px; }
 .reader-rail-identity { display:flex; align-items:center; flex-direction:column; justify-content:center; flex:1; min-height:0; width:100%; gap:14px; padding-block:14px; }
 .reader-rail-identity-line { position:relative; display:block; flex:1; min-height:8px; width:var(--reader-thread-cap-size); }
 .reader-rail-identity-line::before { content:''; position:absolute; inset:0 auto 0 50%; width:var(--reader-thread-line-width); background:rgba(255,255,255,.1); transform:translateX(-50%); }
@@ -224,7 +225,6 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-panel-thread-start { top:var(--reader-panel-thread-start,32px); }
 .reader-panel-thread-end { top:var(--reader-panel-thread-end,32px); }
 .reader-panel-thread-line { position:absolute;left:var(--reader-panel-thread-x,9px);translate:-50% 0;top:var(--reader-panel-thread-start,32px);width:var(--reader-thread-line-width,1px);height:max(0px,calc(var(--reader-panel-thread-end,32px) - var(--reader-panel-thread-start,32px)));background:currentColor; }
-@media(prefers-reduced-motion:reduce) { .reader-panel-collections :is(.reader-panel-collection-subcategories,.reader-panel-subcategory-pages,.reader-panel-subcategories,.reader-panel-subcategory-pages-inner,.reader-row-number) { transition:none!important; } }
 .reader-panel-footer { --reader-footer-top-space:40px; position:relative; align-self:stretch; flex:0 0 auto; width:100%; margin-top:auto; padding-top:var(--reader-footer-top-space); max-width:100%; }
 .reader-panel-footer::before { content:''; position:absolute; top:var(--reader-footer-top-space); left:0; right:calc(-1 * var(--reader-panel-gutter,0px)); height:var(--reader-divider-thickness); background:var(--reader-divider-ink); }
 .reader-panel .reader-panel-all-pages { padding-top:24px; }
@@ -269,6 +269,7 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
 .reader-directory-list { border-top: 1px solid #aeb3b7; }
 .reader-directory-list li { margin: 0; }
 .reader-directory-row { display:grid; grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) 22px; align-items:center; gap:var(--reader-directory-column-gap); min-height:67px; padding:20px 0; border-bottom:1px solid #b7bcc0; }
+.reader-directory-row--with-subcollections { grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) fit-content(43%) 22px; }
 :where(a,button).reader-directory-row > :is(.reader-row-number,.reader-row-title,.reader-row-arrow) { transition:transform var(--reader-title-motion); }
 :where(a,button).reader-directory-row:is(:hover,:focus-visible):not([data-reader-touch] *) > :is(.reader-row-number,.reader-row-title) { transform:translateX(var(--reader-title-indent)); }
 :where(a,button).reader-directory-row:hover:not([data-reader-touch] *) { color: #05090d; }
@@ -518,11 +519,8 @@ html:not(.reader-tomato-aiming) :is(button:not(:disabled),a[href],summary,[role=
  .reader-directory-section + .reader-directory-section { margin-top:44px; }
  :root { --reader-directory-number-width:23px; --reader-directory-column-gap:12px; }
  .reader-directory-row { grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) 18px; min-height:64px; padding-block:18px; }
+ .reader-directory-row--with-subcollections { grid-template-columns:var(--reader-directory-number-width) minmax(0,1fr) fit-content(43%) 18px; column-gap:8px; }
  .reader-row-title { font-size:21px; }
  .reader-category-list .reader-row-title { font-size:26px; }
  .reader-category-list .reader-directory-row { min-height:72px; padding-block:21px; }
-}
-@media (prefers-reduced-motion:reduce) {
- :root { transition:none; }
- .reader-icon,.reader-title-action,.reader-title-action::after,.reader-navigation *,.reader-navigation *::before,.reader-navigation *::after { transition:none!important; }
 }

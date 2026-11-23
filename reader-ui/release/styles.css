@@ -426,7 +426,3 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
   .dndwiki-page .dd5e-card-grid,
   .dndwiki-page .dd5e-ability-grid { grid-template-columns: 1fr !important; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; animation-duration: .001ms !important; }
-}

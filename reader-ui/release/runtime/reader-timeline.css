@@ -223,4 +223,3 @@ html[data-reader-outline-headings="ellipsis"] .reader-timeline[data-reader-expan
  .reader-timeline-caption { font-size:10px; }
  .reader-timeline[data-reader-expanded-content] .reader-toc-label { font-size:13px; }
 }
-@media(prefers-reduced-motion:reduce) { .reader-timeline,.reader-timeline *,.reader-timeline .reader-edge-shadow::before { transition:none!important; } }

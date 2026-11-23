@@ -1,6 +1,6 @@
 # Approved De Drakengardt reader
 
-GitHub Pages stages the approved Browser Lab v99 reader over a disposable copy of the publisher’s `site/` output. `release.json` identifies the source, approved appearance revisions and staged files. The live entry enables the campaign’s approved collection cards and reader appearance. The bundle excludes Admin and loads the approved appearance locally.
+GitHub Pages stages the approved Browser Lab v104 reader over a disposable copy of the publisher’s `site/` output. `release.json` identifies the source, approved appearance revisions and staged files. The live entry enables the campaign’s approved collection cards and reader appearance. The bundle excludes Admin and loads the approved appearance locally.
 
 The Obsidian publisher continues to own the campaign snapshot, notes, assets and tracked `site/` tree. The Pages build fingerprints the current snapshot for the reader cache and derives lossless map tiles from the current published assets. It serves the original assets at their existing URLs.
 
