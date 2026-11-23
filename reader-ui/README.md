@@ -13,3 +13,5 @@ Build the next approved reader with `scripts/prepare-published-reader.mjs` in th
 Revert the campaign reader release commit to restore the previous Pages build. The earlier compatibility files remain available to that build.
 
 The released navigation and home gallery use the collection order, labels, and published subcollections in the snapshot’s `collections` field. Subcollection links use `subcollection=`. The reader continues to display the existing default collections for earlier snapshots that do not include the field.
+
+The reader supports both the legacy and sealed snapshots during the publisher rollout. For sealed snapshots, staging verifies the publisher runtime fingerprints and checks that the public pages, map annotations, and graph contain only public material. The browser opens the encrypted player view with the supplied key.
