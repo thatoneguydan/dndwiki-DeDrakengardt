@@ -2101,11 +2101,11 @@
       {
         "audience": {
           "playerIds": [
-            "dm"
+            "celeste"
           ],
           "public": false
         },
-        "markdown": "\n\n\n",
+        "markdown": "\ndfd\n\n",
         "pageId": "the-monster-in-the-lava-purify-pauldron",
         "segmentIndex": 0
       },
@@ -2863,14 +2863,14 @@
       "segments": [
         {
           "kind": "keyed",
-          "markdown": "\n\n\n",
+          "markdown": "\ndfd\n\n",
           "playerIds": [
-            "dm"
+            "celeste"
           ]
         }
       ],
       "title": "The Monster in the Lava - Purify Pauldron",
-      "updatedAt": "2026-11-23T15:42:46.107Z"
+      "updatedAt": "2026-11-23T15:43:15.311Z"
     },
     {
       "categories": [
