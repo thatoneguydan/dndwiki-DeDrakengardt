@@ -112,4 +112,3 @@
 .reader-tomato-impact-message.is-canvas-unavailable { padding:24px; background:#b62b24; border-radius:24px; }
 .reader-tomato-announcement { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 @media(max-width:760px) { .reader-empty-note { --reader-empty-gap:36px; min-height:480px; padding:44px 0 64px; } .reader-empty-note .reader-tomato-button:not(.is-cancel) { padding-inline:22px; } .reader-tomato-impact-message { font-size:12px; } .reader-tomato-tools { right:44px; gap:6px; max-width:calc(100vw - 60px); flex-wrap:wrap; justify-content:flex-end; } .reader-tomato-tool { gap:6px; padding-inline:11px; font-size:12px; } .reader-tomato-controls { right:16px; } }
-@media(prefers-reduced-motion:reduce) { .reader-empty-note * { transition:none!important; } .reader-tomato-wait-dot { animation:none; } }
