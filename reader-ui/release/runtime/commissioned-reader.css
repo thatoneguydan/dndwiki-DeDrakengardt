@@ -39,13 +39,13 @@ html,body { background:var(--reader-page-paper); }
 .reader-note-section-body > :first-child { margin-block-start:0; }
 .reader-note-section-body > :last-child { margin-block-end:0; }
 .dndwiki-page .reader-note-embed-unavailable { color:var(--reader-muted); }
-.dndwiki-page .dndwiki-note-embed:not([open]) { border-block-end:0; }
+.dndwiki-page .dndwiki-note-embed:is(:not([open]), :has(+ .dndwiki-note-embed)) { border-block-end:0; }
 .dndwiki-page .dndwiki-note-embed > summary { display:flex; align-items:center; min-height:2.5rem; list-style:none; cursor:pointer; }
 .dndwiki-page .dndwiki-note-embed > summary::-webkit-details-marker { display:none; }
 .dndwiki-page .dndwiki-note-embed > summary:focus-visible { outline:2px solid var(--interactive-accent); outline-offset:2px; }
 :is(.reader-shell,.dndwiki-note-preview) .dndwiki-page .dndwiki-note-embed > summary > .reader-note-embed-heading { display:flex; align-items:center; gap:1ch; width:100%; min-width:0; margin:0; }
 .dndwiki-page .reader-note-embed-heading:is(span) { color:var(--reader-ink); font-family:var(--reader-font-serif); font-size:1.25em; line-height:1.3; }
-.dndwiki-page .reader-note-embed-heading::before,.dndwiki-page .reader-note-embed-heading::after { content:''; flex:1 0 .4ch; border-block-start:var(--reader-note-divider); }
+.dndwiki-page .reader-note-embed-heading::before,.dndwiki-page .reader-note-embed-heading::after { content:''; flex:1 0 clamp(1rem,calc(20% - 3rem),4rem); border-block-start:var(--reader-note-divider); }
 .dndwiki-page .reader-note-embed-title { display:inline-flex; align-items:center; gap:.5ch; min-width:0; }
 .dndwiki-page .reader-note-embed-label { min-width:0; overflow-wrap:anywhere; text-align:center; }
 .dndwiki-page .reader-note-embed-toggle-icon { transition:transform 140ms ease; }
@@ -55,6 +55,12 @@ html,body { background:var(--reader-page-paper); }
 .dndwiki-page :is(.reader-note-embed-open,.reader-note-embed-toggle) .reader-icon { width:1rem; height:1rem; }
 .dndwiki-page :is(.reader-note-embed-open,.reader-note-embed-toggle):is(:hover,:focus-visible) { background:var(--background-modifier-hover); color:var(--reader-ink); }
 .dndwiki-page :is(.reader-note-embed-open,.reader-note-embed-toggle):is(:hover,:focus-visible) .reader-icon { stroke-width:var(--reader-icon-hover-stroke,3); transition-duration:var(--reader-icon-in-speed,80ms); }
+@media (max-width:480px) {
+  /* Leave room for the title by using part of the divider gap for each control. */
+  .dndwiki-page .reader-note-embed-title { gap:0; }
+  .dndwiki-page .reader-note-embed-toggle { margin-inline-start:-.5ch; }
+  .dndwiki-page .reader-note-embed-open { margin-inline-end:-.5ch; }
+}
 @supports (interpolate-size: allow-keywords) and selector(details::details-content) {
   .dndwiki-page .dndwiki-note-embed::details-content { interpolate-size:allow-keywords; block-size:0; overflow:clip; opacity:0; transition:block-size 160ms ease,opacity 140ms ease,content-visibility 160ms allow-discrete; }
   .dndwiki-page .dndwiki-note-embed[open]::details-content { block-size:auto; opacity:1; }
