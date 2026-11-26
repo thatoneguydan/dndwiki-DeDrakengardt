@@ -156,6 +156,12 @@ button:hover, .dndwiki-button:hover { background: var(--background-modifier-hove
 .dndwiki-page h6 { margin: var(--heading-spacing) 0 .5em; font-size: var(--h6-size); font-weight: var(--h6-weight); font-variant: small-caps; }
 .dndwiki-page ul, .dndwiki-page ol { padding-inline-start: 2em; margin-block: .75em var(--p-spacing); }
 .dndwiki-page li { margin-block: .075em; }
+.dndwiki-page li .reader-list-inset {
+  display: block;
+  margin-inline-start: -.55em;
+  padding-inline-start: calc(.55em + min(var(--reader-list-indent), 40%));
+  border-inline-start: 1px solid var(--background-modifier-border);
+}
 .dndwiki-page hr { border: 0; border-top: 1px solid var(--background-modifier-border); margin: 2rem 0; }
 .dndwiki-page img:not(:where(.mapsmith img)), .mapsmith .mapsmith-note-content img { max-width: 100%; height: auto; border-radius: 4px; }
 .dndwiki-page pre { max-width: 100%; overflow: auto; padding: .75rem 1rem; border: 0; border-radius: var(--radius-s); background: var(--background-secondary); }
