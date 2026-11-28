@@ -10,13 +10,13 @@ import {
   visibleSearchTags,
 } from './navigation.mjs';
 import { buildPageView } from './page-visibility.mjs';
+import { READER_PAGE_ID_RE, parsePageRoute } from './page-route.mjs';
 import { createPlayerIdentitySession, playerKeyStorageKey } from './player-identity.mjs';
 import { openSealedPlayerView } from './sealed-player-view.mjs';
 import { createPrivateAssetReader, guardPrivateAssetMarkup } from './private-asset-reader.mjs';
 import { validatePrivateAssetDescriptor } from './private-asset-format.mjs';
 import { buildViewerGraph } from './viewer-graph.mjs';
 
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
 const PLAYER_KEY_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="8.25" cy="12" r="3.25"></circle><path d="M11.5 12H21"></path><path d="m17.5 12 0 3"></path><path d="m14.5 12 0 2"></path></svg>';
 const RELATED_PAGE_LIMIT = 4;
 const RELATED_STOP_WORDS = new Set([
@@ -423,9 +423,9 @@ export function parseWikiRoute(hash) {
     const params = new URLSearchParams(search[1] ?? '');
     return { kind: 'search', pageId: null, heading: null, query: params.get('q') ?? '', searchOptions: normalizeSearchOptions({ includeTags: params.getAll('include'), excludeTags: params.getAll('exclude'), sort: params.get('sort') }) };
   }
-  const match = /^#\/page\/([a-z0-9][a-z0-9._-]{0,63})(?:#(.*))?$/.exec(value);
-  if (!match) return { kind: 'home', pageId: null, heading: null };
-  return { kind: 'page', pageId: match[1], heading: decodeHeading(match[2]) };
+  const page = parsePageRoute(value);
+  if (!page) return { kind: 'home', pageId: null, heading: null };
+  return { kind: 'page', pageId: page.pageId, heading: decodeHeading(page.fragment) };
 }
 
 export function routeForSearch(query = '', options = {}) {
@@ -1289,7 +1289,7 @@ export async function mountWikiShell({
         const moreButton = event.target?.closest?.('[data-dndwiki-search-more]');
         if (moreButton != null) {
           const pageId = moreButton.getAttribute?.('data-dndwiki-search-page') ?? '';
-          if (!PAGE_ID_RE.test(pageId)) return;
+          if (!READER_PAGE_ID_RE.test(pageId)) return;
           event.preventDefault();
           if (expandedSearchPages.has(pageId)) {
             expandedSearchPages.delete(pageId);
@@ -1308,7 +1308,7 @@ export async function mountWikiShell({
         const occurrenceIndex = Number.parseInt(link.getAttribute?.('data-dndwiki-search-occurrence') ?? '', 10);
         const route = link.getAttribute?.('href') ?? '';
         const contentTarget = matchType === 'content';
-        if (!PAGE_ID_RE.test(pageId)
+        if (!READER_PAGE_ID_RE.test(pageId)
           || (contentTarget && query.trim().length === 0)
           || !['title', 'tag', 'content', 'page'].includes(matchType)
           || (contentTarget && (!Number.isInteger(occurrenceIndex) || occurrenceIndex < 0))

@@ -1,6 +1,7 @@
 import { pageForRoute } from './navigation.mjs';
 import { escapeHtml } from './markdown-renderer-v2.mjs';
 import { renderNoteMarkdown } from './note-embeds.mjs';
+import { parsePageRoute } from './page-route.mjs';
 
 const STYLE_ID = 'dndwiki-note-link-preview-styles';
 const CSS = `
@@ -43,12 +44,12 @@ const CSS = `
 `;
 
 export function notePreviewForLink(snapshot, perspective, href) {
-  const match = /^#\/page\/([a-z0-9][a-z0-9-]{0,63})(?:#(.*))?$/.exec(String(href ?? ''));
-  if (match == null) return null;
-  const view = pageForRoute(snapshot, perspective, match[1]);
+  const route = parsePageRoute(href);
+  if (route == null) return null;
+  const view = pageForRoute(snapshot, perspective, route.pageId);
   if (view.status !== 'visible') return null;
   let heading = null;
-  try { heading = match[2] == null ? null : decodeURIComponent(match[2]); } catch { /* Start at the title for malformed fragments. */ }
+  try { heading = route.fragment == null ? null : decodeURIComponent(route.fragment); } catch { /* Start at the title for malformed fragments. */ }
   return { title: view.title ?? 'Page', route: view.route, heading, html: renderNoteMarkdown(snapshot, perspective, view) };
 }
 
@@ -121,7 +122,7 @@ export function mountNoteLinkPreviews({ root, window: browserWindow, snapshot, s
     const link = target?.closest?.('a[href],[data-dndwiki-note-preview-href]');
     if (!link || link.closest('[data-dndwiki-page-outline]')) return null;
     const href = previewHref(link);
-    if (!/^#\/page\/[a-z0-9][a-z0-9-]{0,63}(?:#.*)?$/.test(String(href ?? ''))) return null;
+    if (!parsePageRoute(href)) return null;
     // Only authored/body links nest. Header title links still navigate.
     // Check owned panels before the reader root: fullscreen map previews live
     // inside that root, but must retain their recursive parent depth.

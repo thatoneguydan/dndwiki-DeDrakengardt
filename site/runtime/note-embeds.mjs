@@ -1,10 +1,10 @@
 import { escapeHtml, renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import { pageForRoute, routeForPage } from './navigation.mjs';
+import { PAGE_ID_RE } from './page-route.mjs';
 import { guardPrivateAssetMarkup } from './private-asset-reader.mjs';
 import { tablerIcon } from './tabler-icons.mjs';
 
 const DETAILS = 'details[data-dndwiki-note-embed]';
-const PAGE_ID = /^[a-z0-9][a-z0-9-]{0,63}$/;
 const sectionName = (value) => value.replace(/[*_`]/g, '').trim().toLocaleLowerCase('en-US');
 
 function noteSection(markdown, selector) {
@@ -89,7 +89,7 @@ export function mountNoteEmbeds(document, session) {
     if (!article || !body) return;
     const ancestors = new Set([article.dataset.dndwikiEmbedRoot]);
     for (let node = details; node; node = node.parentElement?.closest(DETAILS)) {
-      if (!PAGE_ID.test(node.dataset.dndwikiNoteEmbed)) return;
+      if (!PAGE_ID_RE.test(node.dataset.dndwikiNoteEmbed)) return;
       ancestors.add(routeForPage(node.dataset.dndwikiNoteEmbed, node.dataset.dndwikiNoteSelector));
     }
     const { currentSnapshot: snapshot, perspective } = session;

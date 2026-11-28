@@ -1,5 +1,6 @@
+import { READER_PAGE_ID_RE } from './page-route.mjs';
+
 const PLAYER_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
 
 export class PageVisibilityError extends Error {
   constructor(message) {
@@ -51,7 +52,7 @@ function validateTags(page) {
 
 function validatePage(page) {
   if (page == null || typeof page !== 'object') throw new PageVisibilityError('Page is required.');
-  if (typeof page.pageId !== 'string' || !PAGE_ID_RE.test(page.pageId)) {
+  if (typeof page.pageId !== 'string' || !READER_PAGE_ID_RE.test(page.pageId)) {
     throw new PageVisibilityError('Page requires a valid opaque pageId.');
   }
   if (!Array.isArray(page.segments)) throw new PageVisibilityError(`Page '${page.pageId}' requires segments.`);

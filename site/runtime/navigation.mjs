@@ -1,11 +1,10 @@
 import { buildPageView } from './page-visibility.mjs';
+import { PAGE_ID_RE, parsePageRoute } from './page-route.mjs';
 import {
   backlinksForPage,
   buildViewerGraph,
   referencesFromPage,
 } from './viewer-graph.mjs';
-
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
 
 export class NavigationError extends Error {
   constructor(message) {
@@ -631,7 +630,7 @@ function installBottomAwareOutlineProgress(root, browserWindow) {
     state.explicitScrollY = Math.max(0, Number(browserWindow.scrollY ?? browserWindow.pageYOffset ?? 0));
 
     const route = String(link.getAttribute?.('href') ?? '');
-    if (/^#\/page\/[a-z0-9][a-z0-9._-]{0,63}(?:#|$)/.test(route)) {
+    if (parsePageRoute(route)) {
       try {
         browserWindow.history?.replaceState?.(browserWindow.history.state, '', route);
       } catch {

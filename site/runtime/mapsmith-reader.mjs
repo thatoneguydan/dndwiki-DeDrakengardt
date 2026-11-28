@@ -3,7 +3,7 @@ import { renderMarkdownToHtml } from './markdown-renderer-v2.mjs';
 import { mountMapNoteCard } from './mapsmith-note-card.mjs';
 import { guardPrivateAssetMarkup } from './private-asset-reader.mjs';
 
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9-]{0,63}$/;
+import { PAGE_ID_RE } from './page-route.mjs';
 const HOST_SELECTOR = '[data-dndwiki-mapsmith-page]';
 const STYLE_ID = 'dndwiki-mapsmith-reader-style';
 const STYLE_LOADS = new WeakMap();

@@ -1,3 +1,5 @@
+import { parsePageRoute } from './page-route.mjs';
+
 const STYLE_ID='dndwiki-reader-ui-contracts-v54';
 const SENTINEL='__dndwiki_outline_sentinel__';
 export const OBSIDIAN_ACCENT='rgb(57, 46, 87)';
@@ -16,7 +18,10 @@ export const tagRoute=value=>{const name=tagName(value);return name?`#/tag/${enc
 const articleHeadings=article=>[...(article?.querySelectorAll?.('h1,h2,h3,h4,h5,h6')??[])];
 const isSentinel=node=>node?.hasAttribute?.('data-dndwiki-outline-contract-sentinel')===true;
 function escapeHtml(value){return String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;')}
-function pageRoute(hash){return /^(#\/page\/[a-z0-9][a-z0-9._-]{0,63})/i.exec(String(hash??''))?.[1]??null}
+function pageRoute(hash) {
+  const route = parsePageRoute(hash);
+  return route ? `#/page/${route.pageId}` : null;
+}
 export function ensureUiContractStyles(document){if(!document)return false;let changed=false;let style=document.getElementById?.(STYLE_ID);if(!style){style=document.createElement('style');style.id=STYLE_ID;style.textContent=CSS;document.head?.append(style);return true}if(style.textContent!==CSS){style.textContent=CSS;changed=true}if(document.head&&document.head.lastElementChild!==style){document.head.append(style);changed=true}return changed}
 export function ensureOutlineSentinels(root){const article=root?.querySelector?.('[data-dndwiki-page]'),document=article?.ownerDocument;if(!article||!document)return false;let changed=false;for(const legacy of article.querySelectorAll('[data-dndwiki-outline-contract-anchor="title"],[data-dndwiki-outline-contract-anchor="sentinel"]')){legacy.remove();changed=true}const real=articleHeadings(article).filter(node=>!isSentinel(node));const wanted=Math.max(0,2-real.length);const current=[...article.querySelectorAll('[data-dndwiki-outline-contract-sentinel]')];while(current.length>wanted){current.pop().remove();changed=true}while(current.length<wanted){const node=document.createElement('h6');node.className='dndwiki-outline-contract-anchor';node.setAttribute('data-dndwiki-outline-contract-sentinel',String(current.length));node.setAttribute('aria-hidden','true');node.textContent=SENTINEL+current.length;article.append(node);current.push(node);changed=true}return changed}
 export function stripOutlineSentinelLinks(root){const article=root?.querySelector?.('[data-dndwiki-page]');if(!article)return false;let changed=false;articleHeadings(article).forEach((node,index)=>{if(!isSentinel(node))return;for(const link of root.querySelectorAll(`[data-dndwiki-toc-index="${index}"]`)){const item=link.closest('li');if(item&&!item.classList.contains('dndwiki-outline-contract-sentinel-item')){item.classList.add('dndwiki-outline-contract-sentinel-item');changed=true}}});return changed}

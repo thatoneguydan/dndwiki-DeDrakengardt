@@ -1,5 +1,6 @@
 import { tablerIcon } from './tabler-icons.mjs';
 import { visibleReaderDirectory, readerDirectoryModel } from './reader-navigation.mjs';
+import { parsePageRoute } from './page-route.mjs';
 
 const escapeHtml = value => String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -36,7 +37,10 @@ export function mountReaderTimeline({ root, window: browserWindow, snapshot: ini
   const preference = `dndwiki:${initialSnapshot.campaign.id}:outline-open`;
   let rail = null, signature = '', open = remember(browserWindow, preference) === 'open';
   let records = [], frame = 0, dragging = null, destroyed = false, resizeObserver = null;
-  const pageRoute = () => /^(#\/page\/[^#]+)/.exec(browserWindow.location.hash)?.[1] ?? '#/';
+  const pageRoute = () => {
+    const route = parsePageRoute(browserWindow.location.hash);
+    return route ? `#/page/${route.pageId}` : '#/';
+  };
   const updateSpace = () => {
     document.documentElement.style.setProperty('--reader-right-space', browserWindow.innerWidth <= 760 ? '28px' : open ? '310px' : '56px');
   };

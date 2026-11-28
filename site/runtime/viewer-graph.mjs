@@ -1,5 +1,6 @@
+import { READER_PAGE_ID_RE } from './page-route.mjs';
+
 const PLAYER_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
-const PAGE_ID_RE = /^[a-z0-9][a-z0-9._-]{0,63}$/;
 
 export class ViewerGraphError extends Error {
   constructor(message) {
@@ -48,7 +49,7 @@ function visible(audience, allowed) {
 }
 
 function pageId(value, field) {
-  if (typeof value !== 'string' || !PAGE_ID_RE.test(value)) throw new ViewerGraphError(`${field} must be an opaque page ID.`);
+  if (typeof value !== 'string' || !READER_PAGE_ID_RE.test(value)) throw new ViewerGraphError(`${field} must be an opaque page ID.`);
   return value;
 }
 

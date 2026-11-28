@@ -1,5 +1,6 @@
 import { pageForRoute } from './navigation.mjs';
 import { tablerIcon } from './tabler-icons.mjs';
+import { parsePageRoute } from './page-route.mjs';
 
 export const READER_MOBILE_QUERY = '(max-width: 760px)';
 
@@ -113,11 +114,11 @@ export function mobileRailOffset(offset, previousY, currentY, height) {
 }
 
 function routeState(hash) {
-  const page = /^#\/page\/([a-z0-9][a-z0-9._-]{0,63})/.exec(String(hash));
+  const page = parsePageRoute(hash);
   const tag = /^#\/tag\/(.+)$/.exec(String(hash));
   let category = null;
   if (tag) { try { category = normalize(decodeURIComponent(tag[1])); } catch { category = ''; } }
-  return { pageId: page?.[1] ?? null, category, home: !page && !tag && !/^#\/search(?:[/?]|$)/.test(String(hash)) };
+  return { pageId: page?.pageId ?? null, category, home: !page && !tag && !/^#\/search(?:[/?]|$)/.test(String(hash)) };
 }
 
 function panelLinks(model, hash) {

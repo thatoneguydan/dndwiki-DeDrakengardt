@@ -89,6 +89,7 @@
     "site/runtime/note-embeds.mjs",
     "site/runtime/note-link-previews.mjs",
     "site/runtime/obsidian-html.mjs",
+    "site/runtime/page-route.mjs",
     "site/runtime/page-visibility.mjs",
     "site/runtime/pixel-burn.mjs",
     "site/runtime/player-identity.mjs",

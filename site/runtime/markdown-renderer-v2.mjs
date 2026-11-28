@@ -6,9 +6,11 @@ import {
   sanitizeAuthoredHtml,
 } from './obsidian-html.mjs';
 
+import { PAGE_SLUG_PATTERN } from './page-route.mjs';
+
 const DD5E_ROOT_RE = /^\s*<div class="dd5e-sheet">\s*$/;
-const MAPSMITH_MARKER_RE = /^\s*<!-- dndwiki:mapsmith ([a-z0-9][a-z0-9-]{0,63}) -->\s*$/;
-const NOTE_EMBED_MARKER = /<!-- dndwiki:note-embed ([a-z0-9][a-z0-9-]{0,63}) ([^\s<>]*) ([^\s<>]*) -->/g;
+const MAPSMITH_MARKER_RE = new RegExp(String.raw`^\s*<!-- dndwiki:mapsmith (${PAGE_SLUG_PATTERN}) -->\s*$`);
+const NOTE_EMBED_MARKER = new RegExp(String.raw`<!-- dndwiki:note-embed (${PAGE_SLUG_PATTERN}) ([^\s<>]*) ([^\s<>]*) -->`, 'g');
 
 function fenceMarker(line) {
   const match = /^ {0,3}(`{3,}|~{3,})/.exec(String(line ?? ''));
