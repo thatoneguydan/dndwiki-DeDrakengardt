@@ -1,6 +1,6 @@
 {
-  "source": "0d1fa9c9e1b22835380e3c02be316fde85d7d995",
-  "approvedLab": "cc91d867e488ef0c318bbdfa9c29d6a2c35261f7",
+  "source": "4af9c53b0d9b18405a387c4099a8cd393a5424e6",
+  "approvedLab": "effbaacba65cfb64542c7f6d22bb5716703f5402",
   "snapshotSchema": 1,
   "tomatoNotificationsEndpoint": "https://dndwiki-tomato-notifications.thatoneguydan.workers.dev/api/tomato",
   "appearanceRevisions": {
@@ -13,8 +13,8 @@
     "runtime/wiki-shell-entry.mjs": "830552ca49f8e92687b20a1bf1c29dc4fe921260fbddddba00c0540df1a17275"
   },
   "files": {
-    "index.html": "2b2e1d09756ba83e1545f269c20c2366fcacabed7614180099cb3f623228b39f",
-    "runtime/commissioned-reader.css": "d04d3dfac0acdd918d5d1610d9662d604a6b28915bbc7dbff90c17c532759922",
+    "index.html": "0363a821b7feed02ae6b7ddb9c898ed540e23b5253f2aee6241246fd96c0620a",
+    "runtime/commissioned-reader.css": "aa64d02423488bc14a296209ca5c0dd40738f281c5b2a95232d61cf434ce2bef",
     "runtime/map-viewer-BVQ6LGKO.mjs": "6d71a216f28e4439e2c48b78ef1155207d44962afcdafa0596ccc24b9244dce5",
     "runtime/mapsmith-notices.txt": "6a2ffc0d0acb7e17e61ac8d1ab6265df51c8ee3606885146359b3eb4df4b4fbb",
     "runtime/mapsmith-provenance.json": "3ca968c7e37ac68ead7e50ae49afbc382b73bbc01bc6ad731a60193b6a1ecc89",
